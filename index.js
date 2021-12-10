@@ -32,16 +32,18 @@ client.on('messageCreate', message => {
 client.on('messageDelete', message => {
     if (message.author.bot) return;
     const logchannel = client.channels.cache.find(channel => channel.name === 'message-logs');
-    const logembed = new MessageEmbed()
-	.setColor('#FFC0DD')
-	.setTitle('Message Deleted')
-	.addFields(
-		{ name: 'User Name: ', value: message.author.username },
-		{ name: 'User Id: ', value: message.author.id },
-		{ name: 'Message: ', value: message.content },
-	)
-	.setTimestamp()
-    logchannel.send({ embeds: [logembed] });
+    if (message.guild.id === logchannel.guild.id) {
+        const logembed = new MessageEmbed()
+        .setColor('#FFC0DD')
+        .setTitle('Message Deleted')
+        .addFields(
+            { name: 'User Name: ', value: message.author.username },
+            { name: 'User Id: ', value: message.author.id },
+            { name: 'Message: ', value: message.content },
+        )
+        .setTimestamp()
+        logchannel.send({ embeds: [logembed] });
+    }
 });
 
 client.on('messageUpdate', (oldMessage, newMessage) => {
@@ -49,17 +51,19 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
     if (newMessage.author.bot) return;
     if (!oldMessage.author) return;
     const logchannel = client.channels.cache.find(channel => channel.name === 'message-logs');
-    const logembed = new MessageEmbed()
-	.setColor('#FFC0DD')
-	.setTitle('Message Edited')
-	.addFields(
-		{ name: 'User Name: ', value: newMessage.author.username },
-		{ name: 'User Id: ', value: newMessage.author.id },
-		{ name: 'Original: ', value: oldMessage.content },
-		{ name: 'Edited: ', value: newMessage.content },
-	)
-	.setTimestamp()
-    logchannel.send({ embeds: [logembed] });
+    if (newMessage.guild.id === logchannel.guild.id) {
+        const logembed = new MessageEmbed()
+        .setColor('#FFC0DD')
+        .setTitle('Message Edited')
+        .addFields(
+            { name: 'User Name: ', value: newMessage.author.username },
+            { name: 'User Id: ', value: newMessage.author.id },
+            { name: 'Original: ', value: oldMessage.content },
+            { name: 'Edited: ', value: newMessage.content },
+        )
+        .setTimestamp()
+        logchannel.send({ embeds: [logembed] });
+    }
 });
 
 client.on('interactionCreate', async interaction => {
