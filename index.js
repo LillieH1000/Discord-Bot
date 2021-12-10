@@ -73,10 +73,10 @@ client.on('interactionCreate', async interaction => {
 
 	if (commandName === 'play') {
         await interaction.deferReply();
-        const test1 = interaction.member.voice.channel.id;
-        const test2 = interaction.member.voice.channel.guild.id;
-        const test3 = interaction.member.voice.channel.guild.voiceAdapterCreator;
-        connect(test1, test2, test3);
+        const voicechannelid = interaction.member.voice.channel.id;
+        const voiceguildid = interaction.member.voice.channel.guild.id;
+        const guildvoiceadapter = interaction.member.voice.channel.guild.voiceAdapterCreator;
+        connect(voicechannelid, voiceguildid, guildvoiceadapter);
         if (interaction.options.getSubcommand() === 'youtube') {
             const name = interaction.options.getString('name');
             const url = interaction.options.getString('url');
@@ -85,16 +85,21 @@ client.on('interactionCreate', async interaction => {
             }
             if (name == null) {
                 const result = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/.test(url);
-                console.log(result);
                 if (result == true) {
                     const videotitle = exec(`yt-dlp -j --no-playlist ${url} | jq ".title"`).slice(1,-2);
                     const videofilename = exec(`yt-dlp -j --no-playlist ${url} | jq ".filename"`).slice(1,-2);
-                    interaction.editReply(`Queued: ${videotitle.toString()}`);
+                    const queuedembed = new MessageEmbed()
+                        .setColor('#FFC0DD')
+                        .setTitle('Music Player')
+                        .addFields(
+                            { name: 'Queued: ', value: videotitle.toString() },
+                        )
+                        .setTimestamp()
+                    interaction.editReply({ embeds: [queuedembed] });
                     exec(`yt-dlp -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist --output "/root/discordbot/downloads/%(title)s [%(id)s].%(ext)s" ${url}`);
                     const title = path.parse(videofilename.toString());
                     const name = path.join(title.name);
                     const video = name.toString() + ".mp3";
-                    console.log(video.toString());
                     songsarray.push(`downloads/${video}`);
                     if (songsarray.length == 1) {
                         play();
@@ -106,12 +111,18 @@ client.on('interactionCreate', async interaction => {
             if (url == null) {
                 const videotitle = exec(`yt-dlp -j --no-playlist "ytsearch:${name}" | jq ".title"`).slice(1,-2);
                 const videofilename = exec(`yt-dlp -j --no-playlist "ytsearch:${name}" | jq ".filename"`).slice(1,-2);
-                interaction.editReply(`Queued: ${videotitle.toString()}`);
+                const queuedembed = new MessageEmbed()
+                    .setColor('#FFC0DD')
+                    .setTitle('Music Player')
+                    .addFields(
+                        { name: 'Queued: ', value: videotitle.toString() },
+                    )
+                    .setTimestamp()
+                interaction.editReply({ embeds: [queuedembed] });
                 exec(`yt-dlp -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist --output "/root/discordbot/downloads/%(title)s [%(id)s].%(ext)s" "ytsearch:${name}"`);
                 const title = path.parse(videofilename.toString());
                 const name = path.join(title.name);
                 const video = name.toString() + ".mp3";
-                console.log(video.toString());
                 songsarray.push(`downloads/${video}`);
                 if (songsarray.length == 1) {
                     play();
@@ -126,10 +137,16 @@ client.on('interactionCreate', async interaction => {
             }
             if (name == null) {
                 const result = /^https?:\/\/(soundcloud\.com|snd\.sc)\/(.*)$/.test(url);
-                console.log(result);
                 if (result == true) {
                     const videotitle = exec(`yt-dlp -j --no-playlist ${url} | jq ".title"`).slice(1,-2);
-                    interaction.editReply(`Queued: ${videotitle.toString()}`);
+                    const queuedembed = new MessageEmbed()
+                        .setColor('#FFC0DD')
+                        .setTitle('Music Player')
+                        .addFields(
+                            { name: 'Queued: ', value: videotitle.toString() },
+                        )
+                        .setTimestamp()
+                    interaction.editReply({ embeds: [queuedembed] });
                     exec(`yt-dlp -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist --output "/root/discordbot/downloads/%(title)s.%(ext)s" ${url}`);
                     songsarray.push(`downloads/${videotitle}.mp3`);
                     if (songsarray.length == 1) {
@@ -141,7 +158,14 @@ client.on('interactionCreate', async interaction => {
             }
             if (url == null) {
                 const videotitle = exec(`yt-dlp -j --no-playlist "scsearch:${name}" | jq ".title"`).slice(1,-2);
-                interaction.editReply(`Queued: ${videotitle.toString()}`);
+                const queuedembed = new MessageEmbed()
+                    .setColor('#FFC0DD')
+                    .setTitle('Music Player')
+                    .addFields(
+                        { name: 'Queued: ', value: videotitle.toString() },
+                    )
+                    .setTimestamp()
+                interaction.editReply({ embeds: [queuedembed] });
                 exec(`yt-dlp -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist --output "/root/discordbot/downloads/%(title)s.%(ext)s" "scsearch:${name}"`);
                 songsarray.push(`downloads/${videotitle}.mp3`);
                 if (songsarray.length == 1) {
@@ -152,7 +176,14 @@ client.on('interactionCreate', async interaction => {
         if (interaction.options.getSubcommand() === 'bandcamp') {
             const url = interaction.options.getString('url');
             const videotitle = exec(`yt-dlp -j --no-playlist ${url} | jq ".title"`).slice(1,-2);
-            interaction.editReply(`Queued: ${videotitle.toString()}`);
+            const queuedembed = new MessageEmbed()
+                .setColor('#FFC0DD')
+                .setTitle('Music Player')
+                .addFields(
+                    { name: 'Queued: ', value: videotitle.toString() },
+                )
+                .setTimestamp()
+            interaction.editReply({ embeds: [queuedembed] });
             exec(`yt-dlp -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist --output "/root/discordbot/downloads/%(title)s.%(ext)s" ${url}`);
             songsarray.push(`downloads/${videotitle}.mp3`);
             if (songsarray.length == 1) {
@@ -206,11 +237,11 @@ client.on('interactionCreate', async interaction => {
     }
 });
 
-function connect(test1, test2, test3) {
+function connect(voicechannelid, voiceguildid, guildvoiceadapter) {
     connection = joinVoiceChannel({
-        channelId: test1,
-        guildId: test2,
-        adapterCreator: test3,
+        channelId: voicechannelid,
+        guildId: voiceguildid,
+        adapterCreator: guildvoiceadapter,
     })
 }
 
@@ -220,9 +251,6 @@ function play() {
     player = createAudioPlayer();
     connection.subscribe(player);
     player.play(resource);
-    player.on(AudioPlayerStatus.Playing, () => {
-        console.log('The audio player has started');
-    });
     player.on(AudioPlayerStatus.Idle, () => {
         songsarray.shift();
         if (songsarray.length != 0) {
