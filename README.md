@@ -1,2 +1,2 @@
 # Discord-Bot
-My new in-development discord.js bot
+My new in-development pycord (discord.py) bot
