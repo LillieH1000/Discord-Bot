@@ -5,14 +5,7 @@ import requests
 import datetime
 import json
 
-# Regular Commands
-
-from discord.ext import commands
-bot = commands.Bot(command_prefix="!")
-
-# Slash Commands
-
-# bot = discord.Bot()
+bot = discord.Bot()
 
 # Config Loader
 
@@ -76,16 +69,16 @@ def youtube_ytdlp(arg):
 
 # def audioplayer():
 
-@bot.command()
+@bot.slash_command(guild_ids=[918949427522191361, 846702751350390825])
 async def connect(ctx):
     if not is_connected(ctx):
         await ctx.author.voice.channel.connect()
         embed = discord.Embed(title="Music Player", color=0xFFC0DD)
         embed.add_field(name="Connected To: ", value=ctx.author.voice.channel, inline=False)
         embed.timestamp = datetime.datetime.now()
-        await ctx.reply(embed=embed)
+        await ctx.respond(embed=embed)
 
-@bot.command()
+@bot.slash_command(guild_ids=[918949427522191361, 846702751350390825])
 async def play(ctx, *, arg):
     await connect(ctx)
     FFMPEG_OPTIONS = {
@@ -101,9 +94,9 @@ async def play(ctx, *, arg):
         embed = discord.Embed(title="Music Player", color=0xFFC0DD)
         embed.add_field(name="Now Playing: ", value=name, inline=False)
         embed.timestamp = datetime.datetime.now()
-        await ctx.reply(embed=embed)
+        await ctx.respond(embed=embed)
 
-@bot.command()
+@bot.slash_command(guild_ids=[918949427522191361, 846702751350390825])
 async def stop(ctx):
     if is_connected(ctx):
         ctx.channel.guild.voice_client.stop()
@@ -111,23 +104,23 @@ async def stop(ctx):
         embed = discord.Embed(title="Music Player", color=0xFFC0DD)
         embed.add_field(name="Stopped Playing In: ", value=ctx.author.voice.channel, inline=False)
         embed.timestamp = datetime.datetime.now()
-        await ctx.reply(embed=embed)
+        await ctx.respond(embed=embed)
 
-@bot.command()
+@bot.slash_command(guild_ids=[918949427522191361, 846702751350390825])
 async def volume(ctx, *, arg):
     if is_connected(ctx):
-        await ctx.reply(f"Sheep")
+        await ctx.respond(f"Sheep")
         # ctx.channel.guild.voice_client.volume = int(arg) / 100
 
-@bot.command()
+@bot.slash_command(guild_ids=[918949427522191361, 846702751350390825])
 async def pause(ctx):
     ctx.channel.guild.voice_client.pause()
-    await ctx.reply(f"Sheep")
+    await ctx.respond(f"Sheep")
 
-@bot.command()
+@bot.slash_command(guild_ids=[918949427522191361, 846702751350390825])
 async def resume(ctx):
     ctx.channel.guild.voice_client.resume()
-    await ctx.reply(f"Sheep")
+    await ctx.respond(f"Sheep")
 
 # Run
 
