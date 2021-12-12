@@ -45,30 +45,7 @@ def is_connected(ctx):
     voice_client = discord.utils.get(ctx.bot.voice_clients, guild=ctx.guild)
     return voice_client and voice_client.is_connected()
 
-def youtubename_ytdlp(arg):
-    YTDL_OPTIONS = {
-        'format': 'bestaudio/best',
-        'extractaudio': True,
-        'audioformat': 'mp3',
-        'outtmpl': 'downloads/%(extractor)s-%(id)s-%(title)s.%(ext)s',
-        'restrictfilenames': True,
-        'noplaylist': True,
-        'nocheckcertificate': True,
-        'ignoreerrors': False,
-        'logtostderr': False,
-        'quiet': True,
-        'no_warnings': True,
-        'default_search': 'ytsearch',
-        'source_address': '0.0.0.0',
-    }
-    with YoutubeDL(YTDL_OPTIONS) as ytdl:
-        try:
-            info = ytdl.extract_info(arg, download=False)['entries'][0]
-        except:
-            info = ytdl.extract_info(arg, download=False)
-    return info['title']
-    
-def youtubeurl_ytdlp(arg):
+def youtube_ytdlp(arg):
     YTDL_OPTIONS = {
         'format': 'bestaudio/best',
         'extractaudio': True,
@@ -89,7 +66,7 @@ def youtubeurl_ytdlp(arg):
             info = ytdl.extract_info(arg, download=True)['entries'][0]
         except:
             info = ytdl.extract_info(arg, download=True)
-    return info['url']
+    return info['title'], info['url']
 
 @bot.command()
 async def connect(ctx):
@@ -107,8 +84,7 @@ async def play(ctx, *, arg):
         'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
         'options': '-vn',
     }
-    name = youtubename_ytdlp(arg)
-    url = youtubeurl_ytdlp(arg)
+    name, url = youtube_ytdlp(arg)
     ctx.channel.guild.voice_client.play(discord.FFmpegPCMAudio(url, **FFMPEG_OPTIONS))
     embed = discord.Embed(title="Music Player", color=0xFFC0DD)
     embed.add_field(name="Now Playing: ", value=name, inline=False)
