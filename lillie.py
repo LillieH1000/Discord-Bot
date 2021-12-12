@@ -24,6 +24,7 @@ token = data['token']
 
 @bot.event
 async def on_ready():
+    print(f"Logged in as {bot.user.name}");
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="Selene Be Adorable"))
 
 # Tasks
@@ -44,6 +45,52 @@ def is_connected(ctx):
     voice_client = discord.utils.get(ctx.bot.voice_clients, guild=ctx.guild)
     return voice_client and voice_client.is_connected()
 
+def youtubename_ytdlp(arg):
+    YTDL_OPTIONS = {
+        'format': 'bestaudio/best',
+        'extractaudio': True,
+        'audioformat': 'mp3',
+        'outtmpl': 'downloads/%(extractor)s-%(id)s-%(title)s.%(ext)s',
+        'restrictfilenames': True,
+        'noplaylist': True,
+        'nocheckcertificate': True,
+        'ignoreerrors': False,
+        'logtostderr': False,
+        'quiet': True,
+        'no_warnings': True,
+        'default_search': 'ytsearch',
+        'source_address': '0.0.0.0',
+    }
+    with YoutubeDL(YTDL_OPTIONS) as ytdl:
+        try:
+            info = ytdl.extract_info(arg, download=False)['entries'][0]
+        except:
+            info = ytdl.extract_info(arg, download=False)
+    return info['title']
+    
+def youtubeurl_ytdlp(arg):
+    YTDL_OPTIONS = {
+        'format': 'bestaudio/best',
+        'extractaudio': True,
+        'audioformat': 'mp3',
+        'outtmpl': 'downloads/%(extractor)s-%(id)s-%(title)s.%(ext)s',
+        'restrictfilenames': True,
+        'noplaylist': True,
+        'nocheckcertificate': True,
+        'ignoreerrors': False,
+        'logtostderr': False,
+        'quiet': True,
+        'no_warnings': True,
+        'default_search': 'ytsearch',
+        'source_address': '0.0.0.0',
+    }
+    with YoutubeDL(YTDL_OPTIONS) as ytdl:
+        try:
+            info = ytdl.extract_info(arg, download=True)['entries'][0]
+        except:
+            info = ytdl.extract_info(arg, download=True)
+    return info['url']
+
 @bot.command()
 async def connect(ctx):
     if not is_connected(ctx):
@@ -54,15 +101,19 @@ async def connect(ctx):
         await ctx.reply(embed=embed)
 
 @bot.command()
-async def play(ctx):
+async def play(ctx, *, arg):
     await connect(ctx)
     FFMPEG_OPTIONS = {
-        # 'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
+        'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
         'options': '-vn',
     }
-    # ctx.channel.guild.voice_client.volume(0.5)
-    ctx.channel.guild.voice_client.play(discord.FFmpegPCMAudio("Curses.mp3", **FFMPEG_OPTIONS))
-    await ctx.reply(f"Sheep")
+    name = youtubename_ytdlp(arg)
+    url = youtubeurl_ytdlp(arg)
+    ctx.channel.guild.voice_client.play(discord.FFmpegPCMAudio(url, **FFMPEG_OPTIONS))
+    embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+    embed.add_field(name="Now Playing: ", value=name, inline=False)
+    embed.timestamp = datetime.datetime.now()
+    await ctx.reply(embed=embed)
 
 @bot.command()
 async def stop(ctx):
