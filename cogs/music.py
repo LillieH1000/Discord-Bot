@@ -4,10 +4,13 @@ from discord.commands import Option
 from discord.ext import commands
 from yt_dlp import YoutubeDL
 import datetime
+import asyncio
 
 class music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
+    queue = []
 
     def is_connected(self, ctx):
         voice_client = discord.utils.get(ctx.bot.voice_clients, guild=ctx.guild)
@@ -63,6 +66,20 @@ class music(commands.Cog):
                 info = ytdl.extract_info(video, download=True)
         return info['title'], info['url']
 
+    async def audio_player(self, ctx):
+        if self.queue:
+            FFMPEG_OPTIONS = {
+                'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
+                'options': '-vn',
+            }
+            ctx.channel.guild.voice_client.play(discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(self.queue[1], **FFMPEG_OPTIONS)), after=lambda e: asyncio.run_coroutine_threadsafe(self.audio_player(ctx)))
+            ctx.channel.guild.voice_client.source.volume = 0.5
+            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+            embed.add_field(name="Now Playing: ", value=self.queue[0], inline=False)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.respond(embed=embed)
+            del self.queue[:2]
+
     @slash_command(guild_ids=[918949427522191361, 846702751350390825])
     async def connect(self, ctx):
         if not self.is_connected(ctx):
@@ -75,27 +92,23 @@ class music(commands.Cog):
     @slash_command(guild_ids=[918949427522191361, 846702751350390825])
     async def play(self, ctx, source: Option(str, "Choose audio source", choices=["YouTube", "SoundCloud"]), video: Option(str, "Enter video name or url"),):
         await self.connect(self, ctx)
-        FFMPEG_OPTIONS = {
-            'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
-            'options': '-vn',
-        }
         if source == "YouTube":
             name, url = self.youtube_ytdlp(video)
         if source == "SoundCloud":
             name, url = self.soundcloud_ytdlp(video)
-        # queue.append(name)
-        # queue.append(url)
+        self.queue.append(name)
+        self.queue.append(url)
+        embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+        embed.add_field(name="Added To Queue: ", value=name, inline=False)
+        embed.timestamp = datetime.datetime.now()
+        await ctx.respond(embed=embed)
         if not self.is_playing(ctx):
-            ctx.channel.guild.voice_client.play(discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(url, **FFMPEG_OPTIONS)))
-            ctx.channel.guild.voice_client.source.volume = 0.5
-            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-            embed.add_field(name="Now Playing: ", value=name, inline=False)
-            embed.timestamp = datetime.datetime.now()
-            await ctx.respond(embed=embed)
+            await self.audio_player(ctx)
 
     @slash_command(guild_ids=[918949427522191361, 846702751350390825])
     async def stop(self, ctx):
         if self.is_connected(ctx):
+            queue.clear()
             ctx.channel.guild.voice_client.stop()
             await ctx.channel.guild.voice_client.disconnect()
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
