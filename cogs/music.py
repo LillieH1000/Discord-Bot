@@ -108,7 +108,7 @@ class music(commands.Cog):
     @slash_command(guild_ids=[918949427522191361, 846702751350390825])
     async def stop(self, ctx):
         if self.is_connected(ctx):
-            queue.clear()
+            self.queue.clear()
             ctx.channel.guild.voice_client.stop()
             await ctx.channel.guild.voice_client.disconnect()
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
