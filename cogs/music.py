@@ -96,13 +96,12 @@ class music(commands.Cog):
     @slash_command(guild_ids=[918949427522191361, 846702751350390825])
     async def stop(self, ctx):
         if self.is_connected(ctx):
-            if self.is_playing(ctx):
-                ctx.channel.guild.voice_client.stop()
-                await ctx.channel.guild.voice_client.disconnect()
-                embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-                embed.add_field(name="Stopped Playing In: ", value=ctx.author.voice.channel, inline=False)
-                embed.timestamp = datetime.datetime.now()
-                await ctx.respond(embed=embed)
+            ctx.channel.guild.voice_client.stop()
+            await ctx.channel.guild.voice_client.disconnect()
+            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+            embed.add_field(name="Stopped Playing In: ", value=ctx.author.voice.channel, inline=False)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.respond(embed=embed)
 
     @slash_command(guild_ids=[918949427522191361, 846702751350390825])
     async def pause(self, ctx):
