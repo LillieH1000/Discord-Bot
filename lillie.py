@@ -39,11 +39,17 @@ async def memberbackgroundtask():
 async def memberbackgroundtask_before():
     await bot.wait_until_ready()
 
-# Commands
+# Music Commands
+
+queue = []
 
 def is_connected(ctx):
     voice_client = discord.utils.get(ctx.bot.voice_clients, guild=ctx.guild)
     return voice_client and voice_client.is_connected()
+
+def is_playing(ctx):
+    voice_client = discord.utils.get(ctx.bot.voice_clients, guild=ctx.guild)
+    return voice_client and voice_client.is_playing()
 
 def youtube_ytdlp(arg):
     YTDL_OPTIONS = {
@@ -68,6 +74,8 @@ def youtube_ytdlp(arg):
             info = ytdl.extract_info(arg, download=True)
     return info['title'], info['url']
 
+# def audioplayer():
+
 @bot.command()
 async def connect(ctx):
     if not is_connected(ctx):
@@ -85,11 +93,15 @@ async def play(ctx, *, arg):
         'options': '-vn',
     }
     name, url = youtube_ytdlp(arg)
-    ctx.channel.guild.voice_client.play(discord.FFmpegPCMAudio(url, **FFMPEG_OPTIONS))
-    embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-    embed.add_field(name="Now Playing: ", value=name, inline=False)
-    embed.timestamp = datetime.datetime.now()
-    await ctx.reply(embed=embed)
+    queue.append(name)
+    queue.append(url)
+    # ctx.channel.guild.voice_client.volume = 0.1
+    if not is_playing(ctx):
+        ctx.channel.guild.voice_client.play(discord.FFmpegPCMAudio(url, **FFMPEG_OPTIONS))
+        embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+        embed.add_field(name="Now Playing: ", value=name, inline=False)
+        embed.timestamp = datetime.datetime.now()
+        await ctx.reply(embed=embed)
 
 @bot.command()
 async def stop(ctx):
@@ -100,6 +112,12 @@ async def stop(ctx):
         embed.add_field(name="Stopped Playing In: ", value=ctx.author.voice.channel, inline=False)
         embed.timestamp = datetime.datetime.now()
         await ctx.reply(embed=embed)
+
+@bot.command()
+async def volume(ctx, *, arg):
+    if is_connected(ctx):
+        await ctx.reply(f"Sheep")
+        # ctx.channel.guild.voice_client.volume = int(arg) / 100
 
 @bot.command()
 async def pause(ctx):
