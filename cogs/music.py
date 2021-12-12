@@ -85,9 +85,9 @@ class music(commands.Cog):
             name, url = self.soundcloud_ytdlp(video)
         # queue.append(name)
         # queue.append(url)
-        # ctx.channel.guild.voice_client.volume = 0.1
         if not self.is_playing(ctx):
-            ctx.channel.guild.voice_client.play(discord.FFmpegPCMAudio(url, **FFMPEG_OPTIONS))
+            ctx.channel.guild.voice_client.play(discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(url, **FFMPEG_OPTIONS)))
+            ctx.channel.guild.voice_client.source.volume = 0.5
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
             embed.add_field(name="Now Playing: ", value=name, inline=False)
             embed.timestamp = datetime.datetime.now()
@@ -100,6 +100,15 @@ class music(commands.Cog):
             await ctx.channel.guild.voice_client.disconnect()
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
             embed.add_field(name="Stopped Playing In: ", value=ctx.author.voice.channel, inline=False)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.respond(embed=embed)
+
+    @slash_command(guild_ids=[918949427522191361, 846702751350390825])
+    async def volume(self, ctx, volume: Option(int, "Enter the volume you want"),):
+        if self.is_connected(ctx):
+            ctx.channel.guild.voice_client.source.volume = volume / 100
+            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+            embed.add_field(name="Test", value=ctx.author.voice.channel, inline=False)
             embed.timestamp = datetime.datetime.now()
             await ctx.respond(embed=embed)
 
