@@ -72,7 +72,7 @@ class music(commands.Cog):
                 'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
                 'options': '-vn',
             }
-            ctx.channel.guild.voice_client.play(discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(self.queue[1], **FFMPEG_OPTIONS)), after=lambda e: asyncio.run_coroutine_threadsafe(self.audio_player(ctx)))
+            ctx.channel.guild.voice_client.play(discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(self.queue[1], **FFMPEG_OPTIONS)), after=lambda e: asyncio.run_coroutine_threadsafe(self.audio_player(ctx), self.bot.loop))
             ctx.channel.guild.voice_client.source.volume = 0.5
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
             embed.add_field(name="Now Playing: ", value=self.queue[0], inline=False)
