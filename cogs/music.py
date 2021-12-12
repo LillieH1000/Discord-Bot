@@ -40,6 +40,29 @@ class music(commands.Cog):
                 info = ytdl.extract_info(video, download=True)
         return info['title'], info['url']
 
+    def soundcloud_ytdlp(self, video):
+        YTDL_OPTIONS = {
+            'format': 'bestaudio/best',
+            'extractaudio': True,
+            'audioformat': 'mp3',
+            'outtmpl': 'downloads/%(extractor)s-%(id)s-%(title)s.%(ext)s',
+            'restrictfilenames': True,
+            'noplaylist': True,
+            'nocheckcertificate': True,
+            'ignoreerrors': False,
+            'logtostderr': False,
+            'quiet': True,
+            'no_warnings': True,
+            'default_search': 'scsearch',
+            'source_address': '0.0.0.0',
+        }
+        with YoutubeDL(YTDL_OPTIONS) as ytdl:
+            try:
+                info = ytdl.extract_info(video, download=True)['entries'][0]
+            except:
+                info = ytdl.extract_info(video, download=True)
+        return info['title'], info['url']
+
     @slash_command(guild_ids=[918949427522191361, 846702751350390825])
     async def connect(self, ctx):
         if not self.is_connected(ctx):
@@ -56,7 +79,10 @@ class music(commands.Cog):
             'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
             'options': '-vn',
         }
-        name, url = self.youtube_ytdlp(video)
+        if source == "YouTube":
+            name, url = self.youtube_ytdlp(video)
+        if source == "SoundCloud":
+            name, url = self.soundcloud_ytdlp(video)
         # queue.append(name)
         # queue.append(url)
         # ctx.channel.guild.voice_client.volume = 0.1
