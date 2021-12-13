@@ -10,7 +10,7 @@ class other(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command(guild_ids=[918949427522191361, 846702751350390825])
+    @slash_command(guild_ids=[918949427522191361, 846702751350390825, 881509316392263700])
     async def cat(self, ctx):
         response = requests.get(f"http://aws.random.cat/meow")
         responsejson = response.json()
@@ -19,7 +19,7 @@ class other(commands.Cog):
         embed.timestamp = datetime.datetime.now()
         await ctx.respond(embed=embed)
 
-    @slash_command(guild_ids=[918949427522191361, 846702751350390825])
+    @slash_command(guild_ids=[918949427522191361, 846702751350390825, 881509316392263700])
     async def dog(self, ctx):
         response = requests.get(f"https://dog.ceo/api/breeds/image/random")
         responsejson = response.json()
