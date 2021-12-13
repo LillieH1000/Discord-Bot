@@ -10,7 +10,7 @@ class ytdislikes(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command(guild_ids=[918949427522191361, 846702751350390825, 881509316392263700])
+    @slash_command(guild_ids=[918949427522191361, 881509316392263700])
     async def ytdislikes(self, ctx, videoid: Option(str, "Enter the video id"),):
         response = requests.get(f"https://returnyoutubedislikeapi.com/votes?videoId={videoid}")
         responsejson = response.json()
