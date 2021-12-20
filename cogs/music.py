@@ -5,10 +5,26 @@ from discord.ext import commands
 from yt_dlp import YoutubeDL
 import datetime
 import asyncio
+import json
 
 class music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
+    # Guilds Loader
+
+    guildconfig = open('guilds.json')
+    data = json.load(guildconfig)
+    s = ""
+    t = 1
+    for x in data:
+        y = ""
+        y += "guild"
+        y += str(t)
+        s += data[y]
+        if (t != len(data)):
+            s += str(",")
+        t = t + 1
 
     queue = []
 
@@ -80,7 +96,7 @@ class music(commands.Cog):
             await ctx.respond(embed=embed)
             del self.queue[:2]
 
-    @slash_command()
+    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Connects the bot to the voice channel you are in")
     async def connect(self, ctx):
         if not self.is_connected(ctx):
             await ctx.author.voice.channel.connect()
@@ -89,7 +105,7 @@ class music(commands.Cog):
             embed.timestamp = datetime.datetime.now()
             await ctx.respond(embed=embed)
     
-    @slash_command()
+    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Plays a song")
     async def play(self, ctx, source: Option(str, "Choose audio source", choices=["YouTube", "SoundCloud"]), video: Option(str, "Enter video name or url"),):
         await self.connect(self, ctx)
         if source == "YouTube":
@@ -105,7 +121,7 @@ class music(commands.Cog):
         if not self.is_playing(ctx):
             await self.audio_player(ctx)
 
-    @slash_command()
+    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Stops and disconnects the bot")
     async def stop(self, ctx):
         if self.is_connected(ctx):
             self.queue.clear()
@@ -116,7 +132,7 @@ class music(commands.Cog):
             embed.timestamp = datetime.datetime.now()
             await ctx.respond(embed=embed)
 
-    @slash_command()
+    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Pauses the playing song")
     async def pause(self, ctx):
         if self.is_connected(ctx):
             if self.is_playing(ctx):
@@ -126,7 +142,7 @@ class music(commands.Cog):
                 embed.timestamp = datetime.datetime.now()
                 await ctx.respond(embed=embed)
 
-    @slash_command()
+    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Resumes the playing song")
     async def resume(self, ctx):
         if self.is_connected(ctx):
             if not self.is_playing(ctx):
@@ -136,7 +152,7 @@ class music(commands.Cog):
                 embed.timestamp = datetime.datetime.now()
                 await ctx.respond(embed=embed)
 
-    @slash_command()
+    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Change the bots volume")
     async def volume(self, ctx, volume: Option(int, "Enter the volume you want"),):
         if self.is_connected(ctx):
             ctx.channel.guild.voice_client.source.volume = volume / 100

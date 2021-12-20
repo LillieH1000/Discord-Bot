@@ -10,7 +10,22 @@ class pronoundb(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command()
+    # Guilds Loader
+
+    guildconfig = open('guilds.json')
+    data = json.load(guildconfig)
+    s = ""
+    t = 1
+    for x in data:
+        y = ""
+        y += "guild"
+        y += str(t)
+        s += data[y]
+        if (t != len(data)):
+            s += str(",")
+        t = t + 1
+
+    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Get a users pronouns")
     async def pronouns(self, ctx, user: discord.Member):
         response = requests.get(f"https://pronoundb.org/api/v1/lookup?platform=discord&id={user.id}")
         responsejson = response.json()
