@@ -93,7 +93,10 @@ class music(commands.Cog):
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
             embed.add_field(name="Now Playing: ", value=self.queue[0], inline=False)
             embed.timestamp = datetime.datetime.now()
-            await ctx.respond(embed=embed)
+            try:
+                await ctx.respond(embed=embed)
+            except:
+                await ctx.send_followup(embed=embed)
             del self.queue[:2]
 
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Connects the bot to the voice channel you are in")
@@ -103,7 +106,10 @@ class music(commands.Cog):
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
             embed.add_field(name="Connected To: ", value=ctx.author.voice.channel, inline=False)
             embed.timestamp = datetime.datetime.now()
-            await ctx.respond(embed=embed)
+            try:
+                await ctx.respond(embed=embed)
+            except:
+                await ctx.send_followup(embed=embed)
     
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Plays a song")
     async def play(self, ctx, source: Option(str, "Choose audio source", choices=["YouTube", "SoundCloud"]), video: Option(str, "Enter video name or url"),):
@@ -117,7 +123,10 @@ class music(commands.Cog):
         embed = discord.Embed(title="Music Player", color=0xFFC0DD)
         embed.add_field(name="Added To Queue: ", value=name, inline=False)
         embed.timestamp = datetime.datetime.now()
-        await ctx.respond(embed=embed)
+        try:
+            await ctx.respond(embed=embed)
+        except:
+            await ctx.send_followup(embed=embed)
         if not self.is_playing(ctx):
             await self.audio_player(ctx)
 
