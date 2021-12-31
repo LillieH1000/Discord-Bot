@@ -27,8 +27,7 @@ class pronoundb(commands.Cog):
 
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Get a users pronouns")
     async def pronouns(self, ctx, user: discord.Member):
-        response = requests.get(f"https://pronoundb.org/api/v1/lookup?platform=discord&id={user.id}")
-        responsejson = response.json()
+        response = requests.get(f"https://pronoundb.org/api/v1/lookup?platform=discord&id={user.id}").json()
         if responsejson["pronouns"] == "unspecified":
             pronoun = "unspecified"
         if responsejson["pronouns"] == "hh":

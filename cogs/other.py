@@ -27,19 +27,17 @@ class other(commands.Cog):
 
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Posts a random cat picture")
     async def cat(self, ctx):
-        response = requests.get(f"http://aws.random.cat/meow")
-        responsejson = response.json()
+        response = requests.get(f"http://aws.random.cat/meow").json()
         embed = discord.Embed(title="Cat Pics", color=0xFFC0DD)
-        embed.set_image(url=str(responsejson["file"]))
+        embed.set_image(url=str(response["file"]))
         embed.timestamp = datetime.datetime.now()
         await ctx.respond(embed=embed)
 
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Posts a random dog picture")
     async def dog(self, ctx):
-        response = requests.get(f"https://dog.ceo/api/breeds/image/random")
-        responsejson = response.json()
+        response = requests.get(f"https://dog.ceo/api/breeds/image/random").json()
         embed = discord.Embed(title="Dog Pics", color=0xFFC0DD)
-        embed.set_image(url=str(responsejson["message"]))
+        embed.set_image(url=str(response["message"]))
         embed.timestamp = datetime.datetime.now()
         await ctx.respond(embed=embed)
 
