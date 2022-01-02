@@ -15,7 +15,7 @@ token = data['token']
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user.name}");
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="Piplup"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="Lillie"))
 
 # Run
 
