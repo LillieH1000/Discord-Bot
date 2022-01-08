@@ -2,6 +2,7 @@ import discord
 from discord.commands import Option, slash_command
 from discord.ext import commands
 from discord.ui import Button, View
+import urllib.parse
 import datetime
 import requests
 import json
@@ -19,7 +20,7 @@ class tweaksearch(commands.Cog):
 
             message_content = message.content.replace(" ", "%20")[2:-2]
 
-            response = requests.get(f"https://api.canister.me/v1/community/packages/search?query={message_content}&limit=1").json()
+            response = requests.get(f"https://api.canister.me/v1/community/packages/search?query={urllib.parse.quote(message_content)}&limit=1").json()
             
             try:
                 embed = discord.Embed(color=0xFFC0DD)
