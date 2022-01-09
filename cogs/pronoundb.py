@@ -27,47 +27,47 @@ class pronoundb(commands.Cog):
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Get a users pronouns")
     async def pronouns(self, ctx, user: discord.Member):
         response = requests.get(f"https://pronoundb.org/api/v1/lookup?platform=discord&id={user.id}").json()
-        if responsejson["pronouns"] == "unspecified":
+        if response["pronouns"] == "unspecified":
             pronoun = "unspecified"
-        if responsejson["pronouns"] == "hh":
+        if response["pronouns"] == "hh":
             pronoun = "he/him"
-        if responsejson["pronouns"] == "hi":
+        if response["pronouns"] == "hi":
             pronoun = "he/it"
-        if responsejson["pronouns"] == "hs":
+        if response["pronouns"] == "hs":
             pronoun = "he/she"
-        if responsejson["pronouns"] == "ht":
+        if response["pronouns"] == "ht":
             pronoun = "he/they"
-        if responsejson["pronouns"] == "ih":
+        if response["pronouns"] == "ih":
             pronoun = "it/him"
-        if responsejson["pronouns"] == "ii":
+        if response["pronouns"] == "ii":
             pronoun = "it/its"
-        if responsejson["pronouns"] == "is":
+        if response["pronouns"] == "is":
             pronoun = "it/she"
-        if responsejson["pronouns"] == "it":
+        if response["pronouns"] == "it":
             pronoun = "it/they"
-        if responsejson["pronouns"] == "shh":
+        if response["pronouns"] == "shh":
             pronoun = "she/he"
-        if responsejson["pronouns"] == "sh":
+        if response["pronouns"] == "sh":
             pronoun = "she/her"
-        if responsejson["pronouns"] == "si":
+        if response["pronouns"] == "si":
             pronoun = "she/it"
-        if responsejson["pronouns"] == "st":
+        if response["pronouns"] == "st":
             pronoun = "she/they"
-        if responsejson["pronouns"] == "th":
+        if response["pronouns"] == "th":
             pronoun = "they/he"
-        if responsejson["pronouns"] == "ti":
+        if response["pronouns"] == "ti":
             pronoun = "they/it"
-        if responsejson["pronouns"] == "ts":
+        if response["pronouns"] == "ts":
             pronoun = "they/she"
-        if responsejson["pronouns"] == "tt":
+        if response["pronouns"] == "tt":
             pronoun = "they/them"
-        if responsejson["pronouns"] == "any":
+        if response["pronouns"] == "any":
             pronoun = "Any pronouns"
-        if responsejson["pronouns"] == "other":
+        if response["pronouns"] == "other":
             pronoun = "Other pronouns"
-        if responsejson["pronouns"] == "ask":
+        if response["pronouns"] == "ask":
             pronoun = "Ask me my pronouns"
-        if responsejson["pronouns"] == "avoid":
+        if response["pronouns"] == "avoid":
             pronoun = "Avoid pronouns, use my name"
         embed = discord.Embed(title="PronounDB", color=0xFFC0DD)
         embed.add_field(name=f"Pronouns of {user.name}: ", value=pronoun, inline=False)
