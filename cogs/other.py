@@ -26,7 +26,7 @@ class other(commands.Cog):
         t = t + 1
 
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Posts a random cat picture")
-    async def cat(self, ctx, source: Option(str, "Choose cat pics source", choices=["Random.Cat", "Nekos.Life"])):
+    async def cat(self, ctx, source: Option(str, "Choose cat pics source", choices=["Random.Cat", "Nekos.Life", "AlexFlipnote.Dev"])):
         if source == "Random.Cat":
             response = requests.get(f"http://aws.random.cat/meow").json()
             embed = discord.Embed(title="Cat Pics", color=0xFFC0DD)
@@ -53,21 +53,61 @@ class other(commands.Cog):
                 view.add_item(vieworiginalimage)
 
             await ctx.respond(embed=embed, view=view)
+        if source == "AlexFlipnote.Dev":
+            response = requests.get(f"https://api.alexflipnote.dev/cats").json()
+            embed = discord.Embed(title="Cat Pics", color=0xFFC0DD)
+            embed.set_image(url=str(response["file"]))
+            embed.timestamp = datetime.datetime.now()
+
+            vieworiginalimage = Button(label="View Original Image", url=f"{response['file']}", style=discord.ButtonStyle.grey)
+
+            view = View()
+            if (response["file"] is not None):
+                view.add_item(vieworiginalimage)
+
+            await ctx.respond(embed=embed, view=view)
 
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Posts a random dog picture")
-    async def dog(self, ctx):
-        response = requests.get(f"https://dog.ceo/api/breeds/image/random").json()
-        embed = discord.Embed(title="Dog Pics", color=0xFFC0DD)
-        embed.set_image(url=str(response["message"]))
-        embed.timestamp = datetime.datetime.now()
-        
-        vieworiginalimage = Button(label="View Original Image", url=f"{response['message']}", style=discord.ButtonStyle.grey)
+    async def dog(self, ctx, source: Option(str, "Choose dog pics source", choices=["Dog.Ceo", "Nekos.Life", "AlexFlipnote.Dev"])):
+        if source == "Dog.Ceo":
+            response = requests.get(f"https://dog.ceo/api/breeds/image/random").json()
+            embed = discord.Embed(title="Dog Pics", color=0xFFC0DD)
+            embed.set_image(url=str(response["message"]))
+            embed.timestamp = datetime.datetime.now()
+            
+            vieworiginalimage = Button(label="View Original Image", url=f"{response['message']}", style=discord.ButtonStyle.grey)
 
-        view = View()
-        if (response["message"] is not None):
-            view.add_item(vieworiginalimage)
+            view = View()
+            if (response["message"] is not None):
+                view.add_item(vieworiginalimage)
 
-        await ctx.respond(embed=embed, view=view)
+            await ctx.respond(embed=embed, view=view)
+        if source == "Nekos.Life":
+            response = requests.get(f"https://nekos.life/api/v2/img/woof").json()
+            embed = discord.Embed(title="Dog Pics", color=0xFFC0DD)
+            embed.set_image(url=str(response["url"]))
+            embed.timestamp = datetime.datetime.now()
+
+            vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
+
+            view = View()
+            if (response["url"] is not None):
+                view.add_item(vieworiginalimage)
+
+            await ctx.respond(embed=embed, view=view)
+        if source == "AlexFlipnote.Dev":
+            response = requests.get(f"https://api.alexflipnote.dev/dogs").json()
+            embed = discord.Embed(title="Dog Pics", color=0xFFC0DD)
+            embed.set_image(url=str(response["file"]))
+            embed.timestamp = datetime.datetime.now()
+
+            vieworiginalimage = Button(label="View Original Image", url=f"{response['file']}", style=discord.ButtonStyle.grey)
+
+            view = View()
+            if (response["file"] is not None):
+                view.add_item(vieworiginalimage)
+
+            await ctx.respond(embed=embed, view=view)
 
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Posts a random birb picture")
     async def birb(self, ctx):
@@ -88,6 +128,36 @@ class other(commands.Cog):
     async def neko(self, ctx):
         response = requests.get(f"https://nekos.life/api/v2/img/neko").json()
         embed = discord.Embed(title="Neko Pics", color=0xFFC0DD)
+        embed.set_image(url=str(response["url"]))
+        embed.timestamp = datetime.datetime.now()
+        
+        vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
+
+        view = View()
+        if (response["url"] is not None):
+            view.add_item(vieworiginalimage)
+
+        await ctx.respond(embed=embed, view=view)
+
+    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Posts a random coffee picture")
+    async def coffee(self, ctx):
+        response = requests.get(f"https://coffee.alexflipnote.dev/random.json").json()
+        embed = discord.Embed(title="Coffee Pics", color=0xFFC0DD)
+        embed.set_image(url=str(response["file"]))
+        embed.timestamp = datetime.datetime.now()
+        
+        vieworiginalimage = Button(label="View Original Image", url=f"{response['file']}", style=discord.ButtonStyle.grey)
+
+        view = View()
+        if (response["file"] is not None):
+            view.add_item(vieworiginalimage)
+
+        await ctx.respond(embed=embed, view=view)
+
+    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Posts a random goose picture")
+    async def goose(self, ctx):
+        response = requests.get(f"https://nekos.life/api/v2/img/goose").json()
+        embed = discord.Embed(title="Goose Pics", color=0xFFC0DD)
         embed.set_image(url=str(response["url"]))
         embed.timestamp = datetime.datetime.now()
         
