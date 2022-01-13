@@ -25,16 +25,22 @@ class pokemon(commands.Cog):
 
             response = requests.get(f"https://pokeapi.co/api/v2/pokemon/{urllib.parse.quote(message_before)}").json()
 
-            embed = discord.Embed(color=0xFFC0DD)
+            embed = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
             embed.set_thumbnail(url=response['sprites']['other']['home']['front_default'])
-            embed.add_field(name=f"{response['name'].capitalize()}", value=f"Pokedex ID: {response['id']}", inline=False)
+            embed.add_field(name=f"Pokedex ID: ", value=f"{response['id']}", inline=False)
+            # embed.add_field(name=f"Types: ", value=f"{response['types'][0]['type']['name']}", inline=False)
             if (message_after != ""):
                 embed.add_field(name=f"Game And Count", value=message_after, inline=False)
             embed.set_image(url=response['sprites']['other']['home']['front_shiny'])
             embed.timestamp = datetime.datetime.now()
 
+            # view = View()
+            # swapimage = Button(label="View Original Image", url=f"{response['file']}", style=discord.ButtonStyle.grey)
+            # view.add_item(swapimage)
+
             await message.delete()
             await message.channel.send(embed=embed)
+            # await message.channel.send(embed=embed, view=view)
 
 def setup(bot):
     bot.add_cog(pokemon(bot))
