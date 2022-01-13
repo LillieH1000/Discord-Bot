@@ -7,7 +7,7 @@ import datetime
 import requests
 import json
 
-class pokemonshinycatch(commands.Cog):
+class pokemon(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -18,33 +18,23 @@ class pokemonshinycatch(commands.Cog):
 
         if message.content.startswith("((") and "))" in message.content:
 
-            message_content = message.content.lower()[2:-2]
-            try:
-                message_after = message.content.split("))")[1]
-                message_before = message_content[0:-len(message_after)]
+            message_content = message.content.lower()
 
-                response = requests.get(f"https://pokeapi.co/api/v2/pokemon/{urllib.parse.quote(message_before)}").json()
-                
-                embed = discord.Embed(color=0xFFC0DD)
-                embed.set_thumbnail(url=response['sprites']['other']['home']['front_default'])
-                embed.add_field(name=f"{response['name'].capitalize()}", value=f"Pokedex ID: {response['id']}", inline=False)
+            message_before = message_content.split("))")[0].replace("((", "")
+            message_after = message_content.split("))")[1]
+
+            response = requests.get(f"https://pokeapi.co/api/v2/pokemon/{urllib.parse.quote(message_before)}").json()
+
+            embed = discord.Embed(color=0xFFC0DD)
+            embed.set_thumbnail(url=response['sprites']['other']['home']['front_default'])
+            embed.add_field(name=f"{response['name'].capitalize()}", value=f"Pokedex ID: {response['id']}", inline=False)
+            if (message_after != ""):
                 embed.add_field(name=f"Game And Count", value=message_after, inline=False)
-                embed.set_image(url=response['sprites']['other']['home']['front_shiny'])
-                embed.timestamp = datetime.datetime.now()
+            embed.set_image(url=response['sprites']['other']['home']['front_shiny'])
+            embed.timestamp = datetime.datetime.now()
 
-                await message.delete()
-                await message.channel.send(embed=embed)
-            except:
-                response = requests.get(f"https://pokeapi.co/api/v2/pokemon/{urllib.parse.quote(message_content)}").json()
-                
-                embed = discord.Embed(color=0xFFC0DD)
-                embed.set_thumbnail(url=response['sprites']['other']['home']['front_default'])
-                embed.add_field(name=f"{response['name'].capitalize()}", value=f"Pokedex ID: {response['id']}", inline=False)
-                embed.set_image(url=response['sprites']['other']['home']['front_shiny'])
-                embed.timestamp = datetime.datetime.now()
-
-                await message.delete()
-                await message.channel.send(embed=embed)
+            await message.delete()
+            await message.channel.send(embed=embed)
 
 def setup(bot):
-    bot.add_cog(pokemonshinycatch(bot))
+    bot.add_cog(pokemon(bot))
