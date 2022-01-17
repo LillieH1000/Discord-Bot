@@ -17,8 +17,6 @@ class automod(commands.Cog):
         message_content = message.content.lower()
 
         antiscamresponse = requests.get(f"https://raw.githubusercontent.com/LillieWeeb001/Anti-Scam-Json-List/main/antiscam.json").json()
-
-        # antijbpiracyresponse = requests.get(f"https://api.canister.me/v1/community/repositories/check?queries={message_content}").json()
         
         if any(word in message_content for word in antiscamresponse["scamjburls"]):
             await message.delete()
@@ -26,8 +24,13 @@ class automod(commands.Cog):
         if any(word in message_content for word in antiscamresponse["scamideviceunlockurls"]):
             await message.delete()
 
-        # if (antijbpiracyresponse['data'][0]['status'] == "unsafe"):
-            # await message.delete()
+        if any(word in message_content for word in antiscamresponse["scamdiscordurls"]):
+            await message.delete()
+
+        for word in message_content.split():
+            antijbpiracyresponse = requests.get(f"https://api.canister.me/v1/community/repositories/check?queries={word}").json()
+            if (antijbpiracyresponse['data'][0]['status'] == "unsafe"):
+                await message.delete()
 
 def setup(bot):
     bot.add_cog(automod(bot))
