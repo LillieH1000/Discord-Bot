@@ -50,6 +50,11 @@ class music(commands.Cog):
             'no_warnings': True,
             'default_search': 'ytsearch',
             'source_address': '0.0.0.0',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
         }
         with YoutubeDL(YTDL_OPTIONS) as ytdl:
             try:
@@ -73,6 +78,39 @@ class music(commands.Cog):
             'no_warnings': True,
             'default_search': 'scsearch',
             'source_address': '0.0.0.0',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+        }
+        with YoutubeDL(YTDL_OPTIONS) as ytdl:
+            try:
+                info = ytdl.extract_info(video, download=True)['entries'][0]
+            except:
+                info = ytdl.extract_info(video, download=True)
+        return info['title'], info['url']
+
+    def bandcamp_ytdlp(self, video):
+        YTDL_OPTIONS = {
+            'format': 'bestaudio/best',
+            'extractaudio': True,
+            'audioformat': 'mp3',
+            'outtmpl': 'downloads/%(extractor)s-%(id)s-%(title)s.%(ext)s',
+            'restrictfilenames': True,
+            'noplaylist': True,
+            'nocheckcertificate': True,
+            'ignoreerrors': False,
+            'logtostderr': False,
+            'quiet': True,
+            'no_warnings': True,
+            'default_search': 'none',
+            'source_address': '0.0.0.0',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
         }
         with YoutubeDL(YTDL_OPTIONS) as ytdl:
             try:
@@ -84,63 +122,63 @@ class music(commands.Cog):
     async def audio_player(self, ctx):
         if self.queue:
             FFMPEG_OPTIONS = {
-                'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
+                'before_options': '-nostdin -reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
                 'options': '-vn',
             }
-            ctx.channel.guild.voice_client.play(discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(self.queue[1], **FFMPEG_OPTIONS)), after=lambda e: asyncio.run_coroutine_threadsafe(self.audio_player(ctx), self.bot.loop))
-            ctx.channel.guild.voice_client.source.volume = 0.5
+            # ctx.channel.guild.voice_client.play(discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(self.queue[1], **FFMPEG_OPTIONS)), after=lambda e: asyncio.run_coroutine_threadsafe(self.audio_player(ctx), self.bot.loop))
+            # ctx.channel.guild.voice_client.source.volume = 0.4
+            source = await discord.FFmpegOpusAudio.from_probe(self.queue[1], **FFMPEG_OPTIONS)
+            ctx.channel.guild.voice_client.play(source)
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
             embed.add_field(name="Now Playing: ", value=self.queue[0], inline=False)
             embed.timestamp = datetime.datetime.now()
-            try:
-                await ctx.respond(embed=embed)
-            except:
-                await ctx.send_followup(embed=embed)
+            await ctx.send_followup(embed=embed)
             del self.queue[:2]
 
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Connects the bot to the voice channel you are in")
     async def connect(self, ctx):
+        await ctx.defer()
         if not self.is_connected(ctx):
             await ctx.author.voice.channel.connect()
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
             embed.add_field(name="Connected To: ", value=ctx.author.voice.channel, inline=False)
             embed.timestamp = datetime.datetime.now()
-            try:
-                await ctx.respond(embed=embed)
-            except:
-                await ctx.send_followup(embed=embed)
+            await ctx.send_followup(embed=embed)
     
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Plays a song")
-    async def play(self, ctx, source: Option(str, "Choose audio source", choices=["YouTube", "SoundCloud"]), video: Option(str, "Enter video name or url"),):
-        await self.connect(self, ctx)
+    async def play(self, ctx, source: Option(str, "Choose audio source", choices=["YouTube", "SoundCloud", "Bandcamp"]), video: Option(str, "Enter video name or url"),):
+        await ctx.defer()
+        if not self.is_connected(ctx):
+            await self.connect(self, ctx)
         if source == "YouTube":
             name, url = self.youtube_ytdlp(video)
         if source == "SoundCloud":
             name, url = self.soundcloud_ytdlp(video)
+        if source == "Bandcamp":
+            name, url = self.bandcamp_ytdlp(video)
         self.queue.append(name)
         self.queue.append(url)
         embed = discord.Embed(title="Music Player", color=0xFFC0DD)
         embed.add_field(name="Added To Queue: ", value=name, inline=False)
         embed.timestamp = datetime.datetime.now()
-        try:
-            await ctx.respond(embed=embed)
-        except:
-            await ctx.send_followup(embed=embed)
+        await ctx.send_followup(embed=embed)
         if not self.is_playing(ctx):
             await self.audio_player(ctx)
 
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Skips to the next song in the queue")
     async def skip(self, ctx):
+        await ctx.defer()
         if self.is_connected(ctx):
             ctx.channel.guild.voice_client.stop()
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
             embed.add_field(name="Skipped Playing Song In: ", value=ctx.author.voice.channel, inline=False)
             embed.timestamp = datetime.datetime.now()
-            await ctx.respond(embed=embed)
+            await ctx.send_followup(embed=embed)
             await self.audio_player(ctx)
             
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Stops and disconnects the bot")
     async def stop(self, ctx):
+        await ctx.defer()
         if self.is_connected(ctx):
             self.queue.clear()
             ctx.channel.guild.voice_client.stop()
@@ -148,36 +186,29 @@ class music(commands.Cog):
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
             embed.add_field(name="Stopped Playing In: ", value=ctx.author.voice.channel, inline=False)
             embed.timestamp = datetime.datetime.now()
-            await ctx.respond(embed=embed)
+            await ctx.send_followup(embed=embed)
 
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Pauses the playing song")
     async def pause(self, ctx):
+        await ctx.defer()
         if self.is_connected(ctx):
             if self.is_playing(ctx):
                 ctx.channel.guild.voice_client.pause()
                 embed = discord.Embed(title="Music Player", color=0xFFC0DD)
                 embed.add_field(name="Paused Playing In: ", value=ctx.author.voice.channel, inline=False)
                 embed.timestamp = datetime.datetime.now()
-                await ctx.respond(embed=embed)
+                await ctx.send_followup(embed=embed)
 
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Resumes the playing song")
     async def resume(self, ctx):
+        await ctx.defer()
         if self.is_connected(ctx):
             if not self.is_playing(ctx):
                 ctx.channel.guild.voice_client.resume()
                 embed = discord.Embed(title="Music Player", color=0xFFC0DD)
                 embed.add_field(name="Resumed Playing In: ", value=ctx.author.voice.channel, inline=False)
                 embed.timestamp = datetime.datetime.now()
-                await ctx.respond(embed=embed)
-
-    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Change the bots volume")
-    async def volume(self, ctx, volume: Option(int, "Enter the volume you want"),):
-        if self.is_connected(ctx):
-            ctx.channel.guild.voice_client.source.volume = volume / 100
-            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-            embed.add_field(name="Test", value=ctx.author.voice.channel, inline=False)
-            embed.timestamp = datetime.datetime.now()
-            await ctx.respond(embed=embed)
+                await ctx.send_followup(embed=embed)
 
 def setup(bot):
     bot.add_cog(music(bot))

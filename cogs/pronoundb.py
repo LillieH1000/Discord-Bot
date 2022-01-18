@@ -26,6 +26,7 @@ class pronoundb(commands.Cog):
 
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Get a users pronouns")
     async def pronouns(self, ctx, user: discord.Member):
+        await ctx.defer()
         response = requests.get(f"https://pronoundb.org/api/v1/lookup?platform=discord&id={user.id}").json()
         if response["pronouns"] == "unspecified":
             pronoun = "unspecified"
@@ -72,7 +73,7 @@ class pronoundb(commands.Cog):
         embed = discord.Embed(title="PronounDB", color=0xFFC0DD)
         embed.add_field(name=f"Pronouns of {user.name}: ", value=pronoun, inline=False)
         embed.timestamp = datetime.datetime.now()
-        await ctx.respond(embed=embed, delete_after=30.0)
+        await ctx.send_followup(embed=embed, delete_after=30.0)
 
 def setup(bot):
     bot.add_cog(pronoundb(bot))
