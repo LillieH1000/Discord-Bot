@@ -129,6 +129,16 @@ class music(commands.Cog):
         if not self.is_playing(ctx):
             await self.audio_player(ctx)
 
+    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Skips to the next song in the queue")
+    async def skip(self, ctx):
+        if self.is_connected(ctx):
+            ctx.channel.guild.voice_client.stop()
+            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+            embed.add_field(name="Skipped Playing Song In: ", value=ctx.author.voice.channel, inline=False)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.respond(embed=embed)
+            await self.audio_player(ctx)
+            
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Stops and disconnects the bot")
     async def stop(self, ctx):
         if self.is_connected(ctx):
