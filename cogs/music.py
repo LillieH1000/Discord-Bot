@@ -50,11 +50,6 @@ class music(commands.Cog):
             'no_warnings': True,
             'default_search': 'ytsearch',
             'source_address': '0.0.0.0',
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
         }
         with YoutubeDL(YTDL_OPTIONS) as ytdl:
             try:
@@ -78,11 +73,6 @@ class music(commands.Cog):
             'no_warnings': True,
             'default_search': 'scsearch',
             'source_address': '0.0.0.0',
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
         }
         with YoutubeDL(YTDL_OPTIONS) as ytdl:
             try:
@@ -106,11 +96,6 @@ class music(commands.Cog):
             'no_warnings': True,
             'default_search': 'none',
             'source_address': '0.0.0.0',
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
         }
         with YoutubeDL(YTDL_OPTIONS) as ytdl:
             try:
@@ -145,9 +130,10 @@ class music(commands.Cog):
     
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Plays a song")
     async def play(self, ctx, source: Option(str, "Choose audio source", choices=["YouTube", "SoundCloud", "Bandcamp"]), video: Option(str, "Enter video name or url"),):
-        await ctx.defer()
         if not self.is_connected(ctx):
             await self.connect(self, ctx)
+        else:
+            await ctx.defer()
         if source == "YouTube":
             name, url = self.youtube_ytdlp(video)
         if source == "SoundCloud":
