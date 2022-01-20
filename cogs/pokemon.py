@@ -28,7 +28,11 @@ class pokemon(commands.Cog):
             embed = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
             embed.set_thumbnail(url=response['sprites']['other']['home']['front_default'])
             embed.add_field(name=f"Pokedex ID: ", value=f"{response['id']}", inline=False)
-            # embed.add_field(name=f"Types: ", value=f"{response['types'][0]['type']['name']}", inline=False)
+            # embed.add_field(name=f"Types: ", value=f"{len(response['types'])}", inline=False)
+            i = 1
+            for x in response['types']:
+                embed.add_field(name=f"Type {i}: ", value=f"{x['type']['name'].capitalize()}", inline=True)
+                i = i + 1
             if (message_after != ""):
                 embed.add_field(name=f"Game And Count", value=message_after, inline=False)
             embed.set_image(url=response['sprites']['other']['home']['front_shiny'])

@@ -21,7 +21,7 @@ class membercount(commands.Cog):
         lilliememberchannel = self.bot.get_channel(932817405556690944)
         while not self.bot.is_closed():
             await townofsalemmemberchannel.edit(name=f"Members: {townofsalemguild.member_count}")
-            # await charizmemberchannel.edit(name=f"Members: {charizguild.member_count}")
+            await charizmemberchannel.edit(name=f"Members: {charizguild.member_count}")
             await worfmemberchannel.edit(name=f"Members: {worfguild.member_count}")
             await lilliememberchannel.edit(name=f"Members: {lillieguild.member_count}")
             await asyncio.sleep(60)
