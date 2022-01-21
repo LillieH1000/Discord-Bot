@@ -30,10 +30,14 @@ class pokemon(commands.Cog):
             embed = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
             embed.set_thumbnail(url=response['sprites']['other']['home']['front_default'])
             embed.add_field(name=f"Pokedex ID: ", value=f"{response['id']}", inline=False)
-            i = 1
+            i = 0
+            z = ""
             for x in response['types']:
-                embed.add_field(name=f"Type {i}: ", value=f"{x['type']['name'].capitalize()}", inline=True)
+                z = z + f"{x['type']['name'].capitalize()}"
                 i = i + 1
+                if (len(response['types']) != i):
+                    z = z + ", "
+            embed.add_field(name=f"Types: ", value=f"{z}", inline=True)
             if (message_after != ""):
                 embed.add_field(name=f"Game And Count", value=message_after, inline=False)
             embed.timestamp = datetime.datetime.now()
@@ -45,10 +49,14 @@ class pokemon(commands.Cog):
             embedShiny = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
             embedShiny.set_thumbnail(url=response['sprites']['other']['home']['front_default'])
             embedShiny.add_field(name=f"Pokedex ID: ", value=f"{response['id']}", inline=False)
-            i = 1
+            i = 0
+            z = ""
             for x in response['types']:
-                embedShiny.add_field(name=f"Type {i}: ", value=f"{x['type']['name'].capitalize()}", inline=True)
+                z = z + f"{x['type']['name'].capitalize()}"
                 i = i + 1
+                if (len(response['types']) != i):
+                    z = z + ", "
+            embedShiny.add_field(name=f"Types: ", value=f"{z}", inline=True)
             if (message_after != ""):
                 embedShiny.add_field(name=f"Game And Count", value=message_after, inline=False)
             embedShiny.set_image(url=response['sprites']['other']['home']['front_shiny'])
