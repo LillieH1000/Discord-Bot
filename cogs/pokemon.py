@@ -25,26 +25,53 @@ class pokemon(commands.Cog):
 
             response = requests.get(f"https://pokeapi.co/api/v2/pokemon/{urllib.parse.quote(message_before)}").json()
 
+            # Regular View
+            
             embed = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
             embed.set_thumbnail(url=response['sprites']['other']['home']['front_default'])
             embed.add_field(name=f"Pokedex ID: ", value=f"{response['id']}", inline=False)
-            # embed.add_field(name=f"Types: ", value=f"{len(response['types'])}", inline=False)
             i = 1
             for x in response['types']:
                 embed.add_field(name=f"Type {i}: ", value=f"{x['type']['name'].capitalize()}", inline=True)
                 i = i + 1
             if (message_after != ""):
                 embed.add_field(name=f"Game And Count", value=message_after, inline=False)
-            embed.set_image(url=response['sprites']['other']['home']['front_shiny'])
             embed.timestamp = datetime.datetime.now()
 
-            # view = View()
-            # swapimage = Button(label="View Original Image", url=f"{response['file']}", style=discord.ButtonStyle.grey)
-            # view.add_item(swapimage)
+            view = View()
+
+            # Shiny View
+
+            embedShiny = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
+            embedShiny.set_thumbnail(url=response['sprites']['other']['home']['front_default'])
+            embedShiny.add_field(name=f"Pokedex ID: ", value=f"{response['id']}", inline=False)
+            i = 1
+            for x in response['types']:
+                embedShiny.add_field(name=f"Type {i}: ", value=f"{x['type']['name'].capitalize()}", inline=True)
+                i = i + 1
+            if (message_after != ""):
+                embedShiny.add_field(name=f"Game And Count", value=message_after, inline=False)
+            embedShiny.set_image(url=response['sprites']['other']['home']['front_shiny'])
+            embedShiny.timestamp = datetime.datetime.now()
+
+            viewShiny = View()
+            
+            async def image_callback(interaction):
+                await interaction.response.edit_message(embed=embed, view=view)
+
+            async def shinyimage_callback(interaction):
+                await interaction.response.edit_message(embed=embedShiny, view=viewShiny)
+
+            showshinyimage = Button(label="Show Shiny Image", style=discord.ButtonStyle.grey)
+            showshinyimage.callback = shinyimage_callback
+            view.add_item(showshinyimage)
+
+            hideshinyimage = Button(label="Hide Shiny Image", style=discord.ButtonStyle.grey)
+            hideshinyimage.callback = image_callback
+            viewShiny.add_item(hideshinyimage)
 
             await message.delete()
-            await message.channel.send(embed=embed)
-            # await message.channel.send(embed=embed, view=view)
+            await message.channel.send(embed=embed, view=view)
 
 def setup(bot):
     bot.add_cog(pokemon(bot))
