@@ -37,7 +37,7 @@ class pokemon(commands.Cog):
                 i = i + 1
                 if (len(response['types']) != i):
                     z = z + ", "
-            embed.add_field(name=f"Types: ", value=f"{z}", inline=True)
+            embed.add_field(name=f"Types: ", value=f"{z}", inline=False)
             if (message_after != ""):
                 embed.add_field(name=f"Game And Count", value=message_after, inline=False)
             embed.timestamp = datetime.datetime.now()
@@ -56,7 +56,7 @@ class pokemon(commands.Cog):
                 i = i + 1
                 if (len(response['types']) != i):
                     z = z + ", "
-            embedShiny.add_field(name=f"Types: ", value=f"{z}", inline=True)
+            embedShiny.add_field(name=f"Types: ", value=f"{z}", inline=False)
             if (message_after != ""):
                 embedShiny.add_field(name=f"Game And Count", value=message_after, inline=False)
             embedShiny.set_image(url=response['sprites']['other']['home']['front_shiny'])
