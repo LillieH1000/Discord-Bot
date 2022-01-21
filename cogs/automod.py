@@ -18,13 +18,13 @@ class automod(commands.Cog):
 
         antiscamresponse = requests.get(f"https://raw.githubusercontent.com/LillieWeeb001/Anti-Scam-Json-List/main/antiscam.json").json()
         
-        if any(word in message_content for word in antiscamresponse["scamjburls"]):
+        if any(word in message_content.split() for word in antiscamresponse["scamjburls"]):
             await message.delete()
 
-        if any(word in message_content for word in antiscamresponse["scamideviceunlockurls"]):
+        if any(word in message_content.split() for word in antiscamresponse["scamideviceunlockurls"]):
             await message.delete()
 
-        if any(word in message_content for word in antiscamresponse["scamdiscordurls"]):
+        if any(word in message_content.split() for word in antiscamresponse["scamdiscordurls"]):
             await message.delete()
 
         for word in message_content.split():
