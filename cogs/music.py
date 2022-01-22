@@ -81,7 +81,7 @@ class music(commands.Cog):
                 info = ytdl.extract_info(video, download=True)
         return info['title'], info['url']
 
-    def bandcamp_ytdlp(self, video):
+    def other_ytdlp(self, video):
         YTDL_OPTIONS = {
             'format': 'bestaudio/best',
             'extractaudio': True,
@@ -129,7 +129,7 @@ class music(commands.Cog):
             await ctx.send_followup(embed=embed)
     
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Plays a song")
-    async def play(self, ctx, source: Option(str, "Choose audio source", choices=["YouTube", "SoundCloud", "Bandcamp"]), video: Option(str, "Enter video name or url"),):
+    async def play(self, ctx, source: Option(str, "Choose audio source", choices=["YouTube", "SoundCloud", "Audiomack", "Bandcamp"]), video: Option(str, "Enter video name or url")):
         if not self.is_connected(ctx):
             await self.connect(self, ctx)
         else:
@@ -138,8 +138,8 @@ class music(commands.Cog):
             name, url = self.youtube_ytdlp(video)
         if source == "SoundCloud":
             name, url = self.soundcloud_ytdlp(video)
-        if source == "Bandcamp":
-            name, url = self.bandcamp_ytdlp(video)
+        if source == "Audiomack" or source == "Bandcamp":
+            name, url = self.other_ytdlp(video)
         self.queue.append(name)
         self.queue.append(url)
         embed = discord.Embed(title="Music Player", color=0xFFC0DD)

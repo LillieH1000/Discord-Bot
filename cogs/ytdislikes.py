@@ -25,7 +25,7 @@ class ytdislikes(commands.Cog):
         t = t + 1
 
     @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Get the dislikes count of a YouTube video")
-    async def ytdislikes(self, ctx, videoid: Option(str, "Enter the video id"),):
+    async def ytdislikes(self, ctx, videoid: Option(str, "Enter the video id")):
         await ctx.defer()
         response = requests.get(f"https://returnyoutubedislikeapi.com/votes?videoId={videoid}").json()
         embed = discord.Embed(title="YouTube Dislikes", color=0xFFC0DD)
