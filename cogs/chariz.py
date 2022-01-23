@@ -1,0 +1,48 @@
+import discord
+from discord.commands import Option, slash_command
+from discord.ext import commands
+from discord.ui import Button, View
+import datetime
+import requests
+import json
+
+class chariz(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+    # Guilds Loader
+
+    guildconfig = open('guilds.json')
+    data = json.load(guildconfig)
+    s = ""
+    t = 1
+    for x in data:
+        y = ""
+        y += "guild"
+        y += str(t)
+        s += data[y]
+        if (t != len(data)):
+            s += str(",")
+        t = t + 1
+
+    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Tells a user the contact info stuff")
+    async def contactdev(self, ctx, user: discord.Member):
+        await ctx.defer()
+        response = requests.get(f"https://api.alexflipnote.dev/birb").json()
+        embed = discord.Embed(title="Chariz Notice", color=0xFFC0DD)
+        embed.add_field(name=f"\u200b", value=f"""You need to contact the author regarding this.
+
+If you don’t know how to contact them, follow this:
+
+• Cydia: Search for the package, tap “Author”, and then “Author” again.
+• Zebra: Search for the package, then tap the author’s name.
+• Sileo: Search for the package, tap the three dots “•••” button, and then “Support”.
+• Installer: Search for the package, scroll to the bottom of the page and then tap "Contact".
+
+You may also be able to find them on Twitter, Reddit, or this Discord server.""", inline=False)
+        embed.timestamp = datetime.datetime.now()
+
+        await ctx.send_followup(f"<@!{user.id}>", embed=embed)
+
+def setup(bot):
+    bot.add_cog(chariz(bot))
