@@ -1,5 +1,8 @@
 {
-	"guild1": "guildidhere",
-	"guild2": "guildidhere",
-	"guild3": "guildidhere"
+	"guilds": [
+		"guildid1",
+		"guildid2",
+		"guildid3",
+		"guildid4"
+	]
 }

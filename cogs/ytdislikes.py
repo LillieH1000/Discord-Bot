@@ -13,18 +13,15 @@ class ytdislikes(commands.Cog):
 
     guildconfig = open('guilds.json')
     data = json.load(guildconfig)
-    s = ""
-    t = 1
-    for x in data:
-        y = ""
-        y += "guild"
-        y += str(t)
-        s += data[y]
-        if (t != len(data)):
-            s += str(",")
-        t = t + 1
+    guildscount = 0
+    guildids = ""
+    for guild in data["guilds"]:
+        guildids += guild
+        guildscount = guildscount + 1
+        if (len(data["guilds"]) != guildscount):
+            guildids += str(",")
 
-    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Get the dislikes count of a YouTube video")
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Get the dislikes count of a YouTube video")
     async def ytdislikes(self, ctx, videoid: Option(str, "Enter the video id")):
         await ctx.defer()
         response = requests.get(f"https://returnyoutubedislikeapi.com/votes?videoId={videoid}").json()

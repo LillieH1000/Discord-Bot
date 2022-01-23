@@ -14,18 +14,15 @@ class other(commands.Cog):
 
     guildconfig = open('guilds.json')
     data = json.load(guildconfig)
-    s = ""
-    t = 1
-    for x in data:
-        y = ""
-        y += "guild"
-        y += str(t)
-        s += data[y]
-        if (t != len(data)):
-            s += str(",")
-        t = t + 1
+    guildscount = 0
+    guildids = ""
+    for guild in data["guilds"]:
+        guildids += guild
+        guildscount = guildscount + 1
+        if (len(data["guilds"]) != guildscount):
+            guildids += str(",")
 
-    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Posts a random cat picture")
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random cat picture")
     async def cat(self, ctx, source: Option(str, "Choose cat pics source", choices=["Random.Cat", "Nekos.Life", "AlexFlipnote.Dev"])):
         await ctx.defer()
         if source == "Random.Cat":
@@ -68,7 +65,7 @@ class other(commands.Cog):
 
             await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Posts a random dog picture")
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random dog picture")
     async def dog(self, ctx, source: Option(str, "Choose dog pics source", choices=["Dog.Ceo", "Nekos.Life", "AlexFlipnote.Dev"])):
         await ctx.defer()
         if source == "Dog.Ceo":
@@ -111,7 +108,7 @@ class other(commands.Cog):
 
             await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Posts a random birb picture")
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random birb picture")
     async def birb(self, ctx):
         await ctx.defer()
         response = requests.get(f"https://api.alexflipnote.dev/birb").json()
@@ -127,7 +124,7 @@ class other(commands.Cog):
 
         await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Posts a random neko picture")
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random neko picture")
     async def neko(self, ctx):
         await ctx.defer()
         response = requests.get(f"https://nekos.life/api/v2/img/neko").json()
@@ -143,7 +140,7 @@ class other(commands.Cog):
 
         await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Posts a random coffee picture")
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random coffee picture")
     async def coffee(self, ctx):
         await ctx.defer()
         response = requests.get(f"https://coffee.alexflipnote.dev/random.json").json()
@@ -159,7 +156,7 @@ class other(commands.Cog):
 
         await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Posts a random goose picture")
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random goose picture")
     async def goose(self, ctx):
         await ctx.defer()
         response = requests.get(f"https://nekos.life/api/v2/img/goose").json()

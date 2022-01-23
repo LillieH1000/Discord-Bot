@@ -13,18 +13,15 @@ class pronoundb(commands.Cog):
 
     guildconfig = open('guilds.json')
     data = json.load(guildconfig)
-    s = ""
-    t = 1
-    for x in data:
-        y = ""
-        y += "guild"
-        y += str(t)
-        s += data[y]
-        if (t != len(data)):
-            s += str(",")
-        t = t + 1
+    guildscount = 0
+    guildids = ""
+    for guild in data["guilds"]:
+        guildids += guild
+        guildscount = guildscount + 1
+        if (len(data["guilds"]) != guildscount):
+            guildids += str(",")
 
-    @slash_command(guild_ids=[int(x) for x in s.split(",")], description="Get a users pronouns")
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Get a users pronouns")
     async def pronouns(self, ctx, user: discord.Member):
         await ctx.defer()
         response = requests.get(f"https://pronoundb.org/api/v1/lookup?platform=discord&id={user.id}").json()

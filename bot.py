@@ -8,7 +8,6 @@ bot = discord.Bot()
 
 config = open('config.json')
 data = json.load(config)
-token = data['token']
 
 # Events
 
@@ -22,4 +21,4 @@ async def on_ready():
 for filename in os.listdir('./cogs'):
   if filename.endswith('.py'):
     bot.load_extension(f'cogs.{filename[:-3]}')
-bot.run(token)
+bot.run(data['token'])
