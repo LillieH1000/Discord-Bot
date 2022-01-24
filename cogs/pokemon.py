@@ -38,7 +38,7 @@ class pokemon(commands.Cog):
                 embed.add_field(name=f"Game And Count", value=message_after, inline=False)
             embed.timestamp = datetime.datetime.now()
 
-            view = View()
+            view = View(timeout=None)
 
             # Shiny View
 
@@ -58,7 +58,7 @@ class pokemon(commands.Cog):
             embedShiny.set_image(url=response['sprites']['other']['home']['front_shiny'])
             embedShiny.timestamp = datetime.datetime.now()
 
-            viewShiny = View()
+            viewShiny = View(timeout=None)
             
             async def image_callback(interaction):
                 await interaction.response.edit_message(embed=embed, view=view)
