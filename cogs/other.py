@@ -169,5 +169,24 @@ class other(commands.Cog):
 
         await ctx.send_followup(embed=embed, view=view)
 
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Get the dislikes count of a YouTube video")
+    async def ytdislikes(self, ctx, videoid: Option(str, "Enter the video id")):
+        await ctx.defer()
+        response = requests.get(f"https://returnyoutubedislikeapi.com/votes?videoId={videoid}").json()
+        embed = discord.Embed(title="YouTube Dislikes", color=0xFFC0DD)
+        embed.add_field(name="Dislike Count: ", value=str(response["dislikes"]), inline=False)
+        embed.timestamp = datetime.datetime.now()
+        await ctx.send_followup(embed=embed)
+
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random chuck norris joke")
+    async def chucknorris(self, ctx):
+        await ctx.defer()
+        response = requests.get(f"https://api.chucknorris.io/jokes/random").json()
+        embed = discord.Embed(title="Chuck Norris", color=0xFFC0DD)
+        embed.set_thumbnail(url=response["icon_url"])
+        embed.add_field(name="\u200b", value=response["value"], inline=False)
+        embed.timestamp = datetime.datetime.now()
+        await ctx.send_followup(embed=embed)
+
 def setup(bot):
     bot.add_cog(other(bot))
