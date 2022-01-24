@@ -14,7 +14,7 @@ class chariz(commands.Cog):
     guildids = ""
     for guild in data["guilds"]:
         guildids += guild
-        guildscount = guildscount + 1
+        guildscount += 1
         if (len(data["guilds"]) != guildscount):
             guildids += str(",")
 
@@ -22,8 +22,8 @@ class chariz(commands.Cog):
     async def contactdev(self, ctx, user: discord.Member):
         await ctx.defer()
         response = requests.get(f"https://api.alexflipnote.dev/birb").json()
-        embed = discord.Embed(title="Chariz Notice", color=0xFFC0DD)
-        embed.add_field(name=f"\u200b", value=f"""You need to contact the author regarding this.
+        embed = discord.Embed(color=0xFFC0DD)
+        embed.add_field(name=f"Chariz Notice", value=f"""You need to contact the author regarding this.
 
 If you don’t know how to contact them, follow this:
 

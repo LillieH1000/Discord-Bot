@@ -15,7 +15,7 @@ class music(commands.Cog):
     guildids = ""
     for guild in data["guilds"]:
         guildids += guild
-        guildscount = guildscount + 1
+        guildscount += 1
         if (len(data["guilds"]) != guildscount):
             guildids += str(",")
 

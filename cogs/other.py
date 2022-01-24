@@ -15,7 +15,7 @@ class other(commands.Cog):
     guildids = ""
     for guild in data["guilds"]:
         guildids += guild
-        guildscount = guildscount + 1
+        guildscount += 1
         if (len(data["guilds"]) != guildscount):
             guildids += str(",")
 
@@ -122,20 +122,34 @@ class other(commands.Cog):
         await ctx.send_followup(embed=embed, view=view)
 
     @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random neko picture")
-    async def neko(self, ctx):
+    async def neko(self, ctx, source: Option(str, "Choose neko pics source", choices=["Nekos.Life", "Waifu.Pics"])):
         await ctx.defer()
-        response = requests.get(f"https://nekos.life/api/v2/img/neko").json()
-        embed = discord.Embed(title="Neko Pics", color=0xFFC0DD)
-        embed.set_image(url=str(response["url"]))
-        embed.timestamp = datetime.datetime.now()
-        
-        vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
+        if source == "Nekos.Life":
+            response = requests.get(f"https://nekos.life/api/v2/img/neko").json()
+            embed = discord.Embed(title="Neko Pics", color=0xFFC0DD)
+            embed.set_image(url=str(response["url"]))
+            embed.timestamp = datetime.datetime.now()
+            
+            vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
 
-        view = View()
-        if (response["url"] is not None):
-            view.add_item(vieworiginalimage)
+            view = View()
+            if (response["url"] is not None):
+                view.add_item(vieworiginalimage)
 
-        await ctx.send_followup(embed=embed, view=view)
+            await ctx.send_followup(embed=embed, view=view)
+        if source == "Waifu.Pics":
+            response = requests.get(f"https://api.waifu.pics/sfw/neko").json()
+            embed = discord.Embed(title="Neko Pics", color=0xFFC0DD)
+            embed.set_image(url=str(response["url"]))
+            embed.timestamp = datetime.datetime.now()
+            
+            vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
+
+            view = View()
+            if (response["url"] is not None):
+                view.add_item(vieworiginalimage)
+
+            await ctx.send_followup(embed=embed, view=view)
 
     @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random coffee picture")
     async def coffee(self, ctx):
@@ -182,11 +196,43 @@ class other(commands.Cog):
     async def chucknorris(self, ctx):
         await ctx.defer()
         response = requests.get(f"https://api.chucknorris.io/jokes/random").json()
-        embed = discord.Embed(title="Chuck Norris", color=0xFFC0DD)
+        embed = discord.Embed(color=0xFFC0DD)
         embed.set_thumbnail(url=response["icon_url"])
-        embed.add_field(name="\u200b", value=response["value"], inline=False)
+        embed.add_field(name="Chuck Norris", value=response["value"], inline=False)
         embed.timestamp = datetime.datetime.now()
         await ctx.send_followup(embed=embed)
+
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random waifu pic")
+    async def waifu(self, ctx):
+        await ctx.defer()
+        response = requests.get(f"https://api.waifu.pics/sfw/waifu").json()
+        embed = discord.Embed(title="Waifu Pics", color=0xFFC0DD)
+        embed.set_image(url=str(response["url"]))
+        embed.timestamp = datetime.datetime.now()
+        
+        vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
+
+        view = View()
+        if (response["url"] is not None):
+            view.add_item(vieworiginalimage)
+
+        await ctx.send_followup(embed=embed, view=view)
+
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random duck pic")
+    async def duck(self, ctx):
+        await ctx.defer()
+        response = requests.get(f"https://random-d.uk/api/v2/random").json()
+        embed = discord.Embed(title="Duck Pics", color=0xFFC0DD)
+        embed.set_image(url=str(response["url"]))
+        embed.timestamp = datetime.datetime.now()
+        
+        vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
+
+        view = View()
+        if (response["url"] is not None):
+            view.add_item(vieworiginalimage)
+
+        await ctx.send_followup(embed=embed, view=view)
 
 def setup(bot):
     bot.add_cog(other(bot))

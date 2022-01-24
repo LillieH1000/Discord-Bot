@@ -48,10 +48,10 @@ class pokemon(commands.Cog):
             i = 0
             z = ""
             for x in response['types']:
-                z = z + f"{x['type']['name'].capitalize()}"
-                i = i + 1
+                z += f"{x['type']['name'].capitalize()}"
+                i += 1
                 if (len(response['types']) != i):
-                    z = z + ", "
+                    z += ", "
             embedShiny.add_field(name=f"Types: ", value=f"{z}", inline=False)
             if (message_after != ""):
                 embedShiny.add_field(name=f"Game And Count", value=message_after, inline=False)
