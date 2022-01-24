@@ -1,10 +1,7 @@
-import discord
+import discord, datetime, requests, json
 from discord.commands import Option, slash_command
 from discord.ext import commands
 from discord.ui import Button, View
-import datetime
-import requests
-import json
 
 class other(commands.Cog):
     def __init__(self, bot):

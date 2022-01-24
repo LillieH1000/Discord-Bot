@@ -1,9 +1,6 @@
-import discord
+import discord, datetime, asyncio, pytz
 from discord.commands import Option, slash_command
 from discord.ext import commands
-import datetime
-import asyncio
-import pytz
 
 class gotosleep(commands.Cog):
     def __init__(self, bot):

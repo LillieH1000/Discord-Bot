@@ -1,6 +1,4 @@
-import discord
-import json
-import os
+import discord, json, os
 
 bot = discord.Bot()
 

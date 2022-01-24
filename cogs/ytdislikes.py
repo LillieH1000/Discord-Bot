@@ -1,9 +1,6 @@
-import discord
+import discord, datetime, requests, json
 from discord.commands import Option, slash_command
 from discord.ext import commands
-import datetime
-import requests
-import json
 
 class ytdislikes(commands.Cog):
     def __init__(self, bot):

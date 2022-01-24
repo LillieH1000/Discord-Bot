@@ -1,10 +1,7 @@
-import discord
+import discord, datetime, asyncio, json
 from discord.commands import Option, slash_command
 from discord.ext import commands
 from yt_dlp import YoutubeDL
-import datetime
-import asyncio
-import json
 
 class music(commands.Cog):
     def __init__(self, bot):

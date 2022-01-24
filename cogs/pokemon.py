@@ -1,11 +1,7 @@
-import discord
+import discord, urllib.parse, datetime, requests, json
 from discord.commands import Option, slash_command
 from discord.ext import commands
 from discord.ui import Button, View
-import urllib.parse
-import datetime
-import requests
-import json
 
 class pokemon(commands.Cog):
     def __init__(self, bot):

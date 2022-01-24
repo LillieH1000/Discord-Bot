@@ -1,8 +1,6 @@
-import discord
+import discord, json
 from discord.commands import Option, slash_command, permissions
 from discord.ext import commands
-from discord.ui import Button, View
-import json
 
 class admin(commands.Cog):
     def __init__(self, bot):
