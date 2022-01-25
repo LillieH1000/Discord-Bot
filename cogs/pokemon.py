@@ -26,14 +26,34 @@ class pokemon(commands.Cog):
             embed = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
             embed.set_thumbnail(url=response['sprites']['other']['home']['front_default'])
             embed.add_field(name=f"Pokedex ID: ", value=f"{response['id']}", inline=False)
-            i = 0
-            z = ""
-            for x in response['types']:
-                z += f"{x['type']['name'].capitalize()}"
-                i += 1
-                if (len(response['types']) != i):
-                    z += ", "
-            embed.add_field(name=f"Types: ", value=f"{z}", inline=False)
+            a = 0
+            b = ""
+            for c in response['types']:
+                b += f"{c['type']['name'].capitalize()}"
+                a += 1
+                if (len(response['types']) != a):
+                    b += ", "
+            embed.add_field(name=f"Types: ", value=f"{b}", inline=False)
+            d = 0
+            e = ""
+            for f in response['abilities']:
+                e += f"{f['ability']['name'].capitalize()}"
+                if f['is_hidden'] == True:
+                    e += f" (Hidden)"
+                d += 1
+                if (len(response['abilities']) != d):
+                    e += ", "
+            embed.add_field(name=f"Abilities: ", value=f"{e}", inline=False)
+            g = 0
+            h = ""
+            for i in response['stats']:
+                h += i['stat']['name'].capitalize()
+                h += ": "
+                h += str(i['base_stat'])
+                g += 1
+                if (len(response['stats']) != g):
+                    h += "\n"
+            embed.add_field(name=f"Base Stats: ", value=f"\n{h}", inline=False)
             if (message_after != ""):
                 embed.add_field(name=f"Game And Count", value=message_after, inline=False)
             embed.timestamp = datetime.datetime.now()
@@ -43,19 +63,38 @@ class pokemon(commands.Cog):
             # Shiny View
 
             embedShiny = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
-            embedShiny.set_thumbnail(url=response['sprites']['other']['home']['front_default'])
+            embedShiny.set_thumbnail(url=response['sprites']['other']['home']['front_shiny'])
             embedShiny.add_field(name=f"Pokedex ID: ", value=f"{response['id']}", inline=False)
-            i = 0
-            z = ""
-            for x in response['types']:
-                z += f"{x['type']['name'].capitalize()}"
-                i += 1
-                if (len(response['types']) != i):
-                    z += ", "
-            embedShiny.add_field(name=f"Types: ", value=f"{z}", inline=False)
+            a = 0
+            b = ""
+            for c in response['types']:
+                b += f"{c['type']['name'].capitalize()}"
+                a += 1
+                if (len(response['types']) != a):
+                    b += ", "
+            embedShiny.add_field(name=f"Types: ", value=f"{b}", inline=False)
+            d = 0
+            e = ""
+            for f in response['abilities']:
+                e += f"{f['ability']['name'].capitalize()}"
+                if f['is_hidden'] == True:
+                    e += f" (Hidden)"
+                d += 1
+                if (len(response['abilities']) != d):
+                    e += ", "
+            embedShiny.add_field(name=f"Abilities: ", value=f"{e}", inline=False)
+            g = 0
+            h = ""
+            for i in response['stats']:
+                h += i['stat']['name'].capitalize()
+                h += ": "
+                h += str(i['base_stat'])
+                g += 1
+                if (len(response['stats']) != g):
+                    h += "\n"
+            embedShiny.add_field(name=f"Base Stats: ", value=f"\n{h}", inline=False)
             if (message_after != ""):
                 embedShiny.add_field(name=f"Game And Count", value=message_after, inline=False)
-            embedShiny.set_image(url=response['sprites']['other']['home']['front_shiny'])
             embedShiny.timestamp = datetime.datetime.now()
 
             viewShiny = View(timeout=None)
