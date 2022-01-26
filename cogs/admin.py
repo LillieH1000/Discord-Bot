@@ -18,12 +18,18 @@ class admin(commands.Cog):
         if (len(data["guilds"]) != guildscount):
             guildids += str(",")
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="clears chat of defined message count picture", default_permission=False)
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Clears chat of the defined message count", default_permission=False)
     @permissions.is_owner()
     async def clear(self, ctx, amount: Option(int, "Enter amount of messages to delete")):
         await ctx.defer()
-        await ctx.channel.purge(limit=amount)
-        await ctx.send_followup("Cleared Messages", delete_after=30.0)
+        await ctx.channel.purge(limit=amount + 1)
+
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Mutes the defined user", default_permission=False)
+    @permissions.is_owner()
+    async def mute(self, ctx, user: discord.Member, time: Option(int, "Enter amount of time to mute user")):
+        await ctx.defer()
+        await user.timeout_for(duration=time)
+        await ctx.send_followup(f"Muted {user.name}", delete_after=30.0)
 
 def setup(bot):
     bot.add_cog(admin(bot))
