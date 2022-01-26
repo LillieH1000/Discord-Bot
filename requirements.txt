@@ -1,0 +1,8 @@
+pip
+yt-dlp
+pynacl
+py-cord[voice]
+datetime
+asyncio
+requests
+pytz
