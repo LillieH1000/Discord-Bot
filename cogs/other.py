@@ -1,4 +1,4 @@
-import discord, datetime, requests, json
+import discord, datetime, requests, json, random
 from discord.commands import Option, slash_command
 from discord.ext import commands
 from discord.ui import Button, View
@@ -233,6 +233,11 @@ class other(commands.Cog):
             view.add_item(vieworiginalimage)
 
         await ctx.send_followup(embed=embed, view=view)
+
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Role a 6 sided dice")
+    async def dice(self, ctx):
+        await ctx.defer()
+        await ctx.send_followup(f"{random.randint(1, 6)}")
 
 def setup(bot):
     bot.add_cog(other(bot))

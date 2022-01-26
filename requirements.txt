@@ -6,3 +6,7 @@ datetime
 asyncio
 requests
 pytz
+aiohttp
+aiodns
+brotlipy
+cchardet

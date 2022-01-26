@@ -5,7 +5,7 @@ from discord.ext import commands
 class membercount(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.bgtask = self.bot.loop.create_task(self.member_count())
+        self.memberbgtask = self.bot.loop.create_task(self.member_count())
 
     async def member_count(self):
         await self.bot.wait_until_ready()

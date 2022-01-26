@@ -5,7 +5,7 @@ from discord.ext import commands
 class gotosleep(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.bgtask = self.bot.loop.create_task(self.go_to_sleep())
+        self.sleepbgtask = self.bot.loop.create_task(self.go_to_sleep())
 
     async def go_to_sleep(self):
         await self.bot.wait_until_ready()
