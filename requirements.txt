@@ -4,7 +4,6 @@ pynacl
 py-cord[voice]
 datetime
 asyncio
-requests
 pytz
 aiohttp
 aiodns
