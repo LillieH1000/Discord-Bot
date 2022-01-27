@@ -9,3 +9,5 @@ aiohttp
 aiodns
 brotlipy
 cchardet
+geopy
+timezonefinder

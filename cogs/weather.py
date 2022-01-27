@@ -1,7 +1,10 @@
-import discord, datetime, json, random, aiohttp, asyncio
+import discord, datetime, json, random, aiohttp, asyncio, pytz
 from discord.commands import Option, slash_command
 from discord.ext import commands
 from discord.ui import Button, View
+from geopy.adapters import AioHTTPAdapter
+from geopy.geocoders import Nominatim
+from timezonefinder import TimezoneFinder
 
 class weather(commands.Cog):
     def __init__(self, bot):
@@ -22,43 +25,61 @@ class weather(commands.Cog):
     @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Get the current weather from an area")
     async def weather(self, ctx, city: Option(str, "Enter the City"), province: Option(str, "Enter the Province/Territory"), country: Option(str, "Enter the Country")):
         await ctx.defer()
-        async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://goweather.herokuapp.com/weather/{city.lower()},{province.lower()},{country.lower()}') as resp:
-                response = await resp.json()
-                
-                # Regular View
-                
-                embed = discord.Embed(title=f"{city.capitalize()}", color=0xFFC0DD)
-                embed.add_field(name=f"Current", value=f"{response['description']}\nTemperature: {response['temperature']}\nWind: {response['wind']}", inline=False)
-                embed.timestamp = datetime.datetime.now()
+        async with Nominatim(
+            user_agent="Selene_Discord_Bot",
+            adapter_factory=AioHTTPAdapter,
+        ) as geolocator:
+            location = await geolocator.geocode(f"{city.lower()},{province.lower()},{country.lower()}")
+            tf = TimezoneFinder()
+            timezone = tf.timezone_at(lng=location.longitude, lat=location.latitude)
+            currentdate = datetime.datetime.now(pytz.timezone(timezone))
+            tomorrowdate = currentdate + datetime.timedelta(days=1)
+            aftertomorrowdate = currentdate + datetime.timedelta(days=2)
 
-                view = View(timeout=None)
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f'https://goweather.herokuapp.com/weather/{city.lower()},{province.lower()},{country.lower()}') as resp:
+                    response = await resp.json()
+                    
+                    # Regular View
+                    
+                    embed = discord.Embed(title=f"{city.capitalize()}", color=0xFFC0DD)
+                    embed.add_field(name=f"Current", value=f"{response['description']}\nTemperature: {response['temperature']}\nWind: {response['wind']}", inline=False)
+                    embed.timestamp = datetime.datetime.now()
 
-                # Forecast View
+                    view = View(timeout=None)
 
-                embedForecast = discord.Embed(title=f"{city.capitalize()}", color=0xFFC0DD)
-                embedForecast.add_field(name=f"Current", value=f"{response['description']}\nTemperature: {response['temperature']}\nWind: {response['wind']}", inline=False)
-                for a in response['forecast']:
-                    embedForecast.add_field(name=f"Day {a['day']}", value=f"Temperature: {a['temperature']}\nWind: {a['wind']}", inline=False)
-                embedForecast.timestamp = datetime.datetime.now()
+                    # Forecast View
 
-                viewForecast = View(timeout=None)
+                    embedForecast = discord.Embed(title=f"{city.capitalize()}", color=0xFFC0DD)
+                    embedForecast.add_field(name=f"Current", value=f"{response['description']}\nTemperature: {response['temperature']}\nWind: {response['wind']}", inline=False)
+                    b = 1
+                    for a in response['forecast']:
+                        if b == 1:
+                            embedForecast.add_field(name=currentdate.strftime("%B %d"), value=f"Temperature: {a['temperature']}\nWind: {a['wind']}", inline=False)
+                        if b == 2:
+                            embedForecast.add_field(name=tomorrowdate.strftime("%B %d"), value=f"Temperature: {a['temperature']}\nWind: {a['wind']}", inline=False)
+                        if b == 3:
+                            embedForecast.add_field(name=aftertomorrowdate.strftime("%B %d"), value=f"Temperature: {a['temperature']}\nWind: {a['wind']}", inline=False)
+                        b += 1
+                    embedForecast.timestamp = datetime.datetime.now()
 
-                async def regular_callback(interaction):
-                    await interaction.response.edit_message(embed=embed, view=view)
+                    viewForecast = View(timeout=None)
 
-                async def forecast_callback(interaction):
-                    await interaction.response.edit_message(embed=embedForecast, view=viewForecast)
+                    async def regular_callback(interaction):
+                        await interaction.response.edit_message(embed=embed, view=view)
 
-                showforecast = Button(label="Show 3 Day Forecast", style=discord.ButtonStyle.grey)
-                showforecast.callback = forecast_callback
-                view.add_item(showforecast)
+                    async def forecast_callback(interaction):
+                        await interaction.response.edit_message(embed=embedForecast, view=viewForecast)
 
-                hideforecast = Button(label="Hide 3 Day Forecast", style=discord.ButtonStyle.grey)
-                hideforecast.callback = regular_callback
-                viewForecast.add_item(hideforecast)
+                    showforecast = Button(label="Show 3 Day Forecast", style=discord.ButtonStyle.grey)
+                    showforecast.callback = forecast_callback
+                    view.add_item(showforecast)
 
-                await ctx.send_followup(embed=embed, view=view)
+                    hideforecast = Button(label="Hide 3 Day Forecast", style=discord.ButtonStyle.grey)
+                    hideforecast.callback = regular_callback
+                    viewForecast.add_item(hideforecast)
+
+                    await ctx.send_followup(embed=embed, view=view)
 
 def setup(bot):
     bot.add_cog(weather(bot))
