@@ -67,7 +67,7 @@ class pronoundb(commands.Cog):
         embed = discord.Embed(title="PronounDB", color=0xFFC0DD)
         embed.add_field(name=f"Pronouns of {user.name}: ", value=pronoun, inline=False)
         embed.timestamp = datetime.datetime.now()
-        await ctx.send_followup(embed=embed, delete_after=30.0)
+        await ctx.send_followup(embed=embed, delete_after=60.0)
 
 def setup(bot):
     bot.add_cog(pronoundb(bot))
