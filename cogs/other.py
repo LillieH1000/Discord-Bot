@@ -135,34 +135,34 @@ class other(commands.Cog):
     async def neko(self, ctx, source: Option(str, "Choose neko pics source", choices=["Nekos.Life", "Waifu.Pics"])):
         await ctx.defer()
         async with aiohttp.ClientSession() as session:
-        if source == "Nekos.Life":
-            async with session.get(f'https://nekos.life/api/v2/img/neko') as resp:
-                response = await resp.json()
-                embed = discord.Embed(title="Neko Pics", color=0xFFC0DD)
-                embed.set_image(url=str(response["url"]))
-                embed.timestamp = datetime.datetime.now()
-                
-                vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
+            if source == "Nekos.Life":
+                async with session.get(f'https://nekos.life/api/v2/img/neko') as resp:
+                    response = await resp.json()
+                    embed = discord.Embed(title="Neko Pics", color=0xFFC0DD)
+                    embed.set_image(url=str(response["url"]))
+                    embed.timestamp = datetime.datetime.now()
+                    
+                    vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
 
-                view = View()
-                if (response["url"] is not None):
-                    view.add_item(vieworiginalimage)
+                    view = View()
+                    if (response["url"] is not None):
+                        view.add_item(vieworiginalimage)
 
-                await ctx.send_followup(embed=embed, view=view)
-        if source == "Waifu.Pics":
-            async with session.get(f'https://api.waifu.pics/sfw/neko') as resp:
-                response = await resp.json()
-                embed = discord.Embed(title="Neko Pics", color=0xFFC0DD)
-                embed.set_image(url=str(response["url"]))
-                embed.timestamp = datetime.datetime.now()
-                
-                vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
+                    await ctx.send_followup(embed=embed, view=view)
+            if source == "Waifu.Pics":
+                async with session.get(f'https://api.waifu.pics/sfw/neko') as resp:
+                    response = await resp.json()
+                    embed = discord.Embed(title="Neko Pics", color=0xFFC0DD)
+                    embed.set_image(url=str(response["url"]))
+                    embed.timestamp = datetime.datetime.now()
+                    
+                    vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
 
-                view = View()
-                if (response["url"] is not None):
-                    view.add_item(vieworiginalimage)
+                    view = View()
+                    if (response["url"] is not None):
+                        view.add_item(vieworiginalimage)
 
-                await ctx.send_followup(embed=embed, view=view)
+                    await ctx.send_followup(embed=embed, view=view)
 
     @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random coffee picture")
     async def coffee(self, ctx):
