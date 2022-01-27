@@ -259,6 +259,24 @@ class other(commands.Cog):
 
                 await ctx.send_followup(embed=embed, view=view)
 
+    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random fox pic")
+    async def fox(self, ctx):
+        await ctx.defer()
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f'https://randomfox.ca/floof/') as resp:
+                response = await resp.json()
+                embed = discord.Embed(title="Fox Pics", color=0xFFC0DD)
+                embed.set_image(url=str(response["image"]))
+                embed.timestamp = datetime.datetime.now()
+                
+                vieworiginalimage = Button(label="View Original Image", url=f"{response['image']}", style=discord.ButtonStyle.grey)
+
+                view = View()
+                if (response["image"] is not None):
+                    view.add_item(vieworiginalimage)
+
+                await ctx.send_followup(embed=embed, view=view)
+
     @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Role a 6 sided dice")
     async def dice(self, ctx):
         await ctx.defer()
