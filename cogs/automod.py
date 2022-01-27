@@ -15,7 +15,7 @@ class automod(commands.Cog):
 
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://raw.githubusercontent.com/LillieWeeb001/Anti-Scam-Json-List/main/antiscam.json') as resp:
-                response = await resp.json()
+                antiscamresponse = await resp.json(content_type='text/plain')
         
                 if any(word in message_content.split() for word in antiscamresponse["scamjburls"]):
                     await message.delete()

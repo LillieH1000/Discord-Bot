@@ -1,4 +1,4 @@
-import discord, datetime, requests, json
+import discord, datetime, json
 from discord.commands import Option, slash_command
 from discord.ext import commands
 
@@ -21,7 +21,6 @@ class chariz(commands.Cog):
     @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Tells a user the contact info stuff")
     async def contactdev(self, ctx, user: discord.Member):
         await ctx.defer()
-        response = requests.get(f"https://api.alexflipnote.dev/birb").json()
         embed = discord.Embed(color=0xFFC0DD)
         embed.add_field(name=f"Chariz Notice", value=f"""You need to contact the author regarding this.
 
