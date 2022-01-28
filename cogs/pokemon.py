@@ -27,7 +27,7 @@ class pokemon(commands.Cog):
                     
                     embed = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
                     embed.set_thumbnail(url=response['sprites']['other']['home']['front_default'])
-                    embed.add_field(name=f"Pokedex ID: ", value=f"{response['id']}", inline=False)
+                    embed.add_field(name=f"Pokedex ID", value=f"{response['id']}", inline=False)
                     a = 0
                     b = ""
                     for c in response['types']:
@@ -35,7 +35,7 @@ class pokemon(commands.Cog):
                         a += 1
                         if (len(response['types']) != a):
                             b += ", "
-                    embed.add_field(name=f"Types: ", value=f"{b}", inline=False)
+                    embed.add_field(name=f"Types", value=f"{b}", inline=False)
                     d = 0
                     e = ""
                     for f in response['abilities']:
@@ -45,7 +45,7 @@ class pokemon(commands.Cog):
                         d += 1
                         if (len(response['abilities']) != d):
                             e += ", "
-                    embed.add_field(name=f"Abilities: ", value=f"{e}", inline=False)
+                    embed.add_field(name=f"Abilities", value=f"{e}", inline=False)
                     g = 0
                     h = ""
                     for i in response['stats']:
@@ -55,7 +55,7 @@ class pokemon(commands.Cog):
                         g += 1
                         if (len(response['stats']) != g):
                             h += "\n"
-                    embed.add_field(name=f"Base Stats: ", value=f"\n{h}", inline=False)
+                    embed.add_field(name=f"Base Stats", value=f"\n{h}", inline=False)
                     if (message_after != ""):
                         embed.add_field(name=f"Game And Count", value=message_after, inline=False)
                     embed.timestamp = datetime.datetime.now()
@@ -66,7 +66,7 @@ class pokemon(commands.Cog):
 
                     embedShiny = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
                     embedShiny.set_thumbnail(url=response['sprites']['other']['home']['front_shiny'])
-                    embedShiny.add_field(name=f"Pokedex ID: ", value=f"{response['id']}", inline=False)
+                    embedShiny.add_field(name=f"Pokedex ID", value=f"{response['id']}", inline=False)
                     a = 0
                     b = ""
                     for c in response['types']:
@@ -74,7 +74,7 @@ class pokemon(commands.Cog):
                         a += 1
                         if (len(response['types']) != a):
                             b += ", "
-                    embedShiny.add_field(name=f"Types: ", value=f"{b}", inline=False)
+                    embedShiny.add_field(name=f"Types", value=f"{b}", inline=False)
                     d = 0
                     e = ""
                     for f in response['abilities']:
@@ -84,7 +84,7 @@ class pokemon(commands.Cog):
                         d += 1
                         if (len(response['abilities']) != d):
                             e += ", "
-                    embedShiny.add_field(name=f"Abilities: ", value=f"{e}", inline=False)
+                    embedShiny.add_field(name=f"Abilities", value=f"{e}", inline=False)
                     g = 0
                     h = ""
                     for i in response['stats']:
@@ -94,7 +94,7 @@ class pokemon(commands.Cog):
                         g += 1
                         if (len(response['stats']) != g):
                             h += "\n"
-                    embedShiny.add_field(name=f"Base Stats: ", value=f"\n{h}", inline=False)
+                    embedShiny.add_field(name=f"Base Stats", value=f"\n{h}", inline=False)
                     if (message_after != ""):
                         embedShiny.add_field(name=f"Game And Count", value=message_after, inline=False)
                     embedShiny.timestamp = datetime.datetime.now()
