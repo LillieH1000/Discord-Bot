@@ -10,4 +10,3 @@ aiodns
 brotlipy
 cchardet
 geopy
-timezonefinder
