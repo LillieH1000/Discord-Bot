@@ -22,16 +22,21 @@ class weather(commands.Cog):
             guildids += str(",")
 
     @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Get the current weather from an area")
-    async def weather(self, ctx, city: Option(str, "Enter the City"), province: Option(str, "Enter the Province/Territory/State"), country: Option(str, "Enter the Country")):
-        await ctx.defer()
+    async def weather(self, ctx, city: Option(str, "Enter the City"), province: Option(str, "Enter the Province/Territory/State"), country: Option(str, "Enter the Country"), privacy: Option(str, "Will reply private or publicly to you", choices=["Private", "Public"])):
+        if privacy == "Private":
+            await ctx.defer(ephemeral=True)
+        if privacy == "Public":
+            await ctx.defer()
         async with Nominatim(
             user_agent="Selene_Discord_Bot",
             adapter_factory=AioHTTPAdapter,
         ) as geolocator:
             location = await geolocator.geocode(f"{city.lower()},{province.lower()},{country.lower()}")
+            mainconfig = open('config.json')
+            configdata = json.load(mainconfig)
 
             async with aiohttp.ClientSession() as session:
-                async with session.get(f'https://api.weatherapi.com/v1/current.json?q={location.latitude},{location.longitude}&key=5437620069ee48a0ae821912222801') as resp:
+                async with session.get(f'https://api.weatherapi.com/v1/current.json?q={location.latitude},{location.longitude}&key={configdata["weatherapikey"]}') as resp:
                     response = await resp.json()
                     
                     embed = discord.Embed(title=f"{response['location']['name']}", description=f"{response['current']['condition']['text']}", color=0xFFC0DD)
@@ -40,7 +45,10 @@ class weather(commands.Cog):
                     embed.add_field(name=f"Wind", value=f"{response['current']['wind_kph']} km/h | {response['current']['wind_mph']} m/h", inline=False)
                     embed.timestamp = datetime.datetime.now()
 
-                    await ctx.send_followup(embed=embed)
+                    if privacy == "Private":
+                        await ctx.send_followup(embed=embed, ephemeral=True)
+                    if privacy == "Public":
+                        await ctx.send_followup(embed=embed)
 
 def setup(bot):
     bot.add_cog(weather(bot))

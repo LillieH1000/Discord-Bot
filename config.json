@@ -1,3 +1,4 @@
 {
-	"token": "YourBotTokenHere"
+	"token": "YourBotTokenHere",
+	"weatherapikey": "YourWeatherApiKeyHere"
 }

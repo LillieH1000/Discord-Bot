@@ -34,7 +34,7 @@ If you don’t know how to contact them, follow this:
 You may also be able to find them on Twitter, Reddit, or this Discord server.""", inline=False)
         embed.timestamp = datetime.datetime.now()
 
-        await ctx.send_followup(f"<@!{user.id}>", embed=embed)
+        await ctx.send_followup(f"{user.mention}", embed=embed)
 
 def setup(bot):
     bot.add_cog(chariz(bot))
