@@ -1,7 +1,7 @@
 pip
 yt-dlp
 pynacl
-py-cord[voice]
+py-cord==2.0.0b1
 datetime
 asyncio
 pytz
