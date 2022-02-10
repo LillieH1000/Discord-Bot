@@ -36,7 +36,7 @@ class tweaksearch(commands.Cog):
                         viewdepictionbutton = Button(label="View Depiction", url=f"{response['data'][0]['depiction']}", style=discord.ButtonStyle.grey)
                         addrepotopackagemanagerbutton = Button(label="Add Repo To Package Manager", url=f"https://sharerepo.stkc.win/?repo={response['data'][0]['repository']['uri']}", style=discord.ButtonStyle.grey)
 
-                        view = View()
+                        view = View(timeout=None)
                         if (response['data'][0]['depiction'] is not None):
                             view.add_item(viewdepictionbutton)
                         if (response['data'][0]['repository']['uri'] is not None):

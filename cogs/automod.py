@@ -17,14 +17,23 @@ class automod(commands.Cog):
             async with session.get(f'https://raw.githubusercontent.com/LillieWeeb001/Anti-Scam-Json-List/main/antiscam.json') as resp:
                 antiscamresponse = await resp.json(content_type='text/plain')
         
-                if any(word in message_content.replace("http://", "").replace("https://", "").rstrip('/').split() for word in antiscamresponse["scamjburls"]):
-                    await message.delete()
+                for word in message_content.replace("/", "").replace("\\", "").replace("http:", "").replace("https:", "").split():
+                    for filtered in antiscamresponse["scamjburls"]:
+                        check = filtered.replace("/", "").replace("\\", "")
+                        if word.startswith(check):
+                            await message.delete()
 
-                if any(word in message_content.replace("http://", "").replace("https://", "").rstrip('/').split() for word in antiscamresponse["scamideviceunlockurls"]):
-                    await message.delete()
+                for word in message_content.replace("/", "").replace("\\", "").replace("http:", "").replace("https:", "").split():
+                    for filtered in antiscamresponse["scamideviceunlockurls"]:
+                        check = filtered.replace("/", "").replace("\\", "")
+                        if word.startswith(check):
+                            await message.delete()
 
-                if any(word in message_content.replace("http://", "").replace("https://", "").rstrip('/').split() for word in antiscamresponse["scamdiscordurls"]):
-                    await message.delete()
+                for word in message_content.replace("/", "").replace("\\", "").replace("http:", "").replace("https:", "").split():
+                    for filtered in antiscamresponse["scamdiscordurls"]:
+                        check = filtered.replace("/", "").replace("\\", "")
+                        if word.startswith(check):
+                            await message.delete()
 
             for word in message_content.split():
                 async with session.get(f'https://api.canister.me/v1/community/repositories/check?queries={word}') as antijbpiracyresp:

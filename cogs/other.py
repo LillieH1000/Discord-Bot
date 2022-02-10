@@ -32,7 +32,7 @@ class other(commands.Cog):
 
                     vieworiginalimage = Button(label="View Original Image", url=f"{response['file']}", style=discord.ButtonStyle.grey)
 
-                    view = View()
+                    view = View(timeout=None)
                     if (response["file"] is not None):
                         view.add_item(vieworiginalimage)
 
@@ -46,7 +46,7 @@ class other(commands.Cog):
 
                     vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
 
-                    view = View()
+                    view = View(timeout=None)
                     if (response["url"] is not None):
                         view.add_item(vieworiginalimage)
 
@@ -60,7 +60,7 @@ class other(commands.Cog):
 
                     vieworiginalimage = Button(label="View Original Image", url=f"{response['file']}", style=discord.ButtonStyle.grey)
 
-                    view = View()
+                    view = View(timeout=None)
                     if (response["file"] is not None):
                         view.add_item(vieworiginalimage)
 
@@ -79,7 +79,7 @@ class other(commands.Cog):
                     
                     vieworiginalimage = Button(label="View Original Image", url=f"{response['message']}", style=discord.ButtonStyle.grey)
 
-                    view = View()
+                    view = View(timeout=None)
                     if (response["message"] is not None):
                         view.add_item(vieworiginalimage)
 
@@ -93,7 +93,7 @@ class other(commands.Cog):
 
                     vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
 
-                    view = View()
+                    view = View(timeout=None)
                     if (response["url"] is not None):
                         view.add_item(vieworiginalimage)
 
@@ -107,7 +107,7 @@ class other(commands.Cog):
 
                     vieworiginalimage = Button(label="View Original Image", url=f"{response['file']}", style=discord.ButtonStyle.grey)
 
-                    view = View()
+                    view = View(timeout=None)
                     if (response["file"] is not None):
                         view.add_item(vieworiginalimage)
 
@@ -125,7 +125,7 @@ class other(commands.Cog):
                 
                 vieworiginalimage = Button(label="View Original Image", url=f"{response['file']}", style=discord.ButtonStyle.grey)
 
-                view = View()
+                view = View(timeout=None)
                 if (response["file"] is not None):
                     view.add_item(vieworiginalimage)
 
@@ -144,7 +144,7 @@ class other(commands.Cog):
                     
                     vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
 
-                    view = View()
+                    view = View(timeout=None)
                     if (response["url"] is not None):
                         view.add_item(vieworiginalimage)
 
@@ -158,7 +158,7 @@ class other(commands.Cog):
                     
                     vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
 
-                    view = View()
+                    view = View(timeout=None)
                     if (response["url"] is not None):
                         view.add_item(vieworiginalimage)
 
@@ -176,7 +176,7 @@ class other(commands.Cog):
                 
                 vieworiginalimage = Button(label="View Original Image", url=f"{response['file']}", style=discord.ButtonStyle.grey)
 
-                view = View()
+                view = View(timeout=None)
                 if (response["file"] is not None):
                     view.add_item(vieworiginalimage)
 
@@ -194,7 +194,7 @@ class other(commands.Cog):
                 
                 vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
 
-                view = View()
+                view = View(timeout=None)
                 if (response["url"] is not None):
                     view.add_item(vieworiginalimage)
 
@@ -235,7 +235,7 @@ class other(commands.Cog):
                 
                 vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
 
-                view = View()
+                view = View(timeout=None)
                 if (response["url"] is not None):
                     view.add_item(vieworiginalimage)
 
@@ -253,7 +253,7 @@ class other(commands.Cog):
                 
                 vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
 
-                view = View()
+                view = View(timeout=None)
                 if (response["url"] is not None):
                     view.add_item(vieworiginalimage)
 
@@ -271,7 +271,7 @@ class other(commands.Cog):
                 
                 vieworiginalimage = Button(label="View Original Image", url=f"{response['image']}", style=discord.ButtonStyle.grey)
 
-                view = View()
+                view = View(timeout=None)
                 if (response["image"] is not None):
                     view.add_item(vieworiginalimage)
 

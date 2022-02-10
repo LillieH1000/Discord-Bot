@@ -1,7 +1,7 @@
 import discord, urllib.parse, datetime, json, aiohttp, asyncio
 from discord.commands import Option, slash_command
 from discord.ext import commands
-from discord.ui import Button, View
+from discord.ui import View, Select
 
 class pokemon(commands.Cog):
     def __init__(self, bot):
@@ -23,50 +23,10 @@ class pokemon(commands.Cog):
                 async with session.get(f'https://pokeapi.co/api/v2/pokemon/{urllib.parse.quote(message_before)}') as resp:
                     response = await resp.json()
 
-                    # Regular View
-                    
-                    embed = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
-                    embed.set_thumbnail(url=response['sprites']['other']['home']['front_default'])
-                    embed.add_field(name=f"Pokedex ID", value=f"{response['id']}", inline=False)
-                    a = 0
-                    b = ""
-                    for c in response['types']:
-                        b += f"{c['type']['name'].capitalize()}"
-                        a += 1
-                        if (len(response['types']) != a):
-                            b += ", "
-                    embed.add_field(name=f"Types", value=f"{b}", inline=False)
-                    d = 0
-                    e = ""
-                    for f in response['abilities']:
-                        e += f"{f['ability']['name'].capitalize()}"
-                        if f['is_hidden'] == True:
-                            e += f" (Hidden)"
-                        d += 1
-                        if (len(response['abilities']) != d):
-                            e += ", "
-                    embed.add_field(name=f"Abilities", value=f"{e}", inline=False)
-                    g = 0
-                    h = ""
-                    for i in response['stats']:
-                        h += i['stat']['name'].capitalize()
-                        h += ": "
-                        h += str(i['base_stat'])
-                        g += 1
-                        if (len(response['stats']) != g):
-                            h += "\n"
-                    embed.add_field(name=f"Base Stats", value=f"\n{h}", inline=False)
-                    if (message_after != ""):
-                        embed.add_field(name=f"Game And Count", value=message_after, inline=False)
-                    embed.timestamp = datetime.datetime.now()
+                    # Variables
 
                     view = View(timeout=None)
 
-                    # Shiny View
-
-                    embedShiny = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
-                    embedShiny.set_thumbnail(url=response['sprites']['other']['home']['front_shiny'])
-                    embedShiny.add_field(name=f"Pokedex ID", value=f"{response['id']}", inline=False)
                     a = 0
                     b = ""
                     for c in response['types']:
@@ -74,7 +34,7 @@ class pokemon(commands.Cog):
                         a += 1
                         if (len(response['types']) != a):
                             b += ", "
-                    embedShiny.add_field(name=f"Types", value=f"{b}", inline=False)
+
                     d = 0
                     e = ""
                     for f in response['abilities']:
@@ -84,7 +44,7 @@ class pokemon(commands.Cog):
                         d += 1
                         if (len(response['abilities']) != d):
                             e += ", "
-                    embedShiny.add_field(name=f"Abilities", value=f"{e}", inline=False)
+
                     g = 0
                     h = ""
                     for i in response['stats']:
@@ -94,29 +54,92 @@ class pokemon(commands.Cog):
                         g += 1
                         if (len(response['stats']) != g):
                             h += "\n"
-                    embedShiny.add_field(name=f"Base Stats", value=f"\n{h}", inline=False)
-                    if (message_after != ""):
-                        embedShiny.add_field(name=f"Game And Count", value=message_after, inline=False)
-                    embedShiny.timestamp = datetime.datetime.now()
 
-                    viewShiny = View(timeout=None)
+                    # Regular Default View
                     
-                    async def image_callback(interaction):
-                        await interaction.response.edit_message(embed=embed, view=view)
+                    embedRegularDefault = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
+                    embedRegularDefault.set_thumbnail(url=response['sprites']['other']['home']['front_default'])
+                    embedRegularDefault.add_field(name=f"Pokedex ID", value=f"{response['id']}", inline=False)
+                    embedRegularDefault.add_field(name=f"Types", value=f"{b}", inline=False)
+                    embedRegularDefault.add_field(name=f"Abilities", value=f"{e}", inline=False)
+                    embedRegularDefault.add_field(name=f"Base Stats", value=f"\n{h}", inline=False)
+                    if (message_after != ""):
+                        embedRegularDefault.add_field(name=f"Game And Count", value=message_after, inline=False)
+                    embedRegularDefault.timestamp = datetime.datetime.now()
 
-                    async def shinyimage_callback(interaction):
-                        await interaction.response.edit_message(embed=embedShiny, view=viewShiny)
+                    # Shiny Default View
 
-                    showshinyimage = Button(label="Show Shiny Image", style=discord.ButtonStyle.grey)
-                    showshinyimage.callback = shinyimage_callback
-                    view.add_item(showshinyimage)
+                    embedShinyDefault = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
+                    embedShinyDefault.set_thumbnail(url=response['sprites']['other']['home']['front_shiny'])
+                    embedShinyDefault.add_field(name=f"Pokedex ID", value=f"{response['id']}", inline=False)
+                    embedShinyDefault.add_field(name=f"Types", value=f"{b}", inline=False)
+                    embedShinyDefault.add_field(name=f"Abilities", value=f"{e}", inline=False)
+                    embedShinyDefault.add_field(name=f"Base Stats", value=f"\n{h}", inline=False)
+                    if (message_after != ""):
+                        embedShinyDefault.add_field(name=f"Game And Count", value=message_after, inline=False)
+                    embedShinyDefault.timestamp = datetime.datetime.now()
 
-                    hideshinyimage = Button(label="Hide Shiny Image", style=discord.ButtonStyle.grey)
-                    hideshinyimage.callback = image_callback
-                    viewShiny.add_item(hideshinyimage)
+                    # Regular Female View
+
+                    embedRegularFemale = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
+                    embedRegularFemale.set_thumbnail(url=response['sprites']['other']['home']['front_female'])
+                    embedRegularFemale.add_field(name=f"Pokedex ID", value=f"{response['id']}", inline=False)
+                    embedRegularFemale.add_field(name=f"Types", value=f"{b}", inline=False)
+                    embedRegularFemale.add_field(name=f"Abilities", value=f"{e}", inline=False)
+                    embedRegularFemale.add_field(name=f"Base Stats", value=f"\n{h}", inline=False)
+                    if (message_after != ""):
+                        embedRegularFemale.add_field(name=f"Game And Count", value=message_after, inline=False)
+                    embedRegularFemale.timestamp = datetime.datetime.now()
+
+                    # Shiny Female View
+
+                    embedShinyFemale = discord.Embed(color=0xFFC0DD, title=f"{response['name'].capitalize()}")
+                    embedShinyFemale.set_thumbnail(url=response['sprites']['other']['home']['front_shiny_female'])
+                    embedShinyFemale.add_field(name=f"Pokedex ID", value=f"{response['id']}", inline=False)
+                    embedShinyFemale.add_field(name=f"Types", value=f"{b}", inline=False)
+                    embedShinyFemale.add_field(name=f"Abilities", value=f"{e}", inline=False)
+                    embedShinyFemale.add_field(name=f"Base Stats", value=f"\n{h}", inline=False)
+                    if (message_after != ""):
+                        embedShinyFemale.add_field(name=f"Game And Count", value=message_after, inline=False)
+                    embedShinyFemale.timestamp = datetime.datetime.now()
+
+                    # Dropdown View
+
+                    options = []
+
+                    if (response['sprites']['other']['home']['front_default'] is not None):
+                        options.append(discord.SelectOption(
+                            label="Default (Regular)", description="Show the regular default pic of the pokemon"
+                        ),)
+                    if (response['sprites']['other']['home']['front_shiny'] is not None):
+                        options.append(discord.SelectOption(
+                            label="Default (Shiny)", description="Show the shiny default pic of the pokemon"
+                        ),)
+                    if (response['sprites']['other']['home']['front_female'] is not None):
+                        options.append(discord.SelectOption(
+                            label="Female (Regular)", description="Show the regular female pic of the pokemon"
+                        ),)
+                    if (response['sprites']['other']['home']['front_shiny_female'] is not None):
+                        options.append(discord.SelectOption(
+                            label="Female (Shiny)", description="Show the shiny female pic of the pokemon"
+                        ),)
+
+                    async def dropdown_callback(interaction):
+                        if (dropdown.values[0] == "Default (Regular)"):
+                            await interaction.response.edit_message(embed=embedRegularDefault)
+                        if (dropdown.values[0] == "Default (Shiny)"):
+                            await interaction.response.edit_message(embed=embedShinyDefault)
+                        if (dropdown.values[0] == "Female (Regular)"):
+                            await interaction.response.edit_message(embed=embedRegularFemale)
+                        if (dropdown.values[0] == "Female (Shiny)"):
+                            await interaction.response.edit_message(embed=embedShinyFemale)
+
+                    dropdown = Select(placeholder="Choose Sprite Image", min_values=1, max_values=1, options=options)
+                    dropdown.callback = dropdown_callback
+                    view.add_item(dropdown)
 
                     await message.delete()
-                    await message.channel.send(embed=embed, view=view)
+                    await message.channel.send(embed=embedRegularDefault, view=view)
 
 def setup(bot):
     bot.add_cog(pokemon(bot))
