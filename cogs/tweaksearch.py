@@ -1,4 +1,4 @@
-import discord, urllib.parse, datetime, json, aiohttp, asyncio
+import discord, urllib.parse, datetime, json, aiohttp, asyncio, re
 from discord.commands import Option, slash_command
 from discord.ext import commands
 from discord.ui import Button, View
@@ -17,7 +17,7 @@ class tweaksearch(commands.Cog):
             message_content = message.content[2:-2]
 
             async with aiohttp.ClientSession() as session:
-                async with session.get(f'https://api.canister.me/v1/community/packages/search?query={urllib.parse.quote(message_content)}&limit=1&responseFields=name,description,author,price,packageIcon,depiction,repository.name,repository.uri') as resp:
+                async with session.get(f'https://api.canister.me/v1/community/packages/search?query={urllib.parse.quote(message_content)}&limit=1&responseFields=name,description,author,price,packageIcon,depiction,repository.name,repository.uri,latestVersion,identifier') as resp:
                     response = await resp.json()
                     try:
                         embed = discord.Embed(color=0xFFC0DD)
@@ -26,11 +26,16 @@ class tweaksearch(commands.Cog):
                         if (response['data'][0]['name'] is not None and response['data'][0]['description'] is not None):
                             embed.add_field(name=f"{response['data'][0]['name']}", value=f"{response['data'][0]['description']}", inline=False)
                         if (response['data'][0]['author'] is not None):
-                            embed.add_field(name="Author: ", value=f"{response['data'][0]['author']}", inline=False)
+                            author = re.sub('<[^>]+>', '', response['data'][0]['author'])
+                            embed.add_field(name="Author:", value=f"{author}", inline=True)
+                        if (response['data'][0]['latestVersion'] is not None):
+                            embed.add_field(name="Version:", value=f"{response['data'][0]['latestVersion']}", inline=True)
                         if (response['data'][0]['price'] is not None):
-                            embed.add_field(name="Price: ", value=f"{response['data'][0]['price']}", inline=False)
+                            embed.add_field(name="Price:", value=f"{response['data'][0]['price']}", inline=True)
                         if (response['data'][0]['repository']['name'] is not None and response['data'][0]['repository']['uri'] is not None):
-                            embed.add_field(name="Repository: ", value=f"[{response['data'][0]['repository']['name']}]({response['data'][0]['repository']['uri']})", inline=False)
+                            embed.add_field(name="Repository:", value=f"[{response['data'][0]['repository']['name']}]({response['data'][0]['repository']['uri']})", inline=True)
+                        if (response['data'][0]['identifier'] is not None):
+                            embed.add_field(name="Bundle ID:", value=f"{response['data'][0]['identifier']}", inline=True)
                         embed.timestamp = datetime.datetime.now()
 
                         viewdepictionbutton = Button(label="View Depiction", url=f"{response['data'][0]['depiction']}", style=discord.ButtonStyle.grey)

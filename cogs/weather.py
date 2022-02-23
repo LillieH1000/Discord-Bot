@@ -9,19 +9,7 @@ class weather(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    # Guilds Loader
-
-    guildconfig = open('guilds.json')
-    data = json.load(guildconfig)
-    guildscount = 0
-    guildids = ""
-    for guild in data["guilds"]:
-        guildids += guild
-        guildscount += 1
-        if (len(data["guilds"]) != guildscount):
-            guildids += str(",")
-
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Get the current weather from an area")
+    @slash_command(description="Get the current weather from an area")
     async def weather(self, ctx, city: Option(str, "Enter the City"), province: Option(str, "Enter the Province/Territory/State"), country: Option(str, "Enter the Country"), privacy: Option(str, "Will reply private or publicly to you", choices=["Private", "Public"])):
         if privacy == "Private":
             await ctx.defer(ephemeral=True)

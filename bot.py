@@ -1,6 +1,7 @@
 import discord, json, os
 
-bot = discord.Bot()
+intents = discord.Intents().all()
+bot = discord.Bot(intents=intents)
 
 # Config Loader
 

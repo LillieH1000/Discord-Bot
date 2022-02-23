@@ -6,21 +6,9 @@ class pronoundb(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    # Guilds Loader
-
-    guildconfig = open('guilds.json')
-    data = json.load(guildconfig)
-    guildscount = 0
-    guildids = ""
-    for guild in data["guilds"]:
-        guildids += guild
-        guildscount += 1
-        if (len(data["guilds"]) != guildscount):
-            guildids += str(",")
-
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Get a users pronouns")
+    @slash_command(description="Get a users pronouns")
     async def pronouns(self, ctx, user: discord.Member):
-        await ctx.defer()
+        await ctx.defer(ephemeral=True)
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://pronoundb.org/api/v1/lookup?platform=discord&id={user.id}') as resp:
                 response = await resp.json()
@@ -69,7 +57,7 @@ class pronoundb(commands.Cog):
                 embed = discord.Embed(title="PronounDB", color=0xFFC0DD)
                 embed.add_field(name=f"Pronouns of {user.name}: ", value=pronoun, inline=False)
                 embed.timestamp = datetime.datetime.now()
-                await ctx.send_followup(embed=embed, delete_after=60.0)
+                await ctx.send_followup(embed=embed, ephemeral=True)
 
 def setup(bot):
     bot.add_cog(pronoundb(bot))

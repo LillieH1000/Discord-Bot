@@ -6,19 +6,7 @@ class chariz(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    # Guilds Loader
-
-    guildconfig = open('guilds.json')
-    data = json.load(guildconfig)
-    guildscount = 0
-    guildids = ""
-    for guild in data["guilds"]:
-        guildids += guild
-        guildscount += 1
-        if (len(data["guilds"]) != guildscount):
-            guildids += str(",")
-
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Tells a user the contact info stuff")
+    @slash_command(guild_ids=[326739046531596289, 918949427522191361], description="Tells a user the contact info stuff")
     async def contactdev(self, ctx, user: discord.Member):
         await ctx.defer()
         embed = discord.Embed(color=0xFFC0DD)

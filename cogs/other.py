@@ -7,19 +7,7 @@ class other(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    # Guilds Loader
-
-    guildconfig = open('guilds.json')
-    data = json.load(guildconfig)
-    guildscount = 0
-    guildids = ""
-    for guild in data["guilds"]:
-        guildids += guild
-        guildscount += 1
-        if (len(data["guilds"]) != guildscount):
-            guildids += str(",")
-
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random cat picture")
+    @slash_command(description="Posts a random cat picture")
     async def cat(self, ctx, source: Option(str, "Choose cat pics source", choices=["Random.Cat", "Nekos.Life", "AlexFlipnote.Dev"])):
         await ctx.defer()
         async with aiohttp.ClientSession() as session:
@@ -66,7 +54,7 @@ class other(commands.Cog):
 
                     await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random dog picture")
+    @slash_command(description="Posts a random dog picture")
     async def dog(self, ctx, source: Option(str, "Choose dog pics source", choices=["Dog.Ceo", "Nekos.Life", "AlexFlipnote.Dev"])):
         await ctx.defer()
         async with aiohttp.ClientSession() as session:
@@ -113,7 +101,7 @@ class other(commands.Cog):
 
                     await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random birb picture")
+    @slash_command(description="Posts a random birb picture")
     async def birb(self, ctx):
         await ctx.defer()
         async with aiohttp.ClientSession() as session:
@@ -131,7 +119,7 @@ class other(commands.Cog):
 
                 await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random neko picture")
+    @slash_command(description="Posts a random neko picture")
     async def neko(self, ctx, source: Option(str, "Choose neko pics source", choices=["Nekos.Life", "Waifu.Pics"])):
         await ctx.defer()
         async with aiohttp.ClientSession() as session:
@@ -164,7 +152,7 @@ class other(commands.Cog):
 
                     await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random coffee picture")
+    @slash_command(description="Posts a random coffee picture")
     async def coffee(self, ctx):
         await ctx.defer()
         async with aiohttp.ClientSession() as session:
@@ -182,7 +170,7 @@ class other(commands.Cog):
 
                 await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random goose picture")
+    @slash_command(description="Posts a random goose picture")
     async def goose(self, ctx):
         await ctx.defer()
         async with aiohttp.ClientSession() as session:
@@ -200,7 +188,7 @@ class other(commands.Cog):
 
                 await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random chuck norris joke")
+    @slash_command(description="Posts a random chuck norris joke")
     async def chucknorris(self, ctx):
         await ctx.defer()
         async with aiohttp.ClientSession() as session:
@@ -212,7 +200,7 @@ class other(commands.Cog):
                 embed.timestamp = datetime.datetime.now()
                 await ctx.send_followup(embed=embed)
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random waifu pic")
+    @slash_command(description="Posts a random waifu pic")
     async def waifu(self, ctx):
         await ctx.defer()
         async with aiohttp.ClientSession() as session:
@@ -230,7 +218,7 @@ class other(commands.Cog):
 
                 await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random duck pic")
+    @slash_command(description="Posts a random duck pic")
     async def duck(self, ctx):
         await ctx.defer()
         async with aiohttp.ClientSession() as session:
@@ -248,7 +236,7 @@ class other(commands.Cog):
 
                 await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Posts a random fox pic")
+    @slash_command(description="Posts a random fox pic")
     async def fox(self, ctx):
         await ctx.defer()
         async with aiohttp.ClientSession() as session:
@@ -266,7 +254,7 @@ class other(commands.Cog):
 
                 await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Role a 6 sided dice")
+    @slash_command(description="Role a 6 sided dice")
     async def dice(self, ctx):
         await ctx.defer()
         await ctx.send_followup(f"You Rolled A: {random.randint(1, 6)}")

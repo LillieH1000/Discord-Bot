@@ -7,18 +7,6 @@ class music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    # Guilds Loader
-
-    guildconfig = open('guilds.json')
-    data = json.load(guildconfig)
-    guildscount = 0
-    guildids = ""
-    for guild in data["guilds"]:
-        guildids += guild
-        guildscount += 1
-        if (len(data["guilds"]) != guildscount):
-            guildids += str(",")
-
     queue = []
 
     def is_connected(self, ctx):
@@ -112,7 +100,7 @@ class music(commands.Cog):
             await ctx.send_followup(embed=embed)
             del self.queue[:2]
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Connects the bot to the voice channel you are in")
+    @slash_command(description="Connects the bot to the voice channel you are in")
     async def connect(self, ctx):
         await ctx.defer()
         if not self.is_connected(ctx):
@@ -122,7 +110,7 @@ class music(commands.Cog):
             embed.timestamp = datetime.datetime.now()
             await ctx.send_followup(embed=embed)
     
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Plays a song")
+    @slash_command(description="Plays a song")
     async def play(self, ctx, source: Option(str, "Choose audio source", choices=["YouTube", "SoundCloud", "Audiomack", "Bandcamp"]), video: Option(str, "Enter video name or url")):
         if not self.is_connected(ctx):
             await self.connect(self, ctx)
@@ -143,7 +131,7 @@ class music(commands.Cog):
         if not self.is_playing(ctx):
             await self.audio_player(ctx)
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Skips to the next song in the queue")
+    @slash_command(description="Skips to the next song in the queue")
     async def skip(self, ctx):
         await ctx.defer()
         if self.is_connected(ctx):
@@ -154,7 +142,7 @@ class music(commands.Cog):
             await ctx.send_followup(embed=embed)
             await self.audio_player(ctx)
             
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Stops and disconnects the bot")
+    @slash_command(description="Stops and disconnects the bot")
     async def stop(self, ctx):
         await ctx.defer()
         if self.is_connected(ctx):
@@ -166,7 +154,7 @@ class music(commands.Cog):
             embed.timestamp = datetime.datetime.now()
             await ctx.send_followup(embed=embed)
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Pauses the playing song")
+    @slash_command(description="Pauses the playing song")
     async def pause(self, ctx):
         await ctx.defer()
         if self.is_connected(ctx):
@@ -177,7 +165,7 @@ class music(commands.Cog):
                 embed.timestamp = datetime.datetime.now()
                 await ctx.send_followup(embed=embed)
 
-    @slash_command(guild_ids=[int(x) for x in guildids.split(",")], description="Resumes the playing song")
+    @slash_command(description="Resumes the playing song")
     async def resume(self, ctx):
         await ctx.defer()
         if self.is_connected(ctx):
