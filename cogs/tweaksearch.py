@@ -21,19 +21,13 @@ class tweaksearch(commands.Cog):
                     embed = discord.Embed(color=0xFFC0DD)
                     if (response.json()['data'][0]['packageIcon'] is not None):
                         embed.set_thumbnail(url=response.json()['data'][0]['packageIcon'])
-                    if (response.json()['data'][0]['name'] is not None and response.json()['data'][0]['description'] is not None):
-                        embed.add_field(name=f"{response.json()['data'][0]['name']}", value=f"{response.json()['data'][0]['description']}", inline=False)
-                    if (response.json()['data'][0]['author'] is not None):
-                        author = re.sub('<[^>]+>', '', response.json()['data'][0]['author'])
-                        embed.add_field(name="Author:", value=f"{author}", inline=True)
-                    if (response.json()['data'][0]['latestVersion'] is not None):
-                        embed.add_field(name="Version:", value=f"{response.json()['data'][0]['latestVersion']}", inline=True)
-                    if (response.json()['data'][0]['price'] is not None):
-                        embed.add_field(name="Price:", value=f"{response.json()['data'][0]['price']}", inline=True)
-                    if (response.json()['data'][0]['repository']['name'] is not None and response.json()['data'][0]['repository']['uri'] is not None):
-                        embed.add_field(name="Repository:", value=f"[{response.json()['data'][0]['repository']['name']}]({response.json()['data'][0]['repository']['uri']})", inline=True)
-                    if (response.json()['data'][0]['identifier'] is not None):
-                        embed.add_field(name="Bundle ID:", value=f"{response.json()['data'][0]['identifier']}", inline=True)
+                    embed.add_field(name=f"{response.json()['data'][0]['name']}", value=f"{response.json()['data'][0]['description']}", inline=False)
+                    author = re.sub('<[^>]+>', '', response.json()['data'][0]['author'])
+                    embed.add_field(name="Author:", value=f"{author}", inline=True)
+                    embed.add_field(name="Version:", value=f"{response.json()['data'][0]['latestVersion']}", inline=True)
+                    embed.add_field(name="Price:", value=f"{response.json()['data'][0]['price']}", inline=True)
+                    embed.add_field(name="Repository:", value=f"[{response.json()['data'][0]['repository']['name']}]({response.json()['data'][0]['repository']['uri']})", inline=True)
+                    embed.add_field(name="Bundle ID:", value=f"{response.json()['data'][0]['identifier']}", inline=True)
                     embed.timestamp = datetime.datetime.now()
 
                     viewdepictionbutton = Button(label="View Depiction", url=f"{response.json()['data'][0]['depiction']}", style=discord.ButtonStyle.grey)
