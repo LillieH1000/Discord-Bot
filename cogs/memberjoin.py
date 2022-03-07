@@ -10,8 +10,12 @@ class memberjoin(commands.Cog):
     async def on_member_join(self, member):
         guild = member.guild
         if guild.system_channel is not None:
-            embed = discord.Embed(color=0xFFC0DD, title=f"{member.name}", description=f"{member.id}")
-            embed.set_thumbnail(url=member.avatar.url)
+            embed = discord.Embed(color=0xFFC0DD, title=f"{member.name}")
+            if member.avatar != None:
+                embed.set_thumbnail(url=member.avatar.url)
+            embed.add_field(name=f"Member ID:", value=f"{member.id}", inline=False)
+            embed.add_field(name=f"Joined At:", value=f"{member.joined_at}", inline=False)
+            embed.timestamp = datetime.datetime.now()
             await guild.system_channel.send(embed=embed)
 
 def setup(bot):
