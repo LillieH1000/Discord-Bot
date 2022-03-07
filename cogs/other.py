@@ -12,7 +12,7 @@ class other(commands.Cog):
         await ctx.defer()
         async with aiohttp.ClientSession() as session:
             if source == "Random.Cat":
-                async with session.get(f'http://aws.random.cat/meow') as resp:
+                async with session.get(f'https://aws.random.cat/meow') as resp:
                     response = await resp.json()
                     embed = discord.Embed(title="Cat Pics", color=0xFFC0DD)
                     embed.set_image(url=str(response["file"]))
