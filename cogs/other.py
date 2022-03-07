@@ -8,21 +8,9 @@ class other(commands.Cog):
         self.bot = bot
 
     @slash_command(description="Posts a random cat picture")
-    async def cat(self, ctx, source: Option(str, "Choose cat pics source", choices=["Random.Cat", "Nekos.Life", "AlexFlipnote.Dev"])):
+    async def cat(self, ctx, source: Option(str, "Choose cat pics source", choices=["Nekos.Life", "AlexFlipnote.Dev"])):
         await ctx.defer()
         async with httpx.AsyncClient() as client:
-            if source == "Random.Cat":
-                response = await client.get(f'https://aws.random.cat/meow')
-                embed = discord.Embed(title="Cat Pics", color=0xFFC0DD)
-                embed.set_image(url=response.json()["file"])
-                embed.timestamp = datetime.datetime.now()
-
-                vieworiginalimage = Button(label="View Original Image", url=f"{response.json()['file']}", style=discord.ButtonStyle.grey)
-
-                view = View(timeout=None)
-                view.add_item(vieworiginalimage)
-
-                await ctx.send_followup(embed=embed, view=view)
             if source == "Nekos.Life":
                 response = await client.get(f'https://nekos.life/api/v2/img/meow')
                 embed = discord.Embed(title="Cat Pics", color=0xFFC0DD)

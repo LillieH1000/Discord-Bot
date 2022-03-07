@@ -1,4 +1,4 @@
-import discord, datetime, json, random, aiohttp, asyncio, pytz
+import discord, datetime, json, random, httpx, asyncio, pytz
 from discord.commands import Option, slash_command
 from discord.ext import commands
 from discord.ui import Button, View
@@ -23,20 +23,18 @@ class weather(commands.Cog):
             mainconfig = open('config.json')
             configdata = json.load(mainconfig)
 
-            async with aiohttp.ClientSession() as session:
-                async with session.get(f'https://api.weatherapi.com/v1/current.json?q={location.latitude},{location.longitude}&key={configdata["weatherapikey"]}') as resp:
-                    response = await resp.json()
-                    
-                    embed = discord.Embed(title=f"{response['location']['name']}", description=f"{response['current']['condition']['text']}", color=0xFFC0DD)
-                    embed.set_thumbnail(url=f"https:{response['current']['condition']['icon']}")
-                    embed.add_field(name=f"Temperature", value=f"{response['current']['temp_c']} °C | {response['current']['temp_f']} °F", inline=False)
-                    embed.add_field(name=f"Wind", value=f"{response['current']['wind_kph']} km/h | {response['current']['wind_mph']} m/h", inline=False)
-                    embed.timestamp = datetime.datetime.now()
+            async with httpx.AsyncClient() as client:
+                response = await client.get(f'https://api.weatherapi.com/v1/current.json?q={location.latitude},{location.longitude}&key={configdata["weatherapikey"]}')
+                embed = discord.Embed(title=f"{response.json()['location']['name']}", description=f"{response.json()['current']['condition']['text']}", color=0xFFC0DD)
+                embed.set_thumbnail(url=f"https:{response.json()['current']['condition']['icon']}")
+                embed.add_field(name=f"Temperature", value=f"{response.json()['current']['temp_c']} °C | {response.json()['current']['temp_f']} °F", inline=False)
+                embed.add_field(name=f"Wind", value=f"{response.json()['current']['wind_kph']} km/h | {response.json()['current']['wind_mph']} m/h", inline=False)
+                embed.timestamp = datetime.datetime.now()
 
-                    if privacy == "Private":
-                        await ctx.send_followup(embed=embed, ephemeral=True)
-                    if privacy == "Public":
-                        await ctx.send_followup(embed=embed)
+                if privacy == "Private":
+                    await ctx.send_followup(embed=embed, ephemeral=True)
+                if privacy == "Public":
+                    await ctx.send_followup(embed=embed)
 
 def setup(bot):
     bot.add_cog(weather(bot))
