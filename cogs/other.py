@@ -267,7 +267,7 @@ class other(commands.Cog):
 
     @slash_command(description="Pat a user")
     async def pat(self, ctx, user: discord.Member):
-        await ctx.defer()
+        await ctx.defer(ephemeral=True)
         async with aiohttp.ClientSession() as session:
             async with session.get(f'https://api.waifu.pics/sfw/pat') as resp:
                 response = await resp.json()
@@ -281,7 +281,8 @@ class other(commands.Cog):
                 if (response["url"] is not None):
                     view.add_item(vieworiginalimage)
 
-                await ctx.send_followup(content=f"{user.mention}", embed=embed, view=view)
+                await ctx.send(content=f"{user.mention}", embed=embed, view=view)
+                await ctx.send_followup(f"Successfully patted the user", ephemeral=True)
 
 def setup(bot):
     bot.add_cog(other(bot))

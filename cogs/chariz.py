@@ -8,7 +8,7 @@ class chariz(commands.Cog):
 
     @slash_command(guild_ids=[326739046531596289, 918949427522191361], description="Tells a user the contact info stuff")
     async def contactdev(self, ctx, user: discord.Member):
-        await ctx.defer()
+        await ctx.defer(ephemeral=True)
         embed = discord.Embed(color=0xFFC0DD)
         embed.add_field(name=f"Chariz Notice", value=f"""You need to contact the author regarding this.
 
@@ -22,7 +22,8 @@ If you don’t know how to contact them, follow this:
 You may also be able to find them on Twitter, Reddit, or this Discord server.""", inline=False)
         embed.timestamp = datetime.datetime.now()
 
-        await ctx.send_followup(f"{user.mention}", embed=embed)
+        await ctx.send(f"{user.mention}", embed=embed)
+        await ctx.send_followup(f"Sent the message", ephemeral=True)
 
 def setup(bot):
     bot.add_cog(chariz(bot))
