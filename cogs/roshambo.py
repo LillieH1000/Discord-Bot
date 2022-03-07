@@ -1,4 +1,4 @@
-import discord, datetime, json, random, aiohttp, asyncio
+import discord, datetime, json, random
 from discord.commands import Option, slash_command
 from discord.ext import commands
 from discord.ui import Button, View
