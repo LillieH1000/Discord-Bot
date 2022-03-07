@@ -8,23 +8,9 @@ class other(commands.Cog):
         self.bot = bot
 
     @slash_command(description="Posts a random cat picture")
-    async def cat(self, ctx, source: Option(str, "Choose cat pics source", choices=["Random.Cat", "Nekos.Life", "AlexFlipnote.Dev"])):
+    async def cat(self, ctx, source: Option(str, "Choose cat pics source", choices=["Nekos.Life", "AlexFlipnote.Dev"])):
         await ctx.defer()
         async with aiohttp.ClientSession() as session:
-            if source == "Random.Cat":
-                async with session.get(f'https://aws.random.cat/meow') as resp:
-                    response = await resp.json()
-                    embed = discord.Embed(title="Cat Pics", color=0xFFC0DD)
-                    embed.set_image(url=str(response["file"]))
-                    embed.timestamp = datetime.datetime.now()
-
-                    vieworiginalimage = Button(label="View Original Image", url=f"{response['file']}", style=discord.ButtonStyle.grey)
-
-                    view = View(timeout=None)
-                    if (response["file"] is not None):
-                        view.add_item(vieworiginalimage)
-
-                await ctx.send_followup(embed=embed, view=view)
             if source == "Nekos.Life":
                 async with session.get(f'https://nekos.life/api/v2/img/meow') as resp:
                     response = await resp.json()
@@ -254,10 +240,48 @@ class other(commands.Cog):
 
                 await ctx.send_followup(embed=embed, view=view)
 
-    @slash_command(description="Role a 6 sided dice")
-    async def dice(self, ctx):
+    @slash_command(description="Posts a random megumin pic")
+    async def megumin(self, ctx):
         await ctx.defer()
-        await ctx.send_followup(f"You Rolled A: {random.randint(1, 6)}")
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f'https://api.waifu.pics/sfw/megumin') as resp:
+                response = await resp.json()
+                embed = discord.Embed(title="Megumin Pics", color=0xFFC0DD)
+                embed.set_image(url=str(response["url"]))
+                embed.timestamp = datetime.datetime.now()
+                
+                vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
+
+                view = View(timeout=None)
+                if (response["url"] is not None):
+                    view.add_item(vieworiginalimage)
+
+                await ctx.send_followup(embed=embed, view=view)
+
+    @slash_command(description="Role a dice with any sides you define")
+    async def dice(self, ctx, sides: Option(int, "How many sides is the dice")):
+        await ctx.defer()
+        embed = discord.Embed(title="Dice", description=f"You rolled a {random.randint(1, sides):,}", color=0xFFC0DD)
+        embed.timestamp = datetime.datetime.now()
+        await ctx.send_followup(embed=embed)
+
+    @slash_command(description="Pat a user")
+    async def pat(self, ctx, user: discord.Member):
+        await ctx.defer()
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f'https://api.waifu.pics/sfw/pat') as resp:
+                response = await resp.json()
+                embed = discord.Embed(color=0xFFC0DD)
+                embed.set_image(url=str(response["url"]))
+                embed.timestamp = datetime.datetime.now()
+
+                vieworiginalimage = Button(label="View Original Image", url=f"{response['url']}", style=discord.ButtonStyle.grey)
+
+                view = View(timeout=None)
+                if (response["url"] is not None):
+                    view.add_item(vieworiginalimage)
+
+                await ctx.send_followup(content=f"{user.mention}", embed=embed, view=view)
 
 def setup(bot):
     bot.add_cog(other(bot))
