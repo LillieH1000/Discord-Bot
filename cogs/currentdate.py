@@ -9,7 +9,8 @@ class currentdate(commands.Cog):
 
     async def current_date(self):
         await self.bot.wait_until_ready()
-        townofsalemdatechannel = self.bot.get_channel(772878026521182248)
+        townofsalemguild = self.bot.get_guild(416350699794857986)
+        townofsalemdatechannel = townofsalemguild.get_channel(772878026521182248)
         while not self.bot.is_closed():
             await townofsalemdatechannel.edit(name=f"Date: {datetime.datetime.now(pytz.timezone('America/Toronto')).strftime('%B %d, %Y')}")
             await asyncio.sleep(60)
