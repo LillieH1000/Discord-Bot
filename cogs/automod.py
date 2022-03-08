@@ -63,6 +63,7 @@ class automod(commands.Cog):
                             await charizlogs.send(embed=embed)
                         else:
                             await automodlogs.send(embed=embed)
+
                 for filtered in antiscamresponse.json()["scamideviceunlockurls"]:
                     check = filtered.replace("/", "").replace("\\", "")
                     if word.startswith(check):
@@ -79,6 +80,7 @@ class automod(commands.Cog):
                             await charizlogs.send(embed=embed)
                         else:
                             await automodlogs.send(embed=embed)
+                            
                 for filtered in antiscamresponse.json()["scamdiscordurls"]:
                     check = filtered.replace("/", "").replace("\\", "")
                     if word.startswith(check):
