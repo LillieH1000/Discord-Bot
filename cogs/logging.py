@@ -13,6 +13,7 @@ class logging(commands.Cog):
         filterEmbed.add_field(name=f"User ID:", value=before.author.id, inline=False)
         filterEmbed.add_field(name=f"Old Message:", value=before.content, inline=False)
         filterEmbed.add_field(name=f"New Message:", value=after.content, inline=False)
+        filterEmbed.timestamp = datetime.datetime.now()
         if before.guild.id == 326739046531596289:
             charizguild = self.bot.get_guild(326739046531596289)
             charizlogs = charizguild.get_channel(818424030297325569)
@@ -27,6 +28,7 @@ class logging(commands.Cog):
         filterEmbed.add_field(name=f"Username:", value=message.author.name, inline=False)
         filterEmbed.add_field(name=f"User ID:", value=message.author.id, inline=False)
         filterEmbed.add_field(name=f"Message:", value=message.content, inline=False)
+        filterEmbed.timestamp = datetime.datetime.now()
         if message.guild.id == 326739046531596289:
             charizguild = self.bot.get_guild(326739046531596289)
             charizlogs = charizguild.get_channel(818424030297325569)

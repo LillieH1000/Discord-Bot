@@ -1,4 +1,4 @@
-import discord, json, httpx, asyncio, urllib.parse
+import discord, datetime, json, httpx, asyncio, urllib.parse
 from discord.ext import commands
 
 class automod(commands.Cog):
@@ -12,6 +12,7 @@ class automod(commands.Cog):
         filterEmbed.add_field(name=f"User ID:", value=message.author.id, inline=False)
         filterEmbed.add_field(name=f"Trigger:", value=word, inline=False)
         filterEmbed.add_field(name=f"Message:", value=message.content, inline=False)
+        filterEmbed.timestamp = datetime.datetime.now()
         if message.guild.id == 326739046531596289:
             charizguild = self.bot.get_guild(326739046531596289)
             charizlogs = charizguild.get_channel(818424030297325569)

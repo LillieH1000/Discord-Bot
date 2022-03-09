@@ -12,6 +12,7 @@ class admin(commands.Cog):
         reportEmbed.add_field(name=f"Username:", value=user.name, inline=False)
         reportEmbed.add_field(name=f"User ID:", value=user.id, inline=False)
         reportEmbed.add_field(name=f"Command Ran:", value=command, inline=False)
+        reportEmbed.timestamp = datetime.datetime.now()
         if user.guild.id == 326739046531596289:
             charizguild = self.bot.get_guild(326739046531596289)
             charizlogs = charizguild.get_channel(818424030297325569)
@@ -42,7 +43,7 @@ class admin(commands.Cog):
             await ctx.send_followup(f"You don't have permission to use this command, this has been logged and sent to the admins", ephemeral=True)
             await self.reportlog(ctx.interaction.user, "/mute")
 
-    @slash_command(description="Bans the specified user")
+    @slash_command(description="Kicks the specified user")
     async def kick(self, ctx, user: discord.Member, reason: Option(str, "Enter the reason")):
         await ctx.defer(ephemeral=True)
         if ctx.interaction.user.guild_permissions.kick_members:
