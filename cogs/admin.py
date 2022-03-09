@@ -21,12 +21,29 @@ class admin(commands.Cog):
             modlogs = discord.utils.get(user.guild.channels, name="mod-logs")
             await modlogs.send(embed=reportEmbed)
 
+    async def modlog(self, user, description, member):
+        reportEmbed = discord.Embed(title="Mod Log", description=description, color=0xFFC0DD)
+        reportEmbed.add_field(name=f"Username:", value=user.name, inline=False)
+        reportEmbed.add_field(name=f"User ID:", value=user.id, inline=False)
+        if member != None:
+            reportEmbed.add_field(name=f"Member:", value=member.name, inline=False)
+            reportEmbed.add_field(name=f"Member ID:", value=member.id, inline=False)
+        reportEmbed.timestamp = datetime.datetime.now()
+        if user.guild.id == 326739046531596289:
+            charizguild = self.bot.get_guild(326739046531596289)
+            charizlogs = charizguild.get_channel(818424030297325569)
+            await charizlogs.send(embed=reportEmbed)
+        else:
+            modlogs = discord.utils.get(user.guild.channels, name="mod-logs")
+            await modlogs.send(embed=reportEmbed)
+
     @slash_command(description="Clears chat of the defined message count")
     async def clear(self, ctx, amount: Option(int, "Enter amount of messages to delete")):
         await ctx.defer(ephemeral=True)
         if ctx.interaction.user.guild_permissions.manage_messages:
             await ctx.channel.purge(limit=amount)
             await ctx.send_followup(f"Cleared messages", ephemeral=True)
+            await self.modlog(ctx.interaction.user, "Admin/Mod cleared messages", None)
         else:
             await ctx.send_followup(f"You don't have permission to use this command, this has been logged and sent to the admins", ephemeral=True)
             await self.reportlog(ctx.interaction.user, "/clear")
@@ -39,6 +56,7 @@ class admin(commands.Cog):
             mutetime += datetime.timedelta(days=days, hours=hours, minutes=minutes, seconds=seconds)
             await user.timeout(until=mutetime)
             await ctx.send_followup(f"Muted {user.name}", ephemeral=True)
+            await self.modlog(ctx.interaction.user, "Muted Member", user)
         else:
             await ctx.send_followup(f"You don't have permission to use this command, this has been logged and sent to the admins", ephemeral=True)
             await self.reportlog(ctx.interaction.user, "/mute")
@@ -49,6 +67,7 @@ class admin(commands.Cog):
         if ctx.interaction.user.guild_permissions.kick_members:
             await user.kick(reason=reason)
             await ctx.send_followup(f"Kicked {user.name}", ephemeral=True)
+            await self.modlog(ctx.interaction.user, "Kicked Member", user)
         else:
             await ctx.send_followup(f"You don't have permission to use this command, this has been logged and sent to the admins", ephemeral=True)
             await self.reportlog(ctx.interaction.user, "/kick")
@@ -59,6 +78,7 @@ class admin(commands.Cog):
         if ctx.interaction.user.guild_permissions.ban_members:
             await user.ban(reason=reason)
             await ctx.send_followup(f"Banned {user.name}", ephemeral=True)
+            await self.modlog(ctx.interaction.user, "Banned Member", user)
         else:
             await ctx.send_followup(f"You don't have permission to use this command, this has been logged and sent to the admins", ephemeral=True)
             await self.reportlog(ctx.interaction.user, "/ban")
