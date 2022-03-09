@@ -11,7 +11,7 @@ class tweaksearch(commands.Cog):
         if message.author.id == self.bot.user.id:
             return
 
-        if message.content.startswith("[[") & message.content.endswith("]]"):
+        if message.content.startswith("{{") & message.content.endswith("}}"):
 
             message_content = message.content[2:-2]
 
