@@ -95,7 +95,7 @@ class music(commands.Cog):
             source = await discord.FFmpegOpusAudio.from_probe(self.queue[1], **FFMPEG_OPTIONS)
             ctx.channel.guild.voice_client.play(source, after=lambda e: asyncio.run_coroutine_threadsafe(self.audio_player(ctx), self.bot.loop))
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-            embed.add_field(name="Now Playing: ", value=self.queue[0], inline=False)
+            embed.add_field(name="Now Playing:", value=self.queue[0], inline=False)
             embed.timestamp = datetime.datetime.now()
             await ctx.send_followup(embed=embed)
             del self.queue[:2]
@@ -106,7 +106,7 @@ class music(commands.Cog):
         if not self.is_connected(ctx):
             await ctx.author.voice.channel.connect()
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-            embed.add_field(name="Connected To: ", value=ctx.author.voice.channel, inline=False)
+            embed.add_field(name="Connected To:", value=ctx.author.voice.channel, inline=False)
             embed.timestamp = datetime.datetime.now()
             await ctx.send_followup(embed=embed)
     
@@ -125,7 +125,7 @@ class music(commands.Cog):
         self.queue.append(name)
         self.queue.append(url)
         embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-        embed.add_field(name="Added To Queue: ", value=name, inline=False)
+        embed.add_field(name="Added To Queue:", value=name, inline=False)
         embed.timestamp = datetime.datetime.now()
         await ctx.send_followup(embed=embed)
         if not self.is_playing(ctx):
@@ -137,7 +137,7 @@ class music(commands.Cog):
         if self.is_connected(ctx):
             ctx.channel.guild.voice_client.stop()
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-            embed.add_field(name="Skipped Playing Song In: ", value=ctx.author.voice.channel, inline=False)
+            embed.add_field(name="Skipped Playing Song In:", value=ctx.author.voice.channel, inline=False)
             embed.timestamp = datetime.datetime.now()
             await ctx.send_followup(embed=embed)
             await self.audio_player(ctx)
@@ -150,7 +150,7 @@ class music(commands.Cog):
             ctx.channel.guild.voice_client.stop()
             await ctx.channel.guild.voice_client.disconnect()
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-            embed.add_field(name="Stopped Playing In: ", value=ctx.author.voice.channel, inline=False)
+            embed.add_field(name="Stopped Playing In:", value=ctx.author.voice.channel, inline=False)
             embed.timestamp = datetime.datetime.now()
             await ctx.send_followup(embed=embed)
 
@@ -161,7 +161,7 @@ class music(commands.Cog):
             if self.is_playing(ctx):
                 ctx.channel.guild.voice_client.pause()
                 embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-                embed.add_field(name="Paused Playing In: ", value=ctx.author.voice.channel, inline=False)
+                embed.add_field(name="Paused Playing In:", value=ctx.author.voice.channel, inline=False)
                 embed.timestamp = datetime.datetime.now()
                 await ctx.send_followup(embed=embed)
 
@@ -172,7 +172,7 @@ class music(commands.Cog):
             if not self.is_playing(ctx):
                 ctx.channel.guild.voice_client.resume()
                 embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-                embed.add_field(name="Resumed Playing In: ", value=ctx.author.voice.channel, inline=False)
+                embed.add_field(name="Resumed Playing In:", value=ctx.author.voice.channel, inline=False)
                 embed.timestamp = datetime.datetime.now()
                 await ctx.send_followup(embed=embed)
 
