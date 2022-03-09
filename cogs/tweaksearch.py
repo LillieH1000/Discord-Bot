@@ -39,9 +39,11 @@ class tweaksearch(commands.Cog):
                     if (response.json()['data'][0]['repository']['uri'] is not None):
                         view.add_item(addrepotopackagemanagerbutton)
 
-                    await message.reply(embed=embed, view=view)
+                    await message.delete()
+                    await message.channel.send(embed=embed, view=view)
                 except:
-                    await message.reply("No package/tweak found")
+                    await message.delete()
+                    await message.channel.send("No package/tweak found")
 
 def setup(bot):
     bot.add_cog(tweaksearch(bot))
