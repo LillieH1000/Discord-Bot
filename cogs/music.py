@@ -103,33 +103,43 @@ class music(commands.Cog):
     @slash_command(description="Connects the bot to the voice channel you are in")
     async def connect(self, ctx):
         await ctx.defer()
-        if not self.is_connected(ctx):
-            await ctx.author.voice.channel.connect()
-            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-            embed.add_field(name="Connected To:", value=ctx.author.voice.channel, inline=False)
+        if ctx.author.voice != None:
+            if not self.is_connected(ctx):
+                await ctx.author.voice.channel.connect()
+                embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+                embed.add_field(name="Connected To:", value=ctx.author.voice.channel, inline=False)
+                embed.timestamp = datetime.datetime.now()
+                await ctx.send_followup(embed=embed)
+        else:
+            embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
             embed.timestamp = datetime.datetime.now()
             await ctx.send_followup(embed=embed)
     
     @slash_command(description="Plays a song")
     async def play(self, ctx, source: Option(str, "Choose audio source", choices=["YouTube", "SoundCloud", "Audiomack", "Bandcamp"]), video: Option(str, "Enter video name or url")):
-        if not self.is_connected(ctx):
-            await self.connect(self, ctx)
+        if ctx.author.voice != None:
+            if not self.is_connected(ctx):
+                await self.connect(self, ctx)
+            else:
+                await ctx.defer()
+            if source == "YouTube":
+                name, url = self.youtube_ytdlp(video)
+            if source == "SoundCloud":
+                name, url = self.soundcloud_ytdlp(video)
+            if source == "Audiomack" or source == "Bandcamp":
+                name, url = self.other_ytdlp(video)
+            self.queue.append(name)
+            self.queue.append(url)
+            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+            embed.add_field(name="Added To Queue:", value=name, inline=False)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
+            if not self.is_playing(ctx):
+                await self.audio_player(ctx)
         else:
-            await ctx.defer()
-        if source == "YouTube":
-            name, url = self.youtube_ytdlp(video)
-        if source == "SoundCloud":
-            name, url = self.soundcloud_ytdlp(video)
-        if source == "Audiomack" or source == "Bandcamp":
-            name, url = self.other_ytdlp(video)
-        self.queue.append(name)
-        self.queue.append(url)
-        embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-        embed.add_field(name="Added To Queue:", value=name, inline=False)
-        embed.timestamp = datetime.datetime.now()
-        await ctx.send_followup(embed=embed)
-        if not self.is_playing(ctx):
-            await self.audio_player(ctx)
+            embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
 
     @slash_command(description="Skips to the next song in the queue")
     async def skip(self, ctx):
