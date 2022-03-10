@@ -1,7 +1,6 @@
-import discord, datetime, json, random, httpx, asyncio, pytz
+import discord, datetime, json, httpx, asyncio
 from discord.commands import Option, slash_command
 from discord.ext import commands
-from discord.ui import Button, View
 from geopy.adapters import AioHTTPAdapter
 from geopy.geocoders import Nominatim
 

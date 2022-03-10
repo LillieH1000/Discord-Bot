@@ -1,5 +1,4 @@
 import discord, datetime, asyncio, pytz
-from discord.commands import Option, slash_command
 from discord.ext import commands
 
 class gotosleep(commands.Cog):

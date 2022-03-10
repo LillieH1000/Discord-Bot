@@ -1,7 +1,6 @@
 import discord, datetime
 from discord.commands import Option, slash_command
 from discord.ext import commands
-from discord.ui import Button, View
 
 class admin(commands.Cog):
     def __init__(self, bot):

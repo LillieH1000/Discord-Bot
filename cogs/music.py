@@ -1,4 +1,4 @@
-import discord, datetime, asyncio, json
+import discord, datetime, asyncio
 from discord.commands import Option, slash_command
 from discord.ext import commands
 from yt_dlp import YoutubeDL

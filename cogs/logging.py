@@ -1,5 +1,4 @@
-import discord, datetime, asyncio
-from discord.commands import Option, slash_command
+import discord, datetime
 from discord.ext import commands
 
 class logging(commands.Cog):

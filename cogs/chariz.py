@@ -1,5 +1,5 @@
-import discord, datetime, json, asyncio
-from discord.commands import Option, slash_command
+import discord, datetime, asyncio
+from discord.commands import slash_command
 from discord.ext import commands
 
 class chariz(commands.Cog):

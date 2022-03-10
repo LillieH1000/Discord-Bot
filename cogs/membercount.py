@@ -1,5 +1,4 @@
-import discord, datetime, asyncio
-from discord.commands import Option, slash_command
+import discord, asyncio
 from discord.ext import commands
 
 class membercount(commands.Cog):

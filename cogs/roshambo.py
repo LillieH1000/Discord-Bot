@@ -1,5 +1,5 @@
-import discord, datetime, json, random
-from discord.commands import Option, slash_command
+import discord, datetime, random
+from discord.commands import slash_command
 from discord.ext import commands
 from discord.ui import Button, View
 
