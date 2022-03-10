@@ -80,10 +80,7 @@ class music(commands.Cog):
             'source_address': '0.0.0.0',
         }
         with YoutubeDL(YTDL_OPTIONS) as ytdl:
-            try:
-                info = ytdl.extract_info(video, download=True)['entries'][0]
-            except:
-                info = ytdl.extract_info(video, download=True)
+            info = ytdl.extract_info(video, download=True)
         return info['title'], info['url']
 
     async def audio_player(self, ctx):
@@ -103,14 +100,13 @@ class music(commands.Cog):
     @slash_command(description="Connects the bot to the voice channel you are in")
     async def connect(self, ctx):
         await ctx.defer()
-        if ctx.author.voice != None:
-            if not self.is_connected(ctx):
-                await ctx.author.voice.channel.connect()
-                embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-                embed.add_field(name="Connected To:", value=ctx.author.voice.channel, inline=False)
-                embed.timestamp = datetime.datetime.now()
-                await ctx.send_followup(embed=embed)
-        else:
+        if ctx.author.voice != None and not self.is_connected(ctx):
+            await ctx.author.voice.channel.connect()
+            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+            embed.add_field(name="Connected To:", value=ctx.author.voice.channel, inline=False)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
+        elif ctx.author.voice == None:
             embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
             embed.timestamp = datetime.datetime.now()
             await ctx.send_followup(embed=embed)
@@ -136,7 +132,8 @@ class music(commands.Cog):
             await ctx.send_followup(embed=embed)
             if not self.is_playing(ctx):
                 await self.audio_player(ctx)
-        else:
+        elif ctx.author.voice == None:
+            await ctx.defer()
             embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
             embed.timestamp = datetime.datetime.now()
             await ctx.send_followup(embed=embed)
@@ -144,67 +141,87 @@ class music(commands.Cog):
     @slash_command(description="Skips to the next song in the queue")
     async def skip(self, ctx):
         await ctx.defer()
-        if self.is_connected(ctx):
-            if ctx.author.voice != None:
-                ctx.channel.guild.voice_client.stop()
-                embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-                embed.add_field(name="Skipped Playing Song In:", value=ctx.author.voice.channel, inline=False)
-                embed.timestamp = datetime.datetime.now()
-                await ctx.send_followup(embed=embed)
-                await self.audio_player(ctx)
-            else:
-                embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
-                embed.timestamp = datetime.datetime.now()
-                await ctx.send_followup(embed=embed)
+        if ctx.author.voice != None and self.is_connected(ctx):
+            ctx.channel.guild.voice_client.stop()
+            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+            embed.add_field(name="Skipped Playing Song In:", value=ctx.author.voice.channel, inline=False)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
+            await self.audio_player(ctx)
+        elif ctx.author.voice == None:
+            embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
+        elif not self.is_connected(ctx):
+            embed = discord.Embed(title="Music Player", description="I am not connected to any voice channel", color=0xFFC0DD)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
             
     @slash_command(description="Stops and disconnects the bot")
     async def stop(self, ctx):
         await ctx.defer()
-        if self.is_connected(ctx):
-            if ctx.author.voice != None:
-                self.queue.clear()
-                ctx.channel.guild.voice_client.stop()
-                await ctx.channel.guild.voice_client.disconnect()
-                embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-                embed.add_field(name="Stopped Playing In:", value=ctx.author.voice.channel, inline=False)
-                embed.timestamp = datetime.datetime.now()
-                await ctx.send_followup(embed=embed)
-            else:
-                embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
-                embed.timestamp = datetime.datetime.now()
-                await ctx.send_followup(embed=embed)
+        if ctx.author.voice != None and self.is_connected(ctx):
+            self.queue.clear()
+            ctx.channel.guild.voice_client.stop()
+            await ctx.channel.guild.voice_client.disconnect()
+            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+            embed.add_field(name="Stopped Playing In:", value=ctx.author.voice.channel, inline=False)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
+        elif ctx.author.voice == None:
+            embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
+        elif not self.is_connected(ctx):
+            embed = discord.Embed(title="Music Player", description="I am not connected to any voice channel", color=0xFFC0DD)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
 
     @slash_command(description="Pauses the playing song")
     async def pause(self, ctx):
         await ctx.defer()
-        if self.is_connected(ctx):
-            if ctx.author.voice != None:
-                if self.is_playing(ctx):
-                    ctx.channel.guild.voice_client.pause()
-                    embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-                    embed.add_field(name="Paused Playing In:", value=ctx.author.voice.channel, inline=False)
-                    embed.timestamp = datetime.datetime.now()
-                    await ctx.send_followup(embed=embed)
-            else:
-                embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
+        if ctx.author.voice != None and self.is_connected(ctx):
+            if self.is_playing(ctx):
+                ctx.channel.guild.voice_client.pause()
+                embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+                embed.add_field(name="Paused Playing In:", value=ctx.author.voice.channel, inline=False)
                 embed.timestamp = datetime.datetime.now()
                 await ctx.send_followup(embed=embed)
+            else:
+                embed = discord.Embed(title="Music Player", description="I am currently not playing anything", color=0xFFC0DD)
+                embed.timestamp = datetime.datetime.now()
+                await ctx.send_followup(embed=embed)
+        elif ctx.author.voice == None:
+            embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
+        elif not self.is_connected(ctx):
+            embed = discord.Embed(title="Music Player", description="I am not connected to any voice channel", color=0xFFC0DD)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
 
     @slash_command(description="Resumes the playing song")
     async def resume(self, ctx):
         await ctx.defer()
-        if self.is_connected(ctx):
-            if ctx.author.voice != None:
-                if not self.is_playing(ctx):
-                    ctx.channel.guild.voice_client.resume()
-                    embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-                    embed.add_field(name="Resumed Playing In:", value=ctx.author.voice.channel, inline=False)
-                    embed.timestamp = datetime.datetime.now()
-                    await ctx.send_followup(embed=embed)
-            else:
-                embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
+        if ctx.author.voice != None and self.is_connected(ctx):
+            if not self.is_playing(ctx):
+                ctx.channel.guild.voice_client.resume()
+                embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+                embed.add_field(name="Resumed Playing In:", value=ctx.author.voice.channel, inline=False)
                 embed.timestamp = datetime.datetime.now()
                 await ctx.send_followup(embed=embed)
+            else:
+                embed = discord.Embed(title="Music Player", description="I am currently not paused", color=0xFFC0DD)
+                embed.timestamp = datetime.datetime.now()
+                await ctx.send_followup(embed=embed)
+        elif ctx.author.voice == None:
+            embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
+        elif not self.is_connected(ctx):
+            embed = discord.Embed(title="Music Player", description="I am not connected to any voice channel", color=0xFFC0DD)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
 
 def setup(bot):
     bot.add_cog(music(bot))
