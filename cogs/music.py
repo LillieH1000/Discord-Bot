@@ -135,33 +135,48 @@ class music(commands.Cog):
     async def skip(self, ctx):
         await ctx.defer()
         if self.is_connected(ctx):
-            ctx.channel.guild.voice_client.stop()
-            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-            embed.add_field(name="Skipped Playing Song In:", value=ctx.author.voice.channel, inline=False)
-            embed.timestamp = datetime.datetime.now()
-            await ctx.send_followup(embed=embed)
-            await self.audio_player(ctx)
+            if ctx.author.voice != None:
+                ctx.channel.guild.voice_client.stop()
+                embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+                embed.add_field(name="Skipped Playing Song In:", value=ctx.author.voice.channel, inline=False)
+                embed.timestamp = datetime.datetime.now()
+                await ctx.send_followup(embed=embed)
+                await self.audio_player(ctx)
+            else:
+                embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
+                embed.timestamp = datetime.datetime.now()
+                await ctx.send_followup(embed=embed)
             
     @slash_command(description="Stops and disconnects the bot")
     async def stop(self, ctx):
         await ctx.defer()
         if self.is_connected(ctx):
-            self.queue.clear()
-            ctx.channel.guild.voice_client.stop()
-            await ctx.channel.guild.voice_client.disconnect()
-            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-            embed.add_field(name="Stopped Playing In:", value=ctx.author.voice.channel, inline=False)
-            embed.timestamp = datetime.datetime.now()
-            await ctx.send_followup(embed=embed)
+            if ctx.author.voice != None:
+                self.queue.clear()
+                ctx.channel.guild.voice_client.stop()
+                await ctx.channel.guild.voice_client.disconnect()
+                embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+                embed.add_field(name="Stopped Playing In:", value=ctx.author.voice.channel, inline=False)
+                embed.timestamp = datetime.datetime.now()
+                await ctx.send_followup(embed=embed)
+            else:
+                embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
+                embed.timestamp = datetime.datetime.now()
+                await ctx.send_followup(embed=embed)
 
     @slash_command(description="Pauses the playing song")
     async def pause(self, ctx):
         await ctx.defer()
         if self.is_connected(ctx):
-            if self.is_playing(ctx):
-                ctx.channel.guild.voice_client.pause()
-                embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-                embed.add_field(name="Paused Playing In:", value=ctx.author.voice.channel, inline=False)
+            if ctx.author.voice != None:
+                if self.is_playing(ctx):
+                    ctx.channel.guild.voice_client.pause()
+                    embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+                    embed.add_field(name="Paused Playing In:", value=ctx.author.voice.channel, inline=False)
+                    embed.timestamp = datetime.datetime.now()
+                    await ctx.send_followup(embed=embed)
+            else:
+                embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
                 embed.timestamp = datetime.datetime.now()
                 await ctx.send_followup(embed=embed)
 
@@ -169,10 +184,15 @@ class music(commands.Cog):
     async def resume(self, ctx):
         await ctx.defer()
         if self.is_connected(ctx):
-            if not self.is_playing(ctx):
-                ctx.channel.guild.voice_client.resume()
-                embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-                embed.add_field(name="Resumed Playing In:", value=ctx.author.voice.channel, inline=False)
+            if ctx.author.voice != None:
+                if not self.is_playing(ctx):
+                    ctx.channel.guild.voice_client.resume()
+                    embed = discord.Embed(title="Music Player", color=0xFFC0DD)
+                    embed.add_field(name="Resumed Playing In:", value=ctx.author.voice.channel, inline=False)
+                    embed.timestamp = datetime.datetime.now()
+                    await ctx.send_followup(embed=embed)
+            else:
+                embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
                 embed.timestamp = datetime.datetime.now()
                 await ctx.send_followup(embed=embed)
 
