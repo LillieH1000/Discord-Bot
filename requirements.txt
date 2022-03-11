@@ -7,4 +7,3 @@ asyncio
 pytz
 geopy
 httpx
-pyttsx3
