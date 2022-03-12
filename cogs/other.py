@@ -94,7 +94,7 @@ class other(commands.Cog):
             await ctx.send_followup(embed=embed, view=view)
 
     @slash_command(description="Posts a random neko picture")
-    async def neko(self, ctx, source: Option(str, "Choose neko pics source", choices=["Nekos.Life", "Waifu.Pics"])):
+    async def neko(self, ctx, source: Option(str, "Choose neko pics source", choices=["Nekos.Life", "Waifu.Pics", "Nekos.Best"])):
         await ctx.defer()
         async with httpx.AsyncClient() as client:
             if source == "Nekos.Life":
@@ -116,6 +116,18 @@ class other(commands.Cog):
                 embed.timestamp = datetime.datetime.now()
                 
                 vieworiginalimage = Button(label="View Original Image", url=f"{response.json()['url']}", style=discord.ButtonStyle.grey)
+
+                view = View(timeout=None)
+                view.add_item(vieworiginalimage)
+
+                await ctx.send_followup(embed=embed, view=view)
+            if source == "Nekos.Best":
+                response = await client.get(f'https://nekos.best/api/v2/neko')
+                embed = discord.Embed(title="Neko Pics", color=0xFFC0DD)
+                embed.set_image(url=response.json()["results"][0]["url"])
+                embed.timestamp = datetime.datetime.now()
+                
+                vieworiginalimage = Button(label="View Original Image", url=f"{response.json()['results'][0]['url']}", style=discord.ButtonStyle.grey)
 
                 view = View(timeout=None)
                 view.add_item(vieworiginalimage)
@@ -252,6 +264,32 @@ class other(commands.Cog):
 
             await ctx.send(content=f"{user.mention}", embed=embed, view=view)
             await ctx.send_followup(f"Successfully patted the user", ephemeral=True)
+
+    @slash_command(description="Posts a random dad joke")
+    async def dadjoke(self, ctx):
+        await ctx.defer()
+        async with httpx.AsyncClient() as client:
+            headers = {'Accept': 'application/json'}
+            response = await client.get(f'https://icanhazdadjoke.com/', headers=headers)
+            embed = discord.Embed(color=0xFFC0DD, title="Dad Joke", description=f"{response.json()['joke']}")
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
+
+    @slash_command(description="Posts a random axolotl pic")
+    async def axolotl(self, ctx):
+        await ctx.defer()
+        async with httpx.AsyncClient() as client:
+            response = await client.get(f'https://axoltlapi.herokuapp.com/')
+            embed = discord.Embed(title="Axolotl Pics", color=0xFFC0DD)
+            embed.set_image(url=response.json()["url"])
+            embed.timestamp = datetime.datetime.now()
+            
+            vieworiginalimage = Button(label="View Original Image", url=f"{response.json()['url']}", style=discord.ButtonStyle.grey)
+
+            view = View(timeout=None)
+            view.add_item(vieworiginalimage)
+
+            await ctx.send_followup(embed=embed, view=view)
 
 def setup(bot):
     bot.add_cog(other(bot))
