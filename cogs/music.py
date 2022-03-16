@@ -87,7 +87,7 @@ class music(commands.Cog):
     async def voice_player(self, ctx):
         if self.queue:
             tts = gTTS(text=f"Now Playing {self.queue[0]}", lang="en", slow=False)
-            filename = ''.join(random.choice(string.ascii_lowercase) for i in range(10))
+            filename = ''.join(random.choice(string.ascii_lowercase) for i in range(30))
             tts.save(f"downloads/{filename}.mp3")
             source = await discord.FFmpegOpusAudio.from_probe(f"downloads/{filename}.mp3")
             ctx.channel.guild.voice_client.play(source, after=lambda e: asyncio.run_coroutine_threadsafe(self.audio_player(ctx), self.bot.loop))
