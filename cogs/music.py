@@ -100,10 +100,6 @@ class music(commands.Cog):
             }
             source = await discord.FFmpegOpusAudio.from_probe(self.queue[1], **FFMPEG_OPTIONS)
             ctx.channel.guild.voice_client.play(source, after=lambda e: asyncio.run_coroutine_threadsafe(self.voice_player(ctx), self.bot.loop))
-            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-            embed.add_field(name="Now Playing:", value=self.queue[0], inline=False)
-            embed.timestamp = datetime.datetime.now()
-            await ctx.send_followup(embed=embed)
             del self.queue[:2]
 
     @slash_command(description="Connects the bot to the voice channel you are in")
