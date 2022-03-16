@@ -7,3 +7,4 @@ asyncio
 pytz
 geopy
 httpx
+gtts

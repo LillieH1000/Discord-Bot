@@ -1,7 +1,8 @@
-import discord, datetime, asyncio
+import discord, datetime, asyncio, string, random
 from discord.commands import Option, slash_command
 from discord.ext import commands
 from yt_dlp import YoutubeDL
+from gtts import gTTS
 
 class music(commands.Cog):
     def __init__(self, bot):
@@ -83,6 +84,14 @@ class music(commands.Cog):
             info = ytdl.extract_info(video, download=True)
         return info['title'], info['url']
 
+    async def voice_player(self, ctx):
+        if self.queue:
+            tts = gTTS(text=f"Now Playing {self.queue[0]}", lang="en", slow=False)
+            filename = ''.join(random.choice(string.ascii_lowercase) for i in range(10))
+            tts.save(f"downloads/{filename}.mp3")
+            source = await discord.FFmpegOpusAudio.from_probe(f"downloads/{filename}.mp3")
+            ctx.channel.guild.voice_client.play(source, after=lambda e: asyncio.run_coroutine_threadsafe(self.audio_player(ctx), self.bot.loop))
+        
     async def audio_player(self, ctx):
         if self.queue:
             FFMPEG_OPTIONS = {
@@ -90,7 +99,7 @@ class music(commands.Cog):
                 'options': '-vn',
             }
             source = await discord.FFmpegOpusAudio.from_probe(self.queue[1], **FFMPEG_OPTIONS)
-            ctx.channel.guild.voice_client.play(source, after=lambda e: asyncio.run_coroutine_threadsafe(self.audio_player(ctx), self.bot.loop))
+            ctx.channel.guild.voice_client.play(source, after=lambda e: asyncio.run_coroutine_threadsafe(self.voice_player(ctx), self.bot.loop))
             embed = discord.Embed(title="Music Player", color=0xFFC0DD)
             embed.add_field(name="Now Playing:", value=self.queue[0], inline=False)
             embed.timestamp = datetime.datetime.now()
@@ -131,7 +140,8 @@ class music(commands.Cog):
             embed.timestamp = datetime.datetime.now()
             await ctx.send_followup(embed=embed)
             if not self.is_playing(ctx):
-                await self.audio_player(ctx)
+                # await self.audio_player(ctx)
+                await self.voice_player(ctx)
         elif ctx.author.voice == None:
             await ctx.defer()
             embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
