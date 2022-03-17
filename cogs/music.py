@@ -22,7 +22,6 @@ class music(commands.Cog):
         YTDL_OPTIONS = {
             'format': 'bestaudio/best',
             'extractaudio': True,
-            'audioformat': 'mp3',
             'outtmpl': 'downloads/%(extractor)s-%(id)s-%(title)s.%(ext)s',
             'restrictfilenames': True,
             'noplaylist': True,
@@ -32,7 +31,7 @@ class music(commands.Cog):
             'quiet': True,
             'no_warnings': True,
             'default_search': 'ytsearch',
-            'source_address': '0.0.0.0',
+            'no-cache-dir': True,
         }
         with YoutubeDL(YTDL_OPTIONS) as ytdl:
             try:
@@ -45,7 +44,6 @@ class music(commands.Cog):
         YTDL_OPTIONS = {
             'format': 'bestaudio/best',
             'extractaudio': True,
-            'audioformat': 'mp3',
             'outtmpl': 'downloads/%(extractor)s-%(id)s-%(title)s.%(ext)s',
             'restrictfilenames': True,
             'noplaylist': True,
@@ -55,7 +53,7 @@ class music(commands.Cog):
             'quiet': True,
             'no_warnings': True,
             'default_search': 'scsearch',
-            'source_address': '0.0.0.0',
+            'no-cache-dir': True,
         }
         with YoutubeDL(YTDL_OPTIONS) as ytdl:
             try:
@@ -68,7 +66,6 @@ class music(commands.Cog):
         YTDL_OPTIONS = {
             'format': 'bestaudio/best',
             'extractaudio': True,
-            'audioformat': 'mp3',
             'outtmpl': 'downloads/%(extractor)s-%(id)s-%(title)s.%(ext)s',
             'restrictfilenames': True,
             'noplaylist': True,
@@ -78,7 +75,7 @@ class music(commands.Cog):
             'quiet': True,
             'no_warnings': True,
             'default_search': 'none',
-            'source_address': '0.0.0.0',
+            'no-cache-dir': True,
         }
         with YoutubeDL(YTDL_OPTIONS) as ytdl:
             info = ytdl.extract_info(video, download=True)
