@@ -17,7 +17,7 @@ class translator(commands.Cog):
         embed = discord.Embed(color=0xFFC0DD, title="English Translation", description=f"{translation.text}")
         embed.timestamp = datetime.datetime.now()
 
-        if translation.src != "en":
+        if translation.src != "en" and translation.origin.lower() != translation.text.lower():
             await message.reply(embed=embed)
 
 
