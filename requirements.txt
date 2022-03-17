@@ -8,3 +8,4 @@ pytz
 geopy
 httpx
 gtts
+googletrans==3.1.0a0
