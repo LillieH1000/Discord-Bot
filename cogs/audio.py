@@ -4,7 +4,7 @@ from discord.ext import commands
 from yt_dlp import YoutubeDL
 from gtts import gTTS
 
-class music(commands.Cog):
+class audio(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -85,8 +85,8 @@ class music(commands.Cog):
         if self.queue:
             tts = gTTS(text=f"Now Playing {self.queue[0]}", lang="en", slow=False)
             filename = ''.join(random.choice(string.ascii_lowercase) for i in range(30))
-            tts.save(f"downloads/{filename}.mp3")
-            source = await discord.FFmpegOpusAudio.from_probe(f"downloads/{filename}.mp3")
+            tts.save(f"voice/{filename}.mp3")
+            source = await discord.FFmpegOpusAudio.from_probe(f"voice/{filename}.mp3")
             ctx.channel.guild.voice_client.play(source, after=lambda e: asyncio.run_coroutine_threadsafe(self.audio_player(ctx), self.bot.loop))
         
     async def audio_player(self, ctx):
@@ -98,20 +98,22 @@ class music(commands.Cog):
             source = await discord.FFmpegOpusAudio.from_probe(self.queue[1], **FFMPEG_OPTIONS)
             ctx.channel.guild.voice_client.play(source, after=lambda e: asyncio.run_coroutine_threadsafe(self.voice_player(ctx), self.bot.loop))
             del self.queue[:2]
-
+    
     @slash_command(description="Connects the bot to the voice channel you are in")
     async def connect(self, ctx):
         await ctx.defer()
         if ctx.author.voice != None and not self.is_connected(ctx):
             await ctx.author.voice.channel.connect()
-            embed = discord.Embed(title="Music Player", color=0xFFC0DD)
-            embed.add_field(name="Connected To:", value=ctx.author.voice.channel, inline=False)
+            embed = discord.Embed(title="Connected To:", description=ctx.author.voice.channel, color=0xFFC0DD)
+            # embed.add_field(name="Connected To:", value=ctx.author.voice.channel, inline=False)
             embed.timestamp = datetime.datetime.now()
             await ctx.send_followup(embed=embed)
         elif ctx.author.voice == None:
-            embed = discord.Embed(title="Music Player", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
+            embed = discord.Embed(title="Notice", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
             embed.timestamp = datetime.datetime.now()
             await ctx.send_followup(embed=embed)
+
+    # Music Commands
     
     @slash_command(description="Plays a song")
     async def play(self, ctx, source: Option(str, "Choose audio source", choices=["YouTube", "SoundCloud", "Audiomack", "Bandcamp"]), video: Option(str, "Enter video name or url")):
@@ -226,5 +228,27 @@ class music(commands.Cog):
             embed.timestamp = datetime.datetime.now()
             await ctx.send_followup(embed=embed)
 
+    # Text To Speech Commands
+
+    @slash_command(description="Text to speech")
+    async def tts(self, ctx, text: Option(str, "Enter text to speak")):
+        if ctx.author.voice != None:
+            if not self.is_connected(ctx):
+                await self.connect(self, ctx)
+            else:
+                await ctx.defer()
+                if not self.queue:
+                    texttospeech = gTTS(text=text, lang="en", slow=False)
+                    filename = ''.join(random.choice(string.ascii_lowercase) for i in range(30))
+                    texttospeech.save(f"texttospeech/{filename}.mp3")
+                    source = await discord.FFmpegOpusAudio.from_probe(f"texttospeech/{filename}.mp3")
+                    ctx.channel.guild.voice_client.play(source)
+                    await ctx.send_followup(f"This is a test")
+        elif ctx.author.voice == None:
+            await ctx.defer()
+            embed = discord.Embed(title="Text To Speech", description="You cannot run voice commands unless you are in the voice channel with the bot", color=0xFFC0DD)
+            embed.timestamp = datetime.datetime.now()
+            await ctx.send_followup(embed=embed)
+
 def setup(bot):
-    bot.add_cog(music(bot))
+    bot.add_cog(audio(bot))
