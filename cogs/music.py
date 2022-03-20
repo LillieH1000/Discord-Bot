@@ -133,7 +133,6 @@ class music(commands.Cog):
             embed.timestamp = datetime.datetime.now()
             await ctx.send_followup(embed=embed)
             if not self.is_playing(ctx):
-                # await self.audio_player(ctx)
                 await self.voice_player(ctx)
         elif ctx.author.voice == None:
             await ctx.defer()
