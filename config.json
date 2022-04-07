@@ -1,4 +1,5 @@
 {
+	"clientId": "YourBotClientIdHere",
 	"token": "YourBotTokenHere",
 	"weatherapikey": "YourWeatherApiKeyHere",
 	"safebrowsingapikey": "YourSafeBrowsingApiKeyHere"
