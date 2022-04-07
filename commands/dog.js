@@ -19,7 +19,7 @@ module.exports = {
         if (source == "dog_ceo") {
             (async () => {
                 try {
-                    const response = await axios.get('https://dog.ceo/api/breeds/image/random')
+                    const response = await axios.get('https://dog.ceo/api/breeds/image/random');
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Dog Pics')
@@ -41,7 +41,7 @@ module.exports = {
         if (source == "nekos_life") {
             (async () => {
                 try {
-                    const response = await axios.get('https://nekos.life/api/v2/img/woof')
+                    const response = await axios.get('https://nekos.life/api/v2/img/woof');
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Dog Pics')
@@ -63,7 +63,7 @@ module.exports = {
         if (source == "alexflipnote_dev") {
             (async () => {
                 try {
-                    const response = await axios.get('https://api.alexflipnote.dev/dogs')
+                    const response = await axios.get('https://api.alexflipnote.dev/dogs');
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Dog Pics')

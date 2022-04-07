@@ -19,7 +19,7 @@ module.exports = {
         if (source == "nekos_life") {
             (async () => {
                 try {
-                    const response = await axios.get('https://nekos.life/api/v2/img/meow')
+                    const response = await axios.get('https://nekos.life/api/v2/img/meow');
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Neko Pics')
@@ -41,7 +41,7 @@ module.exports = {
         if (source == "waifu_pics") {
             (async () => {
                 try {
-                    const response = await axios.get('https://api.waifu.pics/sfw/neko')
+                    const response = await axios.get('https://api.waifu.pics/sfw/neko');
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Neko Pics')
@@ -63,7 +63,7 @@ module.exports = {
         if (source == "nekos_best") {
             (async () => {
                 try {
-                    const response = await axios.get('https://nekos.best/api/v2/neko')
+                    const response = await axios.get('https://nekos.best/api/v2/neko');
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Neko Pics')

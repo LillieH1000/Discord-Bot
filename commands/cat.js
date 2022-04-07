@@ -18,7 +18,7 @@ module.exports = {
         if (source == "nekos_life") {
             (async () => {
                 try {
-                    const response = await axios.get('https://nekos.life/api/v2/img/meow')
+                    const response = await axios.get('https://nekos.life/api/v2/img/meow');
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Cat Pics')
@@ -40,7 +40,7 @@ module.exports = {
         if (source == "alexflipnote_dev") {
             (async () => {
                 try {
-                    const response = await axios.get('https://api.alexflipnote.dev/cats')
+                    const response = await axios.get('https://api.alexflipnote.dev/cats');
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Cat Pics')
