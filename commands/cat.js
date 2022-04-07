@@ -31,7 +31,7 @@ module.exports = {
                                 .setStyle('LINK')
                                 .setURL(response.data.url)
                         );
-                    interaction.editReply({ embeds: [embed], components: [row] });
+                    await interaction.editReply({ embeds: [embed], components: [row] });
                 } catch (error) {
                     console.log(error.response);
                 }
@@ -53,7 +53,7 @@ module.exports = {
                                 .setStyle('LINK')
                                 .setURL(response.data.file)
                         );
-                    interaction.editReply({ embeds: [embed], components: [row] });
+                    await interaction.editReply({ embeds: [embed], components: [row] });
                 } catch (error) {
                     console.log(error.response);
                 }
