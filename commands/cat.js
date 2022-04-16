@@ -33,7 +33,7 @@ module.exports = {
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 } catch (error) {
-                    console.log(error.response);
+                    console.log(error);
                 }
             })();
         }
@@ -55,7 +55,7 @@ module.exports = {
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 } catch (error) {
-                    console.log(error.response);
+                    console.log(error);
                 }
             })();
         }
