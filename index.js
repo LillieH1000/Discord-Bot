@@ -21,6 +21,8 @@ client.once('ready', () => {
 	console.log('Ready');
 });
 
+// Slash Commands
+
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
@@ -35,10 +37,7 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isSelectMenu()) return;
-    await pokemonsearch(1, 0, interaction);
-});
+// Member Join
 
 client.on('guildMemberAdd', async guildMember => {
 	const createdDate = moment(guildMember.user.createdAt).format('MMMM D, YYYY');
@@ -57,6 +56,8 @@ client.on('guildMemberAdd', async guildMember => {
 	}
 });
 
+// Member Leave
+
 client.on('guildMemberRemove', async guildMember => {
 	const createdDate = moment(guildMember.user.createdAt).format('MMMM D, YYYY');
 	const embed = new MessageEmbed()
@@ -74,18 +75,43 @@ client.on('guildMemberRemove', async guildMember => {
 	}
 });
 
+// YouTube Video Info
+
 client.on('messageCreate', async message => {
 	if (message.author.bot) return;
 
-	// Pokemon Search
+	// YouTube Video Info
+
+	for (const word of message.content.split(" ")) {
+		const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+		if (word.includes('youtube.com')) {
+			try {
+				const response = await axios.get('https://returnyoutubedislikeapi.com/votes?videoId='.concat(word.match(rx)[1]));
+				const embed = new MessageEmbed()
+				.setColor('#FFC0DD')
+				.setDescription('Views: ' + response.data.viewCount.toLocaleString() + '\nLikes: ' + response.data.likes.toLocaleString() + '\nDislikes: ' + response.data.dislikes.toLocaleString())
+				.setTimestamp()
+				await message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
+			} catch (error) {
+				console.error(error);
+			}
+		}
+	}
+});
+
+// Pokemon Search
+
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isSelectMenu()) return;
+    await pokemonsearch(1, 0, interaction);
+});
+
+client.on('messageCreate', async message => {
+	if (message.author.bot) return;
+
 	if (message.content.startsWith('((') & message.content.includes('))')) {
 		await pokemonsearch(0, 1, message);
 	}
-
-	// YouTube Video Info
-	/* if (message.content.includes('test')) {
-		await message.reply("test", {allowedMentions: {repliedUser: false}});
-	} */
 });
 
 async function pokemonsearch(isInteraction, isMessage, info) {
@@ -222,5 +248,7 @@ async function pokemonsearch(isInteraction, isMessage, info) {
 		console.error(error);
 	}
 }
+
+// Run Bot
 
 client.login(token);
