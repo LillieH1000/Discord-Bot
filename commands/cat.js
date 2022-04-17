@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription('Posts a random cat picture')
         .addStringOption(option =>
             option.setName('source')
-                .setDescription('The input to echo back')
+                .setDescription('Choose the cat pictures source')
                 .setRequired(true)
                 .addChoice('Nekos.Life', 'nekos_life')
                 .addChoice('AlexFlipnote.Dev', 'alexflipnote_dev')),

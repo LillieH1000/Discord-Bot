@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription('Posts a random neko picture')
         .addStringOption(option =>
             option.setName('source')
-                .setDescription('The input to echo back')
+                .setDescription('Choose the neko pictures source')
                 .setRequired(true)
                 .addChoice('Nekos.Life', 'nekos_life')
                 .addChoice('Waifu.Pics', 'waifu_pics')
