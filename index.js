@@ -40,17 +40,17 @@ client.on('interactionCreate', async interaction => {
 // Member Join
 
 client.on('guildMemberAdd', async guildMember => {
-	const createdDate = moment(guildMember.user.createdAt).format('MMMM D, YYYY');
-	const embed = new MessageEmbed()
-		.setColor('#FFC0DD')
-		.setAuthor({ name: guildMember.user.username, iconURL: guildMember.user.displayAvatarURL() })
-		.setTitle('Member Joined')
-		.addField('Created At:', createdDate, false)
-		.setFooter({ text: 'ID: ' + guildMember.user.id })
-		.setTimestamp()
 	try {
-		const guild = guildMember.guild;
-		guild.systemChannel.send({ embeds: [embed] });
+		const createdDate = moment(guildMember.user.createdAt).format('MMMM D, YYYY');
+		const embed = new MessageEmbed()
+			.setColor('#FFC0DD')
+			.setAuthor({ name: guildMember.user.username, iconURL: guildMember.user.displayAvatarURL() })
+			.setTitle('Member Joined')
+			.addField('Created At:', createdDate, false)
+			.setFooter({ text: 'ID: ' + guildMember.user.id })
+			.setTimestamp()
+			const guild = guildMember.guild;
+			guild.systemChannel.send({ embeds: [embed] });
 	} catch (error) {
 		console.error(error);
 	}
@@ -59,17 +59,17 @@ client.on('guildMemberAdd', async guildMember => {
 // Member Leave
 
 client.on('guildMemberRemove', async guildMember => {
-	const createdDate = moment(guildMember.user.createdAt).format('MMMM D, YYYY');
-	const embed = new MessageEmbed()
-		.setColor('#FFC0DD')
-		.setAuthor({ name: guildMember.user.username, iconURL: guildMember.user.displayAvatarURL() })
-		.setTitle('Member Left')
-		.addField('Created At:', createdDate, false)
-		.setFooter({ text: 'ID: ' + guildMember.user.id })
-		.setTimestamp()
 	try {
-		const guild = guildMember.guild;
-		guild.systemChannel.send({ embeds: [embed] });
+		const createdDate = moment(guildMember.user.createdAt).format('MMMM D, YYYY');
+		const embed = new MessageEmbed()
+			.setColor('#FFC0DD')
+			.setAuthor({ name: guildMember.user.username, iconURL: guildMember.user.displayAvatarURL() })
+			.setTitle('Member Left')
+			.addField('Created At:', createdDate, false)
+			.setFooter({ text: 'ID: ' + guildMember.user.id })
+			.setTimestamp()
+			const guild = guildMember.guild;
+			guild.systemChannel.send({ embeds: [embed] });
 	} catch (error) {
 		console.error(error);
 	}
@@ -84,7 +84,7 @@ client.on('messageCreate', async message => {
 
 	for (const word of message.content.split(" ")) {
 		const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
-		if (word.includes('youtube.com')) {
+		if (word.match(rx)) {
 			try {
 				const response = await axios.get('https://returnyoutubedislikeapi.com/votes?videoId='.concat(word.match(rx)[1]));
 				const embed = new MessageEmbed()
