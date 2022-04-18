@@ -18,7 +18,7 @@ module.exports = {
         const source = interaction.options.getString('source');
         if (source == "nekos_life") {
             try {
-                const response = await axios.get('https://nekos.life/api/v2/img/meow');
+                const response = await axios.get('https://nekos.life/api/v2/img/neko');
                 const embed = new MessageEmbed()
                     .setColor('#FFC0DD')
                     .setTitle('Neko Pics')
