@@ -16,13 +16,16 @@ module.exports = {
                 .addChoice('Boobs (Pic)', 'boobs')
                 .addChoice('Boobs (Gif)', 'boobsgif')
                 .addChoice('Cum', 'cum')
-                .addChoice('Feet', 'feet')
+                .addChoice('Feet (Pic)', 'feet')
+                .addChoice('Feet (Gif)', 'feetgif')
                 .addChoice('Femdom', 'femdom')
                 .addChoice('Futanari', 'futanari')
+                .addChoice('Kitsune', 'kitsune')
                 .addChoice('Neko (Pic)', 'neko')
                 .addChoice('Neko (Gif)', 'nekogif')
                 .addChoice('Pussy (Pic)', 'pussy')
                 .addChoice('Pussy (Gif)', 'pussygif')
+                .addChoice('Pwank', 'pwank')
                 .addChoice('Solo (Pic)', 'solo')
                 .addChoice('Solo (Gif)', 'sologif')
                 .addChoice('Trap', 'trap')
@@ -172,6 +175,26 @@ module.exports = {
                     console.log(error);
                 }
             }
+            if (category == "feetgif") {
+                try {
+                    const response = await axios.get('https://nekos.life/api/v2/img/feetg');
+                    const embed = new MessageEmbed()
+                        .setColor('#FFC0DD')
+                        .setTitle('Hentai Pics')
+                        .setImage(response.data.url)
+                        .setTimestamp()
+                    const row = new MessageActionRow()
+                        .addComponents(
+                            new MessageButton()
+                                .setLabel('View Original Image')
+                                .setStyle('LINK')
+                                .setURL(response.data.url)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                } catch (error) {
+                    console.log(error);
+                }
+            }
             if (category == "femdom") {
                 try {
                     const response = await axios.get('https://nekos.life/api/v2/img/femdom');
@@ -195,6 +218,26 @@ module.exports = {
             if (category == "futanari") {
                 try {
                     const response = await axios.get('https://nekos.life/api/v2/img/futanari');
+                    const embed = new MessageEmbed()
+                        .setColor('#FFC0DD')
+                        .setTitle('Hentai Pics')
+                        .setImage(response.data.url)
+                        .setTimestamp()
+                    const row = new MessageActionRow()
+                        .addComponents(
+                            new MessageButton()
+                                .setLabel('View Original Image')
+                                .setStyle('LINK')
+                                .setURL(response.data.url)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            if (category == "kitsune") {
+                try {
+                    const response = await axios.get('https://nekos.life/api/v2/img/lewdk');
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
@@ -275,6 +318,26 @@ module.exports = {
             if (category == "pussygif") {
                 try {
                     const response = await axios.get('https://nekos.life/api/v2/img/pussy');
+                    const embed = new MessageEmbed()
+                        .setColor('#FFC0DD')
+                        .setTitle('Hentai Pics')
+                        .setImage(response.data.url)
+                        .setTimestamp()
+                    const row = new MessageActionRow()
+                        .addComponents(
+                            new MessageButton()
+                                .setLabel('View Original Image')
+                                .setStyle('LINK')
+                                .setURL(response.data.url)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            if (category == "pwank") {
+                try {
+                    const response = await axios.get('https://nekos.life/api/v2/img/pwankg');
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
