@@ -1,15 +1,16 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, VoiceConnectionStatus } = require('@discordjs/voice');
-const axios = require('axios');
-const fs = require('fs');
+// const execSync = require("child_process").execSync;
+/* const axios = require('axios');
+const fs = require('fs'); */
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('play')
 		.setDescription('Plays a song')
         .addStringOption(option =>
-            option.setName('videoid')
-                .setDescription('Enter the video id')
+            option.setName('url')
+                .setDescription('Enter the url')
                 .setRequired(true)),
 	async execute(interaction) {
         await interaction.deferReply();
