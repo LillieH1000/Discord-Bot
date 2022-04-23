@@ -14,6 +14,7 @@ module.exports = {
                 .addChoice('Nekos.Best', 'nekos_best')),
 	async execute(interaction) {
         await interaction.deferReply();
+        const source = interaction.options.getString('source');
         if (source == "waifu_pics") {
             try {
                 const response = await axios.get('https://api.waifu.pics/sfw/waifu');
