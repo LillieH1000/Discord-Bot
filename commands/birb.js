@@ -10,19 +10,21 @@ module.exports = {
         await interaction.deferReply();
         try {
             const response = await axios.get('https://api.alexflipnote.dev/birb');
-            const embed = new MessageEmbed()
-                .setColor('#FFC0DD')
-                .setTitle('Birb Pics')
-                .setImage(response.data.file)
-                .setTimestamp()
-            const row = new MessageActionRow()
-                .addComponents(
-                    new MessageButton()
-                        .setLabel('View Original Image')
-                        .setStyle('LINK')
-                        .setURL(response.data.file)
-                );
-            await interaction.editReply({ embeds: [embed], components: [row] });
+            if (response.status == 200) {
+                const embed = new MessageEmbed()
+                    .setColor('#FFC0DD')
+                    .setTitle('Birb Pics')
+                    .setImage(response.data.file)
+                    .setTimestamp()
+                const row = new MessageActionRow()
+                    .addComponents(
+                        new MessageButton()
+                            .setLabel('View Original Image')
+                            .setStyle('LINK')
+                            .setURL(response.data.file)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
+            }
         } catch (error) {
             console.log(error);
         }

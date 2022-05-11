@@ -18,19 +18,21 @@ module.exports = {
         if (source == "nekos_life") {
             try {
                 const response = await axios.get('https://nekos.life/api/v2/img/meow');
-                const embed = new MessageEmbed()
-                    .setColor('#FFC0DD')
-                    .setTitle('Cat Pics')
-                    .setImage(response.data.url)
-                    .setTimestamp()
-                const row = new MessageActionRow()
-                    .addComponents(
-                        new MessageButton()
-                            .setLabel('View Original Image')
-                            .setStyle('LINK')
-                            .setURL(response.data.url)
-                    );
-                await interaction.editReply({ embeds: [embed], components: [row] });
+                if (response.status == 200) {
+                    const embed = new MessageEmbed()
+                        .setColor('#FFC0DD')
+                        .setTitle('Cat Pics')
+                        .setImage(response.data.url)
+                        .setTimestamp()
+                    const row = new MessageActionRow()
+                        .addComponents(
+                            new MessageButton()
+                                .setLabel('View Original Image')
+                                .setStyle('LINK')
+                                .setURL(response.data.url)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -38,19 +40,21 @@ module.exports = {
         if (source == "alexflipnote_dev") {
             try {
                 const response = await axios.get('https://api.alexflipnote.dev/cats');
-                const embed = new MessageEmbed()
-                    .setColor('#FFC0DD')
-                    .setTitle('Cat Pics')
-                    .setImage(response.data.file)
-                    .setTimestamp()
-                const row = new MessageActionRow()
-                    .addComponents(
-                        new MessageButton()
-                            .setLabel('View Original Image')
-                            .setStyle('LINK')
-                            .setURL(response.data.file)
-                    );
-                await interaction.editReply({ embeds: [embed], components: [row] });
+                if (response.status == 200) {
+                    const embed = new MessageEmbed()
+                        .setColor('#FFC0DD')
+                        .setTitle('Cat Pics')
+                        .setImage(response.data.file)
+                        .setTimestamp()
+                    const row = new MessageActionRow()
+                        .addComponents(
+                            new MessageButton()
+                                .setLabel('View Original Image')
+                                .setStyle('LINK')
+                                .setURL(response.data.file)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                }
             } catch (error) {
                 console.log(error);
             }
