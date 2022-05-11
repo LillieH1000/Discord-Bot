@@ -9,12 +9,12 @@ module.exports = async(client) => {
             for (const word of message.content.split(" ")) {
                 payload = {
                     "threatInfo": {
-                        "threatTypes": ["MALWARE", "SOCIAL_ENGINEERING"],
+                        "threatTypes": ["THREAT_TYPE_UNSPECIFIED", "MALWARE", "SOCIAL_ENGINEERING", "UNWANTED_SOFTWARE", "POTENTIALLY_HARMFUL_APPLICATION"],
                         "platformTypes": ["ANY_PLATFORM"],
-                        "threatEntryTypes": ["URL"],
+                        "threatEntryTypes": ["THREAT_ENTRY_TYPE_UNSPECIFIED", "URL", "EXECUTABLE"],
                         "threatEntries": [
                             {
-                                "url": word.toString()
+                                "url": word
                             }
                         ]
                     }
