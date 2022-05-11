@@ -80,8 +80,6 @@ client.on('guildMemberRemove', async guildMember => {
 client.on('messageCreate', async message => {
 	if (message.author.bot) return;
 
-	// YouTube Video Info
-
 	for (const word of message.content.split(" ")) {
 		const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
 		if (word.match(rx)) {
