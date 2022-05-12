@@ -19,19 +19,21 @@ module.exports = {
         if (source == "dog_ceo") {
             try {
                 const response = await axios.get('https://dog.ceo/api/breeds/image/random');
-                const embed = new MessageEmbed()
-                    .setColor('#FFC0DD')
-                    .setTitle('Dog Pics')
-                    .setImage(response.data.message)
-                    .setTimestamp()
-                const row = new MessageActionRow()
-                    .addComponents(
-                        new MessageButton()
-                            .setLabel('View Original Image')
-                            .setStyle('LINK')
-                            .setURL(response.data.message)
-                    );
-                await interaction.editReply({ embeds: [embed], components: [row] });
+                if (response.status == 200) {
+                    const embed = new MessageEmbed()
+                        .setColor('#FFC0DD')
+                        .setTitle('Dog Pics')
+                        .setImage(response.data.message)
+                        .setTimestamp()
+                    const row = new MessageActionRow()
+                        .addComponents(
+                            new MessageButton()
+                                .setLabel('View Original Image')
+                                .setStyle('LINK')
+                                .setURL(response.data.message)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -39,19 +41,21 @@ module.exports = {
         if (source == "nekos_life") {
             try {
                 const response = await axios.get('https://nekos.life/api/v2/img/woof');
-                const embed = new MessageEmbed()
-                    .setColor('#FFC0DD')
-                    .setTitle('Dog Pics')
-                    .setImage(response.data.url)
-                    .setTimestamp()
-                const row = new MessageActionRow()
-                    .addComponents(
-                        new MessageButton()
-                            .setLabel('View Original Image')
-                            .setStyle('LINK')
-                            .setURL(response.data.url)
-                    );
-                await interaction.editReply({ embeds: [embed], components: [row] });
+                if (response.status == 200) {
+                    const embed = new MessageEmbed()
+                        .setColor('#FFC0DD')
+                        .setTitle('Dog Pics')
+                        .setImage(response.data.url)
+                        .setTimestamp()
+                    const row = new MessageActionRow()
+                        .addComponents(
+                            new MessageButton()
+                                .setLabel('View Original Image')
+                                .setStyle('LINK')
+                                .setURL(response.data.url)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -59,19 +63,21 @@ module.exports = {
         if (source == "alexflipnote_dev") {
             try {
                 const response = await axios.get('https://api.alexflipnote.dev/dogs');
-                const embed = new MessageEmbed()
-                    .setColor('#FFC0DD')
-                    .setTitle('Dog Pics')
-                    .setImage(response.data.file)
-                    .setTimestamp()
-                const row = new MessageActionRow()
-                    .addComponents(
-                        new MessageButton()
-                            .setLabel('View Original Image')
-                            .setStyle('LINK')
-                            .setURL(response.data.file)
-                    );
-                await interaction.editReply({ embeds: [embed], components: [row] });
+                if (response.status == 200) {
+                    const embed = new MessageEmbed()
+                        .setColor('#FFC0DD')
+                        .setTitle('Dog Pics')
+                        .setImage(response.data.file)
+                        .setTimestamp()
+                    const row = new MessageActionRow()
+                        .addComponents(
+                            new MessageButton()
+                                .setLabel('View Original Image')
+                                .setStyle('LINK')
+                                .setURL(response.data.file)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                }
             } catch (error) {
                 console.log(error);
             }
