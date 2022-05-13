@@ -92,14 +92,14 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Neko Pics')
-                        .setImage(response.data.results[0].url)
+                        .setImage(response.data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
                         .addComponents(
                             new MessageButton()
                                 .setLabel('View Original Image')
                                 .setStyle('LINK')
-                                .setURL(response.data.results[0].url)
+                                .setURL(response.data.url)
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
