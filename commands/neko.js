@@ -10,10 +10,12 @@ module.exports = {
             option.setName('source')
                 .setDescription('Choose the neko pictures source')
                 .setRequired(true)
-                .addChoice('Nekos.Life', 'nekos_life')
-                .addChoice('Waifu.Pics', 'waifu_pics')
-                .addChoice('Nekos.Best', 'nekos_best')
-                .addChoice('Neko-Love', 'neko_love')),
+                .addChoices(
+                    { name: 'Nekos.Life', value: 'nekos_life' },
+                    { name: 'Waifu.Pics', value: 'waifu_pics' },
+                    { name: 'Nekos.Best', value: 'nekos_best' },
+                    { name: 'Neko-Love', value: 'neko_love' }
+                )),
 	async execute(interaction) {
         await interaction.deferReply();
         const source = interaction.options.getString('source');

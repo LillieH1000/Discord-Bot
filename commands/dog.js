@@ -10,9 +10,11 @@ module.exports = {
             option.setName('source')
                 .setDescription('Choose the dog pictures source')
                 .setRequired(true)
-                .addChoice('Dog.Ceo', 'dog_ceo')
-                .addChoice('Nekos.Life', 'nekos_life')
-                .addChoice('AlexFlipnote.Dev', 'alexflipnote_dev')),
+                .addChoices(
+                    { name: 'Dog.Ceo', value: 'dog_ceo' },
+                    { name: 'Nekos.Life',  value: 'nekos_life' },
+                    { name: 'AlexFlipnote.Dev',  value: 'alexflipnote_dev' }
+                )),
 	async execute(interaction) {
         await interaction.deferReply();
         const source = interaction.options.getString('source');
