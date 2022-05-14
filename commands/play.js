@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus, StreamType } = require('@discordjs/voice');
+const { joinVoiceChannel, createAudioPlayer, createAudioResource, StreamType } = require('@discordjs/voice');
 const execSync = require("child_process").execSync;
+var globalsaudio = require('../globals/audio.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -14,7 +15,7 @@ module.exports = {
         await interaction.deferReply();
         const url = interaction.options.getString('url');
         try {
-            const connection = joinVoiceChannel({
+            globalsaudio.connection = joinVoiceChannel({
                 channelId: interaction.member.voice.channel.id,
                 guildId: interaction.guild.id,
                 adapterCreator: interaction.guild.voiceAdapterCreator,
@@ -31,19 +32,15 @@ module.exports = {
                 filename = execSync('yt-dlp --get-filename -f "bestaudio/best" --no-playlist "ytsearch:' + url + '"');
                 execSync('yt-dlp -o "downloads/' + filename + '" -f "bestaudio/best" --no-playlist "ytsearch:' + url + '"');
             }
-            const player = createAudioPlayer();
+            globalsaudio.player = createAudioPlayer();
             const resource = createAudioResource('downloads/' + filename, {
                 inputType: StreamType.Opus,
             });
-            player.play(resource);
+            globalsaudio.player.play(resource);
 
-            connection.subscribe(player);
+            globalsaudio.connection.subscribe(globalsaudio.player);
 
             interaction.editReply('Now Playing: ' + title);
-
-            player.on(AudioPlayerStatus.Idle, () => {
-                connection.destroy();
-            });
         } catch (error) {
             console.log(error.response);
         }
