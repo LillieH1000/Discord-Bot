@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js');
 var globalsaudio = require('../globals/audio.js');
 
 module.exports = {
@@ -12,12 +13,15 @@ module.exports = {
 	async execute(interaction) {
         await interaction.deferReply();
         const volume = interaction.options.getInteger('volume');
-        try {
-            globalsaudio.resource.volume.setVolume(volume / 100);
+        
+        globalsaudio.resource.volume.setVolume(volume / 100);
 
-            interaction.editReply('Changed playing audio to');
-        } catch (error) {
-            console.log(error.response);
-        }
+        const embed = new MessageEmbed()
+            .setColor('#FFC0DD')
+            .setTitle('Music Player')
+            .setDescription('Changed audio volume level to: ' + volume.toString())
+            .setTimestamp()
+
+        interaction.editReply({ embeds: [embed] });
 	},
 };

@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js');
 var globalsaudio = require('../globals/audio.js');
 
 module.exports = {
@@ -7,12 +8,15 @@ module.exports = {
 		.setDescription('Pauses the current playing song'),
 	async execute(interaction) {
         await interaction.deferReply();
-        try {
-            globalsaudio.player.pause();
 
-            interaction.editReply('Paused playing audio');
-        } catch (error) {
-            console.log(error.response);
-        }
+        globalsaudio.player.pause();
+
+        const embed = new MessageEmbed()
+            .setColor('#FFC0DD')
+            .setTitle('Music Player')
+            .setDescription('Paused playing audio')
+            .setTimestamp()
+
+        interaction.editReply({ embeds: [embed] });
 	},
 };

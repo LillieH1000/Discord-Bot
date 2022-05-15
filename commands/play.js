@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, StreamType, AudioPlayerStatus } = require('@discordjs/voice');
+const { MessageEmbed } = require('discord.js');
 const execSync = require("child_process").execSync;
 var globalsaudio = require('../globals/audio.js');
 const tts = require('google-translate-tts');
@@ -58,7 +59,13 @@ module.exports = {
             globalsaudio.queue.shift();
         }
 
-        interaction.editReply('Queued: ' + title);
+        const embed = new MessageEmbed()
+            .setColor('#FFC0DD')
+            .setTitle('Music Player')
+            .setDescription('Queued: ' + title)
+            .setTimestamp()
+
+        interaction.editReply({ embeds: [embed] });
 
         globalsaudio.player.on(AudioPlayerStatus.Idle, () => {
             if (globalsaudio.queue === undefined || globalsaudio.queue.length == 0) {
