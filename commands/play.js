@@ -33,10 +33,12 @@ module.exports = {
                 execSync('yt-dlp -o "downloads/' + filename + '" -f "bestaudio/best" --no-playlist "ytsearch:' + url + '"');
             }
             globalsaudio.player = createAudioPlayer();
-            const resource = createAudioResource('downloads/' + filename, {
+            globalsaudio.resource = createAudioResource('downloads/' + filename, {
                 inputType: StreamType.Opus,
+                inlineVolume: true
             });
-            globalsaudio.player.play(resource);
+            globalsaudio.resource.volume.setVolume(0.3);
+            globalsaudio.player.play(globalsaudio.resource);
 
             globalsaudio.connection.subscribe(globalsaudio.player);
 
