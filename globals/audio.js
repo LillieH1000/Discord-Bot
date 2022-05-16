@@ -1,5 +1,7 @@
+const { createAudioPlayer } = require('@discordjs/voice');
+
 var connection;
-var player;
+var player = createAudioPlayer();
 var resource;
 var connectionstatus = 0;
 var queue = [];

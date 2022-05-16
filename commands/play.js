@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { joinVoiceChannel, createAudioPlayer, createAudioResource, StreamType, getVoiceConnection, VoiceConnectionStatus, AudioPlayerStatus } = require('@discordjs/voice');
+const { joinVoiceChannel, createAudioResource, StreamType, getVoiceConnection, VoiceConnectionStatus } = require('@discordjs/voice');
 const { MessageEmbed } = require('discord.js');
 const execSync = require("child_process").execSync;
 var globalsaudio = require('../globals/audio.js');
@@ -26,7 +26,6 @@ module.exports = {
                 guildId: interaction.guild.id,
                 adapterCreator: interaction.guild.voiceAdapterCreator,
             });
-            globalsaudio.player = createAudioPlayer();
         }
 
         var title;
@@ -72,33 +71,14 @@ module.exports = {
         }
 
         globalsaudio.connection.on(VoiceConnectionStatus.Disconnected, () => {
-            globalsaudio.connection.destroy();
-            globalsaudio.queue = [];
-            globalsaudio.connectionstatus = 0;
-        });
-
-        globalsaudio.player.on(AudioPlayerStatus.Idle, () => {
-            if (globalsaudio.queue === undefined || globalsaudio.queue.length == 0) {
+            try {
                 globalsaudio.connection.destroy();
                 globalsaudio.queue = [];
                 globalsaudio.connectionstatus = 0;
-            } else {
-                globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
-                    inputType: StreamType.Opus,
-                    inlineVolume: true
-                });
-                globalsaudio.resource.volume.setVolume(0.3);
-                globalsaudio.player.play(globalsaudio.resource);
-                globalsaudio.connection.subscribe(globalsaudio.player);
-                globalsaudio.queue.shift();
             }
-        });
-
-        globalsaudio.player.on('error', error => {
-            console.error(error);
-            globalsaudio.connection.destroy();
-            globalsaudio.queue = [];
-            globalsaudio.connectionstatus = 0;
+            catch (error) {
+                console.error(error);
+            }
         });
 	},
 };
