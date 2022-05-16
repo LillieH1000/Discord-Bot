@@ -5,11 +5,13 @@ var player = createAudioPlayer();
 var resource;
 var connectionstatus = 0;
 var queue = [];
+var titles = [];
 
 module.exports = {
     connection,
     player,
     resource,
     connectionstatus,
-    queue
+    queue,
+    titles
 };

@@ -11,6 +11,7 @@ module.exports = {
 
         globalsaudio.connection.destroy();
         globalsaudio.queue = [];
+        globalsaudio.titles = [];
         globalsaudio.connectionstatus = 0;
 
         const embed = new MessageEmbed()

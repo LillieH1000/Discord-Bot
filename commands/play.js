@@ -50,6 +50,8 @@ module.exports = {
 
         globalsaudio.queue.push('downloads/' + filename + '.mp3', 'downloads/' + filename);
 
+        globalsaudio.titles.push('ai', title);
+
         const embed = new MessageEmbed()
             .setColor('#FFC0DD')
             .setTitle('Music Player')
@@ -68,12 +70,14 @@ module.exports = {
             globalsaudio.player.play(globalsaudio.resource);
             globalsaudio.connection.subscribe(globalsaudio.player);
             globalsaudio.queue.shift();
+            globalsaudio.titles.shift();
         }
 
         globalsaudio.connection.on(VoiceConnectionStatus.Disconnected, () => {
             try {
                 globalsaudio.connection.destroy();
                 globalsaudio.queue = [];
+                globalsaudio.titles = [];
                 globalsaudio.connectionstatus = 0;
             }
             catch (error) {

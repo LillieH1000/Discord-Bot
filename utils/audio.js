@@ -7,6 +7,7 @@ module.exports = async() => {
             if (globalsaudio.queue === undefined || globalsaudio.queue.length == 0) {
                 globalsaudio.connection.destroy();
                 globalsaudio.queue = [];
+                globalsaudio.titles = [];
                 globalsaudio.connectionstatus = 0;
             } else {
                 globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
@@ -17,6 +18,7 @@ module.exports = async() => {
                 globalsaudio.player.play(globalsaudio.resource);
                 globalsaudio.connection.subscribe(globalsaudio.player);
                 globalsaudio.queue.shift();
+                globalsaudio.titles.shift();
             }
         }
         catch (error) {
@@ -29,6 +31,7 @@ module.exports = async() => {
         try {
             globalsaudio.connection.destroy();
             globalsaudio.queue = [];
+            globalsaudio.titles = [];
             globalsaudio.connectionstatus = 0;
         }
         catch (error) {
