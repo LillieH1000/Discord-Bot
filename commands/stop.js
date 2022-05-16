@@ -11,6 +11,7 @@ module.exports = {
 
         globalsaudio.connection.destroy();
         globalsaudio.queue = [];
+        globalsaudio.connectionstatus = 0;
 
         const embed = new MessageEmbed()
             .setColor('#FFC0DD')
