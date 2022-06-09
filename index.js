@@ -18,8 +18,8 @@ for (const file of commandFiles) {
 const utilsFiles = fs.readdirSync('./utils').filter(file => file.endsWith('.js'));
 
 for (const file of utilsFiles) {
-	const command = require(`./utils/${file}`);
-	command(client);
+	const utils = require(`./utils/${file}`);
+	utils(client);
 }
 
 client.once('ready', () => {
