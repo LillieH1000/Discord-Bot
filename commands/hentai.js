@@ -32,7 +32,6 @@ module.exports = {
                     { name: 'Tentacles', value: 'tentacles' },
                     { name: 'Thighs', value: 'thighs' },
                     { name: 'Uniform', value: 'uniform' },
-                    { name: 'Vagina', value: 'vagina' },
                     { name: 'Yuri', value: 'yuri' }
                 )),
 	async execute(interaction) {
@@ -440,25 +439,6 @@ module.exports = {
             }
             if (category == "uniform") {
                 const res = await fetch('https://hmtai.herokuapp.com/nsfw/uniform');
-                if (res.ok) {
-                    const data = await res.json();
-                    const embed = new MessageEmbed()
-                        .setColor('#FFC0DD')
-                        .setTitle('Hentai Pics')
-                        .setImage(data.url)
-                        .setTimestamp()
-                    const row = new MessageActionRow()
-                        .addComponents(
-                            new MessageButton()
-                                .setLabel('View Original Image')
-                                .setStyle('LINK')
-                                .setURL(data.url)
-                        );
-                    await interaction.editReply({ embeds: [embed], components: [row] });
-                }
-            }
-            if (category == "vagina") {
-                const res = await fetch('https://hmtai.herokuapp.com/nsfw/vagina');
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new MessageEmbed()
