@@ -11,7 +11,8 @@ module.exports = {
                 .setRequired(true)
                 .addChoices(
                     { name: 'Waifu.Pics', value: 'waifu_pics' },
-                    { name: 'Nekos.Best', value: 'nekos_best' }
+                    { name: 'Nekos.Best', value: 'nekos_best' },
+                    { name: 'Neko-Love', value: 'neko_love' }
                 )),
 	async execute(interaction) {
         await interaction.deferReply();
@@ -50,6 +51,25 @@ module.exports = {
                             .setLabel('View Original Image')
                             .setStyle('LINK')
                             .setURL(data.results[0].url)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
+            }
+        }
+        if (source == "neko_love") {
+            const res = await fetch('https://neko-love.xyz/api/v1/waifu/');
+            if (res.ok) {
+                const data = await res.json();
+                const embed = new MessageEmbed()
+                    .setColor('#FFC0DD')
+                    .setTitle('Waifu Pics')
+                    .setImage(data.url)
+                    .setTimestamp()
+                const row = new MessageActionRow()
+                    .addComponents(
+                        new MessageButton()
+                            .setLabel('View Original Image')
+                            .setStyle('LINK')
+                            .setURL(data.url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
