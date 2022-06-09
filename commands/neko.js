@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
-const axios = require('axios');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -21,91 +20,96 @@ module.exports = {
         await interaction.deferReply();
         const source = interaction.options.getString('source');
         if (source == "nekos_life") {
-            const response = await axios.get('https://nekos.life/api/v2/img/neko');
-            if (response.status == 200) {
+            const res = await fetch('https://nekos.life/api/v2/img/neko');
+            if (res.ok) {
+                const data = await res.json();
                 const embed = new MessageEmbed()
                     .setColor('#FFC0DD')
                     .setTitle('Neko Pics')
-                    .setImage(response.data.url)
+                    .setImage(data.url)
                     .setTimestamp()
                 const row = new MessageActionRow()
                     .addComponents(
                         new MessageButton()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
-                            .setURL(response.data.url)
+                            .setURL(data.url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
         }
         if (source == "waifu_pics") {
-            const response = await axios.get('https://api.waifu.pics/sfw/neko');
-            if (response.status == 200) {
+            const res = await fetch('https://api.waifu.pics/sfw/neko');
+            if (res.ok) {
+                const data = await res.json();
                 const embed = new MessageEmbed()
                     .setColor('#FFC0DD')
                     .setTitle('Neko Pics')
-                    .setImage(response.data.url)
+                    .setImage(data.url)
                     .setTimestamp()
                 const row = new MessageActionRow()
                     .addComponents(
                         new MessageButton()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
-                            .setURL(response.data.url)
+                            .setURL(data.url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
         }
         if (source == "nekos_best") {
-            const response = await axios.get('https://nekos.best/api/v2/neko');
-            if (response.status == 200) {
+            const res = await fetch('https://nekos.best/api/v2/neko');
+            if (res.ok) {
+                const data = await res.json();
                 const embed = new MessageEmbed()
                     .setColor('#FFC0DD')
                     .setTitle('Neko Pics')
-                    .setImage(response.data.results[0].url)
+                    .setImage(data.results[0].url)
                     .setTimestamp()
                 const row = new MessageActionRow()
                     .addComponents(
                         new MessageButton()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
-                            .setURL(response.data.results[0].url)
+                            .setURL(data.results[0].url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
         }
         if (source == "neko_love") {
-            const response = await axios.get('https://neko-love.xyz/api/v1/neko/');
-            if (response.status == 200) {
+            const res = await fetch('https://neko-love.xyz/api/v1/neko/');
+            if (res.ok) {
+                const data = await res.json();
                 const embed = new MessageEmbed()
                     .setColor('#FFC0DD')
                     .setTitle('Neko Pics')
-                    .setImage(response.data.url)
+                    .setImage(data.url)
                     .setTimestamp()
                 const row = new MessageActionRow()
                     .addComponents(
                         new MessageButton()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
-                            .setURL(response.data.url)
+                            .setURL(data.url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
         }
         if (source == "hmtai_herokuapp_com") {
-            const response = await axios.get('https://hmtai.herokuapp.com/v2/neko/');
-            if (response.status == 200) {
+            const res = await fetch('https://hmtai.herokuapp.com/v2/neko/');
+            if (res.ok) {
+                const data = await res.json();
                 const embed = new MessageEmbed()
                     .setColor('#FFC0DD')
                     .setTitle('Neko Pics')
-                    .setImage(response.data.url)
+                    .setImage(data.url)
                     .setTimestamp()
                 const row = new MessageActionRow()
                     .addComponents(
                         new MessageButton()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
-                            .setURL(response.data.url)
+                            .setURL(data.url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }

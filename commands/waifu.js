@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
-const axios = require('axios');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -18,37 +17,39 @@ module.exports = {
         await interaction.deferReply();
         const source = interaction.options.getString('source');
         if (source == "waifu_pics") {
-            const response = await axios.get('https://api.waifu.pics/sfw/waifu');
-            if (response.status == 200) {
+            const res = await fetch('https://api.waifu.pics/sfw/waifu');
+            if (res.ok) {
+                const data = await res.json();
                 const embed = new MessageEmbed()
                     .setColor('#FFC0DD')
                     .setTitle('Waifu Pics')
-                    .setImage(response.data.url)
+                    .setImage(data.url)
                     .setTimestamp()
                 const row = new MessageActionRow()
                     .addComponents(
                         new MessageButton()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
-                            .setURL(response.data.url)
+                            .setURL(data.url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
         }
         if (source == "nekos_best") {
-            const response = await axios.get('https://nekos.best/api/v2/waifu');
-            if (response.status == 200) {
+            const res = await fetch('https://nekos.best/api/v2/waifu');
+            if (res.ok) {
+                const data = await res.json();
                 const embed = new MessageEmbed()
                     .setColor('#FFC0DD')
                     .setTitle('Waifu Pics')
-                    .setImage(response.data.results[0].url)
+                    .setImage(data.results[0].url)
                     .setTimestamp()
                 const row = new MessageActionRow()
                     .addComponents(
                         new MessageButton()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
-                            .setURL(response.data.results[0].url)
+                            .setURL(data.results[0].url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
