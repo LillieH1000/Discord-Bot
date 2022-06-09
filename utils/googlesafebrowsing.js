@@ -1,5 +1,4 @@
 const { safebrowsingapikey } = require('../config.json');
-const axios = require('axios');
 
 module.exports = async(client) => {
     client.on('messageCreate', async message => {
@@ -19,9 +18,10 @@ module.exports = async(client) => {
                         ]
                     }
                 }
-                const response = await axios.post('https://safebrowsing.googleapis.com/v4/threatMatches:find?key='.concat(safebrowsingapikey), payload);
-                if (response.status == 200) {
-                    if (response.data.matches) {
+                const res = await fetch('https://safebrowsing.googleapis.com/v4/threatMatches:find?key='.concat(safebrowsingapikey), payload);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.matches) {
                         await message.delete();
                     }
                 }
