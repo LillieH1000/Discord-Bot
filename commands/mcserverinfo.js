@@ -42,11 +42,13 @@ module.exports = {
 
                 var playerslistcount = 0;
                 var playerslist = '';
-                for (const players of data.players.list) {
-                    playerslist += players;
-                    playerslistcount += 1;
-                    if (data.players.list.length != playerslistcount) {
-                        playerslist += "\n";
+                if (data.players.list != null) {
+                    for (const players of data.players.list) {
+                        playerslist += players;
+                        playerslistcount += 1;
+                        if (data.players.list.length != playerslistcount) {
+                            playerslist += "\n";
+                        }
                     }
                 }
 
@@ -60,8 +62,11 @@ module.exports = {
                     .addField('MOTD:', data.motd.clean[0], false)
                     .addField('Players (Online):', data.players.online.toString(), false)
                     .addField('Players (Max):', data.players.max.toString(), false)
-                    .addField('Players (List):', playerslist, false)
                     .setTimestamp()
+
+                if (playerslist != "") {
+                    embed.addField('Players (List):', playerslist, false)
+                }
                 await interaction.editReply({ embeds: [embed] });
             }
         }
