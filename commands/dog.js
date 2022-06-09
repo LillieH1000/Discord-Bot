@@ -39,6 +39,7 @@ module.exports = {
         if (source == "nekos_life") {
             const res = await fetch('https://nekos.life/api/v2/img/woof');
             if (res.ok) {
+                const data = await res.json();
                 const embed = new MessageEmbed()
                     .setColor('#FFC0DD')
                     .setTitle('Dog Pics')

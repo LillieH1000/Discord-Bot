@@ -18,7 +18,13 @@ module.exports = async(client) => {
                         ]
                     }
                 }
-                const res = await fetch('https://safebrowsing.googleapis.com/v4/threatMatches:find?key='.concat(safebrowsingapikey), payload);
+                const res = await fetch('https://safebrowsing.googleapis.com/v4/threatMatches:find?key='.concat(safebrowsingapikey), {
+                    method: "post",
+                    body: payload,
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
                 if (res.ok) {
                     const data = await res.json();
                     if (data.matches) {
