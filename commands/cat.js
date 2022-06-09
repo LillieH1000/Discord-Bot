@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
-const axios = require('axios');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -19,55 +18,58 @@ module.exports = {
         await interaction.deferReply();
         const source = interaction.options.getString('source');
         if (source == "nekos_life") {
-            const response = await axios.get('https://nekos.life/api/v2/img/meow');
-            if (response.status == 200) {
+            const res = await fetch('https://nekos.life/api/v2/img/meow');
+            if (res.ok) {
+                const data = await res.json();
                 const embed = new MessageEmbed()
                     .setColor('#FFC0DD')
                     .setTitle('Cat Pics')
-                    .setImage(response.data.url)
+                    .setImage(data.url)
                     .setTimestamp()
                 const row = new MessageActionRow()
                     .addComponents(
                         new MessageButton()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
-                            .setURL(response.data.url)
+                            .setURL(data.url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
         }
         if (source == "alexflipnote_dev") {
-            const response = await axios.get('https://api.alexflipnote.dev/cats');
-            if (response.status == 200) {
+            const res = await fetch('https://api.alexflipnote.dev/cats');
+            if (res.ok) {
+                const data = await res.json();
                 const embed = new MessageEmbed()
                     .setColor('#FFC0DD')
                     .setTitle('Cat Pics')
-                    .setImage(response.data.file)
+                    .setImage(data.file)
                     .setTimestamp()
                 const row = new MessageActionRow()
                     .addComponents(
                         new MessageButton()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
-                            .setURL(response.data.file)
+                            .setURL(data.file)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
         }
         if (source == "cataas_com") {
-            const response = await axios.get('https://cataas.com/cat?json=true');
-            if (response.status == 200) {
+            const res = await fetch('https://cataas.com/cat?json=true');
+            if (res.ok) {
+                const data = await res.json();
                 const embed = new MessageEmbed()
                     .setColor('#FFC0DD')
                     .setTitle('Cat Pics')
-                    .setImage('https://cataas.com' + response.data.url)
+                    .setImage('https://cataas.com' + data.url)
                     .setTimestamp()
                 const row = new MessageActionRow()
                     .addComponents(
                         new MessageButton()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
-                            .setURL('https://cataas.com' + response.data.url)
+                            .setURL('https://cataas.com' + data.url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
