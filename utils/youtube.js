@@ -19,39 +19,43 @@ module.exports = async(client) => {
                             .setDescription('Views: ' + data1.viewCount.toLocaleString() + '\nLikes: ' + data1.likes.toLocaleString() + '\nDislikes: ' + data1.dislikes.toLocaleString())
                             .setTimestamp()
 
-                        const row = new MessageActionRow();
+                        try {
+                            const row = new MessageActionRow();
 
-                        if (data2.linksByPlatform.appleMusic.url != null) {
+                            if (data2.linksByPlatform.appleMusic.url != null) {
+                                row.addComponents(
+                                    new MessageButton()
+                                        .setLabel('Apple Music')
+                                        .setStyle('LINK')
+                                        .setURL(data2.linksByPlatform.appleMusic.url)
+                                )
+                            }
+                            if (data2.linksByPlatform.deezer.url != null) {
+                                row.addComponents(
+                                    new MessageButton()
+                                        .setLabel('Deezer')
+                                        .setStyle('LINK')
+                                        .setURL(data2.linksByPlatform.deezer.url)
+                                )
+                            }
+                            if (data2.linksByPlatform.spotify.url != null) {
+                                row.addComponents(
+                                    new MessageButton()
+                                        .setLabel('Spotify')
+                                        .setStyle('LINK')
+                                        .setURL(data2.linksByPlatform.spotify.url)
+                                )
+                            }
                             row.addComponents(
                                 new MessageButton()
-                                    .setLabel('Apple Music')
+                                    .setLabel('Other')
                                     .setStyle('LINK')
-                                    .setURL(data2.linksByPlatform.appleMusic.url)
-                            )
+                                    .setURL("https://song.link/y/" + word.match(rx)[1])
+                            );
+                            await message.reply({ embeds: [embed], components: [row], allowedMentions: { repliedUser: false } });
+                        } catch (error) {
+                            await message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
                         }
-                        if (data2.linksByPlatform.deezer.url != null) {
-                            row.addComponents(
-                                new MessageButton()
-                                    .setLabel('Deezer')
-                                    .setStyle('LINK')
-                                    .setURL(data2.linksByPlatform.deezer.url)
-                            )
-                        }
-                        if (data2.linksByPlatform.spotify.url != null) {
-                            row.addComponents(
-                                new MessageButton()
-                                    .setLabel('Spotify')
-                                    .setStyle('LINK')
-                                    .setURL(data2.linksByPlatform.spotify.url)
-                            )
-                        }
-                        row.addComponents(
-                            new MessageButton()
-                                .setLabel('Other')
-                                .setStyle('LINK')
-                                .setURL("https://song.link/y/" + word.match(rx)[1])
-                        );
-                        await message.reply({ embeds: [embed], components: [row], allowedMentions: { repliedUser: false } });
                     }
                 }
             }
