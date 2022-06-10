@@ -20,8 +20,7 @@ module.exports = async() => {
                 globalsaudio.queue.shift();
                 globalsaudio.titles.shift();
             }
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error);
         }
     });
@@ -33,8 +32,7 @@ module.exports = async() => {
             globalsaudio.queue = [];
             globalsaudio.titles = [];
             globalsaudio.connectionstatus = 0;
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error);
         }
     });

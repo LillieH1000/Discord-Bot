@@ -35,8 +35,7 @@ module.exports = async(client) => {
                     await message.channel.send({ embeds: [embed], components: [row] });
                 }
             }
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error);
         }
     });

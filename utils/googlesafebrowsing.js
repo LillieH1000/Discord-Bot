@@ -33,8 +33,7 @@ module.exports = async(client) => {
                     }
                 }
             }
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error);
         }
     });
