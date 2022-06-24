@@ -1,6 +1,9 @@
 {
-	"clientId": "YourBotClientIdHere",
-	"token": "YourBotTokenHere",
-	"weatherapikey": "YourWeatherApiKeyHere",
-	"safebrowsingapikey": "YourSafeBrowsingApiKeyHere"
+	"clientId": "BotClientIdHere",
+	"token": "BotTokenHere",
+	"safebrowsingapikey": "GoogleSafeBrowsingApiKeyHere",
+	"ubisoftaccountinfo": [
+		"UbisoftAccountEmailHere",
+		"UbisoftAccountPasswordHere"
+	]
 }
