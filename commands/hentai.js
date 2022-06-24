@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+var _ = require('underscore');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -31,7 +32,9 @@ module.exports = {
                     { name: 'Public', value: 'public' },
                     { name: 'Tentacles', value: 'tentacles' },
                     { name: 'Thighs', value: 'thighs' },
+                    { name: 'Trap', value: 'trap' },
                     { name: 'Uniform', value: 'uniform' },
+                    { name: 'Waifu', value: 'waifu' },
                     { name: 'Yuri', value: 'yuri' }
                 )),
 	async execute(interaction) {
@@ -96,7 +99,8 @@ module.exports = {
                 }
             }
             if (category == "blowjob") {
-                const res = await fetch('https://hmtai.herokuapp.com/nsfw/blowjob');
+                var url = _.sample(["https://hmtai.herokuapp.com/nsfw/blowjob", "https://api.waifu.pics/nsfw/blowjob"]);
+                const res = await fetch(url);
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new MessageEmbed()
@@ -324,7 +328,8 @@ module.exports = {
                 }
             }
             if (category == "neko") {
-                const res = await fetch('https://hmtai.herokuapp.com/nsfw/nsfwNeko');
+                var url = _.sample(["https://hmtai.herokuapp.com/nsfw/nsfwNeko", "https://api.waifu.pics/nsfw/neko"]);
+                const res = await fetch(url);
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new MessageEmbed()
@@ -437,8 +442,46 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
             }
+            if (category == "trap") {
+                const res = await fetch('https://api.waifu.pics/nsfw/trap');
+                if (res.ok) {
+                    const data = await res.json();
+                    const embed = new MessageEmbed()
+                        .setColor('#FFC0DD')
+                        .setTitle('Hentai Pics')
+                        .setImage(data.url)
+                        .setTimestamp()
+                    const row = new MessageActionRow()
+                        .addComponents(
+                            new MessageButton()
+                                .setLabel('View Original Image')
+                                .setStyle('LINK')
+                                .setURL(data.url)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                }
+            }
             if (category == "uniform") {
                 const res = await fetch('https://hmtai.herokuapp.com/nsfw/uniform');
+                if (res.ok) {
+                    const data = await res.json();
+                    const embed = new MessageEmbed()
+                        .setColor('#FFC0DD')
+                        .setTitle('Hentai Pics')
+                        .setImage(data.url)
+                        .setTimestamp()
+                    const row = new MessageActionRow()
+                        .addComponents(
+                            new MessageButton()
+                                .setLabel('View Original Image')
+                                .setStyle('LINK')
+                                .setURL(data.url)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                }
+            }
+            if (category == "waifu") {
+                const res = await fetch('https://api.waifu.pics/nsfw/waifu');
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new MessageEmbed()
