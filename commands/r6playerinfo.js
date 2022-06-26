@@ -40,7 +40,6 @@ module.exports = {
         var generalinfo = '';
         generalinfo += 'Playtime: ' + stats.pvp.general.playtime.toLocaleString() + '\n';
         generalinfo += 'Matches Played: ' + stats.pvp.general.matches.toLocaleString() + '\n';
-        generalinfo += 'Bullets Fired: ' + stats.pvp.general.bulletsFired.toLocaleString() + '\n';
         generalinfo += 'Bullets Connected: ' + stats.pvp.general.bulletsConnected.toLocaleString() + '\n';
         generalinfo += 'Kills: ' + stats.pvp.general.kills.toLocaleString() + '\n';
         generalinfo += 'Deaths: ' + stats.pvp.general.deaths.toLocaleString() + '\n';
@@ -55,8 +54,7 @@ module.exports = {
         generalinfo += 'Rappel Breaches: ' + stats.pvp.general.rappelBreaches.toLocaleString() + '\n';
         generalinfo += 'Barricades Deployed: ' + stats.pvp.general.barricadesDeployed.toLocaleString() + '\n';
         generalinfo += 'Reinforcements Deployed: ' + stats.pvp.general.reinforcementsDeployed.toLocaleString() + '\n';
-        generalinfo += 'Suicides: ' + stats.pvp.general.suicides.toLocaleString() + '\n';
-        generalinfo += 'Distance Travelled: ' + stats.pvp.general.distanceTravelled.toLocaleString();
+        generalinfo += 'Suicides: ' + stats.pvp.general.suicides.toLocaleString();
 
         var casualinfo = '';
         casualinfo += 'Playtime: ' + stats.pvp.queues.casual.playtime.toLocaleString() + '\n';
@@ -90,6 +88,14 @@ module.exports = {
             .addField('Ranked', rankedinfo, false)
             .addField('Custom', custominfo, false)
             .setTimestamp()
+
+        if (player.avatar[Object.keys(player.avatar)[2]] != null) {
+            embed.setThumbnail(player.avatar[Object.keys(player.avatar)[2]]);
+        } else if (player.avatar[Object.keys(player.avatar)[1]] != null) {
+            embed.setThumbnail(player.avatar[Object.keys(player.avatar)[1]]);
+        } else if (player.avatar[Object.keys(player.avatar)[0]] != null) {
+            embed.setThumbnail(player.avatar[Object.keys(player.avatar)[0]]);
+        }
 
         const row = new MessageActionRow()
             .addComponents(
