@@ -19,6 +19,7 @@ module.exports = {
             globalsaudio.player.play(globalsaudio.resource);
             globalsaudio.connection.subscribe(globalsaudio.player);
             globalsaudio.queue.shift();
+            globalsaudio.titles.shift();
         }
 
         const embed = new MessageEmbed()

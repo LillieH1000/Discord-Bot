@@ -56,6 +56,8 @@ module.exports = {
 
         globalsaudio.queue.push('downloads/' + ttsfilename + '.mp3', 'downloads/' + filename + '.mp3');
 
+        globalsaudio.titles.push('ai', info.player_response.videoDetails.title);
+
         audiodownload.on('finish', function() {
             if (globalsaudio.connectionstatus == 0) {
                 globalsaudio.connectionstatus = 1;
@@ -66,6 +68,7 @@ module.exports = {
                 globalsaudio.player.play(globalsaudio.resource);
                 globalsaudio.connection.subscribe(globalsaudio.player);
                 globalsaudio.queue.shift();
+                globalsaudio.titles.shift();
             }
             const embed = new MessageEmbed()
                 .setColor('#FFC0DD')
