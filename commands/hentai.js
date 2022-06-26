@@ -6,6 +6,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('hentai')
 		.setDescription('Posts a random hentai picture, can only be used in nsfw channels')
+        .setDMPermission(false)
         .addStringOption(option =>
             option.setName('category')
                 .setDescription('Choose which hentai picture type you want')
