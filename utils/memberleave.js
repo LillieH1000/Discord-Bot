@@ -1,10 +1,10 @@
 const { MessageEmbed } = require('discord.js');
-var moment = require('moment');
+const dayjs = require('dayjs');
 
 module.exports = async(client) => {
     client.on('guildMemberRemove', async guildMember => {
         try {
-            const createdDate = moment(guildMember.user.createdAt).format('MMMM D, YYYY');
+            const createdDate = dayjs(guildMember.user.createdAt).format('MMMM D, YYYY');
             const embed = new MessageEmbed()
                 .setColor('#FFC0DD')
                 .setAuthor({ name: guildMember.user.username, iconURL: guildMember.user.displayAvatarURL() })
