@@ -27,9 +27,12 @@ module.exports = {
 
         const { 0: stats } = await r6api.getStats(platform, player.id);
 
+        const { 0: userstatus } = await r6api.getUserStatus(player.id);
+
         const rankedstatus = ranks.seasons[Object.keys(ranks.seasons)[0]];
 
         var playerinfo = '';
+        playerinfo += 'Status: ' + userstatus.status.charAt(0).toUpperCase() + userstatus.status.slice(1) + '\n';
         playerinfo += 'Level: ' + progression.level.toLocaleString() + '\n';
         playerinfo += 'XP Of Current Level: ' + progression.xp.toLocaleString() + '\n';
         playerinfo += 'Total XP: ' + stats.pvp.general.xp.toLocaleString() + '\n';
