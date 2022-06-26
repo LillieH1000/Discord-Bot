@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const R6API = require('r6api.js').default;
 const { ubisoftaccountinfo } = require('../config.json');
 
@@ -27,11 +27,17 @@ module.exports = {
 
         const { 0: stats } = await r6api.getStats(platform, player.id);
 
+        const rankedstatus = ranks.seasons[Object.keys(ranks.seasons)[0]];
+
+        var playerinfo = '';
+        playerinfo += 'Level: ' + progression.level.toLocaleString() + '\n';
+        playerinfo += 'XP Of Current Level: ' + progression.xp.toLocaleString() + '\n';
+        playerinfo += 'Total XP: ' + stats.pvp.general.xp.toLocaleString() + '\n';
+        playerinfo += 'Lootbox Probability: ' + progression.lootboxProbability.percent.toLocaleString() + '\n';
+        playerinfo += 'Rank: ' + rankedstatus.regions.ncsa.boards.pvp_ranked.current.name.toString() + '\n';
+        playerinfo += 'MMR: ' + rankedstatus.regions.ncsa.boards.pvp_ranked.current.mmr.toLocaleString();
+
         var generalinfo = '';
-        generalinfo += 'Level: ' + progression.level.toLocaleString() + '\n';
-        generalinfo += 'XP: ' + stats.pvp.general.xp.toLocaleString() + '\n';
-        generalinfo += 'XP To Next Level: ' + progression.xp.toLocaleString() + '\n';
-        generalinfo += 'Lootbox Probability: ' + progression.lootboxProbability.percent.toLocaleString() + '\n';
         generalinfo += 'Playtime: ' + stats.pvp.general.playtime.toLocaleString() + '\n';
         generalinfo += 'Matches Played: ' + stats.pvp.general.matches.toLocaleString() + '\n';
         generalinfo += 'Bullets Fired: ' + stats.pvp.general.bulletsFired.toLocaleString() + '\n';
@@ -75,18 +81,24 @@ module.exports = {
         var custominfo = '';
         custominfo += 'Playtime: ' + stats.pvp.queues.custom.playtime.toLocaleString();
         
-        const rankedstatus = ranks.seasons[Object.keys(ranks.seasons)[0]];
-        
         const embed = new MessageEmbed()
             .setColor('#FFC0DD')
             .setTitle(player.username.toString())
-            .setDescription(rankedstatus.regions.ncsa.boards.pvp_ranked.current.name.toString() + ' (' + rankedstatus.regions.ncsa.boards.pvp_ranked.current.mmr.toLocaleString() + ')')
+            .addField('Info', playerinfo, false)
             .addField('General', generalinfo, false)
             .addField('Casual', casualinfo, false)
             .addField('Ranked', rankedinfo, false)
             .addField('Custom', custominfo, false)
             .setTimestamp()
 
-        await interaction.editReply({ embeds: [embed] });
+        const row = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                    .setLabel('R6 Tracker')
+                    .setStyle('LINK')
+                    .setURL('https://r6.tracker.network/profile/pc/' + player.username.toString())
+            );
+
+        await interaction.editReply({ embeds: [embed], components: [row] });
 	},
 };
