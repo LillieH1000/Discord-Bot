@@ -45,7 +45,7 @@ module.exports = {
         if (url.match(rx)) {
             videoid = url.match(rx)[1];
         } else {
-            /* payload = {
+            payload = {
                 "context": {
                     "client": {
                         "hl": "en",
@@ -74,16 +74,8 @@ module.exports = {
             });
             if (res.ok) {
                 const data = await res.json();
-                console.log(data.contents.sectionListRenderer.contents);
-            } */
-            const embed = new MessageEmbed()
-                .setColor('#FFC0DD')
-                .setTitle('Music Player')
-                .setDescription('Not a youtube url, search by youtube video name is currently in development')
-                .setTimestamp()
-
-            await interaction.editReply({ embeds: [embed] });
-            return;
+                videoid = data.contents.sectionListRenderer.contents[1].itemSectionRenderer.contents[0].compactVideoRenderer.videoId;
+            }
         }
 
         const info = await ytdl.getInfo(videoid);
