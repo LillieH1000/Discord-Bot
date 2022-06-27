@@ -23,6 +23,7 @@ for (const file of utilsFiles) {
 }
 
 client.once('ready', () => {
+	client.user.setActivity("Lillie Be Adorable", { type: "WATCHING"})
 	console.log(`Logged in as ${client.user.tag}`);
 });
 
