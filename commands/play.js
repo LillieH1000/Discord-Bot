@@ -39,7 +39,54 @@ module.exports = {
             });
         }
 
-        const info = await ytdl.getInfo(url);
+        var videoid = '';
+
+        const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+        if (url.match(rx)) {
+            videoid = url.match(rx)[1];
+        } else {
+            /* payload = {
+                "context": {
+                    "client": {
+                        "hl": "en",
+                        "clientName": "ANDROID",
+                        "clientVersion": "16.20",
+                        "playbackContext": {
+                            "contentPlaybackContext": {
+                                "html5Preference": "HTML5_PREF_WANTS"
+                            }
+                        }
+                    }
+                },
+                "contentCheckOk": true,
+                "racyCheckOk": true,
+                "order": "relevance",
+                "items": "videos",
+                "duration": "any",
+                "query": url
+            }
+            const res = await fetch('https://www.youtube.com/youtubei/v1/search?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8&prettyPrint=false', {
+                method: "post",
+                body: JSON.stringify(payload),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            if (res.ok) {
+                const data = await res.json();
+                console.log(data.contents.sectionListRenderer.contents);
+            } */
+            const embed = new MessageEmbed()
+                .setColor('#FFC0DD')
+                .setTitle('Music Player')
+                .setDescription('Not a youtube url, search by youtube video name is currently in development')
+                .setTimestamp()
+
+            await interaction.editReply({ embeds: [embed] });
+            return;
+        }
+
+        const info = await ytdl.getInfo(videoid);
 
         const filename = makeid(50);
         const ttsfilename = makeid(50);
@@ -50,9 +97,9 @@ module.exports = {
             slow: false
         });
         
-        fs.writeFileSync('downloads/' + ttsfilename + '.mp3', buffer);
+        await fs.writeFileSync('downloads/' + ttsfilename + '.mp3', buffer);
 
-        var audiodownload = await ytdl(url, { quality: 'highestaudio' }).pipe(fs.createWriteStream('downloads/' + filename + '.mp3'));
+        var audiodownload = await ytdl(videoid, { quality: 'highestaudio' }).pipe(fs.createWriteStream('downloads/' + filename + '.mp3'));
 
         globalsaudio.queue.push('downloads/' + ttsfilename + '.mp3', 'downloads/' + filename + '.mp3');
 
