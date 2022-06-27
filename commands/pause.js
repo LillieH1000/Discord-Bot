@@ -18,6 +18,6 @@ module.exports = {
             .setDescription('Paused playing audio')
             .setTimestamp()
 
-        interaction.editReply({ embeds: [embed] });
+        await interaction.editReply({ embeds: [embed] });
 	},
 };

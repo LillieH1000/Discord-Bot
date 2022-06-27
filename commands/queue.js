@@ -36,6 +36,6 @@ module.exports = {
             embed.addField('Songs In Queue', queuelist, false);
         }
 
-        interaction.editReply({ embeds: [embed] });
+        await interaction.editReply({ embeds: [embed] });
 	},
 };

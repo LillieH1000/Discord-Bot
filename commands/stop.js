@@ -21,6 +21,6 @@ module.exports = {
             .setDescription('Stopped play audio and disconnected from voice chat')
             .setTimestamp()
 
-        interaction.editReply({ embeds: [embed] });
+        await interaction.editReply({ embeds: [embed] });
 	},
 };

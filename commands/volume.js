@@ -23,6 +23,6 @@ module.exports = {
             .setDescription('Changed audio volume level to: ' + volume.toString())
             .setTimestamp()
 
-        interaction.editReply({ embeds: [embed] });
+        await interaction.editReply({ embeds: [embed] });
 	},
 };
