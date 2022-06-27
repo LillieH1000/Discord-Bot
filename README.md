@@ -8,7 +8,7 @@ curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 ```
 
 ```
-sudo apt install ffmpeg nodejs libtool-bin
+sudo apt install make g++ ffmpeg nodejs libtool-bin
 ```
 
 ```
