@@ -16,7 +16,7 @@ module.exports = {
 
         for (i = 0; i < globalsaudio.queue.length; i++) {
             queuecount += 1;
-            if (!globalsaudio.queue[i].endsWith('mp3')) {
+            if (globalsaudio.titles[i] != 'ai') {
                 queuelistcount += 1;
                 queuelist += queuelistcount.toString() + ') ' + globalsaudio.titles[i];
                 if (globalsaudio.queue.length != queuecount) {
