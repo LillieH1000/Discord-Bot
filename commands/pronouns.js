@@ -17,67 +17,67 @@ module.exports = {
             const data = await res.json();
             var pronoun = '';
             if (data.pronouns == "unspecified") {
-                pronoun += "unspecified";
+                pronoun = "unspecified";
             }
             if (data.pronouns == "hh") {
-                pronoun += "he/him";
+                pronoun = "he/him";
             }
             if (data.pronouns == "hi") {
-                pronoun += "he/it";
+                pronoun = "he/it";
             }
             if (data.pronouns == "hs") {
-                pronoun += "he/she";
+                pronoun = "he/she";
             }
             if (data.pronouns == "ht") {
-                pronoun += "he/they";
+                pronoun = "he/they";
             }
             if (data.pronouns == "ih") {
-                pronoun += "it/him";
+                pronoun = "it/him";
             }
             if (data.pronouns == "ii") {
-                pronoun += "it/its";
+                pronoun = "it/its";
             }
             if (data.pronouns == "is") {
-                pronoun += "it/she";
+                pronoun = "it/she";
             }
             if (data.pronouns == "it") {
-                pronoun += "it/they";
+                pronoun = "it/they";
             }
             if (data.pronouns == "shh") {
-                pronoun += "she/he";
+                pronoun = "she/he";
             }
             if (data.pronouns == "sh") {
-                pronoun += "she/her";
+                pronoun = "she/her";
             }
             if (data.pronouns == "si") {
-                pronoun += "she/it";
+                pronoun = "she/it";
             }
             if (data.pronouns == "st") {
-                pronoun += "she/they";
+                pronoun = "she/they";
             }
             if (data.pronouns == "th") {
-                pronoun += "they/he";
+                pronoun = "they/he";
             }
             if (data.pronouns == "ti") {
-                pronoun += "they/it";
+                pronoun = "they/it";
             }
             if (data.pronouns == "ts") {
-                pronoun += "they/she";
+                pronoun = "they/she";
             }
             if (data.pronouns == "tt") {
-                pronoun += "they/them";
+                pronoun = "they/them";
             }
             if (data.pronouns == "any") {
-                pronoun += "Any pronouns";
+                pronoun = "Any pronouns";
             }
             if (data.pronouns == "other") {
-                pronoun += "Other pronouns";
+                pronoun = "Other pronouns";
             }
             if (data.pronouns == "ask") {
-                pronoun += "Ask me my pronouns";
+                pronoun = "Ask me my pronouns";
             }
             if (data.pronouns == "avoid") {
-                pronoun += "Avoid pronouns, use my name";
+                pronoun = "Avoid pronouns, use my name";
             }
             const embed = new MessageEmbed()
                 .setColor('#FFC0DD')
