@@ -49,6 +49,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -68,6 +69,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -87,6 +89,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -101,18 +104,34 @@ module.exports = {
             }
             if (category == "blowjob") {
                 var option = _.sample([1, 2, 3]);
-                if (option == 1 || option == 2) {
-                    var res;
-                    if (option == 1) {
-                        res = await fetch("https://hmtai.herokuapp.com/nsfw/blowjob");
-                    } else if (option == 2) {
-                        res = await fetch("https://api.waifu.pics/nsfw/blowjob");
-                    }
+                if (option == 1) {
+                    const res = await fetch("https://hmtai.herokuapp.com/nsfw/blowjob");
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new MessageEmbed()
                             .setColor('#FFC0DD')
                             .setTitle('Hentai Pics')
+                            .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
+                            .setImage(data.url)
+                            .setTimestamp()
+                        const row = new MessageActionRow()
+                            .addComponents(
+                                new MessageButton()
+                                    .setLabel('View Original Image')
+                                    .setStyle('LINK')
+                                    .setURL(data.url)
+                            );
+                        await interaction.editReply({ embeds: [embed], components: [row] });
+                    }
+                }
+                if (option == 2) {
+                    const res = await fetch("https://api.waifu.pics/nsfw/blowjob");
+                    if (res.ok) {
+                        const data = await res.json();
+                        const embed = new MessageEmbed()
+                            .setColor('#FFC0DD')
+                            .setTitle('Hentai Pics')
+                            .setDescription('[Waifu.Pics](https://waifu.pics/)')
                             .setImage(data.url)
                             .setTimestamp()
                         const row = new MessageActionRow()
@@ -132,6 +151,7 @@ module.exports = {
                         const embed = new MessageEmbed()
                             .setColor('#FFC0DD')
                             .setTitle('Hentai Pics')
+                            .setDescription('[Nekos.Fun](https://nekos.fun/)')
                             .setImage(data.image)
                             .setTimestamp()
                         const row = new MessageActionRow()
@@ -152,6 +172,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -171,6 +192,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -190,6 +212,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -209,6 +232,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -228,6 +252,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -247,6 +272,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -266,6 +292,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -285,6 +312,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -304,6 +332,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -323,6 +352,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -342,6 +372,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -355,23 +386,66 @@ module.exports = {
                 }
             }
             if (category == "neko") {
-                var url = _.sample(["https://hmtai.herokuapp.com/nsfw/nsfwNeko", "https://api.waifu.pics/nsfw/neko", "https://neko-love.xyz/api/v1/nekolewd"]);
-                const res = await fetch(url);
-                if (res.ok) {
-                    const data = await res.json();
-                    const embed = new MessageEmbed()
-                        .setColor('#FFC0DD')
-                        .setTitle('Hentai Pics')
-                        .setImage(data.url)
-                        .setTimestamp()
-                    const row = new MessageActionRow()
-                        .addComponents(
-                            new MessageButton()
-                                .setLabel('View Original Image')
-                                .setStyle('LINK')
-                                .setURL(data.url)
-                        );
-                    await interaction.editReply({ embeds: [embed], components: [row] });
+                var option = _.sample([1, 2, 3]);
+                if (option == 1) {
+                    const res = await fetch('https://hmtai.herokuapp.com/nsfw/nsfwNeko');
+                    if (res.ok) {
+                        const data = await res.json();
+                        const embed = new MessageEmbed()
+                            .setColor('#FFC0DD')
+                            .setTitle('Hentai Pics')
+                            .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
+                            .setImage(data.url)
+                            .setTimestamp()
+                        const row = new MessageActionRow()
+                            .addComponents(
+                                new MessageButton()
+                                    .setLabel('View Original Image')
+                                    .setStyle('LINK')
+                                    .setURL(data.url)
+                            );
+                        await interaction.editReply({ embeds: [embed], components: [row] });
+                    }
+                }
+                if (option == 2) {
+                    const res = await fetch('https://api.waifu.pics/nsfw/neko');
+                    if (res.ok) {
+                        const data = await res.json();
+                        const embed = new MessageEmbed()
+                            .setColor('#FFC0DD')
+                            .setTitle('Hentai Pics')
+                            .setDescription('[Waifu.Pics](https://waifu.pics/)')
+                            .setImage(data.url)
+                            .setTimestamp()
+                        const row = new MessageActionRow()
+                            .addComponents(
+                                new MessageButton()
+                                    .setLabel('View Original Image')
+                                    .setStyle('LINK')
+                                    .setURL(data.url)
+                            );
+                        await interaction.editReply({ embeds: [embed], components: [row] });
+                    }
+                }
+                if (option == 3) {
+                    const res = await fetch('https://neko-love.xyz/api/v1/nekolewd');
+                    if (res.ok) {
+                        const data = await res.json();
+                        const embed = new MessageEmbed()
+                            .setColor('#FFC0DD')
+                            .setTitle('Hentai Pics')
+                            .setDescription('[Neko-Love](https://neko-love.xyz/)')
+                            .setImage(data.url)
+                            .setTimestamp()
+                        const row = new MessageActionRow()
+                            .addComponents(
+                                new MessageButton()
+                                    .setLabel('View Original Image')
+                                    .setStyle('LINK')
+                                    .setURL(data.url)
+                            );
+                        await interaction.editReply({ embeds: [embed], components: [row] });
+                    }
                 }
             }
             if (category == "orgy") {
@@ -381,6 +455,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -400,6 +475,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -419,6 +495,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -438,6 +515,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -457,6 +535,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -476,6 +555,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Waifu.Pics](https://waifu.pics/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -495,6 +575,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -514,6 +595,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Waifu.Pics](https://waifu.pics/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()
@@ -533,6 +615,7 @@ module.exports = {
                     const embed = new MessageEmbed()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics')
+                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
                         .setTimestamp()
                     const row = new MessageActionRow()

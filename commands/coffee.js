@@ -13,6 +13,7 @@ module.exports = {
             const embed = new MessageEmbed()
                 .setColor('#FFC0DD')
                 .setTitle('Coffee Pics')
+                .setDescription('[AlexFlipnote.Dev](https://alexflipnote.dev/)')
                 .setImage(data.file)
                 .setTimestamp()
             const row = new MessageActionRow()

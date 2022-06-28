@@ -13,6 +13,7 @@ module.exports = {
             const embed = new MessageEmbed()
                 .setColor('#FFC0DD')
                 .setTitle('Fox Pics')
+                .setDescription('[Random Fox](https://randomfox.ca/)')
                 .setImage(data.image)
                 .setTimestamp()
             const row = new MessageActionRow()

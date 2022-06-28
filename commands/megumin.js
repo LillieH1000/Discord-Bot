@@ -13,6 +13,7 @@ module.exports = {
             const embed = new MessageEmbed()
                 .setColor('#FFC0DD')
                 .setTitle('Megumin Pics')
+                .setDescription('[Waifu.Pics](https://waifu.pics/)')
                 .setImage(data.url)
                 .setTimestamp()
             const row = new MessageActionRow()

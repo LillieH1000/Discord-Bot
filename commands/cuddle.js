@@ -13,6 +13,7 @@ module.exports = {
             const embed = new MessageEmbed()
                 .setColor('#FFC0DD')
                 .setTitle('Cuddle Pics')
+                .setDescription('[Nekos.Life](https://nekos.life/)')
                 .setImage(data.url)
                 .setTimestamp()
             const row = new MessageActionRow()

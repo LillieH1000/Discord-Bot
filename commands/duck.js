@@ -13,6 +13,7 @@ module.exports = {
             const embed = new MessageEmbed()
                 .setColor('#FFC0DD')
                 .setTitle('Duck Pics')
+                .setDescription('[Random-d](https://random-d.uk/)')
                 .setImage(data.url)
                 .setTimestamp()
             const row = new MessageActionRow()
