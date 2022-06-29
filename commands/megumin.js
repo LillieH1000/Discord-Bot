@@ -45,7 +45,7 @@ module.exports = {
                 const results = resultscheck(data);
                 const embed = new MessageEmbed()
                     .setColor('#FFC0DD')
-                    .setTitle('Futaba Pics')
+                    .setTitle('Megumin Pics')
                     .setDescription('[r/Megumin and Megumin Explosion Related](https://www.reddit.com/r/Megumin/)')
                     .setImage(data.data.children[results].data.url)
                     .setTimestamp()
