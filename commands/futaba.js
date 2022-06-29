@@ -3,7 +3,7 @@ const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 var _ = require('underscore');
 
 function resultscheck(data) {
-    var option = _.sample([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    var option = _.sample([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
     if (data.data.children[option].data.over_18 == false & data.data.children[option].data.stickied == false & data.data.children[option].data.pinned == false & data.data.children[option].data.is_video == false) {
         return option;
     } else {
@@ -17,7 +17,7 @@ module.exports = {
 		.setDescription('Posts a random futaba (persona 5) picture'),
 	async execute(interaction) {
         await interaction.deferReply();
-        const res = await fetch('https://www.reddit.com/r/churchoffutaba.json?limit=10');
+        const res = await fetch('https://www.reddit.com/r/churchoffutaba.json?limit=20');
         if (res.ok) {
             const data = await res.json();
             const results = resultscheck(data);
