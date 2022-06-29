@@ -1,23 +1,15 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+var _ = require('underscore');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('dog')
-		.setDescription('Posts a random dog picture')
-        .addStringOption(option =>
-            option.setName('source')
-                .setDescription('Choose the dog pictures source')
-                .setRequired(true)
-                .addChoices(
-                    { name: 'Dog.Ceo', value: 'dog_ceo' },
-                    { name: 'Nekos.Life',  value: 'nekos_life' },
-                    { name: 'AlexFlipnote.Dev',  value: 'alexflipnote_dev' }
-                )),
+		.setDescription('Posts a random dog picture'),
 	async execute(interaction) {
         await interaction.deferReply();
-        const source = interaction.options.getString('source');
-        if (source == "dog_ceo") {
+        var option = _.sample([1, 2, 3]);
+        if (option == 1) {
             const res = await fetch('https://dog.ceo/api/breeds/image/random');
             if (res.ok) {
                 const data = await res.json();
@@ -37,7 +29,7 @@ module.exports = {
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
         }
-        if (source == "nekos_life") {
+        if (option == 2) {
             const res = await fetch('https://nekos.life/api/v2/img/woof');
             if (res.ok) {
                 const data = await res.json();
@@ -57,7 +49,7 @@ module.exports = {
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
         }
-        if (source == "alexflipnote_dev") {
+        if (option == 3) {
             const res = await fetch('https://api.alexflipnote.dev/dogs');
             if (res.ok) {
                 const data = await res.json();
