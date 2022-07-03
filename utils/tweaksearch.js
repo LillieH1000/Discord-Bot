@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
 
 module.exports = async(client) => {
     client.on('messageCreate', async message => {
@@ -10,7 +10,7 @@ module.exports = async(client) => {
                 if (res.ok) {
                     const data = await res.json();
                     const author = data.data[0].author.replace(/<.*>/, '');
-                    const embed = new MessageEmbed()
+                    const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .addFields(
                             { name: data.data[0].name, value: data.data[0].description, inline: false },
@@ -24,9 +24,9 @@ module.exports = async(client) => {
                     if (data.data[0].packageIcon !== undefined) {
                         embed.setThumbnail(data.data[0].packageIcon);
                     }
-                    const row = new MessageActionRow()
+                    const row = new ActionRowBuilder()
                         .addComponents(
-                            new MessageButton()
+                            new ButtonBuilder()
                                 .setLabel('Add Repo To Package Manager')
                                 .setStyle('LINK')
                                 .setURL('https://repos.slim.rocks/repo/?repoUrl=' + data.data[0].repository.uri)

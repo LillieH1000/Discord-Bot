@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
 
 module.exports = async(client) => {
     client.on('messageCreate', async message => {
@@ -14,17 +14,17 @@ module.exports = async(client) => {
                         const data1 = await res1.json();
                         const data2 = await res2.json();
 
-                        const embed = new MessageEmbed()
+                        const embed = new EmbedBuilder()
                             .setColor('#FFC0DD')
                             .setDescription('Views: ' + data1.viewCount.toLocaleString() + '\nLikes: ' + data1.likes.toLocaleString() + '\nDislikes: ' + data1.dislikes.toLocaleString())
                             .setTimestamp()
 
                         try {
-                            const row = new MessageActionRow();
+                            const row = new ActionRowBuilder();
 
                             if (data2.linksByPlatform.appleMusic.url != null) {
                                 row.addComponents(
-                                    new MessageButton()
+                                    new ButtonBuilder()
                                         .setLabel('Apple Music')
                                         .setStyle('LINK')
                                         .setURL(data2.linksByPlatform.appleMusic.url)
@@ -32,7 +32,7 @@ module.exports = async(client) => {
                             }
                             if (data2.linksByPlatform.deezer.url != null) {
                                 row.addComponents(
-                                    new MessageButton()
+                                    new ButtonBuilder()
                                         .setLabel('Deezer')
                                         .setStyle('LINK')
                                         .setURL(data2.linksByPlatform.deezer.url)
@@ -40,14 +40,14 @@ module.exports = async(client) => {
                             }
                             if (data2.linksByPlatform.spotify.url != null) {
                                 row.addComponents(
-                                    new MessageButton()
+                                    new ButtonBuilder()
                                         .setLabel('Spotify')
                                         .setStyle('LINK')
                                         .setURL(data2.linksByPlatform.spotify.url)
                                 )
                             }
                             row.addComponents(
-                                new MessageButton()
+                                new ButtonBuilder()
                                     .setLabel('Other')
                                     .setStyle('LINK')
                                     .setURL("https://song.link/y/" + word.match(rx)[1])

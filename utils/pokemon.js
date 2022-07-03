@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
 
 module.exports = async(client) => {
     client.on('interactionCreate', async interaction => {
@@ -63,7 +63,7 @@ module.exports = async(client) => {
                     }
                 }
                     
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle(data.name.charAt(0).toUpperCase() + data.name.slice(1))
                     .addFields(
@@ -91,7 +91,7 @@ module.exports = async(client) => {
                     embed.setThumbnail(data.sprites.other.home.front_default);
                 }
         
-                const menu = new MessageSelectMenu().setPlaceholder('Choose Sprite Image');
+                const menu = new SelectMenuBuilder().setPlaceholder('Choose Sprite Image');
         
                 if (game != '') {
                     embed.addField('Game And Count', game, false);
@@ -137,7 +137,7 @@ module.exports = async(client) => {
                     ])
                 }
         
-                const row = new MessageActionRow().addComponents(menu);
+                const row = new ActionRowBuilder().addComponents(menu);
         
                 if (isInteraction == 1) {
                     await info.update({ embeds: [embed], components: [row] });
