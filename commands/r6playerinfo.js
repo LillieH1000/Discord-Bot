@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const R6API = require('r6api.js').default;
 const { ubisoftaccountinfo } = require('../config.json');
 
@@ -103,7 +103,7 @@ module.exports = {
             .addComponents(
                 new ButtonBuilder()
                     .setLabel('R6 Tracker')
-                    .setStyle('LINK')
+                    .setStyle(ButtonStyle.Link)
                     .setURL('https://r6.tracker.network/profile/pc/' + player.username.toString())
             );
 

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -19,7 +19,7 @@ module.exports = {
                 .addComponents(
                     new ButtonBuilder()
                         .setLabel('View Original Image')
-                        .setStyle('LINK')
+                        .setStyle(ButtonStyle.Link)
                         .setURL(data.file)
                 );
             await interaction.editReply({ embeds: [embed], components: [row] });

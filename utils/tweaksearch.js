@@ -1,4 +1,4 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 module.exports = async(client) => {
     client.on('messageCreate', async message => {
@@ -28,7 +28,7 @@ module.exports = async(client) => {
                         .addComponents(
                             new ButtonBuilder()
                                 .setLabel('Add Repo To Package Manager')
-                                .setStyle('LINK')
+                                .setStyle(ButtonStyle.Link)
                                 .setURL('https://repos.slim.rocks/repo/?repoUrl=' + data.data[0].repository.uri)
                         );
                     await message.delete();

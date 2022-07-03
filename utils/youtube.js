@@ -1,4 +1,4 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 module.exports = async(client) => {
     client.on('messageCreate', async message => {
@@ -26,7 +26,7 @@ module.exports = async(client) => {
                                 row.addComponents(
                                     new ButtonBuilder()
                                         .setLabel('Apple Music')
-                                        .setStyle('LINK')
+                                        .setStyle(ButtonStyle.Link)
                                         .setURL(data2.linksByPlatform.appleMusic.url)
                                 )
                             }
@@ -34,7 +34,7 @@ module.exports = async(client) => {
                                 row.addComponents(
                                     new ButtonBuilder()
                                         .setLabel('Deezer')
-                                        .setStyle('LINK')
+                                        .setStyle(ButtonStyle.Link)
                                         .setURL(data2.linksByPlatform.deezer.url)
                                 )
                             }
@@ -42,14 +42,14 @@ module.exports = async(client) => {
                                 row.addComponents(
                                     new ButtonBuilder()
                                         .setLabel('Spotify')
-                                        .setStyle('LINK')
+                                        .setStyle(ButtonStyle.Link)
                                         .setURL(data2.linksByPlatform.spotify.url)
                                 )
                             }
                             row.addComponents(
                                 new ButtonBuilder()
                                     .setLabel('Other')
-                                    .setStyle('LINK')
+                                    .setStyle(ButtonStyle.Link)
                                     .setURL("https://song.link/y/" + word.match(rx)[1])
                             );
                             await message.reply({ embeds: [embed], components: [row], allowedMentions: { repliedUser: false } });

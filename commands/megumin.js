@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
 
 function resultscheck(data) {
@@ -31,7 +31,7 @@ module.exports = {
                     .addComponents(
                         new ButtonBuilder()
                             .setLabel('View Original Image')
-                            .setStyle('LINK')
+                            .setStyle(ButtonStyle.Link)
                             .setURL(data.url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
@@ -52,13 +52,13 @@ module.exports = {
                     .addComponents(
                         new ButtonBuilder()
                             .setLabel('View Reddit Post')
-                            .setStyle('LINK')
+                            .setStyle(ButtonStyle.Link)
                             .setURL('https://www.reddit.com' + data.data.children[results].data.permalink)
                     )
                     .addComponents(
                         new ButtonBuilder()
                             .setLabel('View Original Image')
-                            .setStyle('LINK')
+                            .setStyle(ButtonStyle.Link)
                             .setURL(data.data.children[results].data.url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });

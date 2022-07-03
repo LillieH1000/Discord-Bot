@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
 
 module.exports = {
@@ -22,7 +22,7 @@ module.exports = {
                     .addComponents(
                         new ButtonBuilder()
                             .setLabel('View Original Image')
-                            .setStyle('LINK')
+                            .setStyle(ButtonStyle.Link)
                             .setURL(data.url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
@@ -42,7 +42,7 @@ module.exports = {
                     .addComponents(
                         new ButtonBuilder()
                             .setLabel('View Original Image')
-                            .setStyle('LINK')
+                            .setStyle(ButtonStyle.Link)
                             .setURL(data.url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
@@ -62,7 +62,7 @@ module.exports = {
                     .addComponents(
                         new ButtonBuilder()
                             .setLabel('View Original Image')
-                            .setStyle('LINK')
+                            .setStyle(ButtonStyle.Link)
                             .setURL(data.results[0].url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
@@ -82,7 +82,7 @@ module.exports = {
                     .addComponents(
                         new ButtonBuilder()
                             .setLabel('View Original Image')
-                            .setStyle('LINK')
+                            .setStyle(ButtonStyle.Link)
                             .setURL(data.url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
@@ -102,7 +102,7 @@ module.exports = {
                     .addComponents(
                         new ButtonBuilder()
                             .setLabel('View Original Image')
-                            .setStyle('LINK')
+                            .setStyle(ButtonStyle.Link)
                             .setURL(data.url)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
