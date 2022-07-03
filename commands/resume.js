@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 var globalsaudio = require('../globals/audio.js');
 
 module.exports = {
@@ -12,7 +11,7 @@ module.exports = {
 
         globalsaudio.player.unpause();
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor('#FFC0DD')
             .setTitle('Music Player')
             .setDescription('Resumed playing audio')

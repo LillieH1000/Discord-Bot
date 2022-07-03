@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -22,7 +21,7 @@ module.exports = {
         const edition = interaction.options.getString('edition');
         const host = interaction.options.getString('host');
         if (edition == "bedrock") {
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor('#FFC0DD')
                 .addField('Notice', 'Bedrock server info is not completed yet, only Java server info is completed so far', false)
                 .setTimestamp()
@@ -52,7 +51,7 @@ module.exports = {
                     }
                 }
 
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle(host.toString())
                     .addField('Online:', online, false)

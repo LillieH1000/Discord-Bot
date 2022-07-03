@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
 var _ = require('underscore');
 
 module.exports = {
@@ -13,15 +12,15 @@ module.exports = {
             const res = await fetch('https://api.waifu.pics/sfw/waifu');
             if (res.ok) {
                 const data = await res.json();
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Waifu Pics')
                     .setDescription('[Waifu.Pics](https://waifu.pics/)')
                     .setImage(data.url)
                     .setTimestamp()
-                const row = new MessageActionRow()
+                const row = new ActionRowBuilder()
                     .addComponents(
-                        new MessageButton()
+                        new ButtonBuilder()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
                             .setURL(data.url)
@@ -33,15 +32,15 @@ module.exports = {
             const res = await fetch('https://nekos.best/api/v2/waifu');
             if (res.ok) {
                 const data = await res.json();
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Waifu Pics')
                     .setDescription('[Nekos.Best](https://nekos.best/)')
                     .setImage(data.results[0].url)
                     .setTimestamp()
-                const row = new MessageActionRow()
+                const row = new ActionRowBuilder()
                     .addComponents(
-                        new MessageButton()
+                        new ButtonBuilder()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
                             .setURL(data.results[0].url)
@@ -53,15 +52,15 @@ module.exports = {
             const res = await fetch('https://neko-love.xyz/api/v1/waifu/');
             if (res.ok) {
                 const data = await res.json();
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Waifu Pics')
                     .setDescription('[Neko-Love](https://neko-love.xyz/)')
                     .setImage(data.url)
                     .setTimestamp()
-                const row = new MessageActionRow()
+                const row = new ActionRowBuilder()
                     .addComponents(
-                        new MessageButton()
+                        new ButtonBuilder()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
                             .setURL(data.url)

@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -10,15 +9,15 @@ module.exports = {
         const res = await fetch('https://randomfox.ca/floof/');
         if (res.ok) {
             const data = await res.json();
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor('#FFC0DD')
                 .setTitle('Fox Pics')
                 .setDescription('[Random Fox](https://randomfox.ca/)')
                 .setImage(data.image)
                 .setTimestamp()
-            const row = new MessageActionRow()
+            const row = new ActionRowBuilder()
                 .addComponents(
-                    new MessageButton()
+                    new ButtonBuilder()
                         .setLabel('View Original Image')
                         .setStyle('LINK')
                         .setURL(data.image)

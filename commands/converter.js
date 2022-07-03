@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -22,7 +21,7 @@ module.exports = {
         const conversion = interaction.options.getString('conversion');
         const value = interaction.options.getString('value');
         if (conversion == 'fahrenheit_to_celcius') {
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor('#FFC0DD')
                 .setTitle('Converter')
                 .addField('Fahrenheit -> Celcius', ((parseInt(value) - 32) / 1.8).toString(), false)
@@ -30,7 +29,7 @@ module.exports = {
             await interaction.editReply({ embeds: [embed] });
         }
         if (conversion == 'celcius_to_fahrenheit') {
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor('#FFC0DD')
                 .setTitle('Converter')
                 .addField('Celcius -> Fahrenheit', ((parseInt(value) * 1.8) + 32).toString(), false)

@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
 const R6API = require('r6api.js').default;
 const { ubisoftaccountinfo } = require('../config.json');
 
@@ -82,7 +81,7 @@ module.exports = {
         var custominfo = '';
         custominfo += 'Playtime: ' + stats.pvp.queues.custom.playtime.toLocaleString();
         
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor('#FFC0DD')
             .setTitle(player.username.toString())
             .addField('Info', playerinfo, false)
@@ -100,9 +99,9 @@ module.exports = {
             embed.setThumbnail(player.avatar[Object.keys(player.avatar)[0]]);
         }
 
-        const row = new MessageActionRow()
+        const row = new ActionRowBuilder()
             .addComponents(
-                new MessageButton()
+                new ButtonBuilder()
                     .setLabel('R6 Tracker')
                     .setStyle('LINK')
                     .setURL('https://r6.tracker.network/profile/pc/' + player.username.toString())

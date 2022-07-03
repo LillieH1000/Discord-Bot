@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 var globalsaudio = require('../globals/audio.js');
 
 module.exports = {
@@ -15,7 +14,7 @@ module.exports = {
         globalsaudio.titles = [];
         globalsaudio.connectionstatus = 0;
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor('#FFC0DD')
             .setTitle('Music Player')
             .setDescription('Stopped play audio and disconnected from voice chat')

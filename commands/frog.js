@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
 var _ = require('underscore');
 
 module.exports = {
@@ -65,15 +64,15 @@ module.exports = {
             "http://www.allaboutfrogs.org/funstuff/random/0053.jpg",
             "http://www.allaboutfrogs.org/funstuff/random/0054.jpg"
         ]);
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor('#FFC0DD')
             .setTitle('Frog Pics')
             .setDescription('[Frogland](http://allaboutfrogs.org/)')
             .setImage(option)
             .setTimestamp()
-        const row = new MessageActionRow()
+        const row = new ActionRowBuilder()
             .addComponents(
-                new MessageButton()
+                new ButtonBuilder()
                     .setLabel('View Original Image')
                     .setStyle('LINK')
                     .setURL(option)

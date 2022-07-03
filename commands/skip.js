@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { createAudioResource } = require('@discordjs/voice');
 var globalsaudio = require('../globals/audio.js');
 
@@ -22,7 +21,7 @@ module.exports = {
             globalsaudio.titles.shift();
         }
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setColor('#FFC0DD')
             .setTitle('Music Player')
             .setDescription('Skipped playing audio')

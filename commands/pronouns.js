@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -79,7 +78,7 @@ module.exports = {
             if (data.pronouns == "avoid") {
                 pronoun = "Avoid pronouns, use my name";
             }
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor('#FFC0DD')
                 .setTitle('PronounDB')
                 .addField('Pronouns of ' + user.username + ':', pronoun, false)

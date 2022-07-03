@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
 var _ = require('underscore');
 
 function resultscheck(data) {
@@ -22,15 +21,15 @@ module.exports = {
             const res = await fetch('https://api.waifu.pics/sfw/megumin');
             if (res.ok) {
                 const data = await res.json();
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Megumin Pics')
                     .setDescription('[Waifu.Pics](https://waifu.pics/)')
                     .setImage(data.url)
                     .setTimestamp()
-                const row = new MessageActionRow()
+                const row = new ActionRowBuilder()
                     .addComponents(
-                        new MessageButton()
+                        new ButtonBuilder()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
                             .setURL(data.url)
@@ -43,21 +42,21 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const results = resultscheck(data);
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Megumin Pics')
                     .setDescription('[r/Megumin and Megumin Explosion Related](https://www.reddit.com/r/Megumin/)')
                     .setImage(data.data.children[results].data.url)
                     .setTimestamp()
-                const row = new MessageActionRow()
+                const row = new ActionRowBuilder()
                     .addComponents(
-                        new MessageButton()
+                        new ButtonBuilder()
                             .setLabel('View Reddit Post')
                             .setStyle('LINK')
                             .setURL('https://www.reddit.com' + data.data.children[results].data.permalink)
                     )
                     .addComponents(
-                        new MessageButton()
+                        new ButtonBuilder()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
                             .setURL(data.data.children[results].data.url)

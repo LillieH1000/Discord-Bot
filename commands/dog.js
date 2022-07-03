@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
 var _ = require('underscore');
 
 module.exports = {
@@ -13,15 +12,15 @@ module.exports = {
             const res = await fetch('https://dog.ceo/api/breeds/image/random');
             if (res.ok) {
                 const data = await res.json();
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Dog Pics')
                     .setDescription('[Dog.Ceo](https://dog.ceo/)')
                     .setImage(data.message)
                     .setTimestamp()
-                const row = new MessageActionRow()
+                const row = new ActionRowBuilder()
                     .addComponents(
-                        new MessageButton()
+                        new ButtonBuilder()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
                             .setURL(data.message)
@@ -33,15 +32,15 @@ module.exports = {
             const res = await fetch('https://nekos.life/api/v2/img/woof');
             if (res.ok) {
                 const data = await res.json();
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Dog Pics')
                     .setDescription('[Nekos.Life](https://nekos.life/)')
                     .setImage(data.url)
                     .setTimestamp()
-                const row = new MessageActionRow()
+                const row = new ActionRowBuilder()
                     .addComponents(
-                        new MessageButton()
+                        new ButtonBuilder()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
                             .setURL(data.url)
@@ -53,15 +52,15 @@ module.exports = {
             const res = await fetch('https://api.alexflipnote.dev/dogs');
             if (res.ok) {
                 const data = await res.json();
-                const embed = new MessageEmbed()
+                const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Dog Pics')
                     .setDescription('[AlexFlipnote.Dev](https://alexflipnote.dev/)')
                     .setImage(data.file)
                     .setTimestamp()
-                const row = new MessageActionRow()
+                const row = new ActionRowBuilder()
                     .addComponents(
-                        new MessageButton()
+                        new ButtonBuilder()
                             .setLabel('View Original Image')
                             .setStyle('LINK')
                             .setURL(data.file)

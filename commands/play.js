@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { joinVoiceChannel, getVoiceConnection, createAudioResource, AudioPlayerStatus } = require('@discordjs/voice');
-const { MessageEmbed } = require('discord.js');
+const { joinVoiceChannel, getVoiceConnection, createAudioResource } = require('@discordjs/voice');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 var globalsaudio = require('../globals/audio.js');
 const tts = require('google-translate-tts');
 const ytdl = require('ytdl-core');
@@ -109,7 +108,7 @@ module.exports = {
                 globalsaudio.queue.shift();
                 globalsaudio.titles.shift();
             }
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor('#FFC0DD')
                 .setTitle('Music Player')
                 .setDescription('Queued: ' + info.player_response.videoDetails.title)
