@@ -81,7 +81,9 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor('#FFC0DD')
                 .setTitle('PronounDB')
-                .addField('Pronouns of ' + user.username + ':', pronoun, false)
+                embed.addFields(
+                    { name: 'Pronouns of ' + user.username + ':', value: pronoun, inline: false },
+                )
                 .setTimestamp()
             await interaction.editReply({ embeds: [embed], ephemeral: true });
         }

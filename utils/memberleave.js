@@ -9,7 +9,9 @@ module.exports = async(client) => {
                 .setColor('#FFC0DD')
                 .setAuthor({ name: guildMember.user.username, iconURL: guildMember.user.displayAvatarURL() })
                 .setTitle('Member Left')
-                .addField('Created At:', createdDate, false)
+                .addFields(
+                    { name: 'Created At:', value: createdDate, inline: false },
+                )
                 .setFooter({ text: 'ID: ' + guildMember.user.id })
                 .setTimestamp()
                 const guild = guildMember.guild;

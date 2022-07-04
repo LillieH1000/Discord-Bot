@@ -84,11 +84,13 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setColor('#FFC0DD')
             .setTitle(player.username.toString())
-            .addField('Info', playerinfo, false)
-            .addField('General', generalinfo, false)
-            .addField('Casual', casualinfo, false)
-            .addField('Ranked', rankedinfo, false)
-            .addField('Custom', custominfo, false)
+            .addFields(
+                { name: 'Info', value: playerinfo, inline: false },
+                { name: 'General', value: generalinfo, inline: false },
+                { name: 'Casual', value: casualinfo, inline: false },
+                { name: 'Ranked', value: rankedinfo, inline: false },
+                { name: 'Custom', value: custominfo, inline: false },
+            )
             .setTimestamp()
 
         if (player.avatar[Object.keys(player.avatar)[2]] != null) {

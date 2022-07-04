@@ -94,7 +94,9 @@ module.exports = async(client) => {
                 const menu = new SelectMenuBuilder().setPlaceholder('Choose Sprite Image');
         
                 if (game != '') {
-                    embed.addField('Game And Count', game, false);
+                    embed.addFields(
+                        { name: 'Game And Count', value: game, inline: false },
+                    );
                     menu.setCustomId(data.name + 'custommenuid' + game);
                 } else {
                     menu.setCustomId(data.name + 'custommenuid');
