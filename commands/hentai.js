@@ -2,12 +2,12 @@ const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, Butt
 var _ = require('underscore');
 
 async function yuriimages() {
-    const res = await fetch('https://www.reddit.com/r/yuri.json?limit=100');
+    const res = await fetch('https://www.reddit.com/r/yurihentai.json?limit=100');
     if (res.ok) {
         const images = [];
         const data = await res.json();
         data.data.children.forEach((child) => {
-            if (child.data.over_18 == false) {
+            if (child.data.over_18 == true) {
                 if (child.data.url.endsWith('jpg') || child.data.url.endsWith('jpeg') || child.data.url.endsWith('png') || child.data.url.endsWith('gif')) {
                     images.push(child.data.url);
                 }
@@ -653,7 +653,7 @@ module.exports = {
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Yuri)')
-                        .setDescription('[r/Yuri and Shoujo-ai](https://www.reddit.com/r/yuri/)')
+                        .setDescription('[r/YuriHentai](https://www.reddit.com/r/YuriHentai/)')
                         .setImage(image)
                         .setTimestamp()
                     const row = new ActionRowBuilder()
