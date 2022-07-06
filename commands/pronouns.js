@@ -81,7 +81,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor('#FFC0DD')
                 .setTitle('PronounDB')
-                embed.addFields(
+                .addFields(
                     { name: 'Pronouns of ' + user.username + ':', value: pronoun, inline: false },
                 )
                 .setTimestamp()

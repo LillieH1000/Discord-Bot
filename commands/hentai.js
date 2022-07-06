@@ -1,6 +1,24 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
 
+async function masturbationimages() {
+    const res = await fetch('https://www.reddit.com/r/masturbationhentai.json?limit=100');
+    if (res.ok) {
+        const images = [];
+        const data = await res.json();
+        data.data.children.forEach((child) => {
+            if (child.data.over_18 == true) {
+                if (child.data.url.endsWith('jpg') || child.data.url.endsWith('jpeg') || child.data.url.endsWith('png') || child.data.url.endsWith('gif')) {
+                    images.push(child.data.url);
+                }
+            }
+        });
+        return images;
+    } else {
+        return null;
+    }
+}
+
 async function yuriimages() {
     const res = await fetch('https://www.reddit.com/r/yurihentai.json?limit=100');
     if (res.ok) {
@@ -383,21 +401,42 @@ module.exports = {
                 }
             }
             if (category == "masturbation") {
-                const res = await fetch('https://hmtai.herokuapp.com/nsfw/masturbation');
-                if (res.ok) {
-                    const data = await res.json();
+                var option = _.sample([1, 2]);
+                if (option == 1) {
+                    const res = await fetch('https://hmtai.herokuapp.com/nsfw/masturbation');
+                    if (res.ok) {
+                        const data = await res.json();
+                        const embed = new EmbedBuilder()
+                            .setColor('#FFC0DD')
+                            .setTitle('Hentai Pics (Masturbation)')
+                            .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
+                            .setImage(data.url)
+                            .setTimestamp()
+                        const row = new ActionRowBuilder()
+                            .addComponents(
+                                new ButtonBuilder()
+                                    .setLabel('View Original Image')
+                                    .setStyle(ButtonStyle.Link)
+                                    .setURL(data.url)
+                            );
+                        await interaction.editReply({ embeds: [embed], components: [row] });
+                    }
+                }
+                if (option == 2) {
+                    const imageslist = await masturbationimages();
+                    var image = _.sample(imageslist);
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Masturbation)')
-                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
-                        .setImage(data.url)
+                        .setDescription('[r/MasturbationHentai](https://www.reddit.com/r/MasturbationHentai/)')
+                        .setImage(image)
                         .setTimestamp()
                     const row = new ActionRowBuilder()
                         .addComponents(
                             new ButtonBuilder()
                                 .setLabel('View Original Image')
                                 .setStyle(ButtonStyle.Link)
-                                .setURL(data.url)
+                                .setURL(image)
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
@@ -666,6 +705,14 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
             }
+        } else {
+            await interaction.deferReply({ ephemeral: true });
+            const embed = new EmbedBuilder()
+                .setColor('#FFC0DD')
+                .setTitle('Notice')
+                .setDescription('This command can only be ran in nsfw channels')
+                .setTimestamp()
+            await interaction.editReply({ embeds: [embed], ephemeral: true });
         }
 	},
 };
