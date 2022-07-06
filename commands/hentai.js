@@ -1,6 +1,42 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
 
+async function bdsmimages() {
+    const res = await fetch('https://www.reddit.com/r/hentaibondage.json?limit=100');
+    if (res.ok) {
+        const images = [];
+        const data = await res.json();
+        data.data.children.forEach((child) => {
+            if (child.data.over_18 == true) {
+                if (child.data.url.endsWith('jpg') || child.data.url.endsWith('jpeg') || child.data.url.endsWith('png') || child.data.url.endsWith('gif')) {
+                    images.push(child.data.url);
+                }
+            }
+        });
+        return images;
+    } else {
+        return null;
+    }
+}
+
+async function femdomimages() {
+    const res = await fetch('https://www.reddit.com/r/hentaifemdom.json?limit=100');
+    if (res.ok) {
+        const images = [];
+        const data = await res.json();
+        data.data.children.forEach((child) => {
+            if (child.data.over_18 == true) {
+                if (child.data.url.endsWith('jpg') || child.data.url.endsWith('jpeg') || child.data.url.endsWith('png') || child.data.url.endsWith('gif')) {
+                    images.push(child.data.url);
+                }
+            }
+        });
+        return images;
+    } else {
+        return null;
+    }
+}
+
 async function masturbationimages() {
     const res = await fetch('https://www.reddit.com/r/masturbationhentai.json?limit=100');
     if (res.ok) {
@@ -118,21 +154,42 @@ module.exports = {
                 }
             }
             if (category == "bdsm") {
-                const res = await fetch('https://hmtai.herokuapp.com/nsfw/bdsm');
-                if (res.ok) {
-                    const data = await res.json();
+                var option = _.sample([1, 2]);
+                if (option == 1) {
+                    const res = await fetch('https://hmtai.herokuapp.com/nsfw/bdsm');
+                    if (res.ok) {
+                        const data = await res.json();
+                        const embed = new EmbedBuilder()
+                            .setColor('#FFC0DD')
+                            .setTitle('Hentai Pics (Bdsm)')
+                            .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
+                            .setImage(data.url)
+                            .setTimestamp()
+                        const row = new ActionRowBuilder()
+                            .addComponents(
+                                new ButtonBuilder()
+                                    .setLabel('View Original Image')
+                                    .setStyle(ButtonStyle.Link)
+                                    .setURL(data.url)
+                            );
+                        await interaction.editReply({ embeds: [embed], components: [row] });
+                    }
+                }
+                if (option == 2) {
+                    const imageslist = await bdsmimages();
+                    var image = _.sample(imageslist);
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Bdsm)')
-                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
-                        .setImage(data.url)
+                        .setDescription('[r/Hentai Bondage](https://www.reddit.com/r/hentaibondage/)')
+                        .setImage(image)
                         .setTimestamp()
                     const row = new ActionRowBuilder()
                         .addComponents(
                             new ButtonBuilder()
                                 .setLabel('View Original Image')
                                 .setStyle(ButtonStyle.Link)
-                                .setURL(data.url)
+                                .setURL(image)
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
@@ -301,21 +358,42 @@ module.exports = {
                 }
             }
             if (category == "femdom") {
-                const res = await fetch('https://hmtai.herokuapp.com/nsfw/femdom');
-                if (res.ok) {
-                    const data = await res.json();
+                var option = _.sample([1, 2]);
+                if (option == 1) {
+                    const res = await fetch('https://hmtai.herokuapp.com/nsfw/femdom');
+                    if (res.ok) {
+                        const data = await res.json();
+                        const embed = new EmbedBuilder()
+                            .setColor('#FFC0DD')
+                            .setTitle('Hentai Pics (Femdom)')
+                            .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
+                            .setImage(data.url)
+                            .setTimestamp()
+                        const row = new ActionRowBuilder()
+                            .addComponents(
+                                new ButtonBuilder()
+                                    .setLabel('View Original Image')
+                                    .setStyle(ButtonStyle.Link)
+                                    .setURL(data.url)
+                            );
+                        await interaction.editReply({ embeds: [embed], components: [row] });
+                    }
+                }
+                if (option == 2) {
+                    const imageslist = await femdomimages();
+                    var image = _.sample(imageslist);
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Femdom)')
-                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
-                        .setImage(data.url)
+                        .setDescription('[r/HentaiFemdom](https://www.reddit.com/r/hentaifemdom/)')
+                        .setImage(image)
                         .setTimestamp()
                     const row = new ActionRowBuilder()
                         .addComponents(
                             new ButtonBuilder()
                                 .setLabel('View Original Image')
                                 .setStyle(ButtonStyle.Link)
-                                .setURL(data.url)
+                                .setURL(image)
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
