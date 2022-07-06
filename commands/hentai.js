@@ -3,12 +3,22 @@ var _ = require('underscore');
 
 async function images(category) {
     var res;
-    if (category == 'femboy') {
+    if (category == 'anal') {
+        res = await fetch('https://www.reddit.com/r/hentaianal.json?limit=100');
+    } else if (category == 'cum') {
+        res = await fetch('https://www.reddit.com/r/cumhentai.json?limit=100');
+    } else if (category == 'femboy') {
         res = await fetch('https://www.reddit.com/r/femboyhentai.json?limit=100');
+    } else if (category == 'femboytwo') {
+        res = await fetch('https://www.reddit.com/r/femboysandhentai.json?limit=100');
     } else if (category == 'futanari') {
         res = await fetch('https://www.reddit.com/r/futanari.json?limit=100');
     } else if (category == 'masturbation') {
         res = await fetch('https://www.reddit.com/r/masturbationhentai.json?limit=100');
+    } else if (category == 'tentacles') {
+        res = await fetch('https://www.reddit.com/r/tentai.json?limit=100');
+    } else if (category == 'trap') {
+        res = await fetch('https://www.reddit.com/r/traphentai.json?limit=100');
     } else if (category == 'yuri') {
         res = await fetch('https://www.reddit.com/r/yurihentai.json?limit=100');
     }
@@ -69,21 +79,42 @@ module.exports = {
             await interaction.deferReply();
             const category = interaction.options.getString('category');
             if (category == "anal") {
-                const res = await fetch('https://hmtai.herokuapp.com/nsfw/anal');
-                if (res.ok) {
-                    const data = await res.json();
+                var option = _.sample([1, 2]);
+                if (option == 1) {
+                    const res = await fetch('https://hmtai.herokuapp.com/nsfw/anal');
+                    if (res.ok) {
+                        const data = await res.json();
+                        const embed = new EmbedBuilder()
+                            .setColor('#FFC0DD')
+                            .setTitle('Hentai Pics (Anal)')
+                            .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
+                            .setImage(data.url)
+                            .setTimestamp()
+                        const row = new ActionRowBuilder()
+                            .addComponents(
+                                new ButtonBuilder()
+                                    .setLabel('View Original Image')
+                                    .setStyle(ButtonStyle.Link)
+                                    .setURL(data.url)
+                            );
+                        await interaction.editReply({ embeds: [embed], components: [row] });
+                    }
+                }
+                if (option == 2) {
+                    const imageslist = await images('anal');
+                    var image = _.sample(imageslist);
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Anal)')
-                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
-                        .setImage(data.url)
+                        .setDescription('[r/HentaiAnal](https://www.reddit.com/r/HentaiAnal/)')
+                        .setImage(image)
                         .setTimestamp()
                     const row = new ActionRowBuilder()
                         .addComponents(
                             new ButtonBuilder()
                                 .setLabel('View Original Image')
                                 .setStyle(ButtonStyle.Link)
-                                .setURL(data.url)
+                                .setURL(image)
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
@@ -232,21 +263,42 @@ module.exports = {
                 }
             }
             if (category == "cum") {
-                const res = await fetch('https://hmtai.herokuapp.com/nsfw/cum');
-                if (res.ok) {
-                    const data = await res.json();
+                var option = _.sample([1, 2]);
+                if (option == 1) {
+                    const res = await fetch('https://hmtai.herokuapp.com/nsfw/cum');
+                    if (res.ok) {
+                        const data = await res.json();
+                        const embed = new EmbedBuilder()
+                            .setColor('#FFC0DD')
+                            .setTitle('Hentai Pics (Cum)')
+                            .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
+                            .setImage(data.url)
+                            .setTimestamp()
+                        const row = new ActionRowBuilder()
+                            .addComponents(
+                                new ButtonBuilder()
+                                    .setLabel('View Original Image')
+                                    .setStyle(ButtonStyle.Link)
+                                    .setURL(data.url)
+                            );
+                        await interaction.editReply({ embeds: [embed], components: [row] });
+                    }
+                }
+                if (option == 2) {
+                    const imageslist = await images('cum');
+                    var image = _.sample(imageslist);
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Cum)')
-                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
-                        .setImage(data.url)
+                        .setDescription('[r/CumHentai](https://www.reddit.com/r/CumHentai/)')
+                        .setImage(image)
                         .setTimestamp()
                     const row = new ActionRowBuilder()
                         .addComponents(
                             new ButtonBuilder()
                                 .setLabel('View Original Image')
                                 .setStyle(ButtonStyle.Link)
-                                .setURL(data.url)
+                                .setURL(image)
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
@@ -272,22 +324,43 @@ module.exports = {
                 }
             }
             if (category == "femboy") {
-                const imageslist = await images('femboy');
-                var image = _.sample(imageslist);
-                const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
-                    .setTitle('Hentai Pics (Femboy)')
-                    .setDescription('[r/FemboyHentai](https://www.reddit.com/r/FemboyHentai/)')
-                    .setImage(image)
-                    .setTimestamp()
-                const row = new ActionRowBuilder()
-                    .addComponents(
-                        new ButtonBuilder()
-                            .setLabel('View Original Image')
-                            .setStyle(ButtonStyle.Link)
-                            .setURL(image)
-                    );
-                await interaction.editReply({ embeds: [embed], components: [row] });
+                var option = _.sample([1, 2]);
+                if (option == 1) {
+                    const imageslist = await images('femboy');
+                    var image = _.sample(imageslist);
+                    const embed = new EmbedBuilder()
+                        .setColor('#FFC0DD')
+                        .setTitle('Hentai Pics (Femboy)')
+                        .setDescription('[r/FemboyHentai](https://www.reddit.com/r/FemboyHentai/)')
+                        .setImage(image)
+                        .setTimestamp()
+                    const row = new ActionRowBuilder()
+                        .addComponents(
+                            new ButtonBuilder()
+                                .setLabel('View Original Image')
+                                .setStyle(ButtonStyle.Link)
+                                .setURL(image)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                }
+                if (option == 2) {
+                    const imageslist = await images('femboytwo');
+                    var image = _.sample(imageslist);
+                    const embed = new EmbedBuilder()
+                        .setColor('#FFC0DD')
+                        .setTitle('Hentai Pics (Femboy)')
+                        .setDescription('[r/FemboysAndHentai](https://www.reddit.com/r/FemboysAndHentai/)')
+                        .setImage(image)
+                        .setTimestamp()
+                    const row = new ActionRowBuilder()
+                        .addComponents(
+                            new ButtonBuilder()
+                                .setLabel('View Original Image')
+                                .setStyle(ButtonStyle.Link)
+                                .setURL(image)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                }
             }
             if (category == "footjob") {
                 const res = await fetch('https://hmtai.herokuapp.com/nsfw/footjob');
@@ -552,21 +625,42 @@ module.exports = {
                 }
             }
             if (category == "tentacles") {
-                const res = await fetch('https://hmtai.herokuapp.com/nsfw/tentacles');
-                if (res.ok) {
-                    const data = await res.json();
+                var option = _.sample([1, 2]);
+                if (option == 1) {
+                    const res = await fetch('https://hmtai.herokuapp.com/nsfw/tentacles');
+                    if (res.ok) {
+                        const data = await res.json();
+                        const embed = new EmbedBuilder()
+                            .setColor('#FFC0DD')
+                            .setTitle('Hentai Pics (Tentacles)')
+                            .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
+                            .setImage(data.url)
+                            .setTimestamp()
+                        const row = new ActionRowBuilder()
+                            .addComponents(
+                                new ButtonBuilder()
+                                    .setLabel('View Original Image')
+                                    .setStyle(ButtonStyle.Link)
+                                    .setURL(data.url)
+                            );
+                        await interaction.editReply({ embeds: [embed], components: [row] });
+                    }
+                }
+                if (option == 2) {
+                    const imageslist = await images('tentacles');
+                    var image = _.sample(imageslist);
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Tentacles)')
-                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
-                        .setImage(data.url)
+                        .setDescription('[r/Tentai](https://www.reddit.com/r/Tentai/)')
+                        .setImage(image)
                         .setTimestamp()
                     const row = new ActionRowBuilder()
                         .addComponents(
                             new ButtonBuilder()
                                 .setLabel('View Original Image')
                                 .setStyle(ButtonStyle.Link)
-                                .setURL(data.url)
+                                .setURL(image)
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
@@ -592,21 +686,42 @@ module.exports = {
                 }
             }
             if (category == "trap") {
-                const res = await fetch('https://api.waifu.pics/nsfw/trap');
-                if (res.ok) {
-                    const data = await res.json();
+                var option = _.sample([1, 2]);
+                if (option == 1) {
+                    const res = await fetch('https://api.waifu.pics/nsfw/trap');
+                    if (res.ok) {
+                        const data = await res.json();
+                        const embed = new EmbedBuilder()
+                            .setColor('#FFC0DD')
+                            .setTitle('Hentai Pics (Trap)')
+                            .setDescription('[Waifu.Pics](https://waifu.pics/)')
+                            .setImage(data.url)
+                            .setTimestamp()
+                        const row = new ActionRowBuilder()
+                            .addComponents(
+                                new ButtonBuilder()
+                                    .setLabel('View Original Image')
+                                    .setStyle(ButtonStyle.Link)
+                                    .setURL(data.url)
+                            );
+                        await interaction.editReply({ embeds: [embed], components: [row] });
+                    }
+                }
+                if (option == 2) {
+                    const imageslist = await images('trap');
+                    var image = _.sample(imageslist);
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Trap)')
-                        .setDescription('[Waifu.Pics](https://waifu.pics/)')
-                        .setImage(data.url)
+                        .setDescription('[r/Trap Hentai](https://www.reddit.com/r/traphentai/)')
+                        .setImage(image)
                         .setTimestamp()
                     const row = new ActionRowBuilder()
                         .addComponents(
                             new ButtonBuilder()
                                 .setLabel('View Original Image')
                                 .setStyle(ButtonStyle.Link)
-                                .setURL(data.url)
+                                .setURL(image)
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
