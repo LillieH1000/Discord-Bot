@@ -1,62 +1,17 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
 
-async function bdsmimages() {
-    const res = await fetch('https://www.reddit.com/r/hentaibondage.json?limit=100');
-    if (res.ok) {
-        const images = [];
-        const data = await res.json();
-        data.data.children.forEach((child) => {
-            if (child.data.over_18 == true) {
-                if (child.data.url.endsWith('jpg') || child.data.url.endsWith('jpeg') || child.data.url.endsWith('png') || child.data.url.endsWith('gif')) {
-                    images.push(child.data.url);
-                }
-            }
-        });
-        return images;
-    } else {
-        return null;
+async function images(category) {
+    var res;
+    if (category == 'femboy') {
+        res = await fetch('https://www.reddit.com/r/femboyhentai.json?limit=100');
+    } else if (category == 'futanari') {
+        res = await fetch('https://www.reddit.com/r/futanari.json?limit=100');
+    } else if (category == 'masturbation') {
+        res = await fetch('https://www.reddit.com/r/masturbationhentai.json?limit=100');
+    } else if (category == 'yuri') {
+        res = await fetch('https://www.reddit.com/r/yurihentai.json?limit=100');
     }
-}
-
-async function femdomimages() {
-    const res = await fetch('https://www.reddit.com/r/hentaifemdom.json?limit=100');
-    if (res.ok) {
-        const images = [];
-        const data = await res.json();
-        data.data.children.forEach((child) => {
-            if (child.data.over_18 == true) {
-                if (child.data.url.endsWith('jpg') || child.data.url.endsWith('jpeg') || child.data.url.endsWith('png') || child.data.url.endsWith('gif')) {
-                    images.push(child.data.url);
-                }
-            }
-        });
-        return images;
-    } else {
-        return null;
-    }
-}
-
-async function masturbationimages() {
-    const res = await fetch('https://www.reddit.com/r/masturbationhentai.json?limit=100');
-    if (res.ok) {
-        const images = [];
-        const data = await res.json();
-        data.data.children.forEach((child) => {
-            if (child.data.over_18 == true) {
-                if (child.data.url.endsWith('jpg') || child.data.url.endsWith('jpeg') || child.data.url.endsWith('png') || child.data.url.endsWith('gif')) {
-                    images.push(child.data.url);
-                }
-            }
-        });
-        return images;
-    } else {
-        return null;
-    }
-}
-
-async function yuriimages() {
-    const res = await fetch('https://www.reddit.com/r/yurihentai.json?limit=100');
     if (res.ok) {
         const images = [];
         const data = await res.json();
@@ -85,15 +40,15 @@ module.exports = {
                 .addChoices(
                     { name: 'Anal', value: 'anal' },
                     { name: 'Ass', value: 'ass' },
-                    { name: 'Bdsm', value: 'bdsm' },
                     { name: 'Blowjob', value: 'blowjob' },
                     { name: 'Boobjob', value: 'boobjob' },
                     { name: 'Boobs', value: 'boobs' },
                     { name: 'Creampie', value: 'creampie' },
                     { name: 'Cum', value: 'cum' },
                     { name: 'Ero', value: 'ero' },
-                    { name: 'Femdom', value: 'femdom' },
+                    { name: 'Femboy', value: 'femboy' },
                     { name: 'Footjob', value: 'footjob' },
+                    { name: 'Futanari', value: 'futanari' },
                     { name: 'Gangbang', value: 'gangbang' },
                     { name: 'Glasses', value: 'glasses' },
                     { name: 'Handjob', value: 'handjob' },
@@ -149,47 +104,6 @@ module.exports = {
                                 .setLabel('View Original Image')
                                 .setStyle(ButtonStyle.Link)
                                 .setURL(data.url)
-                        );
-                    await interaction.editReply({ embeds: [embed], components: [row] });
-                }
-            }
-            if (category == "bdsm") {
-                var option = _.sample([1, 2]);
-                if (option == 1) {
-                    const res = await fetch('https://hmtai.herokuapp.com/nsfw/bdsm');
-                    if (res.ok) {
-                        const data = await res.json();
-                        const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
-                            .setTitle('Hentai Pics (Bdsm)')
-                            .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
-                            .setImage(data.url)
-                            .setTimestamp()
-                        const row = new ActionRowBuilder()
-                            .addComponents(
-                                new ButtonBuilder()
-                                    .setLabel('View Original Image')
-                                    .setStyle(ButtonStyle.Link)
-                                    .setURL(data.url)
-                            );
-                        await interaction.editReply({ embeds: [embed], components: [row] });
-                    }
-                }
-                if (option == 2) {
-                    const imageslist = await bdsmimages();
-                    var image = _.sample(imageslist);
-                    const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
-                        .setTitle('Hentai Pics (Bdsm)')
-                        .setDescription('[r/Hentai Bondage](https://www.reddit.com/r/hentaibondage/)')
-                        .setImage(image)
-                        .setTimestamp()
-                    const row = new ActionRowBuilder()
-                        .addComponents(
-                            new ButtonBuilder()
-                                .setLabel('View Original Image')
-                                .setStyle(ButtonStyle.Link)
-                                .setURL(image)
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
@@ -357,46 +271,23 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
             }
-            if (category == "femdom") {
-                var option = _.sample([1, 2]);
-                if (option == 1) {
-                    const res = await fetch('https://hmtai.herokuapp.com/nsfw/femdom');
-                    if (res.ok) {
-                        const data = await res.json();
-                        const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
-                            .setTitle('Hentai Pics (Femdom)')
-                            .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
-                            .setImage(data.url)
-                            .setTimestamp()
-                        const row = new ActionRowBuilder()
-                            .addComponents(
-                                new ButtonBuilder()
-                                    .setLabel('View Original Image')
-                                    .setStyle(ButtonStyle.Link)
-                                    .setURL(data.url)
-                            );
-                        await interaction.editReply({ embeds: [embed], components: [row] });
-                    }
-                }
-                if (option == 2) {
-                    const imageslist = await femdomimages();
-                    var image = _.sample(imageslist);
-                    const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
-                        .setTitle('Hentai Pics (Femdom)')
-                        .setDescription('[r/HentaiFemdom](https://www.reddit.com/r/hentaifemdom/)')
-                        .setImage(image)
-                        .setTimestamp()
-                    const row = new ActionRowBuilder()
-                        .addComponents(
-                            new ButtonBuilder()
-                                .setLabel('View Original Image')
-                                .setStyle(ButtonStyle.Link)
-                                .setURL(image)
-                        );
-                    await interaction.editReply({ embeds: [embed], components: [row] });
-                }
+            if (category == "femboy") {
+                const imageslist = await images('femboy');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Femboy)')
+                    .setDescription('[r/FemboyHentai](https://www.reddit.com/r/FemboyHentai/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
             }
             if (category == "footjob") {
                 const res = await fetch('https://hmtai.herokuapp.com/nsfw/footjob');
@@ -417,6 +308,24 @@ module.exports = {
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
+            }
+            if (category == "futanari") {
+                const imageslist = await images('futanari');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Futanari)')
+                    .setDescription('[r/Futanari](https://www.reddit.com/r/futanari/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
             }
             if (category == "gangbang") {
                 const res = await fetch('https://hmtai.herokuapp.com/nsfw/gangbang');
@@ -501,7 +410,7 @@ module.exports = {
                     }
                 }
                 if (option == 2) {
-                    const imageslist = await masturbationimages();
+                    const imageslist = await images('masturbation');
                     var image = _.sample(imageslist);
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
@@ -765,7 +674,7 @@ module.exports = {
                     }
                 }
                 if (option == 2) {
-                    const imageslist = await yuriimages();
+                    const imageslist = await images('yuri');
                     var image = _.sample(imageslist);
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
