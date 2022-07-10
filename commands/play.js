@@ -108,17 +108,6 @@ module.exports = {
             globalsaudio.titles.push('ai', info.player_response.videoDetails.title);
 
             audiodownload.on('finish', function() {
-                if (globalsaudio.connectionstatus == 0) {
-                    globalsaudio.connectionstatus = 1;
-                    globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
-                        inlineVolume: true
-                    });
-                    globalsaudio.resource.volume.setVolume(0.3);
-                    globalsaudio.player.play(globalsaudio.resource);
-                    globalsaudio.connection.subscribe(globalsaudio.player);
-                    globalsaudio.queue.shift();
-                    globalsaudio.titles.shift();
-                }
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Music Player')
@@ -126,16 +115,6 @@ module.exports = {
                     .setTimestamp()
 
                 interaction.editReply({ embeds: [embed] });
-            });
-        }
-        if (source == "soundcloud") {
-            /* var audiodownload = await scdl.download(url).then(stream => stream.pipe(fs.createWriteStream('downloads/' + filename + '.mp3')));
-
-            globalsaudio.queue.push('downloads/' + filename + '.mp3', 'downloads/' + filename + '.mp3');
-
-            globalsaudio.titles.push('ai', 'test');
-
-            audiodownload.on('finish', function() {
                 if (globalsaudio.connectionstatus == 0) {
                     globalsaudio.connectionstatus = 1;
                     globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
@@ -147,15 +126,45 @@ module.exports = {
                     globalsaudio.queue.shift();
                     globalsaudio.titles.shift();
                 }
+            });
+        }
+        if (source == "soundcloud") {
+            const info = await scdl.getInfo(url);
+
+            const buffer = await tts.synthesize({
+                text: 'Now playing ' + info.title,
+                voice: 'en-US',
+                slow: false
+            });
+
+            await fs.writeFileSync('downloads/' + ttsfilename + '.mp3', buffer);
+
+            var audiodownload = await scdl.download(url).then(stream => stream.pipe(fs.createWriteStream('downloads/' + filename + '.mp3')));
+
+            globalsaudio.queue.push('downloads/' + ttsfilename + '.mp3', 'downloads/' + filename + '.mp3');
+
+            globalsaudio.titles.push('ai', info.title);
+
+            audiodownload.on('finish', function() {
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Music Player')
-                    .setDescription('Queued: ' + 'test')
+                    .setDescription('Queued: ' + info.title)
                     .setTimestamp()
 
                 interaction.editReply({ embeds: [embed] });
-            }); */
-            await interaction.editReply('SoundCloud playback is in development');
+                if (globalsaudio.connectionstatus == 0) {
+                    globalsaudio.connectionstatus = 1;
+                    globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
+                        inlineVolume: true
+                    });
+                    globalsaudio.resource.volume.setVolume(0.3);
+                    globalsaudio.player.play(globalsaudio.resource);
+                    globalsaudio.connection.subscribe(globalsaudio.player);
+                    globalsaudio.queue.shift();
+                    globalsaudio.titles.shift();
+                }
+            });
         }
 	},
 };
