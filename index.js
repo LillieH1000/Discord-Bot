@@ -21,6 +21,9 @@ for (const file of utilsFiles) {
 }
 
 client.once('ready', () => {
+	if (!fs.existsSync('downloads')) {
+		fs.mkdirSync('downloads', '0755')
+	}
 	console.log(`Logged in as ${client.user.tag}`);
 });
 
