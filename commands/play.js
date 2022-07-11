@@ -1,10 +1,7 @@
 const { joinVoiceChannel, getVoiceConnection, createAudioResource } = require('@discordjs/voice');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 var globalsaudio = require('../globals/audio.js');
-const tts = require('google-translate-tts');
-const ytdl = require('ytdl-core');
-const scdl = require('soundcloud-downloader').default;
-const fs = require('fs');
+const exec = require('child_process').exec;
 
 function makeid(length) {
     var result = '';
@@ -14,6 +11,188 @@ function makeid(length) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
+}
+
+function os_func() {
+    this.execCommand = function(cmd, callback) {
+        exec(cmd, (error, stdout, stderr) => {
+            if (error) {
+                return;
+            }
+            callback(stdout);
+        });
+    }
+}
+
+var os = new os_func();
+
+async function ytdlp(type, source, filename, interaction, details) {
+    if (source == 'youtube') {
+        if (type == 0) {
+            const titlecommand = 'yt-dlp --get-title --no-playlist ' + details;
+            const downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist ' + details;
+            var title = '';
+            os.execCommand(titlecommand, function (returnvalue) {
+                title = returnvalue;
+            })
+            os.execCommand(downloadcommand, function () {
+                globalsaudio.queue.push('downloads/' + filename + '.mp3');
+                globalsaudio.titles.push(title);
+
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Music Player')
+                    .setDescription('Queued: ' + title)
+                    .setTimestamp()
+
+                interaction.editReply({ embeds: [embed] });
+
+                if (globalsaudio.connectionstatus == 0) {
+                    globalsaudio.connectionstatus = 1;
+                    globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
+                        inlineVolume: true
+                    });
+                    globalsaudio.resource.volume.setVolume(0.3);
+                    globalsaudio.player.play(globalsaudio.resource);
+                    globalsaudio.connection.subscribe(globalsaudio.player);
+                    globalsaudio.queue.shift();
+                    globalsaudio.titles.shift();
+                }
+            })
+        }
+        if (type == 1) {
+            const titlecommand = 'yt-dlp --get-title --no-playlist "ytsearch:' + details + '"';
+            const downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist "ytsearch:' + details + '"';
+            var title = '';
+            os.execCommand(titlecommand, function (returnvalue) {
+                title = returnvalue;
+            })
+            os.execCommand(downloadcommand, function () {
+                globalsaudio.queue.push('downloads/' + filename + '.mp3');
+                globalsaudio.titles.push(title);
+
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Music Player')
+                    .setDescription('Queued: ' + title)
+                    .setTimestamp()
+
+                interaction.editReply({ embeds: [embed] });
+
+                if (globalsaudio.connectionstatus == 0) {
+                    globalsaudio.connectionstatus = 1;
+                    globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
+                        inlineVolume: true
+                    });
+                    globalsaudio.resource.volume.setVolume(0.3);
+                    globalsaudio.player.play(globalsaudio.resource);
+                    globalsaudio.connection.subscribe(globalsaudio.player);
+                    globalsaudio.queue.shift();
+                    globalsaudio.titles.shift();
+                }
+            })
+        }
+    }
+    if (source == 'soundcloud') {
+        if (type == 0) {
+            const titlecommand = 'yt-dlp --get-title --no-playlist ' + details;
+            const downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist ' + details;
+            var title = '';
+            os.execCommand(titlecommand, function (returnvalue) {
+                title = returnvalue;
+            })
+            os.execCommand(downloadcommand, function () {
+                globalsaudio.queue.push('downloads/' + filename + '.mp3');
+                globalsaudio.titles.push(title);
+
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Music Player')
+                    .setDescription('Queued: ' + title)
+                    .setTimestamp()
+
+                interaction.editReply({ embeds: [embed] });
+
+                if (globalsaudio.connectionstatus == 0) {
+                    globalsaudio.connectionstatus = 1;
+                    globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
+                        inlineVolume: true
+                    });
+                    globalsaudio.resource.volume.setVolume(0.3);
+                    globalsaudio.player.play(globalsaudio.resource);
+                    globalsaudio.connection.subscribe(globalsaudio.player);
+                    globalsaudio.queue.shift();
+                    globalsaudio.titles.shift();
+                }
+            })
+        }
+        if (type == 1) {
+            const titlecommand = 'yt-dlp --get-title --no-playlist "scsearch:' + details + '"';
+            const downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist "scsearch:' + details + '"';
+            var title = '';
+            os.execCommand(titlecommand, function (returnvalue) {
+                title = returnvalue;
+            })
+            os.execCommand(downloadcommand, function () {
+                globalsaudio.queue.push('downloads/' + filename + '.mp3');
+                globalsaudio.titles.push(title);
+
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Music Player')
+                    .setDescription('Queued: ' + title)
+                    .setTimestamp()
+
+                interaction.editReply({ embeds: [embed] });
+
+                if (globalsaudio.connectionstatus == 0) {
+                    globalsaudio.connectionstatus = 1;
+                    globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
+                        inlineVolume: true
+                    });
+                    globalsaudio.resource.volume.setVolume(0.3);
+                    globalsaudio.player.play(globalsaudio.resource);
+                    globalsaudio.connection.subscribe(globalsaudio.player);
+                    globalsaudio.queue.shift();
+                    globalsaudio.titles.shift();
+                }
+            })
+        }
+    }
+    if (source == 'audiomack') {
+        if (type == 0) {
+            const titlecommand = 'yt-dlp --get-title --no-playlist ' + details;
+            const downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist ' + details;
+            var title = '';
+            os.execCommand(titlecommand, function (returnvalue) {
+                title = returnvalue;
+            })
+            os.execCommand(downloadcommand, function () {
+                globalsaudio.queue.push('downloads/' + filename + '.mp3');
+                globalsaudio.titles.push(title);
+
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Music Player')
+                    .setDescription('Queued: ' + title)
+                    .setTimestamp()
+
+                interaction.editReply({ embeds: [embed] });
+
+                if (globalsaudio.connectionstatus == 0) {
+                    globalsaudio.connectionstatus = 1;
+                    globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
+                        inlineVolume: true
+                    });
+                    globalsaudio.resource.volume.setVolume(0.3);
+                    globalsaudio.player.play(globalsaudio.resource);
+                    globalsaudio.connection.subscribe(globalsaudio.player);
+                    globalsaudio.queue.shift();
+                    globalsaudio.titles.shift();
+                }
+            })
+        }
+    }
 }
 
 module.exports = {
@@ -49,122 +228,36 @@ module.exports = {
         }
 
         const filename = makeid(50);
-        const ttsfilename = makeid(50);
 
-        if (source == "youtube") {
-            var videoid = '';
-
+        if (source == 'youtube') {
             const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
             if (url.match(rx)) {
-                videoid = url.match(rx)[1];
+                await ytdlp(0, 'youtube', filename, interaction, url);
             } else {
-                payload = {
-                    "context": {
-                        "client": {
-                            "hl": "en",
-                            "clientName": "ANDROID",
-                            "clientVersion": "16.20",
-                            "playbackContext": {
-                                "contentPlaybackContext": {
-                                    "html5Preference": "HTML5_PREF_WANTS"
-                                }
-                            }
-                        }
-                    },
-                    "contentCheckOk": true,
-                    "racyCheckOk": true,
-                    "order": "relevance",
-                    "items": "videos",
-                    "duration": "any",
-                    "query": url
-                }
-                const res = await fetch('https://www.youtube.com/youtubei/v1/search?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8&prettyPrint=false', {
-                    method: "post",
-                    body: JSON.stringify(payload),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                });
-                if (res.ok) {
-                    const data = await res.json();
-                    videoid = data.contents.sectionListRenderer.contents[1].itemSectionRenderer.contents[0].compactVideoRenderer.videoId;
-                }
+                await ytdlp(1, 'youtube', filename, interaction, url);
             }
-
-            const info = await ytdl.getInfo(videoid);
-
-            const buffer = await tts.synthesize({
-                text: 'Now playing ' + info.player_response.videoDetails.title,
-                voice: 'en-US',
-                slow: false
-            });
-            
-            await fs.writeFileSync('downloads/' + ttsfilename + '.mp3', buffer);
-
-            var audiodownload = await ytdl(videoid, { quality: 'highestaudio' }).pipe(fs.createWriteStream('downloads/' + filename + '.mp3'));
-
-            globalsaudio.queue.push('downloads/' + ttsfilename + '.mp3', 'downloads/' + filename + '.mp3');
-
-            globalsaudio.titles.push('ai', info.player_response.videoDetails.title);
-
-            audiodownload.on('finish', function() {
-                const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
-                    .setTitle('Music Player')
-                    .setDescription('Queued: ' + info.player_response.videoDetails.title)
-                    .setTimestamp()
-
-                interaction.editReply({ embeds: [embed] });
-                if (globalsaudio.connectionstatus == 0) {
-                    globalsaudio.connectionstatus = 1;
-                    globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
-                        inlineVolume: true
-                    });
-                    globalsaudio.resource.volume.setVolume(0.3);
-                    globalsaudio.player.play(globalsaudio.resource);
-                    globalsaudio.connection.subscribe(globalsaudio.player);
-                    globalsaudio.queue.shift();
-                    globalsaudio.titles.shift();
-                }
-            });
         }
-        if (source == "soundcloud") {
-            const info = await scdl.getInfo(url);
-
-            const buffer = await tts.synthesize({
-                text: 'Now playing ' + info.title,
-                voice: 'en-US',
-                slow: false
-            });
-
-            await fs.writeFileSync('downloads/' + ttsfilename + '.mp3', buffer);
-
-            var audiodownload = await scdl.download(url).then(stream => stream.pipe(fs.createWriteStream('downloads/' + filename + '.mp3')));
-
-            globalsaudio.queue.push('downloads/' + ttsfilename + '.mp3', 'downloads/' + filename + '.mp3');
-
-            globalsaudio.titles.push('ai', info.title);
-
-            audiodownload.on('finish', function() {
+        if (source == 'soundcloud') {
+            const rx = /^https?:\/\/(soundcloud\.com|snd\.sc)\/(.*)$/;
+            if (url.match(rx)) {
+                await ytdlp(0, 'soundcloud', filename, interaction, url);
+            } else {
+                await ytdlp(1, 'soundcloud', filename, interaction, url);
+            }
+        }
+        if (source == 'audiomack') {
+            const rx = /^https?:\/\/(audiomack\.com|)\/(.*)$/;
+            if (url.match(rx)) {
+                await ytdlp(0, 'audiomack', filename, interaction, url);
+            } else {
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Music Player')
-                    .setDescription('Queued: ' + info.title)
+                    .setDescription('Only urls are supported for Audiomack, search for Audiomack is currently unsupported')
                     .setTimestamp()
 
-                interaction.editReply({ embeds: [embed] });
-                if (globalsaudio.connectionstatus == 0) {
-                    globalsaudio.connectionstatus = 1;
-                    globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
-                        inlineVolume: true
-                    });
-                    globalsaudio.resource.volume.setVolume(0.3);
-                    globalsaudio.player.play(globalsaudio.resource);
-                    globalsaudio.connection.subscribe(globalsaudio.player);
-                    globalsaudio.queue.shift();
-                    globalsaudio.titles.shift();
-                }
-            });
+                await interaction.editReply({ embeds: [embed] });
+            }
         }
 	},
 };

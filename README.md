@@ -8,9 +8,17 @@ curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 ```
 
 ```
-sudo apt install make g++ ffmpeg nodejs libtool-bin
+sudo apt install make g++ ffmpeg nodejs libtool-bin python3 python3-pip
 ```
 
 ```
-npm install discord.js@dev @discordjs/rest discord-api-types @discordjs/voice @discordjs/opus opusscript ffmpeg-static sodium libsodium-wrappers tweetnacl ytdl-core soundcloud-downloader underscore dayjs r6api.js florabtw/google-translate-tts#pull/6/head
+python3 -m pip install -U pip
+```
+
+```
+python3 -m pip install -U yt-dlp
+```
+
+```
+npm install discord.js@dev @discordjs/rest discord-api-types @discordjs/voice @discordjs/opus opusscript ffmpeg-static sodium libsodium-wrappers tweetnacl underscore dayjs r6api.js
 ```

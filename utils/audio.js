@@ -1,4 +1,4 @@
-const { createAudioResource, StreamType, AudioPlayerStatus } = require('@discordjs/voice');
+const { createAudioResource, AudioPlayerStatus } = require('@discordjs/voice');
 var globalsaudio = require('../globals/audio.js');
 
 module.exports = async() => {
@@ -11,7 +11,6 @@ module.exports = async() => {
                 globalsaudio.connectionstatus = 0;
             } else {
                 globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
-                    inputType: StreamType.Opus,
                     inlineVolume: true
                 });
                 globalsaudio.resource.volume.setVolume(0.3);

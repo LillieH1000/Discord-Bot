@@ -15,12 +15,10 @@ module.exports = {
 
         for (i = 0; i < globalsaudio.queue.length; i++) {
             queuecount += 1;
-            if (globalsaudio.titles[i] != 'ai') {
-                queuelistcount += 1;
-                queuelist += queuelistcount.toString() + ') ' + globalsaudio.titles[i];
-                if (globalsaudio.queue.length != queuecount) {
-                    queuelist += '\n';
-                }
+            queuelistcount += 1;
+            queuelist += queuelistcount.toString() + ') ' + globalsaudio.titles[i];
+            if (globalsaudio.queue.length != queuecount) {
+                queuelist += '\n';
             }
         }
 
@@ -30,9 +28,13 @@ module.exports = {
             .setTimestamp()
 
         if (globalsaudio.queue === undefined || globalsaudio.queue.length == 0) {
-            embed.addField('Songs In Queue', 'None', false);
+            embed.addFields(
+                { name: 'Songs In Queue', value: 'None', inline: false },
+            );
         } else {
-            embed.addField('Songs In Queue', queuelist, false);
+            embed.addFields(
+                { name: 'Songs In Queue', value: queuelist, inline: false },
+            );
         }
 
         await interaction.editReply({ embeds: [embed] });
