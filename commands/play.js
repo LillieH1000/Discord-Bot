@@ -273,7 +273,7 @@ module.exports = {
             }
         }
         if (source == 'soundcloud') {
-            const rx = /^https?:\/\/(soundcloud\.com|snd\.sc)\/(.*)$/;
+            const rx = /^https?:\/\/(.*)(soundcloud\.com|snd\.sc)\/(.*)$/;
             if (url.match(rx)) {
                 await ytdlp(0, 'soundcloud', filename, interaction, url);
             } else {
@@ -281,7 +281,7 @@ module.exports = {
             }
         }
         if (source == 'audiomack') {
-            const rx = /^https?:\/\/(audiomack\.com|)\/(.*)$/;
+            const rx = /^https?:\/\/(.*)(audiomack\.com|)\/(.*)$/;
             if (url.match(rx)) {
                 await ytdlp(0, 'audiomack', filename, interaction, url);
             } else {
@@ -295,7 +295,8 @@ module.exports = {
             }
         }
         if (source == 'bandcamp') {
-            if (url.includes('bandcamp.com')) {
+            const rx = /^https?:\/\/(.*)(bandcamp\.com|)\/(.*)$/;
+            if (url.match(rx)) {
                 await ytdlp(0, 'bandcamp', filename, interaction, url);
             } else {
                 const embed = new EmbedBuilder()
