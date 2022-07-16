@@ -1,12 +1,13 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
+const { redditapilimit } = require('../config.json');
 
 async function images(category) {
     var res;
     if (category == 'cats') {
-        res = await fetch('https://www.reddit.com/r/cats.json?limit=100');
+        res = await fetch(`https://www.reddit.com/r/cats.json?limit=${redditapilimit}`);
     } else if (category == 'catstwo') {
-        res = await fetch('https://www.reddit.com/r/catpictures.json?limit=100');
+        res = await fetch(`https://www.reddit.com/r/catpictures.json?limit=${redditapilimit}`);
     }
     if (res.ok) {
         const images = [];

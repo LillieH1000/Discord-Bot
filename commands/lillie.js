@@ -1,8 +1,9 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
+const { redditapilimit } = require('../config.json');
 
 async function images() {
-    const res = await fetch('https://www.reddit.com/r/lillie.json?limit=100');
+    const res = await fetch(`https://www.reddit.com/r/lillie.json?limit=${redditapilimit}`);
     if (res.ok) {
         const images = [];
         const data = await res.json();
