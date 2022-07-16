@@ -9,7 +9,7 @@ module.exports = async(client) => {
             var choices;
 
             if (focusedOption.value.startsWith('a')) {
-                choices = ['anal', 'ass'];
+                choices = ['amber', 'anal', 'ass'];
             }
             if (focusedOption.value.startsWith('b')) {
                 choices = ['bdsm', 'blowjob', 'boobjob', 'boobs'];
@@ -18,16 +18,19 @@ module.exports = async(client) => {
                 choices = ['creampie', 'cum'];
             }
             if (focusedOption.value.startsWith('e')) {
-                choices = ['ero'];
+                choices = ['ero', 'eula'];
             }
             if (focusedOption.value.startsWith('f')) {
                 choices = ['femboy', 'femdom', 'footjob', 'futanari'];
             }
             if (focusedOption.value.startsWith('g')) {
-                choices = ['gangbang', 'genshin', 'glasses'];
+                choices = ['gangbang', 'ganyu', 'genshin', 'glasses'];
             }
             if (focusedOption.value.startsWith('h')) {
                 choices = ['handjob'];
+            }
+            if (focusedOption.value.startsWith('l')) {
+                choices = ['lumine'];
             }
             if (focusedOption.value.startsWith('m')) {
                 choices = ['masturbation'];
@@ -36,10 +39,10 @@ module.exports = async(client) => {
                 choices = ['neko'];
             }
             if (focusedOption.value.startsWith('o')) {
-                choices = ['orgy'];
+                choices = ['orgy', 'overwatch'];
             }
             if (focusedOption.value.startsWith('p')) {
-                choices = ['pantsu', 'public'];
+                choices = ['pantsu', 'pee', 'pegging', 'public'];
             }
             if (focusedOption.value.startsWith('t')) {
                 choices = ['tentacles', 'thighs', 'trap'];

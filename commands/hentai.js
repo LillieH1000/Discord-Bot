@@ -3,12 +3,16 @@ var _ = require('underscore');
 
 async function images(category) {
     var res;
-    if (category == 'anal') {
+    if (category == 'amber') {
+        res = await fetch('https://www.reddit.com/r/amberhentai.json?limit=100');
+    } else if (category == 'anal') {
         res = await fetch('https://www.reddit.com/r/hentaianal.json?limit=100');
     } else if (category == 'bdsm') {
         res = await fetch('https://www.reddit.com/r/hentaibondage.json?limit=100');
     } else if (category == 'cum') {
         res = await fetch('https://www.reddit.com/r/cumhentai.json?limit=100');
+    } else if (category == 'eula') {
+        res = await fetch('https://www.reddit.com/r/eulansfw.json?limit=100');
     } else if (category == 'femboy') {
         res = await fetch('https://www.reddit.com/r/femboyhentai.json?limit=100');
     } else if (category == 'femboytwo') {
@@ -17,14 +21,24 @@ async function images(category) {
         res = await fetch('https://www.reddit.com/r/hentaifemdom.json?limit=100');
     } else if (category == 'femdomtwo') {
         res = await fetch('https://www.reddit.com/r/femdomhentai.json?limit=100');
+    } else if (category == 'ganyu') {
+        res = await fetch('https://www.reddit.com/r/ganyunsfw.json?limit=100');
     } else if (category == 'genshin') {
         res = await fetch('https://www.reddit.com/r/genshinimpacthentai.json?limit=100');
     } else if (category == 'genshintwo') {
         res = await fetch('https://www.reddit.com/r/genshinimpactnsfw.json?limit=100');
     } else if (category == 'futanari') {
         res = await fetch('https://www.reddit.com/r/futanari.json?limit=100');
+    } else if (category == 'lumine') {
+        res = await fetch('https://www.reddit.com/r/luminensfw.json?limit=100');
     } else if (category == 'masturbation') {
         res = await fetch('https://www.reddit.com/r/masturbationhentai.json?limit=100');
+    } else if (category == 'overwatch') {
+        res = await fetch('https://www.reddit.com/r/overwatch_porn.json?limit=100');
+    } else if (category == 'pee') {
+        res = await fetch('https://www.reddit.com/r/pissinghentai.json?limit=100');
+    } else if (category == 'pegging') {
+        res = await fetch('https://www.reddit.com/r/pegginghentai.json?limit=100');
     } else if (category == 'tentacles') {
         res = await fetch('https://www.reddit.com/r/tentai.json?limit=100');
     } else if (category == 'trap') {
