@@ -12,7 +12,7 @@ module.exports = async(client) => {
                 choices = ['anal', 'ass'];
             }
             if (focusedOption.value.startsWith('b')) {
-                choices = ['blowjob', 'boobjob', 'boobs'];
+                choices = ['bdsm', 'blowjob', 'boobjob', 'boobs'];
             }
             if (focusedOption.value.startsWith('c')) {
                 choices = ['creampie', 'cum'];
@@ -21,7 +21,7 @@ module.exports = async(client) => {
                 choices = ['ero'];
             }
             if (focusedOption.value.startsWith('f')) {
-                choices = ['femboy', 'footjob', 'futanari'];
+                choices = ['femboy', 'femdom', 'footjob', 'futanari'];
             }
             if (focusedOption.value.startsWith('g')) {
                 choices = ['gangbang', 'genshin', 'glasses'];
@@ -45,7 +45,7 @@ module.exports = async(client) => {
                 choices = ['tentacles', 'thighs', 'trap'];
             }
             if (focusedOption.value.startsWith('u')) {
-                choices = ['uniform'];
+                choices = ['uniform', 'upskirt'];
             }
             if (focusedOption.value.startsWith('w')) {
                 choices = ['waifu'];
