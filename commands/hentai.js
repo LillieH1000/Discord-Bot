@@ -11,6 +11,10 @@ async function images(category) {
         res = await fetch('https://www.reddit.com/r/femboyhentai.json?limit=100');
     } else if (category == 'femboytwo') {
         res = await fetch('https://www.reddit.com/r/femboysandhentai.json?limit=100');
+    } else if (category == 'genshin') {
+        res = await fetch('https://www.reddit.com/r/genshinimpacthentai.json?limit=100');
+    } else if (category == 'genshintwo') {
+        res = await fetch('https://www.reddit.com/r/genshinimpactnsfw.json?limit=100');
     } else if (category == 'futanari') {
         res = await fetch('https://www.reddit.com/r/futanari.json?limit=100');
     } else if (category == 'masturbation') {
@@ -47,33 +51,7 @@ module.exports = {
             option.setName('category')
                 .setDescription('Choose which hentai picture type you want')
                 .setRequired(true)
-                .addChoices(
-                    { name: 'Anal', value: 'anal' },
-                    { name: 'Ass', value: 'ass' },
-                    { name: 'Blowjob', value: 'blowjob' },
-                    { name: 'Boobjob', value: 'boobjob' },
-                    { name: 'Boobs', value: 'boobs' },
-                    { name: 'Creampie', value: 'creampie' },
-                    { name: 'Cum', value: 'cum' },
-                    { name: 'Ero', value: 'ero' },
-                    { name: 'Femboy', value: 'femboy' },
-                    { name: 'Footjob', value: 'footjob' },
-                    { name: 'Futanari', value: 'futanari' },
-                    { name: 'Gangbang', value: 'gangbang' },
-                    { name: 'Glasses', value: 'glasses' },
-                    { name: 'Handjob', value: 'handjob' },
-                    { name: 'Masturbation', value: 'masturbation' },
-                    { name: 'Neko', value: 'neko' },
-                    { name: 'Orgy', value: 'orgy' },
-                    { name: 'Pantsu', value: 'pantsu' },
-                    { name: 'Public', value: 'public' },
-                    { name: 'Tentacles', value: 'tentacles' },
-                    { name: 'Thighs', value: 'thighs' },
-                    { name: 'Trap', value: 'trap' },
-                    { name: 'Uniform', value: 'uniform' },
-                    { name: 'Waifu', value: 'waifu' },
-                    { name: 'Yuri', value: 'yuri' }
-                )),
+                .setAutocomplete(true)),
 	async execute(interaction) {
         if (interaction.channel.nsfw) {
             await interaction.deferReply();
@@ -416,6 +394,45 @@ module.exports = {
                                 .setLabel('View Original Image')
                                 .setStyle(ButtonStyle.Link)
                                 .setURL(data.url)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                }
+            }
+            if (category == "genshin") {
+                var option = _.sample([1, 2]);
+                if (option == 1) {
+                    const imageslist = await images('genshin');
+                    var image = _.sample(imageslist);
+                    const embed = new EmbedBuilder()
+                        .setColor('#FFC0DD')
+                        .setTitle('Hentai Pics (Genshin)')
+                        .setDescription('[r/GenshinImpactHentai](https://www.reddit.com/r/GenshinImpactHentai/)')
+                        .setImage(image)
+                        .setTimestamp()
+                    const row = new ActionRowBuilder()
+                        .addComponents(
+                            new ButtonBuilder()
+                                .setLabel('View Original Image')
+                                .setStyle(ButtonStyle.Link)
+                                .setURL(image)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                }
+                if (option == 2) {
+                    const imageslist = await images('genshintwo');
+                    var image = _.sample(imageslist);
+                    const embed = new EmbedBuilder()
+                        .setColor('#FFC0DD')
+                        .setTitle('Hentai Pics (Genshin)')
+                        .setDescription('[r/GenshinImpactNSFW](https://www.reddit.com/r/GenshinImpactNSFW/)')
+                        .setImage(image)
+                        .setTimestamp()
+                    const row = new ActionRowBuilder()
+                        .addComponents(
+                            new ButtonBuilder()
+                                .setLabel('View Original Image')
+                                .setStyle(ButtonStyle.Link)
+                                .setURL(image)
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
