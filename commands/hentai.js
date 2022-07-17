@@ -79,6 +79,24 @@ module.exports = {
         if (interaction.channel.nsfw) {
             await interaction.deferReply();
             const category = interaction.options.getString('category');
+            if (category == "amber") {
+                const imageslist = await images('amber');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Amber)')
+                    .setDescription('[r/AmberHentai](https://www.reddit.com/r/AmberHentai/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
+            }
             if (category == "anal") {
                 var option = _.sample([1, 2]);
                 if (option == 1) {
@@ -365,6 +383,24 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
             }
+            if (category == "eula") {
+                const imageslist = await images('eula');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Eula)')
+                    .setDescription('[r/EulaNSFW](https://www.reddit.com/r/EulaNSFW/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
+            }
             if (category == "femboy") {
                 var option = _.sample([1, 2]);
                 if (option == 1) {
@@ -521,6 +557,24 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
             }
+            if (category == "ganyu") {
+                const imageslist = await images('ganyu');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Ganyu)')
+                    .setDescription('[r/GanyuNSFW](https://www.reddit.com/r/GanyuNSFW/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
+            }
             if (category == "genshin") {
                 var option = _.sample([1, 2]);
                 if (option == 1) {
@@ -599,6 +653,24 @@ module.exports = {
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
+            }
+            if (category == "lumine") {
+                const imageslist = await images('lumine');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Lumine)')
+                    .setDescription('[r/LumineNSFW](https://www.reddit.com/r/LumineNSFW/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
             }
             if (category == "masturbation") {
                 var option = _.sample([1, 2]);
@@ -724,6 +796,24 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
             }
+            if (category == "overwatch") {
+                const imageslist = await images('overwatch');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Overwatch)')
+                    .setDescription('[r/Overwatch_Porn](https://www.reddit.com/r/Overwatch_Porn/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
+            }
             if (category == "pantsu") {
                 const res = await fetch('https://hmtai.herokuapp.com/nsfw/pantsu');
                 if (res.ok) {
@@ -743,6 +833,42 @@ module.exports = {
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
+            }
+            if (category == "pee") {
+                const imageslist = await images('pee');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Pee)')
+                    .setDescription('[r/Pissing Hentai](https://www.reddit.com/r/pissinghentai/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
+            }
+            if (category == "pegging") {
+                const imageslist = await images('pegging');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Pegging)')
+                    .setDescription('[r/pegginghentai](https://www.reddit.com/r/pegginghentai/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
             }
             if (category == "public") {
                 const res = await fetch('https://hmtai.herokuapp.com/nsfw/public');
