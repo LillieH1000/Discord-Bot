@@ -3,9 +3,9 @@ var utc = require('dayjs/plugin/utc')
 var timezone = require('dayjs/plugin/timezone');
 
 module.exports = async(client) => {
-    try {
-        // Town Of Salem Server
-        setInterval(function() {
+    // Town Of Salem Server
+    setInterval(function() {
+        try {
             let guild = client.guilds.cache.get("416350699794857986");
             let channel = guild.channels.cache.get("772878026521182248");
             const date = new Date();
@@ -13,8 +13,8 @@ module.exports = async(client) => {
             dayjs.extend(timezone);
             const formatteddate = dayjs.tz(date, "America/New_York").format('MMMM D, YYYY');
             channel.setName('Date: ' + formatteddate);
-        }, 1000*60*1)
-    } catch (error) {
-        console.error(error);
-    }
+        } catch (error) {
+            console.error(error);
+        }
+    }, 1000*60*1)
 };

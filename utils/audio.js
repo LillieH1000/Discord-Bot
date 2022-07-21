@@ -24,8 +24,8 @@ module.exports = async() => {
         }
     });
 
-    globalsaudio.player.on('error', error => {
-        console.error(error);
+    globalsaudio.player.on('error', voiceerror => {
+        console.error(voiceerror);
         try {
             globalsaudio.connection.destroy();
             globalsaudio.queue = [];
