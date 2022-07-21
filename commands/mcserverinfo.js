@@ -9,7 +9,6 @@ module.exports = {
                 .setDescription('Choose the minecraft server edition')
                 .setRequired(true)
                 .addChoices(
-                    { name: 'Bedrock', value: 'bedrock' },
                     { name: 'Java', value: 'java' }
                 ))
         .addStringOption(option =>
@@ -20,13 +19,6 @@ module.exports = {
         await interaction.deferReply();
         const edition = interaction.options.getString('edition');
         const host = interaction.options.getString('host');
-        if (edition == "bedrock") {
-            const embed = new EmbedBuilder()
-                .setColor('#FFC0DD')
-                .addField('Notice', 'Bedrock server info is not completed yet, only Java server info is completed so far', false)
-                .setTimestamp()
-            await interaction.editReply({ embeds: [embed] });
-        }
         if (edition == "java") {
             const res = await fetch('https://api.mcsrvstat.us/2/'.concat(host));
             if (res.ok) {

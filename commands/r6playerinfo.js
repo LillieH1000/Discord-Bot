@@ -78,8 +78,48 @@ module.exports = {
         rankedinfo += 'Deaths: ' + stats.pvp.queues.ranked.deaths.toLocaleString() + '\n';
         rankedinfo += 'KD Rate: ' + stats.pvp.queues.ranked.kd.toLocaleString();
 
-        var custominfo = '';
-        custominfo += 'Playtime: ' + stats.pvp.queues.custom.playtime.toLocaleString();
+        var terroristhuntinfo = '';
+        terroristhuntinfo += 'Playtime: ' + stats.pve.general.playtime.toLocaleString() + '\n';
+        terroristhuntinfo += 'Matches Played: ' + stats.pve.general.matches.toLocaleString() + '\n';
+        terroristhuntinfo += 'Bullets Connected: ' + stats.pve.general.bulletsConnected.toLocaleString() + '\n';
+        terroristhuntinfo += 'Kills: ' + stats.pve.general.kills.toLocaleString() + '\n';
+        terroristhuntinfo += 'Deaths: ' + stats.pve.general.deaths.toLocaleString() + '\n';
+        terroristhuntinfo += 'KD Rate: ' + stats.pve.general.kd.toLocaleString() + '\n';
+        terroristhuntinfo += 'Assists: ' + stats.pve.general.assists.toLocaleString() + '\n';
+        terroristhuntinfo += 'Headshots: ' + stats.pve.general.headshots.toLocaleString() + '\n';
+        terroristhuntinfo += 'Melee Kills: ' + stats.pve.general.meleeKills.toLocaleString() + '\n';
+        terroristhuntinfo += 'Penetration Kills: ' + stats.pve.general.penetrationKills.toLocaleString() + '\n';
+        terroristhuntinfo += 'Blind Kills: ' + stats.pve.general.blindKills.toLocaleString() + '\n';
+        terroristhuntinfo += 'Revives: ' + stats.pve.general.revives.toLocaleString() + '\n';
+        terroristhuntinfo += 'Gadgets Destroyed: ' + stats.pve.general.gadgetsDestroyed.toLocaleString() + '\n';
+        terroristhuntinfo += 'Rappel Breaches: ' + stats.pve.general.rappelBreaches.toLocaleString() + '\n';
+        terroristhuntinfo += 'Barricades Deployed: ' + stats.pve.general.barricadesDeployed.toLocaleString() + '\n';
+        terroristhuntinfo += 'Reinforcements Deployed: ' + stats.pve.general.reinforcementsDeployed.toLocaleString() + '\n';
+        terroristhuntinfo += 'Suicides: ' + stats.pve.general.suicides.toLocaleString();
+
+        var terroristhuntdisarmbombinfo = '';
+        terroristhuntdisarmbombinfo += 'Matches Played: ' + stats.pve.modes.disarmBomb.matches.toLocaleString() + '\n';
+        terroristhuntdisarmbombinfo += 'Wins: ' + stats.pve.modes.disarmBomb.wins.toLocaleString() + '\n';
+        terroristhuntdisarmbombinfo += 'Losses: ' + stats.pve.modes.disarmBomb.losses.toLocaleString() + '\n';
+        terroristhuntdisarmbombinfo += 'Win Rate: ' + stats.pve.modes.disarmBomb.winRate.toLocaleString() + '\n';
+
+        var terroristhunteliminationinfo = '';
+        terroristhunteliminationinfo += 'Matches Played: ' + stats.pve.modes.elimination.matches.toLocaleString() + '\n';
+        terroristhunteliminationinfo += 'Wins: ' + stats.pve.modes.elimination.wins.toLocaleString() + '\n';
+        terroristhunteliminationinfo += 'Losses: ' + stats.pve.modes.elimination.losses.toLocaleString() + '\n';
+        terroristhunteliminationinfo += 'Win Rate: ' + stats.pve.modes.elimination.winRate.toLocaleString() + '\n';
+
+        var terroristhuntprotecthostageinfo = '';
+        terroristhuntprotecthostageinfo += 'Matches Played: ' + stats.pve.modes.protectHostage.matches.toLocaleString() + '\n';
+        terroristhuntprotecthostageinfo += 'Wins: ' + stats.pve.modes.protectHostage.wins.toLocaleString() + '\n';
+        terroristhuntprotecthostageinfo += 'Losses: ' + stats.pve.modes.protectHostage.losses.toLocaleString() + '\n';
+        terroristhuntprotecthostageinfo += 'Win Rate: ' + stats.pve.modes.protectHostage.winRate.toLocaleString() + '\n';
+
+        var terroristhuntextracthostageinfo = '';
+        terroristhuntextracthostageinfo += 'Matches Played: ' + stats.pve.modes.extractHostage.matches.toLocaleString() + '\n';
+        terroristhuntextracthostageinfo += 'Wins: ' + stats.pve.modes.extractHostage.wins.toLocaleString() + '\n';
+        terroristhuntextracthostageinfo += 'Losses: ' + stats.pve.modes.extractHostage.losses.toLocaleString() + '\n';
+        terroristhuntextracthostageinfo += 'Win Rate: ' + stats.pve.modes.extractHostage.winRate.toLocaleString() + '\n';
         
         const embed = new EmbedBuilder()
             .setColor('#FFC0DD')
@@ -89,7 +129,11 @@ module.exports = {
                 { name: 'General', value: generalinfo, inline: false },
                 { name: 'Casual', value: casualinfo, inline: false },
                 { name: 'Ranked', value: rankedinfo, inline: false },
-                { name: 'Custom', value: custominfo, inline: false },
+                { name: 'Terrorist Hunt (General)', value: terroristhuntinfo, inline: false },
+                { name: 'Terrorist Hunt (Disarm Bomb)', value: terroristhuntdisarmbombinfo, inline: false },
+                { name: 'Terrorist Hunt (Elimination)', value: terroristhunteliminationinfo, inline: false },
+                { name: 'Terrorist Hunt (Protect Hostage)', value: terroristhuntprotecthostageinfo, inline: false },
+                { name: 'Terrorist Hunt (Extract Hostage)', value: terroristhuntextracthostageinfo, inline: false },
             )
             .setTimestamp()
 
