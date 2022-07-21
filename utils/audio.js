@@ -8,8 +8,10 @@ module.exports = async() => {
                 globalsaudio.connection.destroy();
                 globalsaudio.queue = [];
                 globalsaudio.titles = [];
+                globalsaudio.nowplaying = '';
                 globalsaudio.connectionstatus = 0;
             } else {
+                globalsaudio.nowplaying = globalsaudio.titles[0];
                 globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
                     inlineVolume: true
                 });
@@ -30,6 +32,7 @@ module.exports = async() => {
             globalsaudio.connection.destroy();
             globalsaudio.queue = [];
             globalsaudio.titles = [];
+            globalsaudio.nowplaying = '';
             globalsaudio.connectionstatus = 0;
         } catch (error) {
             console.error(error);

@@ -6,6 +6,7 @@ var resource;
 var connectionstatus = 0;
 var queue = [];
 var titles = [];
+var nowplaying = '';
 
 module.exports = {
     connection,
@@ -13,5 +14,6 @@ module.exports = {
     resource,
     connectionstatus,
     queue,
-    titles
+    titles,
+    nowplaying
 };

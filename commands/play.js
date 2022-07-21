@@ -47,6 +47,7 @@ async function ytdlp(type, source, filename, interaction, details) {
 
                 if (globalsaudio.connectionstatus == 0) {
                     globalsaudio.connectionstatus = 1;
+                    globalsaudio.nowplaying = globalsaudio.titles[0];
                     globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
                         inlineVolume: true
                     });
@@ -80,6 +81,7 @@ async function ytdlp(type, source, filename, interaction, details) {
 
                     if (globalsaudio.connectionstatus == 0) {
                         globalsaudio.connectionstatus = 1;
+                        globalsaudio.nowplaying = globalsaudio.titles[0];
                         globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
                             inlineVolume: true
                         });
@@ -112,6 +114,7 @@ async function ytdlp(type, source, filename, interaction, details) {
 
                     if (globalsaudio.connectionstatus == 0) {
                         globalsaudio.connectionstatus = 1;
+                        globalsaudio.nowplaying = globalsaudio.titles[0];
                         globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
                             inlineVolume: true
                         });

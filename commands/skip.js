@@ -11,6 +11,7 @@ module.exports = {
         await interaction.deferReply();
 
         if (globalsaudio.connectionstatus == 1) {
+            globalsaudio.nowplaying = globalsaudio.titles[0];
             globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
                 inlineVolume: true
             });
