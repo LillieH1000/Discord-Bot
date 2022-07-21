@@ -20,5 +20,5 @@ python3 -m pip install -U yt-dlp
 ```
 
 ```
-npm install discord.js@dev @discordjs/rest discord-api-types @discordjs/voice @discordjs/opus opusscript ffmpeg-static sodium libsodium-wrappers tweetnacl underscore dayjs r6api.js
+npm install discord.js @discordjs/rest discord-api-types @discordjs/voice @discordjs/opus opusscript ffmpeg-static sodium libsodium-wrappers tweetnacl underscore dayjs r6api.js
 ```
