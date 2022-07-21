@@ -10,3 +10,7 @@ if [ $1 == "stop" ]
 then
     pm2 stop discordbot
 fi
+if [ $1 == "restart" ]
+then
+    pm2 restart discordbot
+fi
