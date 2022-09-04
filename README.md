@@ -1,7 +1,7 @@
 # Discord-Bot
 My new discord.js bot
 
-Invite my bot: [Invite](https://discord.com/api/oauth2/authorize?client_id=946134485756444692&permissions=8&scope=bot%20applications.commands)
+Invite my bot: [Invite](https://discord.com/api/oauth2/authorize?client_id=1016070725305639002&permissions=8&scope=bot%20applications.commands)
 
 ```
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
