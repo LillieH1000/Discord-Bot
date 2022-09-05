@@ -3,13 +3,10 @@ const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder } = require('discord.j
 module.exports = async(client) => {
     client.on('interactionCreate', async interaction => {
         if (!interaction.isSelectMenu()) return;
-        await pokemonsearch(interaction);
-    });
-    
-    async function pokemonsearch(info) {
+        
         try {
-            const pokemon = info.customId.split('custommenuid')[0];
-            const game = info.customId.split('custommenuid')[1];
+            const pokemon = interaction.customId.split('custommenuid')[0];
+            const game = interaction.customId.split('custommenuid')[1];
 
             const res = await fetch('https://pokeapi.co/api/v2/pokemon/'.concat(pokemon));
             if (res.ok) {
@@ -58,16 +55,16 @@ module.exports = async(client) => {
                         { name: 'Base Stats', value: basestats, inline: false },
                     )
                     .setTimestamp()
-                if (info.values[0] == 'defaultregular') {
+                if (interaction.values[0] == 'defaultregular') {
                     embed.setThumbnail(data.sprites.other.home.front_default);
                 }
-                if (info.values[0] == 'defaultshiny') {
+                if (interaction.values[0] == 'defaultshiny') {
                     embed.setThumbnail(data.sprites.other.home.front_shiny);
                 }
-                if (info.values[0] == 'femaleregular') {
+                if (interaction.values[0] == 'femaleregular') {
                     embed.setThumbnail(data.sprites.other.home.front_female);
                 }
-                if (info.values[0] == 'femaleshiny') {
+                if (interaction.values[0] == 'femaleshiny') {
                     embed.setThumbnail(data.sprites.other.home.front_shiny_female);
                 }
         
@@ -121,10 +118,10 @@ module.exports = async(client) => {
         
                 const row = new ActionRowBuilder().addComponents(menu);
         
-                await info.update({ embeds: [embed], components: [row] });
+                await interaction.update({ embeds: [embed], components: [row] });
             }
         } catch (error) {
             console.error(error);
         }
-    }
+    });
 };

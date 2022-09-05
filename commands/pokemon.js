@@ -18,7 +18,6 @@ module.exports = {
                     { name: 'Alola', value: 'alola' },
                     { name: 'Galar', value: 'galar' },
                     { name: 'Hisui', value: 'hisui' },
-                    { name: 'Paldean', value: 'paldean' },
                 ))
         .addStringOption(option =>
             option.setName('message')
@@ -38,8 +37,6 @@ module.exports = {
             pokemon = name + '-galar';
         } else if (form == 'hisui') {
             pokemon = name + '-hisui';
-        } else if (form == 'paldean') {
-            pokemon = name + '-paldean';
         }
 
         const res = await fetch('https://pokeapi.co/api/v2/pokemon/'.concat(pokemon.toLowerCase()));

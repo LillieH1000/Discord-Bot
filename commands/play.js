@@ -184,20 +184,6 @@ module.exports = {
                 await ytdlp(1, 'soundcloud', filename, interaction, url);
             }
         }
-        if (source == 'audiomack') {
-            const rx = /^https?:\/\/(.*)(audiomack\.com|)\/(.*)$/;
-            if (url.match(rx)) {
-                await ytdlp(0, 'audiomack', filename, interaction, url);
-            } else {
-                const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
-                    .setTitle('Music Player')
-                    .setDescription('Only urls are supported for Audiomack, search for Audiomack is currently unsupported')
-                    .setTimestamp()
-
-                await interaction.editReply({ embeds: [embed] });
-            }
-        }
         if (source == 'bandcamp') {
             const rx = /^https?:\/\/(.*)(bandcamp\.com|)\/(.*)$/;
             if (url.match(rx)) {
