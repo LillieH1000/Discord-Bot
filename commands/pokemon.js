@@ -17,6 +17,8 @@ module.exports = {
                     { name: 'None', value: 'none' },
                     { name: 'Alola', value: 'alola' },
                     { name: 'Galar', value: 'galar' },
+                    { name: 'Hisui', value: 'hisui' },
+                    { name: 'Paldean', value: 'paldean' },
                 ))
         .addStringOption(option =>
             option.setName('message')
@@ -34,6 +36,10 @@ module.exports = {
             pokemon = name + '-alola';
         } else if (form == 'galar') {
             pokemon = name + '-galar';
+        } else if (form == 'hisui') {
+            pokemon = name + '-hisui';
+        } else if (form == 'paldean') {
+            pokemon = name + '-paldean';
         }
 
         const res = await fetch('https://pokeapi.co/api/v2/pokemon/'.concat(pokemon.toLowerCase()));
@@ -85,57 +91,78 @@ module.exports = {
                 .setThumbnail(data.sprites.other.home.front_default)
                 .setTimestamp()
     
-            const menu = new SelectMenuBuilder().setPlaceholder('Choose Sprite Image');
-    
-            if (message) {
-                embed.addFields(
-                    { name: 'Game And Count', value: message, inline: false },
-                );
-                menu.setCustomId(data.name + 'custommenuid' + message);
-            } else {
-                menu.setCustomId(data.name + 'custommenuid');
-            }
-            
-            if (data.sprites.other.home.front_default != null) {
-                menu.addOptions([
-                    {
-                        label: "Default (Regular)",
-                        value: "defaultregular",
-                        description: "Show the regular default pic of the pokemon"
-                    }
-                ])
-            }
-            if (data.sprites.other.home.front_shiny != null) {
-                menu.addOptions([
-                    {
-                        label: "Default (Shiny)",
-                        value: "defaultshiny",
-                        description: "Show the shiny default pic of the pokemon"
-                    }
-                ])
-            }
-            if (data.sprites.other.home.front_female != null) {
-                menu.addOptions([
-                    {
-                        label: "Female (Regular)",
-                        value: "femaleregular",
-                        description: "Show the regular female pic of the pokemon"
-                    }
-                ])
-            }
-            if (data.sprites.other.home.front_shiny_female != null) {
-                menu.addOptions([
-                    {
-                        label: "Female (Shiny)",
-                        value: "femaleshiny",
-                        description: "Show the shiny female pic of the pokemon"
-                    }
-                ])
-            }
-    
-            const row = new ActionRowBuilder().addComponents(menu);
+            if (form == 'hisui') {
+                if (message) {
+                    embed.addFields(
+                        { name: 'Game And Count', value: message, inline: false },
+                    );
+                }
 
-            await interaction.editReply({ embeds: [embed], components: [row] });
+                embed.addFields(
+                    { name: 'Notice', value: 'Unfortunately this is all the data the pokemon api returns for Hisui forms', inline: false },
+                );
+
+                await interaction.editReply({ embeds: [embed] });
+            } else {
+                const menu = new SelectMenuBuilder().setPlaceholder('Choose Sprite Image');
+    
+                if (message) {
+                    embed.addFields(
+                        { name: 'Game And Count', value: message, inline: false },
+                    );
+                    menu.setCustomId(data.name + 'custommenuid' + message);
+                } else {
+                    menu.setCustomId(data.name + 'custommenuid');
+                }
+                
+                if (data.sprites.other.home.front_default != null) {
+                    menu.addOptions([
+                        {
+                            label: "Default (Regular)",
+                            value: "defaultregular",
+                            description: "Show the regular default pic of the pokemon"
+                        }
+                    ])
+                }
+                if (data.sprites.other.home.front_shiny != null) {
+                    menu.addOptions([
+                        {
+                            label: "Default (Shiny)",
+                            value: "defaultshiny",
+                            description: "Show the shiny default pic of the pokemon"
+                        }
+                    ])
+                }
+                if (data.sprites.other.home.front_female != null) {
+                    menu.addOptions([
+                        {
+                            label: "Female (Regular)",
+                            value: "femaleregular",
+                            description: "Show the regular female pic of the pokemon"
+                        }
+                    ])
+                }
+                if (data.sprites.other.home.front_shiny_female != null) {
+                    menu.addOptions([
+                        {
+                            label: "Female (Shiny)",
+                            value: "femaleshiny",
+                            description: "Show the shiny female pic of the pokemon"
+                        }
+                    ])
+                }
+        
+                const row = new ActionRowBuilder().addComponents(menu);
+
+                await interaction.editReply({ embeds: [embed], components: [row] });
+            }
+        } else {
+            const embed = new EmbedBuilder()
+                .setColor('#FFC0DD')
+                .setTitle('Pokemon Not Found')
+                .setTimestamp()
+
+            await interaction.editReply({ embeds: [embed] });
         }
 	},
 };
