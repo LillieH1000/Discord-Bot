@@ -10,14 +10,33 @@ module.exports = {
                 .setDescription('Enter the pokemon name')
                 .setRequired(true))
         .addStringOption(option =>
+            option.setName('form')
+                .setDescription('Enter the pokemon form')
+                .setRequired(true)
+                .addChoices(
+                    { name: 'None', value: 'none' },
+                    { name: 'Alola', value: 'alola' },
+                    { name: 'Galar', value: 'galar' },
+                ))
+        .addStringOption(option =>
             option.setName('message')
                 .setDescription('Enter your message')),
 	async execute(interaction) {
         await interaction.deferReply();
         const name = interaction.options.getString('name');
+        const form = interaction.options.getString('form');
         const message = interaction.options.getString('message');
 
-        const res = await fetch('https://pokeapi.co/api/v2/pokemon/'.concat(name));
+        var pokemon = '';
+        if (form == 'none') {
+            pokemon = name;
+        } else if (form == 'alola') {
+            pokemon = name + '-alola';
+        } else if (form == 'galar') {
+            pokemon = name + '-galar';
+        }
+
+        const res = await fetch('https://pokeapi.co/api/v2/pokemon/'.concat(pokemon.toLowerCase()));
         if (res.ok) {
             const data = await res.json();
             
