@@ -4,10 +4,10 @@ var timezone = require('dayjs/plugin/timezone');
 
 module.exports = async(client) => {
     // Town Of Salem Server
-    setInterval(function() {
+    setInterval(async function() {
         try {
-            let guild = client.guilds.cache.get("416350699794857986");
-            let channel = guild.channels.cache.get("772878026521182248");
+            let guild = client.guilds.cache.get("416350699794857986") || await client.guilds.fetch("416350699794857986");
+            let channel = guild.channels.cache.get("772878026521182248") || await guild.channels.fetch("772878026521182248");
             const date = new Date();
             dayjs.extend(utc);
             dayjs.extend(timezone);
