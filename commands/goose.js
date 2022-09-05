@@ -13,14 +13,14 @@ module.exports = {
                 .setColor('#FFC0DD')
                 .setTitle('Goose Pics')
                 .setDescription('[Nekos.Life](https://nekos.life/)')
-                .setImage(data.file)
+                .setImage(data.url)
                 .setTimestamp()
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
                         .setLabel('View Original Image')
                         .setStyle(ButtonStyle.Link)
-                        .setURL(data.file)
+                        .setURL(data.url)
                 );
             await interaction.editReply({ embeds: [embed], components: [row] });
         }
