@@ -16,7 +16,7 @@ module.exports = {
 	async execute(interaction) {
         await interaction.deferReply({ ephemeral: true });
         const user = interaction.options.getUser('user');
-        const member = interaction.guild.members.cache.get(user.id);
+        const member = interaction.guild.members.cache.get(user.id) || await interaction.guild.members.fetch(user.id);
         const reason = interaction.options.getString('reason');
 
         if (reason) {
