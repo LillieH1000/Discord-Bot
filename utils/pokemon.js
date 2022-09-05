@@ -3,29 +3,14 @@ const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder } = require('discord.j
 module.exports = async(client) => {
     client.on('interactionCreate', async interaction => {
         if (!interaction.isSelectMenu()) return;
-        await pokemonsearch(1, 0, interaction);
+        await pokemonsearch(interaction);
     });
     
-    client.on('messageCreate', async message => {
-        if (message.author.bot) return;
-    
-        if (message.content.startsWith('((') & message.content.includes('))')) {
-            await pokemonsearch(0, 1, message);
-        }
-    });
-    
-    async function pokemonsearch(isInteraction, isMessage, info) {
+    async function pokemonsearch(info) {
         try {
-            var pokemon = '';
-            var game = '';
-            if (isInteraction == 1) {
-                pokemon += info.customId.split('custommenuid')[0];
-                game += info.customId.split('custommenuid')[1];
-            }
-            if (isMessage == 1) {
-                pokemon += info.content.split('))')[0].replace('((', '').toLowerCase();
-                game += info.content.split('))')[1];
-            }
+            const pokemon = info.customId.split('custommenuid')[0];
+            const game = info.customId.split('custommenuid')[1];
+
             const res = await fetch('https://pokeapi.co/api/v2/pokemon/'.concat(pokemon));
             if (res.ok) {
                 const data = await res.json();
@@ -73,22 +58,17 @@ module.exports = async(client) => {
                         { name: 'Base Stats', value: basestats, inline: false },
                     )
                     .setTimestamp()
-                if (isInteraction == 1) {
-                    if (info.values[0] == 'defaultregular') {
-                        embed.setThumbnail(data.sprites.other.home.front_default);
-                    }
-                    if (info.values[0] == 'defaultshiny') {
-                        embed.setThumbnail(data.sprites.other.home.front_shiny);
-                    }
-                    if (info.values[0] == 'femaleregular') {
-                        embed.setThumbnail(data.sprites.other.home.front_female);
-                    }
-                    if (info.values[0] == 'femaleshiny') {
-                        embed.setThumbnail(data.sprites.other.home.front_shiny_female);
-                    }
-                }
-                if (isMessage == 1) {
+                if (info.values[0] == 'defaultregular') {
                     embed.setThumbnail(data.sprites.other.home.front_default);
+                }
+                if (info.values[0] == 'defaultshiny') {
+                    embed.setThumbnail(data.sprites.other.home.front_shiny);
+                }
+                if (info.values[0] == 'femaleregular') {
+                    embed.setThumbnail(data.sprites.other.home.front_female);
+                }
+                if (info.values[0] == 'femaleshiny') {
+                    embed.setThumbnail(data.sprites.other.home.front_shiny_female);
                 }
         
                 const menu = new SelectMenuBuilder().setPlaceholder('Choose Sprite Image');
@@ -141,13 +121,7 @@ module.exports = async(client) => {
         
                 const row = new ActionRowBuilder().addComponents(menu);
         
-                if (isInteraction == 1) {
-                    await info.update({ embeds: [embed], components: [row] });
-                }
-                if (isMessage == 1) {
-                    await info.delete();
-                    await info.channel.send({ embeds: [embed], components: [row] });
-                }
+                await info.update({ embeds: [embed], components: [row] });
             }
         } catch (error) {
             console.error(error);
