@@ -4,7 +4,6 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('tweaksearch')
 		.setDescription('Gives you info about the specified ios jailbreak tweak')
-        .setDMPermission(false)
         .addStringOption(option =>
             option.setName('name')
                 .setDescription('Enter the tweak name')
