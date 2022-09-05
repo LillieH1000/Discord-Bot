@@ -1,7 +1,11 @@
-# Discord-Bot
-My new discord.js bot
+# Ganyu Discord Bot
+My Ganyu discord bot written in discord.js
 
 Invite my bot: [Invite](https://discord.com/api/oauth2/authorize?client_id=1016070725305639002&permissions=8&scope=bot%20applications.commands)
+
+-----
+
+Linux Setup
 
 ```
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
