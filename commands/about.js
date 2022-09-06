@@ -19,6 +19,10 @@ module.exports = {
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
+                    .setLabel('GitHub')
+                    .setStyle(ButtonStyle.Link)
+                    .setURL("https://github.com/LillieH001/Discord-Bot"),
+                new ButtonBuilder()
                     .setLabel('Patreon')
                     .setStyle(ButtonStyle.Link)
                     .setURL("https://www.patreon.com/lillieweeb")
