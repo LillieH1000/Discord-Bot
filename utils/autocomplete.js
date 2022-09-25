@@ -9,7 +9,7 @@ module.exports = async(client) => {
             var choices;
 
             if (focusedOption.value.startsWith('a')) {
-                choices = ['amber', 'anal', 'ass'];
+                choices = ['amber', 'anal', 'ass', 'ayaka'];
             }
             if (focusedOption.value.startsWith('b')) {
                 choices = ['bdsm', 'blowjob', 'boobjob', 'boobs'];
@@ -27,7 +27,10 @@ module.exports = async(client) => {
                 choices = ['gangbang', 'ganyu', 'genshin', 'glasses'];
             }
             if (focusedOption.value.startsWith('h')) {
-                choices = ['handjob'];
+                choices = ['handjob', 'hutao'];
+            }
+            if (focusedOption.value.startsWith('k')) {
+                choices = ['keqing'];
             }
             if (focusedOption.value.startsWith('l')) {
                 choices = ['lumine'];
@@ -54,7 +57,7 @@ module.exports = async(client) => {
                 choices = ['waifu'];
             }
             if (focusedOption.value.startsWith('y')) {
-                choices = ['yuri'];
+                choices = ['yaemiko', 'yuri'];
             }
 
             try {

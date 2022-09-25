@@ -8,6 +8,8 @@ async function images(category) {
         res = await fetch(`https://www.reddit.com/r/amberhentai.json?limit=${redditapilimit}`);
     } else if (category == 'anal') {
         res = await fetch(`https://www.reddit.com/r/hentaianal.json?limit=${redditapilimit}`);
+    } else if (category == 'ayaka') {
+        res = await fetch(`https://www.reddit.com/r/ayakahentai.json?limit=${redditapilimit}`);
     } else if (category == 'bdsm') {
         res = await fetch(`https://www.reddit.com/r/hentaibondage.json?limit=${redditapilimit}`);
     } else if (category == 'cum') {
@@ -30,6 +32,10 @@ async function images(category) {
         res = await fetch(`https://www.reddit.com/r/genshinimpactnsfw.json?limit=${redditapilimit}`);
     } else if (category == 'futanari') {
         res = await fetch(`https://www.reddit.com/r/futanari.json?limit=${redditapilimit}`);
+    } else if (category == 'hutao') {
+        res = await fetch(`https://www.reddit.com/r/hutaonsfw.json?limit=${redditapilimit}`);
+    } else if (category == 'keqing') {
+        res = await fetch(`https://www.reddit.com/r/keqingnsfw.json?limit=${redditapilimit}`);
     } else if (category == 'lumine') {
         res = await fetch(`https://www.reddit.com/r/luminensfw.json?limit=${redditapilimit}`);
     } else if (category == 'masturbation') {
@@ -46,6 +52,8 @@ async function images(category) {
         res = await fetch(`https://www.reddit.com/r/traphentai.json?limit=${redditapilimit}`);
     } else if (category == 'upskirt') {
         res = await fetch(`https://www.reddit.com/r/upskirthentai.json?limit=${redditapilimit}`);
+    } else if (category == 'yaemiko') {
+        res = await fetch(`https://www.reddit.com/r/yaemikonsfw.json?limit=${redditapilimit}`);
     } else if (category == 'yuri') {
         res = await fetch(`https://www.reddit.com/r/yurihentai.json?limit=${redditapilimit}`);
     }
@@ -73,12 +81,35 @@ module.exports = {
         .addStringOption(option =>
             option.setName('category')
                 .setDescription('Choose which hentai picture type you want')
-                .setRequired(true)
                 .setAutocomplete(true)),
 	async execute(interaction) {
         if (interaction.channel.nsfw) {
             await interaction.deferReply();
             const category = interaction.options.getString('category');
+            if (!category) {
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Categories')
+                    .setDescription(`A:\namber\nanal\nass\nayaka\n
+                    B:\nbdsm\nblowjob\nboobjob\nboobs\n
+                    C:\ncreampie\ncum\n
+                    E:\nero\neula\n
+                    F:\nfemboy\nfemdom\nfootjob\nfutanari\n
+                    G:\ngangbang\nganyu\ngenshin\nglasses\n
+                    H:\nhandjob\nhutao\n
+                    K:\nkeqing\n
+                    L:\nlumine\n
+                    M:\nmasturbation\n
+                    N:\nneko\n
+                    O:\norgy\noverwatch\n
+                    P:\npantsu\npee\npegging\npublic\n
+                    T:\ntentacles\nthighs\ntrap\n
+                    U:\nuniform\nupskirt\n
+                    W:\nwaifu\n
+                    Y:\nyaemiko\nyuri`)
+                    .setTimestamp()
+                await interaction.editReply({ embeds: [embed] });
+            }
             if (category == "amber") {
                 const imageslist = await images('amber');
                 var image = _.sample(imageslist);
@@ -157,6 +188,24 @@ module.exports = {
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
+            }
+            if (category == "ayaka") {
+                const imageslist = await images('ayaka');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Ayaka)')
+                    .setDescription('[r/AyakaHentai](https://www.reddit.com/r/AyakaHentai/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
             }
             if (category == "bdsm") {
                 var option = _.sample([1, 2]);
@@ -654,6 +703,42 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
             }
+            if (category == "hutao") {
+                const imageslist = await images('hutao');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Hu Tao)')
+                    .setDescription('[r/HuTaoNSFW](https://www.reddit.com/r/HuTaoNSFW/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
+            }
+            if (category == "keqing") {
+                const imageslist = await images('keqing');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Keqing)')
+                    .setDescription('[r/KeqingNSFW](https://www.reddit.com/r/KeqingNSFW/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
+            }
             if (category == "lumine") {
                 const imageslist = await images('lumine');
                 var image = _.sample(imageslist);
@@ -1049,6 +1134,24 @@ module.exports = {
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
+            }
+            if (category == "yaemiko") {
+                const imageslist = await images('yaemiko');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Yae Miko)')
+                    .setDescription('[r/YaeMikoNSFW](https://www.reddit.com/r/YaeMikoNSFW/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
             }
             if (category == "yuri") {
                 var option = _.sample([1, 2]);
