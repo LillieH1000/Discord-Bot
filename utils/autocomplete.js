@@ -48,10 +48,10 @@ module.exports = async(client) => {
                 choices = ['pantsu', 'pee', 'pegging', 'public'];
             }
             if (focusedOption.value.startsWith('t')) {
-                choices = ['tentacles', 'thighs', 'trap'];
+                choices = ['tentacles', 'thick', 'thighs', 'trap'];
             }
             if (focusedOption.value.startsWith('u')) {
-                choices = ['uniform', 'upskirt'];
+                choices = ['undressing', 'uniform', 'upskirt'];
             }
             if (focusedOption.value.startsWith('w')) {
                 choices = ['waifu'];

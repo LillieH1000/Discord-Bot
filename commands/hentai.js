@@ -46,10 +46,18 @@ async function images(category) {
         res = await fetch(`https://www.reddit.com/r/pissinghentai.json?limit=${redditapilimit}`);
     } else if (category == 'pegging') {
         res = await fetch(`https://www.reddit.com/r/pegginghentai.json?limit=${redditapilimit}`);
+    } else if (category == 'public') {
+        res = await fetch(`https://www.reddit.com/r/publichentai.json?limit=${redditapilimit}`);
     } else if (category == 'tentacles') {
         res = await fetch(`https://www.reddit.com/r/tentai.json?limit=${redditapilimit}`);
+    } else if (category == 'thick') {
+        res = await fetch(`https://www.reddit.com/r/thick_hentai.json?limit=${redditapilimit}`);
     } else if (category == 'trap') {
         res = await fetch(`https://www.reddit.com/r/traphentai.json?limit=${redditapilimit}`);
+    } else if (category == 'undressing') {
+        res = await fetch(`https://www.reddit.com/r/undressinghentai.json?limit=${redditapilimit}`);
+    } else if (category == 'uniform') {
+        res = await fetch(`https://www.reddit.com/r/uniform_hentai.json?limit=${redditapilimit}`);
     } else if (category == 'upskirt') {
         res = await fetch(`https://www.reddit.com/r/upskirthentai.json?limit=${redditapilimit}`);
     } else if (category == 'yaemiko') {
@@ -103,8 +111,8 @@ module.exports = {
                     N:\nneko\n
                     O:\norgy\noverwatch\n
                     P:\npantsu\npee\npegging\npublic\n
-                    T:\ntentacles\nthighs\ntrap\n
-                    U:\nuniform\nupskirt\n
+                    T:\ntentacles\nthick\nthighs\ntrap\n
+                    U:\nundressing\nuniform\nupskirt\n
                     W:\nwaifu\n
                     Y:\nyaemiko\nyuri`)
                     .setTimestamp()
@@ -956,21 +964,42 @@ module.exports = {
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
             if (category == "public") {
-                const res = await fetch('https://hmtai.herokuapp.com/nsfw/public');
-                if (res.ok) {
-                    const data = await res.json();
+                var option = _.sample([1, 2]);
+                if (option == 1) {
+                    const res = await fetch('https://hmtai.herokuapp.com/nsfw/public');
+                    if (res.ok) {
+                        const data = await res.json();
+                        const embed = new EmbedBuilder()
+                            .setColor('#FFC0DD')
+                            .setTitle('Hentai Pics (Public)')
+                            .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
+                            .setImage(data.url)
+                            .setTimestamp()
+                        const row = new ActionRowBuilder()
+                            .addComponents(
+                                new ButtonBuilder()
+                                    .setLabel('View Original Image')
+                                    .setStyle(ButtonStyle.Link)
+                                    .setURL(data.url)
+                            );
+                        await interaction.editReply({ embeds: [embed], components: [row] });
+                    }
+                }
+                if (option == 2) {
+                    const imageslist = await images('public');
+                    var image = _.sample(imageslist);
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Public)')
-                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
-                        .setImage(data.url)
+                        .setDescription('[r/PublicHentai](https://www.reddit.com/r/PublicHentai/)')
+                        .setImage(image)
                         .setTimestamp()
                     const row = new ActionRowBuilder()
                         .addComponents(
                             new ButtonBuilder()
                                 .setLabel('View Original Image')
                                 .setStyle(ButtonStyle.Link)
-                                .setURL(data.url)
+                                .setURL(image)
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
@@ -1015,6 +1044,24 @@ module.exports = {
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
+            }
+            if (category == "thick") {
+                const imageslist = await images('thick');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Thick)')
+                    .setDescription('[r/thick_hentai](https://www.reddit.com/r/thick_hentai/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
             }
             if (category == "thighs") {
                 const res = await fetch('https://hmtai.herokuapp.com/nsfw/thighs');
@@ -1077,22 +1124,61 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
             }
+            if (category == "undressing") {
+                const imageslist = await images('undressing');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Undressing)')
+                    .setDescription('[r/UndressingHentai](https://www.reddit.com/r/UndressingHentai/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
+            }
             if (category == "uniform") {
-                const res = await fetch('https://hmtai.herokuapp.com/nsfw/uniform');
-                if (res.ok) {
-                    const data = await res.json();
+                var option = _.sample([1, 2]);
+                if (option == 1) {
+                    const res = await fetch('https://hmtai.herokuapp.com/nsfw/uniform');
+                    if (res.ok) {
+                        const data = await res.json();
+                        const embed = new EmbedBuilder()
+                            .setColor('#FFC0DD')
+                            .setTitle('Hentai Pics (Uniform)')
+                            .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
+                            .setImage(data.url)
+                            .setTimestamp()
+                        const row = new ActionRowBuilder()
+                            .addComponents(
+                                new ButtonBuilder()
+                                    .setLabel('View Original Image')
+                                    .setStyle(ButtonStyle.Link)
+                                    .setURL(data.url)
+                            );
+                        await interaction.editReply({ embeds: [embed], components: [row] });
+                    }
+                }
+                if (option == 2) {
+                    const imageslist = await images('uniform');
+                    var image = _.sample(imageslist);
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Uniform)')
-                        .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
-                        .setImage(data.url)
+                        .setDescription('[r/Uniform_Hentai](https://www.reddit.com/r/Uniform_Hentai/)')
+                        .setImage(image)
                         .setTimestamp()
                     const row = new ActionRowBuilder()
                         .addComponents(
                             new ButtonBuilder()
                                 .setLabel('View Original Image')
                                 .setStyle(ButtonStyle.Link)
-                                .setURL(data.url)
+                                .setURL(image)
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
