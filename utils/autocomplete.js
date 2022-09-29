@@ -12,13 +12,13 @@ module.exports = async(client) => {
                 choices = ['amber', 'anal', 'ass', 'ayaka'];
             }
             if (focusedOption.value.startsWith('b')) {
-                choices = ['bdsm', 'blowjob', 'boobjob', 'boobs'];
+                choices = ['bdsm', 'blowjob', 'boobjob', 'boobs', 'byleth'];
             }
             if (focusedOption.value.startsWith('c')) {
                 choices = ['creampie', 'cum'];
             }
             if (focusedOption.value.startsWith('e')) {
-                choices = ['ero', 'eula'];
+                choices = ['emilia', 'ero', 'eula'];
             }
             if (focusedOption.value.startsWith('f')) {
                 choices = ['femboy', 'femdom', 'footjob', 'futanari'];
@@ -46,6 +46,9 @@ module.exports = async(client) => {
             }
             if (focusedOption.value.startsWith('p')) {
                 choices = ['pantsu', 'pee', 'pegging', 'public'];
+            }
+            if (focusedOption.value.startsWith('r')) {
+                choices = ['ram', 'rem'];
             }
             if (focusedOption.value.startsWith('t')) {
                 choices = ['tentacles', 'thick', 'thighs', 'trap'];

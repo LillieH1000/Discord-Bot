@@ -63,6 +63,8 @@ async function images(category) {
     } else if (category == 'yaemiko') {
         res = await fetch(`https://www.reddit.com/r/yaemikonsfw.json?limit=${redditapilimit}`);
     } else if (category == 'yuri') {
+        res = await fetch(`https://www.reddit.com/r/yuri.json?limit=${redditapilimit}`);
+    } else if (category == 'yuritwo') {
         res = await fetch(`https://www.reddit.com/r/yurihentai.json?limit=${redditapilimit}`);
     }
     if (res.ok) {
@@ -99,9 +101,9 @@ module.exports = {
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Categories')
                     .setDescription(`A:\namber\nanal\nass\nayaka\n
-                    B:\nbdsm\nblowjob\nboobjob\nboobs\n
+                    B:\nbdsm\nblowjob\nboobjob\nboobs\nbyleth\n
                     C:\ncreampie\ncum\n
-                    E:\nero\neula\n
+                    E:\nemilia\nero\neula\n
                     F:\nfemboy\nfemdom\nfootjob\nfutanari\n
                     G:\ngangbang\nganyu\ngenshin\nglasses\n
                     H:\nhandjob\nhutao\n
@@ -111,6 +113,7 @@ module.exports = {
                     N:\nneko\n
                     O:\norgy\noverwatch\n
                     P:\npantsu\npee\npegging\npublic\n
+                    R:\nram\nrem\n
                     T:\ntentacles\nthick\nthighs\ntrap\n
                     U:\nundressing\nuniform\nupskirt\n
                     W:\nwaifu\n
