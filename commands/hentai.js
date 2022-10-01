@@ -8,12 +8,18 @@ async function images(category) {
         res = await fetch(`https://www.reddit.com/r/amberhentai.json?limit=${redditapilimit}`);
     } else if (category == 'anal') {
         res = await fetch(`https://www.reddit.com/r/hentaianal.json?limit=${redditapilimit}`);
-    } else if (category == 'ayaka') {
-        res = await fetch(`https://www.reddit.com/r/ayakahentai.json?limit=${redditapilimit}`);
+    // } else if (category == 'ayaka') {
+    // res = await fetch(`https://www.reddit.com/r/ayakahentai.json?limit=${redditapilimit}`);
     } else if (category == 'bdsm') {
         res = await fetch(`https://www.reddit.com/r/hentaibondage.json?limit=${redditapilimit}`);
+    } else if (category == 'byleth') {
+        res = await fetch(`https://www.reddit.com/r/byleth.json?limit=${redditapilimit}`);
+    } else if (category == 'bylethtwo') {
+        res = await fetch(`https://www.reddit.com/r/bylethr34.json?limit=${redditapilimit}`);
     } else if (category == 'cum') {
         res = await fetch(`https://www.reddit.com/r/cumhentai.json?limit=${redditapilimit}`);
+    } else if (category == 'emilia') {
+        res = await fetch(`https://www.reddit.com/r/emiliahentai.json?limit=${redditapilimit}`);
     } else if (category == 'eula') {
         res = await fetch(`https://www.reddit.com/r/eulansfw.json?limit=${redditapilimit}`);
     } else if (category == 'femboy') {
@@ -48,6 +54,8 @@ async function images(category) {
         res = await fetch(`https://www.reddit.com/r/pegginghentai.json?limit=${redditapilimit}`);
     } else if (category == 'public') {
         res = await fetch(`https://www.reddit.com/r/publichentai.json?limit=${redditapilimit}`);
+    } else if (category == 'rem') {
+        res = await fetch(`https://www.reddit.com/r/remhentai.json?limit=${redditapilimit}`);
     } else if (category == 'tentacles') {
         res = await fetch(`https://www.reddit.com/r/tentai.json?limit=${redditapilimit}`);
     } else if (category == 'thick') {
@@ -100,7 +108,7 @@ module.exports = {
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Categories')
-                    .setDescription(`A:\namber\nanal\nass\nayaka\n
+                    .setDescription(`A:\namber\nanal\nass\n
                     B:\nbdsm\nblowjob\nboobjob\nboobs\nbyleth\n
                     C:\ncreampie\ncum\n
                     E:\nemilia\nero\neula\n
@@ -113,7 +121,7 @@ module.exports = {
                     N:\nneko\n
                     O:\norgy\noverwatch\n
                     P:\npantsu\npee\npegging\npublic\n
-                    R:\nram\nrem\n
+                    R:\nrem\n
                     T:\ntentacles\nthick\nthighs\ntrap\n
                     U:\nundressing\nuniform\nupskirt\n
                     W:\nwaifu\n
@@ -200,7 +208,7 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
             }
-            if (category == "ayaka") {
+            /* if (category == "ayaka") {
                 const imageslist = await images('ayaka');
                 var image = _.sample(imageslist);
                 const embed = new EmbedBuilder()
@@ -217,7 +225,7 @@ module.exports = {
                             .setURL(image)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
-            }
+            } */
             if (category == "bdsm") {
                 var option = _.sample([1, 2]);
                 if (option == 1) {
@@ -362,6 +370,45 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
             }
+            if (category == "byleth") {
+                var option = _.sample([1, 2]);
+                if (option == 1) {
+                    const imageslist = await images('byleth');
+                    var image = _.sample(imageslist);
+                    const embed = new EmbedBuilder()
+                        .setColor('#FFC0DD')
+                        .setTitle('Hentai Pics (Byleth)')
+                        .setDescription('[r/Byleth](https://www.reddit.com/r/Byleth/)')
+                        .setImage(image)
+                        .setTimestamp()
+                    const row = new ActionRowBuilder()
+                        .addComponents(
+                            new ButtonBuilder()
+                                .setLabel('View Original Image')
+                                .setStyle(ButtonStyle.Link)
+                                .setURL(image)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                }
+                if (option == 2) {
+                    const imageslist = await images('bylethtwo');
+                    var image = _.sample(imageslist);
+                    const embed = new EmbedBuilder()
+                        .setColor('#FFC0DD')
+                        .setTitle('Hentai Pics (Byleth)')
+                        .setDescription('[r/BylethR34](https://www.reddit.com/r/BylethR34/)')
+                        .setImage(image)
+                        .setTimestamp()
+                    const row = new ActionRowBuilder()
+                        .addComponents(
+                            new ButtonBuilder()
+                                .setLabel('View Original Image')
+                                .setStyle(ButtonStyle.Link)
+                                .setURL(image)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                }
+            }
             if (category == "creampie") {
                 const res = await fetch('https://hmtai.herokuapp.com/nsfw/creampie');
                 if (res.ok) {
@@ -422,6 +469,24 @@ module.exports = {
                         );
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
+            }
+            if (category == "emilia") {
+                const imageslist = await images('emilia');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Emilia)')
+                    .setDescription('[r/EmiliaHentai](https://www.reddit.com/r/EmiliaHentai/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
             }
             if (category == "ero") {
                 const res = await fetch('https://hmtai.herokuapp.com/nsfw/ero');
@@ -1007,6 +1072,24 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
             }
+            if (category == "rem") {
+                const imageslist = await images('rem');
+                var image = _.sample(imageslist);
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Hentai Pics (Rem)')
+                    .setDescription('[r/RemHentai](https://www.reddit.com/r/RemHentai/)')
+                    .setImage(image)
+                    .setTimestamp()
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel('View Original Image')
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(image)
+                    );
+                await interaction.editReply({ embeds: [embed], components: [row] });
+            }
             if (category == "tentacles") {
                 var option = _.sample([1, 2]);
                 if (option == 1) {
@@ -1243,7 +1326,7 @@ module.exports = {
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
             if (category == "yuri") {
-                var option = _.sample([1, 2]);
+                var option = _.sample([1, 2, 3]);
                 if (option == 1) {
                     const res = await fetch('https://hmtai.herokuapp.com/nsfw/yuri');
                     if (res.ok) {
@@ -1266,6 +1349,24 @@ module.exports = {
                 }
                 if (option == 2) {
                     const imageslist = await images('yuri');
+                    var image = _.sample(imageslist);
+                    const embed = new EmbedBuilder()
+                        .setColor('#FFC0DD')
+                        .setTitle('Hentai Pics (Yuri)')
+                        .setDescription('[r/yuri](https://www.reddit.com/r/yuri/)')
+                        .setImage(image)
+                        .setTimestamp()
+                    const row = new ActionRowBuilder()
+                        .addComponents(
+                            new ButtonBuilder()
+                                .setLabel('View Original Image')
+                                .setStyle(ButtonStyle.Link)
+                                .setURL(image)
+                        );
+                    await interaction.editReply({ embeds: [embed], components: [row] });
+                }
+                if (option == 3) {
+                    const imageslist = await images('yuritwo');
                     var image = _.sample(imageslist);
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')

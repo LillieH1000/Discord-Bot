@@ -9,7 +9,7 @@ module.exports = async(client) => {
             var choices;
 
             if (focusedOption.value.startsWith('a')) {
-                choices = ['amber', 'anal', 'ass', 'ayaka'];
+                choices = ['amber', 'anal', 'ass'];
             }
             if (focusedOption.value.startsWith('b')) {
                 choices = ['bdsm', 'blowjob', 'boobjob', 'boobs', 'byleth'];
@@ -48,7 +48,7 @@ module.exports = async(client) => {
                 choices = ['pantsu', 'pee', 'pegging', 'public'];
             }
             if (focusedOption.value.startsWith('r')) {
-                choices = ['ram', 'rem'];
+                choices = ['rem'];
             }
             if (focusedOption.value.startsWith('t')) {
                 choices = ['tentacles', 'thick', 'thighs', 'trap'];
