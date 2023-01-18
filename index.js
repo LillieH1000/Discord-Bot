@@ -24,7 +24,6 @@ client.once('ready', () => {
 	if (!fs.existsSync('downloads')) {
 		fs.mkdirSync('downloads', '0755')
 	}
-	client.user.setActivity("Keqing Be Adorable", { type: ActivityType.Watching})
 	console.log(`Logged in as ${client.user.tag}`);
 });
 
