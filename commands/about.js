@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { clientId } = require('../config.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -6,7 +7,7 @@ module.exports = {
 		.setDescription('About Lillie Discord Bot'),
 	async execute(interaction) {
         await interaction.deferReply({ ephemeral: true });
-        const member = interaction.guild.members.cache.get("1065377660303310859") || await interaction.guild.members.fetch("1065377660303310859");
+        const member = interaction.guild.members.cache.get(clientId) || await interaction.guild.members.fetch(clientId);
         
         const embed = new EmbedBuilder()
             .setColor('#FFC0DD')
