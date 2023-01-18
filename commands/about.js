@@ -3,14 +3,14 @@ const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, Butt
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('about')
-		.setDescription('About Ganyu discord bot'),
+		.setDescription('About Lillie Discord Bot'),
 	async execute(interaction) {
         await interaction.deferReply({ ephemeral: true });
         const member = interaction.guild.members.cache.get("1016070725305639002") || await interaction.guild.members.fetch("1016070725305639002");
         
         const embed = new EmbedBuilder()
             .setColor('#FFC0DD')
-            .setTitle('Ganyu')
+            .setTitle('Lillie Discord Bot')
             .setDescription('Made By Lillie')
             .setThumbnail(member.displayAvatarURL())
             .setFooter({ text: 'ID: ' + member.id })
@@ -21,11 +21,7 @@ module.exports = {
                 new ButtonBuilder()
                     .setLabel('GitHub')
                     .setStyle(ButtonStyle.Link)
-                    .setURL("https://github.com/LillieH001/Discord-Bot"),
-                new ButtonBuilder()
-                    .setLabel('Patreon')
-                    .setStyle(ButtonStyle.Link)
-                    .setURL("https://www.patreon.com/lillieweeb")
+                    .setURL("https://github.com/LillieH1000/Discord-Bot")
             );
 
         await interaction.editReply({ embeds: [embed], components: [row], ephemeral: true });
