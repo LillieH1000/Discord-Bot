@@ -26,7 +26,7 @@ function os_func() {
 
 var os = new os_func();
 
-async function ytdlp(type, source, filename, interaction, details) {
+async function ytdlp(type, filename, interaction, details) {
     if (type == 0) {
         const titlecommand = 'yt-dlp --get-title --no-playlist ' + details;
         const downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist ' + details;
@@ -61,72 +61,37 @@ async function ytdlp(type, source, filename, interaction, details) {
         })
     }
     if (type == 1) {
-        if (source == 'youtube') {
-            const titlecommand = 'yt-dlp --get-title --no-playlist "ytsearch:' + details + '"';
-            const downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist "ytsearch:' + details + '"';
-            var title = '';
-            os.execCommand(titlecommand, function (returnvalue) {
-                title = returnvalue;
-                os.execCommand(downloadcommand, function () {
-                    globalsaudio.queue.push('downloads/' + filename + '.mp3');
-                    globalsaudio.titles.push(title);
+        const titlecommand = 'yt-dlp --get-title --no-playlist "scsearch:' + details + '"';
+        const downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist "scsearch:' + details + '"';
+        var title = '';
+        os.execCommand(titlecommand, function (returnvalue) {
+            title = returnvalue;
+            os.execCommand(downloadcommand, function () {
+                globalsaudio.queue.push('downloads/' + filename + '.mp3');
+                globalsaudio.titles.push(title);
 
-                    const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
-                        .setTitle('Music Player')
-                        .setDescription('Queued: ' + title)
-                        .setTimestamp()
+                const embed = new EmbedBuilder()
+                    .setColor('#FFC0DD')
+                    .setTitle('Music Player')
+                    .setDescription('Queued: ' + title)
+                    .setTimestamp()
 
-                    interaction.editReply({ embeds: [embed] });
+                interaction.editReply({ embeds: [embed] });
 
-                    if (globalsaudio.connectionstatus == 0) {
-                        globalsaudio.connectionstatus = 1;
-                        globalsaudio.nowplaying = globalsaudio.titles[0];
-                        globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
-                            inlineVolume: true
-                        });
-                        globalsaudio.resource.volume.setVolume(0.3);
-                        globalsaudio.player.play(globalsaudio.resource);
-                        globalsaudio.connection.subscribe(globalsaudio.player);
-                        globalsaudio.queue.shift();
-                        globalsaudio.titles.shift();
-                    }
-                })
+                if (globalsaudio.connectionstatus == 0) {
+                    globalsaudio.connectionstatus = 1;
+                    globalsaudio.nowplaying = globalsaudio.titles[0];
+                    globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
+                        inlineVolume: true
+                    });
+                    globalsaudio.resource.volume.setVolume(0.3);
+                    globalsaudio.player.play(globalsaudio.resource);
+                    globalsaudio.connection.subscribe(globalsaudio.player);
+                    globalsaudio.queue.shift();
+                    globalsaudio.titles.shift();
+                }
             })
-        }
-        if (source == 'soundcloud') {
-            const titlecommand = 'yt-dlp --get-title --no-playlist "scsearch:' + details + '"';
-            const downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist "scsearch:' + details + '"';
-            var title = '';
-            os.execCommand(titlecommand, function (returnvalue) {
-                title = returnvalue;
-                os.execCommand(downloadcommand, function () {
-                    globalsaudio.queue.push('downloads/' + filename + '.mp3');
-                    globalsaudio.titles.push(title);
-
-                    const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
-                        .setTitle('Music Player')
-                        .setDescription('Queued: ' + title)
-                        .setTimestamp()
-
-                    interaction.editReply({ embeds: [embed] });
-
-                    if (globalsaudio.connectionstatus == 0) {
-                        globalsaudio.connectionstatus = 1;
-                        globalsaudio.nowplaying = globalsaudio.titles[0];
-                        globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
-                            inlineVolume: true
-                        });
-                        globalsaudio.resource.volume.setVolume(0.3);
-                        globalsaudio.player.play(globalsaudio.resource);
-                        globalsaudio.connection.subscribe(globalsaudio.player);
-                        globalsaudio.queue.shift();
-                        globalsaudio.titles.shift();
-                    }
-                })
-            })
-        }
+        })
     }
 }
 
@@ -140,7 +105,6 @@ module.exports = {
                 .setDescription('Choose the video/audio source')
                 .setRequired(true)
                 .addChoices(
-                    { name: 'YouTube', value: 'youtube' },
                     { name: 'SoundCloud', value: 'soundcloud' },
                     { name: 'Bandcamp', value: 'bandcamp' },
                     { name: 'Last.fm', value: 'lastfm' },
@@ -168,26 +132,18 @@ module.exports = {
 
         const filename = makeid(50);
 
-        if (source == 'youtube') {
-            const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
-            if (url.match(rx)) {
-                await ytdlp(0, 'youtube', filename, interaction, url);
-            } else {
-                await ytdlp(1, 'youtube', filename, interaction, url);
-            }
-        }
         if (source == 'soundcloud') {
             const rx = /^https?:\/\/(.*)(soundcloud\.com|snd\.sc)\/(.*)$/;
             if (url.match(rx)) {
-                await ytdlp(0, 'soundcloud', filename, interaction, url);
+                await ytdlp(0, filename, interaction, url);
             } else {
-                await ytdlp(1, 'soundcloud', filename, interaction, url);
+                await ytdlp(1, filename, interaction, url);
             }
         }
         if (source == 'bandcamp') {
             const rx = /^https?:\/\/(.*)(bandcamp\.com|)\/(.*)$/;
             if (url.match(rx)) {
-                await ytdlp(0, 'bandcamp', filename, interaction, url);
+                await ytdlp(0, filename, interaction, url);
             } else {
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
@@ -201,7 +157,7 @@ module.exports = {
         if (source == 'lastfm') {
             const rx = /^https?:\/\/(.*)(last\.fm|)\/(.*)$/;
             if (url.match(rx)) {
-                await ytdlp(0, 'lastfm', filename, interaction, url);
+                await ytdlp(0, filename, interaction, url);
             } else {
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
@@ -215,7 +171,7 @@ module.exports = {
         if (source == 'jamando') {
             const rx = /^https?:\/\/(.*)(last\.fm|)\/(.*)$/;
             if (url.match(rx)) {
-                await ytdlp(0, 'jamando', filename, interaction, url);
+                await ytdlp(0, filename, interaction, url);
             } else {
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
@@ -229,7 +185,7 @@ module.exports = {
         if (source == 'reverbnation') {
             const rx = /^https?:\/\/(.*)(last\.fm|)\/(.*)$/;
             if (url.match(rx)) {
-                await ytdlp(0, 'reverbnation', filename, interaction, url);
+                await ytdlp(0, filename, interaction, url);
             } else {
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
