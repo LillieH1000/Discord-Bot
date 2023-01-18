@@ -1,7 +1,7 @@
 # Discord Bot
 My discord bot written in discord.js
 
-Invite my bot: [Invite](https://discord.com/api/oauth2/authorize?client_id=1016070725305639002&permissions=8&scope=bot%20applications.commands)
+Invite my bot: [Invite](https://discord.com/api/oauth2/authorize?client_id=1065377660303310859&permissions=8&scope=bot%20applications.commands)
 
 -----
 
