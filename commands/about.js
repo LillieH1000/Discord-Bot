@@ -6,7 +6,7 @@ module.exports = {
 		.setDescription('About Lillie Discord Bot'),
 	async execute(interaction) {
         await interaction.deferReply({ ephemeral: true });
-        const member = interaction.guild.members.cache.get("1016070725305639002") || await interaction.guild.members.fetch("1016070725305639002");
+        const member = interaction.guild.members.cache.get("1065377660303310859") || await interaction.guild.members.fetch("1065377660303310859");
         
         const embed = new EmbedBuilder()
             .setColor('#FFC0DD')
