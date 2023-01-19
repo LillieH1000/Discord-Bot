@@ -85,6 +85,9 @@ module.exports = {
                     { name: 'Pokedex ID', value: data.id.toString(), inline: false },
                     { name: 'Types', value: types, inline: false },
                     { name: 'Abilities', value: abilities, inline: false },
+                    { name: 'Height (Decimetres)', value: data.height.toString(), inline: false },
+                    { name: 'Weight (Hectograms)', value: data.weight.toString(), inline: false },
+                    { name: 'Base Experience', value: data.base_experience.toString(), inline: false },
                     { name: 'Base Stats', value: basestats, inline: false },
                 )
                 .setThumbnail(data.sprites.other.home.front_default)
