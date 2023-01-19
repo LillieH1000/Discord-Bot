@@ -61,8 +61,6 @@ async function ytdlp(type, filename, interaction, details) {
                 globalsaudio.resource.volume.setVolume(0.3);
                 globalsaudio.player.play(globalsaudio.resource);
                 globalsaudio.connection.subscribe(globalsaudio.player);
-                globalsaudio.queue.shift();
-                globalsaudio.titles.shift();
             }
         })
     })

@@ -1,9 +1,15 @@
+const fs = require('node:fs');
 const { createAudioResource, AudioPlayerStatus } = require('@discordjs/voice');
 var globalsaudio = require('../globals/audio.js');
 
 module.exports = async() => {
     globalsaudio.player.on(AudioPlayerStatus.Idle, () => {
         try {
+            if (fs.existsSync(globalsaudio.queue[0])) {
+                fs.unlinkSync(globalsaudio.queue[0])
+            }
+            globalsaudio.queue.shift();
+            globalsaudio.titles.shift();
             if (globalsaudio.queue === undefined || globalsaudio.queue.length == 0) {
                 globalsaudio.connection.destroy();
                 globalsaudio.queue = [];
@@ -18,8 +24,6 @@ module.exports = async() => {
                 globalsaudio.resource.volume.setVolume(0.3);
                 globalsaudio.player.play(globalsaudio.resource);
                 globalsaudio.connection.subscribe(globalsaudio.player);
-                globalsaudio.queue.shift();
-                globalsaudio.titles.shift();
             }
         } catch (error) {
             console.error(error);
@@ -30,6 +34,11 @@ module.exports = async() => {
         console.error(voiceerror);
         try {
             globalsaudio.connection.destroy();
+            for (const list of globalsaudio.queue) {
+                if (fs.existsSync(list)) {
+                    fs.unlinkSync(list)
+                }
+            }
             globalsaudio.queue = [];
             globalsaudio.titles = [];
             globalsaudio.nowplaying = '';

@@ -1,3 +1,4 @@
+const fs = require('node:fs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 var globalsaudio = require('../globals/audio.js');
 
@@ -10,6 +11,11 @@ module.exports = {
         await interaction.deferReply();
 
         globalsaudio.connection.destroy();
+        for (const list of globalsaudio.queue) {
+            if (fs.existsSync(list)) {
+                fs.unlinkSync(list)
+            }
+        }
         globalsaudio.queue = [];
         globalsaudio.titles = [];
         globalsaudio.nowplaying = '';
