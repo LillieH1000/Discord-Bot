@@ -17,6 +17,7 @@ module.exports = {
                     { name: 'Alola', value: 'alola' },
                     { name: 'Galar', value: 'galar' },
                     { name: 'Hisui', value: 'hisui' },
+                    { name: 'Paldea', value: 'paldea' },
                 ))
         .addStringOption(option =>
             option.setName('message')
@@ -36,6 +37,8 @@ module.exports = {
             pokemon = name + '-galar';
         } else if (form == 'hisui') {
             pokemon = name + '-hisui';
+        } else if (form == 'paldea') {
+            pokemon = name + '-paldea';
         }
 
         const res = await fetch('https://pokeapi.co/api/v2/pokemon/'.concat(pokemon.toLowerCase()));
@@ -87,7 +90,7 @@ module.exports = {
                 .setThumbnail(data.sprites.other.home.front_default)
                 .setTimestamp()
     
-            if (form == 'hisui') {
+            if (form == 'paldea') {
                 if (message) {
                     embed.addFields(
                         { name: 'Game And Count', value: message, inline: false },
@@ -95,7 +98,7 @@ module.exports = {
                 }
 
                 embed.addFields(
-                    { name: 'Notice', value: 'Unfortunately this is all the data the pokemon api returns for Hisui forms', inline: false },
+                    { name: 'Notice', value: 'Unfortunately this is all the data the pokemon api returns for Paldea forms', inline: false },
                 );
 
                 await interaction.editReply({ embeds: [embed] });
