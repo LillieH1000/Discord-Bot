@@ -27,72 +27,45 @@ function os_func() {
 var os = new os_func();
 
 async function ytdlp(type, filename, interaction, details) {
+    var titlecommand = '';
+    var downloadcommand = '';
     if (type == 0) {
-        const titlecommand = 'yt-dlp --get-title --no-playlist ' + details;
-        const downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist ' + details;
-        var title = '';
-        os.execCommand(titlecommand, function (returnvalue) {
-            title = returnvalue;
-            os.execCommand(downloadcommand, function () {
-                globalsaudio.queue.push('downloads/' + filename + '.mp3');
-                globalsaudio.titles.push(title);
-
-                const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
-                    .setTitle('Music Player')
-                    .setDescription('Queued: ' + title)
-                    .setTimestamp()
-
-                interaction.editReply({ embeds: [embed] });
-
-                if (globalsaudio.connectionstatus == 0) {
-                    globalsaudio.connectionstatus = 1;
-                    globalsaudio.nowplaying = globalsaudio.titles[0];
-                    globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
-                        inlineVolume: true
-                    });
-                    globalsaudio.resource.volume.setVolume(0.3);
-                    globalsaudio.player.play(globalsaudio.resource);
-                    globalsaudio.connection.subscribe(globalsaudio.player);
-                    globalsaudio.queue.shift();
-                    globalsaudio.titles.shift();
-                }
-            })
-        })
+        titlecommand = 'yt-dlp --get-title --no-playlist ' + details;
+        downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist ' + details;
     }
     if (type == 1) {
-        const titlecommand = 'yt-dlp --get-title --no-playlist "scsearch:' + details + '"';
-        const downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist "scsearch:' + details + '"';
-        var title = '';
-        os.execCommand(titlecommand, function (returnvalue) {
-            title = returnvalue;
-            os.execCommand(downloadcommand, function () {
-                globalsaudio.queue.push('downloads/' + filename + '.mp3');
-                globalsaudio.titles.push(title);
-
-                const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
-                    .setTitle('Music Player')
-                    .setDescription('Queued: ' + title)
-                    .setTimestamp()
-
-                interaction.editReply({ embeds: [embed] });
-
-                if (globalsaudio.connectionstatus == 0) {
-                    globalsaudio.connectionstatus = 1;
-                    globalsaudio.nowplaying = globalsaudio.titles[0];
-                    globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
-                        inlineVolume: true
-                    });
-                    globalsaudio.resource.volume.setVolume(0.3);
-                    globalsaudio.player.play(globalsaudio.resource);
-                    globalsaudio.connection.subscribe(globalsaudio.player);
-                    globalsaudio.queue.shift();
-                    globalsaudio.titles.shift();
-                }
-            })
-        })
+        titlecommand = 'yt-dlp --get-title --no-playlist "scsearch:' + details + '"';
+        downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist "scsearch:' + details + '"';
     }
+    var title = '';
+    os.execCommand(titlecommand, function (returnvalue) {
+        title = returnvalue;
+        os.execCommand(downloadcommand, function () {
+            globalsaudio.queue.push('downloads/' + filename + '.mp3');
+            globalsaudio.titles.push(title);
+
+            const embed = new EmbedBuilder()
+                .setColor('#FFC0DD')
+                .setTitle('Music Player')
+                .setDescription('Queued: ' + title)
+                .setTimestamp()
+
+            interaction.editReply({ embeds: [embed] });
+
+            if (globalsaudio.connectionstatus == 0) {
+                globalsaudio.connectionstatus = 1;
+                globalsaudio.nowplaying = globalsaudio.titles[0];
+                globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
+                    inlineVolume: true
+                });
+                globalsaudio.resource.volume.setVolume(0.3);
+                globalsaudio.player.play(globalsaudio.resource);
+                globalsaudio.connection.subscribe(globalsaudio.player);
+                globalsaudio.queue.shift();
+                globalsaudio.titles.shift();
+            }
+        })
+    })
 }
 
 module.exports = {
