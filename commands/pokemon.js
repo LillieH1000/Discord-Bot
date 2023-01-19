@@ -101,7 +101,7 @@ module.exports = {
                 }
 
                 embed.addFields(
-                    { name: 'Notice', value: 'Unfortunately this is all the data the pokemon api returns for Paldea forms', inline: false },
+                    { name: 'Notice', value: 'Unfortunately sprites for Paldea forms aren\'t available via pokeapi at this time', inline: false },
                 );
 
                 await interaction.editReply({ embeds: [embed] });
