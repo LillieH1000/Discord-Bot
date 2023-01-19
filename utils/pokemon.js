@@ -47,17 +47,45 @@ module.exports = async(client) => {
                     
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
-                    .setTitle(data.name.charAt(0).toUpperCase() + data.name.slice(1))
-                    .addFields(
-                        { name: 'Pokedex ID', value: data.id.toString(), inline: false },
-                        { name: 'Types', value: types, inline: false },
-                        { name: 'Abilities', value: abilities, inline: false },
-                        { name: 'Height (Decimetres)', value: data.height.toString(), inline: false },
-                        { name: 'Weight (Hectograms)', value: data.weight.toString(), inline: false },
-                        { name: 'Base Experience', value: data.base_experience.toString(), inline: false },
-                        { name: 'Base Stats', value: basestats, inline: false },
-                    )
                     .setTimestamp()
+
+                if (data.name != null) {
+                    embed.setTitle(data.name.charAt(0).toUpperCase() + data.name.slice(1))
+                }
+
+                if (data.id != null) {
+                    embed.addFields(
+                        { name: 'Pokedex ID', value: data.id.toString(), inline: false },
+                    )
+                }
+
+                embed.addFields(
+                    { name: 'Types', value: types, inline: false },
+                    { name: 'Abilities', value: abilities, inline: false },
+                )
+
+                if (data.height != null) {
+                    embed.addFields(
+                        { name: 'Height (Decimetres)', value: data.height.toString(), inline: false },
+                    )
+                }
+
+                if (data.weight != null) {
+                    embed.addFields(
+                        { name: 'Weight (Hectograms)', value: data.weight.toString(), inline: false },
+                    )
+                }
+
+                if (data.base_experience != null) {
+                    embed.addFields(
+                        { name: 'Base Experience', value: data.base_experience.toString(), inline: false },
+                    )
+                }
+
+                embed.addFields(
+                    { name: 'Base Stats', value: basestats, inline: false },
+                )
+                
                 if (interaction.values[0] == 'defaultregular') {
                     embed.setThumbnail(data.sprites.other.home.front_default);
                 }
