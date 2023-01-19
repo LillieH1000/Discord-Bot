@@ -4,15 +4,15 @@ const { clientId } = require('../config.json');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('about')
-		.setDescription('About Lillie Discord Bot'),
+		.setDescription('About my discord bot'),
 	async execute(interaction) {
         await interaction.deferReply({ ephemeral: true });
         const member = interaction.guild.members.cache.get(clientId) || await interaction.guild.members.fetch(clientId);
         
         const embed = new EmbedBuilder()
             .setColor('#FFC0DD')
-            .setTitle('Lillie Discord Bot')
-            .setDescription('Made By Lillie')
+            .setTitle('Discord Bot')
+            .setDescription('Made By Trans Lillie')
             .setThumbnail(member.displayAvatarURL())
             .setFooter({ text: 'ID: ' + member.id })
             .setTimestamp()
@@ -20,7 +20,7 @@ module.exports = {
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
-                    .setLabel('GitHub')
+                    .setLabel('Source Code (GitHub)')
                     .setStyle(ButtonStyle.Link)
                     .setURL("https://github.com/LillieH1000/Discord-Bot")
             );
