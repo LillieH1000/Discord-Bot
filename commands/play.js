@@ -142,7 +142,7 @@ module.exports = {
             }
         }
         if (source == 'jamando') {
-            const rx = /^https?:\/\/(.*)(last\.fm|)\/(.*)$/;
+            const rx = /^https?:\/\/(.*)(jamendo\.com|)\/(.*)$/;
             if (url.match(rx)) {
                 await ytdlp(0, filename, interaction, url);
             } else {
@@ -156,7 +156,7 @@ module.exports = {
             }
         }
         if (source == 'reverbnation') {
-            const rx = /^https?:\/\/(.*)(last\.fm|)\/(.*)$/;
+            const rx = /^https?:\/\/(.*)(reverbnation\.com|)\/(.*)$/;
             if (url.match(rx)) {
                 await ytdlp(0, filename, interaction, url);
             } else {
