@@ -24,7 +24,9 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor('#FFC0DD')
                 .setTitle('Converter')
-                .addField('Fahrenheit -> Celcius', ((parseInt(value) - 32) / 1.8).toString(), false)
+                .addFields(
+                    { name: 'Fahrenheit -> Celcius', value: ((parseInt(value) - 32) / 1.8).toString(), inline: false },
+                )
                 .setTimestamp()
             await interaction.editReply({ embeds: [embed] });
         }
@@ -32,7 +34,9 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor('#FFC0DD')
                 .setTitle('Converter')
-                .addField('Celcius -> Fahrenheit', ((parseInt(value) * 1.8) + 32).toString(), false)
+                .addFields(
+                    { name: 'Celcius -> Fahrenheit', value: ((parseInt(value) * 1.8) + 32).toString(), inline: false },
+                )
                 .setTimestamp()
             await interaction.editReply({ embeds: [embed] });
         }
