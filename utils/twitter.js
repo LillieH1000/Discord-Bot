@@ -6,10 +6,9 @@ module.exports = async(client) => {
     
         try {
             for (const word of message.content.split(" ")) {
-                const rx = /^https?:\/\/(.*)(twitter\.com|)\/(.*)$/;
+                const rx = /^http(?:s)?:\/\/(.*)twitter\.com|\/$/;
                 if (word.match(rx)) {
-                    message.delete();
-                    message.channel.send(message.content.replace("twitter.com", "vxtwitter.com"));
+                    message.reply(word.replace("twitter.com", "vxtwitter.com"));
                 }
             }
         } catch (error) {

@@ -104,7 +104,7 @@ module.exports = {
         const filename = makeid(50);
 
         if (source == 'soundcloud') {
-            const rx = /^https?:\/\/(.*)(soundcloud\.com|snd\.sc)\/(.*)$/;
+            const rx = /^http(?:s)?:\/\/(.*)soundcloud\.com|snd\.sc\/$/;
             if (url.match(rx)) {
                 await ytdlp(0, filename, interaction, url);
             } else {
@@ -112,7 +112,7 @@ module.exports = {
             }
         }
         if (source == 'bandcamp') {
-            const rx = /^https?:\/\/(.*)(bandcamp\.com|)\/(.*)$/;
+            const rx = /^http(?:s)?:\/\/(.*)bandcamp\.com|\/$/;
             if (url.match(rx)) {
                 await ytdlp(0, filename, interaction, url);
             } else {
@@ -126,7 +126,7 @@ module.exports = {
             }
         }
         if (source == 'lastfm') {
-            const rx = /^https?:\/\/(.*)(last\.fm|)\/(.*)$/;
+            const rx = /^http(?:s)?:\/\/(.*)last\.fm|\/$/;
             if (url.match(rx)) {
                 await ytdlp(0, filename, interaction, url);
             } else {
@@ -140,7 +140,7 @@ module.exports = {
             }
         }
         if (source == 'jamando') {
-            const rx = /^https?:\/\/(.*)(jamendo\.com|)\/(.*)$/;
+            const rx = /^http(?:s)?:\/\/(.*)jamendo\.com|\/$/;
             if (url.match(rx)) {
                 await ytdlp(0, filename, interaction, url);
             } else {
@@ -154,7 +154,7 @@ module.exports = {
             }
         }
         if (source == 'reverbnation') {
-            const rx = /^https?:\/\/(.*)(reverbnation\.com|)\/(.*)$/;
+            const rx = /^http(?:s)?:\/\/(.*)reverbnation\.com|\/$/;
             if (url.match(rx)) {
                 await ytdlp(0, filename, interaction, url);
             } else {
