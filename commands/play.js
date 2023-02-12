@@ -112,7 +112,7 @@ module.exports = {
             }
         }
         if (source == 'bandcamp') {
-            const rx = /^http(?:s)?:\/\/(.*)bandcamp\.com|\/$/;
+            const rx = /^http(?:s)?:\/\/(.*)bandcamp\.com\//;
             if (url.match(rx)) {
                 await ytdlp(0, filename, interaction, url);
             } else {
@@ -126,7 +126,7 @@ module.exports = {
             }
         }
         if (source == 'lastfm') {
-            const rx = /^http(?:s)?:\/\/(.*)last\.fm|\/$/;
+            const rx = /^http(?:s)?:\/\/(.*)last\.fm\//;
             if (url.match(rx)) {
                 await ytdlp(0, filename, interaction, url);
             } else {
@@ -140,7 +140,7 @@ module.exports = {
             }
         }
         if (source == 'jamando') {
-            const rx = /^http(?:s)?:\/\/(.*)jamendo\.com|\/$/;
+            const rx = /^http(?:s)?:\/\/(.*)jamendo\.com\//;
             if (url.match(rx)) {
                 await ytdlp(0, filename, interaction, url);
             } else {
@@ -154,7 +154,7 @@ module.exports = {
             }
         }
         if (source == 'reverbnation') {
-            const rx = /^http(?:s)?:\/\/(.*)reverbnation\.com|\/$/;
+            const rx = /^http(?:s)?:\/\/(.*)reverbnation\.com\//;
             if (url.match(rx)) {
                 await ytdlp(0, filename, interaction, url);
             } else {

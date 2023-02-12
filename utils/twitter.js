@@ -6,7 +6,7 @@ module.exports = async(client) => {
     
         try {
             for (const word of message.content.split(" ")) {
-                const rx = /^http(?:s)?:\/\/(.*)twitter\.com|\/$/;
+                const rx = /^http(?:s)?:\/\/(.*)twitter\.com\//;
                 if (word.match(rx)) {
                     message.reply(word.replace("twitter.com", "vxtwitter.com"));
                 }
