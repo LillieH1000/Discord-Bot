@@ -34,6 +34,10 @@ async function ytdlp(type, filename, interaction, details) {
         downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist ' + details;
     }
     if (type == 1) {
+        titlecommand = 'yt-dlp --get-title --no-playlist "ytsearch:' + details + '"';
+        downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist "ytsearch:' + details + '"';
+    }
+    if (type == 2) {
         titlecommand = 'yt-dlp --get-title --no-playlist "scsearch:' + details + '"';
         downloadcommand = 'yt-dlp -o "downloads/' + filename + '.mp3" -f "bestaudio/best" --extract-audio --audio-format mp3 --audio-quality 0 --no-playlist "scsearch:' + details + '"';
     }
@@ -76,6 +80,7 @@ module.exports = {
                 .setDescription('Choose the video/audio source')
                 .setRequired(true)
                 .addChoices(
+                    { name: 'YouTube', value: 'youtube' },
                     { name: 'SoundCloud', value: 'soundcloud' },
                     { name: 'Bandcamp', value: 'bandcamp' },
                     { name: 'Last.fm', value: 'lastfm' },
@@ -103,12 +108,20 @@ module.exports = {
 
         const filename = makeid(50);
 
+        if (source == 'youtube') {
+            const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+            if (url.match(rx)) {
+                await ytdlp(0, filename, interaction, url);
+            } else {
+                await ytdlp(1, filename, interaction, url);
+            }
+        }
         if (source == 'soundcloud') {
             const rx = /^http(?:s)?:\/\/(.*)soundcloud\.com|snd\.sc\/$/;
             if (url.match(rx)) {
                 await ytdlp(0, filename, interaction, url);
             } else {
-                await ytdlp(1, filename, interaction, url);
+                await ytdlp(2, filename, interaction, url);
             }
         }
         if (source == 'bandcamp') {
