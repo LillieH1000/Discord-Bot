@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+var _ = require('underscore');
 var globalsreddit = require('../globals/reddit.js');
 
 module.exports = {
