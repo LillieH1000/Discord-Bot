@@ -132,7 +132,7 @@ module.exports = {
             var image = _.sample(imageslist);
             const embed = new EmbedBuilder()
                 .setColor('#FFC0DD')
-                .setTitle('Trap Pics')
+                .setTitle('Neko Pics')
                 .setDescription('[r/CatgirlSFW](https://www.reddit.com/r/CatgirlSFW/)')
                 .setImage(image)
                 .setTimestamp()
