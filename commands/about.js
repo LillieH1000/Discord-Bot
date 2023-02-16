@@ -12,7 +12,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setColor('#FFC0DD')
             .setTitle('Discord Bot')
-            .setDescription('Made By Trans Lillie')
+            .setDescription('Made By Lillie')
             .setThumbnail(member.displayAvatarURL())
             .setFooter({ text: 'ID: ' + member.id })
             .setTimestamp()
