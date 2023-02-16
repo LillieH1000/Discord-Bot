@@ -1,29 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
-const { redditapilimit } = require('../config.json');
-
-async function images(category) {
-    var res;
-    if (category == 'cats') {
-        res = await fetch(`https://www.reddit.com/r/cats.json?limit=${redditapilimit}`);
-    } else if (category == 'catstwo') {
-        res = await fetch(`https://www.reddit.com/r/catpictures.json?limit=${redditapilimit}`);
-    }
-    if (res.ok) {
-        const images = [];
-        const data = await res.json();
-        data.data.children.forEach((child) => {
-            if (child.data.over_18 == false) {
-                if (child.data.url.endsWith('jpg') || child.data.url.endsWith('jpeg') || child.data.url.endsWith('png') || child.data.url.endsWith('gif')) {
-                    images.push(child.data.url);
-                }
-            }
-        });
-        return images;
-    } else {
-        return null;
-    }
-}
+var globalsreddit = require('../globals/reddit.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -93,8 +70,7 @@ module.exports = {
             }
         }
         if (option == 4) {
-            const imageslist = await images('cats');
-            var image = _.sample(imageslist);
+            const image = await globalsreddit.sfw('cats');
             const embed = new EmbedBuilder()
                 .setColor('#FFC0DD')
                 .setTitle('Cat Pics')
@@ -111,8 +87,7 @@ module.exports = {
             await interaction.editReply({ embeds: [embed], components: [row] });
         }
         if (option == 5) {
-            const imageslist = await images('catstwo');
-            var image = _.sample(imageslist);
+            const image = await globalsreddit.sfw('catpictures');
             const embed = new EmbedBuilder()
                 .setColor('#FFC0DD')
                 .setTitle('Cat Pics')
