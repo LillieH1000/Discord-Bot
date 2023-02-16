@@ -2,7 +2,6 @@
 	"clientId": "BotClientIdHere",
 	"token": "BotTokenHere",
 	"safebrowsingapikey": "GoogleSafeBrowsingApiKeyHere",
-	"redditapilimit": 50,
 	"ubisoftaccountinfo": [
 		"UbisoftAccountEmailHere",
 		"UbisoftAccountPasswordHere"
