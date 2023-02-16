@@ -9,7 +9,7 @@ module.exports = async(client) => {
             var choices;
 
             if (focusedOption.value.startsWith('a')) {
-                choices = ['amber', 'anal', 'ass'];
+                choices = ['amber', 'anal', 'ass', 'ayaka'];
             }
             if (focusedOption.value.startsWith('b')) {
                 choices = ['bdsm', 'blowjob', 'boobjob', 'boobs', 'byleth'];

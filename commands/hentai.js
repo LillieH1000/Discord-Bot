@@ -19,7 +19,7 @@ module.exports = {
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Categories')
-                    .setDescription(`A:\namber\nanal\nass\n
+                    .setDescription(`A:\namber\nanal\nass\nayaka\n
                     B:\nbdsm\nblowjob\nboobjob\nboobs\nbyleth\n
                     C:\ncreampie\ncum\n
                     E:\nemilia\nero\neula\n
@@ -41,8 +41,7 @@ module.exports = {
                 await interaction.editReply({ embeds: [embed] });
             }
             if (category == "amber") {
-                const imageslist = await images('amber');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('amberhentai');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Amber)')
@@ -81,8 +80,7 @@ module.exports = {
                     }
                 }
                 if (option == 2) {
-                    const imageslist = await images('anal');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('hentaianal');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Anal)')
@@ -119,9 +117,8 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
             }
-            /* if (category == "ayaka") {
-                const imageslist = await images('ayaka');
-                var image = _.sample(imageslist);
+            if (category == "ayaka") {
+                const image = await globalsreddit.nsfw('ayakahentai');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Ayaka)')
@@ -136,7 +133,7 @@ module.exports = {
                             .setURL(image)
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
-            } */
+            }
             if (category == "bdsm") {
                 var option = _.sample([1, 2]);
                 if (option == 1) {
@@ -160,8 +157,7 @@ module.exports = {
                     }
                 }
                 if (option == 2) {
-                    const imageslist = await images('bdsm');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('hentaibondage');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Bdsm)')
@@ -284,8 +280,7 @@ module.exports = {
             if (category == "byleth") {
                 var option = _.sample([1, 2]);
                 if (option == 1) {
-                    const imageslist = await images('byleth');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('byleth');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Byleth)')
@@ -302,8 +297,7 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
                 if (option == 2) {
-                    const imageslist = await images('bylethtwo');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('bylethr34');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Byleth)')
@@ -363,8 +357,7 @@ module.exports = {
                     }
                 }
                 if (option == 2) {
-                    const imageslist = await images('cum');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('cumhentai');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Cum)')
@@ -382,8 +375,7 @@ module.exports = {
                 }
             }
             if (category == "emilia") {
-                const imageslist = await images('emilia');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('emiliahentai');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Emilia)')
@@ -420,8 +412,7 @@ module.exports = {
                 }
             }
             if (category == "eula") {
-                const imageslist = await images('eula');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('eulansfw');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Eula)')
@@ -440,8 +431,7 @@ module.exports = {
             if (category == "femboy") {
                 var option = _.sample([1, 2]);
                 if (option == 1) {
-                    const imageslist = await images('femboy');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('femboyhentai');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Femboy)')
@@ -458,8 +448,7 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
                 if (option == 2) {
-                    const imageslist = await images('femboytwo');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('femboysandhentai');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Femboy)')
@@ -499,8 +488,7 @@ module.exports = {
                     }
                 }
                 if (option == 2) {
-                    const imageslist = await images('femdom');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('hentaifemdom');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Femdom)')
@@ -517,8 +505,7 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
                 if (option == 3) {
-                    const imageslist = await images('femdomtwo');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('femdomhentai');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Femdom)')
@@ -556,8 +543,7 @@ module.exports = {
                 }
             }
             if (category == "futanari") {
-                const imageslist = await images('futanari');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('futanari');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Futanari)')
@@ -594,8 +580,7 @@ module.exports = {
                 }
             }
             if (category == "ganyu") {
-                const imageslist = await images('ganyu');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('ganyunsfw');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Ganyu)')
@@ -614,8 +599,7 @@ module.exports = {
             if (category == "genshin") {
                 var option = _.sample([1, 2]);
                 if (option == 1) {
-                    const imageslist = await images('genshin');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('genshinimpacthentai');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Genshin)')
@@ -632,8 +616,7 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
                 if (option == 2) {
-                    const imageslist = await images('genshintwo');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('genshinimpactnsfw');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Genshin)')
@@ -691,8 +674,7 @@ module.exports = {
                 }
             }
             if (category == "hutao") {
-                const imageslist = await images('hutao');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('hutaonsfw');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Hu Tao)')
@@ -709,8 +691,7 @@ module.exports = {
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
             if (category == "keqing") {
-                const imageslist = await images('keqing');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('keqingnsfw');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Keqing)')
@@ -727,8 +708,7 @@ module.exports = {
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
             if (category == "lumine") {
-                const imageslist = await images('lumine');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('luminensfw');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Lumine)')
@@ -767,8 +747,7 @@ module.exports = {
                     }
                 }
                 if (option == 2) {
-                    const imageslist = await images('masturbation');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('masturbationhentai');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Masturbation)')
@@ -869,8 +848,7 @@ module.exports = {
                 }
             }
             if (category == "overwatch") {
-                const imageslist = await images('overwatch');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('overwatch_porn');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Overwatch)')
@@ -907,8 +885,7 @@ module.exports = {
                 }
             }
             if (category == "pee") {
-                const imageslist = await images('pee');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('pissinghentai');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Pee)')
@@ -925,8 +902,7 @@ module.exports = {
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
             if (category == "pegging") {
-                const imageslist = await images('pegging');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('pegginghentai');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Pegging)')
@@ -965,8 +941,7 @@ module.exports = {
                     }
                 }
                 if (option == 2) {
-                    const imageslist = await images('public');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('publichentai');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Public)')
@@ -984,8 +959,7 @@ module.exports = {
                 }
             }
             if (category == "rem") {
-                const imageslist = await images('rem');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('remhentai');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Rem)')
@@ -1024,8 +998,7 @@ module.exports = {
                     }
                 }
                 if (option == 2) {
-                    const imageslist = await images('tentacles');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('tentai');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Tentacles)')
@@ -1043,8 +1016,7 @@ module.exports = {
                 }
             }
             if (category == "thick") {
-                const imageslist = await images('thick');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('thick_hentai');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Thick)')
@@ -1103,8 +1075,7 @@ module.exports = {
                     }
                 }
                 if (option == 2) {
-                    const imageslist = await images('trap');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('traphentai');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Trap)')
@@ -1122,8 +1093,7 @@ module.exports = {
                 }
             }
             if (category == "undressing") {
-                const imageslist = await images('undressing');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('undressinghentai');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Undressing)')
@@ -1162,8 +1132,7 @@ module.exports = {
                     }
                 }
                 if (option == 2) {
-                    const imageslist = await images('uniform');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('uniform_hentai');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Uniform)')
@@ -1181,8 +1150,7 @@ module.exports = {
                 }
             }
             if (category == "upskirt") {
-                const imageslist = await images('upskirt');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('upskirthentai');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Upskirt)')
@@ -1219,8 +1187,7 @@ module.exports = {
                 }
             }
             if (category == "yaemiko") {
-                const imageslist = await images('yaemiko');
-                var image = _.sample(imageslist);
+                const image = await globalsreddit.nsfw('yaemikonsfw');
                 const embed = new EmbedBuilder()
                     .setColor('#FFC0DD')
                     .setTitle('Hentai Pics (Yae Miko)')
@@ -1259,8 +1226,7 @@ module.exports = {
                     }
                 }
                 if (option == 2) {
-                    const imageslist = await images('yuri');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('yuri');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Yuri)')
@@ -1277,8 +1243,7 @@ module.exports = {
                     await interaction.editReply({ embeds: [embed], components: [row] });
                 }
                 if (option == 3) {
-                    const imageslist = await images('yuritwo');
-                    var image = _.sample(imageslist);
+                    const image = await globalsreddit.nsfw('yurihentai');
                     const embed = new EmbedBuilder()
                         .setColor('#FFC0DD')
                         .setTitle('Hentai Pics (Yuri)')
