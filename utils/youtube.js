@@ -1,4 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+var globalscolours = require('../globals/colours.js');
 
 module.exports = async(client) => {
     client.on('messageCreate', async message => {
@@ -15,7 +16,7 @@ module.exports = async(client) => {
                         const data2 = await res2.json();
 
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setDescription('Views: ' + data1.viewCount.toLocaleString() + '\nLikes: ' + data1.likes.toLocaleString() + '\nDislikes: ' + data1.dislikes.toLocaleString())
                             .setTimestamp()
 

@@ -1,4 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
+var globalscolours = require('../globals/colours.js');
 
 module.exports = async(client) => {
     client.on('interactionCreate', async interaction => {
@@ -46,7 +47,7 @@ module.exports = async(client) => {
                 }
                     
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTimestamp()
 
                 if (data.name != null) {
