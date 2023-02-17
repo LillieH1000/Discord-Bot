@@ -1,5 +1,6 @@
 const { joinVoiceChannel, getVoiceConnection, createAudioResource } = require('@discordjs/voice');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+var globalscolours = require('../globals/colours.js');
 var globalsaudio = require('../globals/audio.js');
 const exec = require('child_process').exec;
 
@@ -49,7 +50,7 @@ async function ytdlp(type, filename, interaction, details) {
             globalsaudio.titles.push(title);
 
             const embed = new EmbedBuilder()
-                .setColor('#FFC0DD')
+                .setColor(globalscolours.embed)
                 .setTitle('Music Player')
                 .setDescription('Queued: ' + title)
                 .setTimestamp()
@@ -130,7 +131,7 @@ module.exports = {
                 await ytdlp(0, filename, interaction, url);
             } else {
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Music Player')
                     .setDescription('Only urls are supported for Bandcamp, search for Bandcamp is currently unsupported')
                     .setTimestamp()
@@ -144,7 +145,7 @@ module.exports = {
                 await ytdlp(0, filename, interaction, url);
             } else {
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Music Player')
                     .setDescription('Only urls are supported for Last.fm, search for Last.fm is currently unsupported')
                     .setTimestamp()
@@ -158,7 +159,7 @@ module.exports = {
                 await ytdlp(0, filename, interaction, url);
             } else {
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Music Player')
                     .setDescription('Only urls are supported for Jamando, search for Jamando is currently unsupported')
                     .setTimestamp()
@@ -172,7 +173,7 @@ module.exports = {
                 await ytdlp(0, filename, interaction, url);
             } else {
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Music Player')
                     .setDescription('Only urls are supported for ReverbNation, search for ReverbNation is currently unsupported')
                     .setTimestamp()

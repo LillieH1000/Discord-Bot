@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+var globalscolours = require('../globals/colours.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -79,7 +80,7 @@ module.exports = {
                 pronoun = "Avoid pronouns, use my name";
             }
             const embed = new EmbedBuilder()
-                .setColor('#FFC0DD')
+                .setColor(globalscolours.embed)
                 .setTitle('PronounDB')
                 .addFields(
                     { name: 'Pronouns of ' + user.username + ':', value: pronoun, inline: false },

@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+var globalscolours = require('../globals/colours.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -22,7 +23,7 @@ module.exports = {
         const value = interaction.options.getString('value');
         if (conversion == 'fahrenheit_to_celcius') {
             const embed = new EmbedBuilder()
-                .setColor('#FFC0DD')
+                .setColor(globalscolours.embed)
                 .setTitle('Converter')
                 .addFields(
                     { name: 'Fahrenheit -> Celcius', value: ((parseInt(value) - 32) / 1.8).toString(), inline: false },
@@ -32,7 +33,7 @@ module.exports = {
         }
         if (conversion == 'celcius_to_fahrenheit') {
             const embed = new EmbedBuilder()
-                .setColor('#FFC0DD')
+                .setColor(globalscolours.embed)
                 .setTitle('Converter')
                 .addFields(
                     { name: 'Celcius -> Fahrenheit', value: ((parseInt(value) * 1.8) + 32).toString(), inline: false },

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
+var globalscolours = require('../globals/colours.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -13,7 +14,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Waifu Pics')
                     .setDescription('[Waifu.Pics](https://waifu.pics/)')
                     .setImage(data.url)
@@ -33,7 +34,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Waifu Pics')
                     .setDescription('[Nekos.Best](https://nekos.best/)')
                     .setImage(data.results[0].url)
@@ -53,7 +54,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Waifu Pics')
                     .setDescription('[Neko-Love](https://neko-love.xyz/)')
                     .setImage(data.url)

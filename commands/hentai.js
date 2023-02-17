@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
+var globalscolours = require('../globals/colours.js');
 var globalsreddit = require('../globals/reddit.js');
 
 module.exports = {
@@ -17,7 +18,7 @@ module.exports = {
             const category = interaction.options.getString('category');
             if (!category) {
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Categories')
                     .setDescription(`A:\namber\nanal\nass\nayaka\n
                     B:\nbdsm\nblowjob\nboobjob\nboobs\nbyleth\n
@@ -43,7 +44,7 @@ module.exports = {
             if (category == "amber") {
                 const image = await globalsreddit.nsfw('amberhentai');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Amber)')
                     .setDescription('[r/AmberHentai](https://www.reddit.com/r/AmberHentai/)')
                     .setImage(image)
@@ -64,7 +65,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Anal)')
                             .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                             .setImage(data.url)
@@ -82,7 +83,7 @@ module.exports = {
                 if (option == 2) {
                     const image = await globalsreddit.nsfw('hentaianal');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Anal)')
                         .setDescription('[r/HentaiAnal](https://www.reddit.com/r/HentaiAnal/)')
                         .setImage(image)
@@ -102,7 +103,7 @@ module.exports = {
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Ass)')
                         .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
@@ -120,7 +121,7 @@ module.exports = {
             if (category == "ayaka") {
                 const image = await globalsreddit.nsfw('ayakahentai');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Ayaka)')
                     .setDescription('[r/AyakaHentai](https://www.reddit.com/r/AyakaHentai/)')
                     .setImage(image)
@@ -141,7 +142,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Bdsm)')
                             .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                             .setImage(data.url)
@@ -159,7 +160,7 @@ module.exports = {
                 if (option == 2) {
                     const image = await globalsreddit.nsfw('hentaibondage');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Bdsm)')
                         .setDescription('[r/Hentai Bondage](https://www.reddit.com/r/hentaibondage/)')
                         .setImage(image)
@@ -181,7 +182,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Blowjob)')
                             .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                             .setImage(data.url)
@@ -201,7 +202,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Blowjob)')
                             .setDescription('[Waifu.Pics](https://waifu.pics/)')
                             .setImage(data.url)
@@ -221,7 +222,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Blowjob)')
                             .setDescription('[Nekos.Fun](https://nekos.fun/)')
                             .setImage(data.image)
@@ -242,7 +243,7 @@ module.exports = {
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Boobjob)')
                         .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
@@ -262,7 +263,7 @@ module.exports = {
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Boobs)')
                         .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
@@ -282,7 +283,7 @@ module.exports = {
                 if (option == 1) {
                     const image = await globalsreddit.nsfw('byleth');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Byleth)')
                         .setDescription('[r/Byleth](https://www.reddit.com/r/Byleth/)')
                         .setImage(image)
@@ -299,7 +300,7 @@ module.exports = {
                 if (option == 2) {
                     const image = await globalsreddit.nsfw('bylethr34');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Byleth)')
                         .setDescription('[r/BylethR34](https://www.reddit.com/r/BylethR34/)')
                         .setImage(image)
@@ -319,7 +320,7 @@ module.exports = {
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Creampie)')
                         .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
@@ -341,7 +342,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Cum)')
                             .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                             .setImage(data.url)
@@ -359,7 +360,7 @@ module.exports = {
                 if (option == 2) {
                     const image = await globalsreddit.nsfw('cumhentai');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Cum)')
                         .setDescription('[r/CumHentai](https://www.reddit.com/r/CumHentai/)')
                         .setImage(image)
@@ -377,7 +378,7 @@ module.exports = {
             if (category == "emilia") {
                 const image = await globalsreddit.nsfw('emiliahentai');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Emilia)')
                     .setDescription('[r/EmiliaHentai](https://www.reddit.com/r/EmiliaHentai/)')
                     .setImage(image)
@@ -396,7 +397,7 @@ module.exports = {
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Ero)')
                         .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
@@ -414,7 +415,7 @@ module.exports = {
             if (category == "eula") {
                 const image = await globalsreddit.nsfw('eulansfw');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Eula)')
                     .setDescription('[r/EulaNSFW](https://www.reddit.com/r/EulaNSFW/)')
                     .setImage(image)
@@ -433,7 +434,7 @@ module.exports = {
                 if (option == 1) {
                     const image = await globalsreddit.nsfw('femboyhentai');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Femboy)')
                         .setDescription('[r/FemboyHentai](https://www.reddit.com/r/FemboyHentai/)')
                         .setImage(image)
@@ -450,7 +451,7 @@ module.exports = {
                 if (option == 2) {
                     const image = await globalsreddit.nsfw('femboysandhentai');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Femboy)')
                         .setDescription('[r/FemboysAndHentai](https://www.reddit.com/r/FemboysAndHentai/)')
                         .setImage(image)
@@ -472,7 +473,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Femdom)')
                             .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                             .setImage(data.url)
@@ -490,7 +491,7 @@ module.exports = {
                 if (option == 2) {
                     const image = await globalsreddit.nsfw('hentaifemdom');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Femdom)')
                         .setDescription('[r/HentaiFemdom](https://www.reddit.com/r/hentaifemdom/)')
                         .setImage(image)
@@ -507,7 +508,7 @@ module.exports = {
                 if (option == 3) {
                     const image = await globalsreddit.nsfw('femdomhentai');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Femdom)')
                         .setDescription('[r/FemdomHentai](https://www.reddit.com/r/femdomhentai/)')
                         .setImage(image)
@@ -527,7 +528,7 @@ module.exports = {
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Footjob)')
                         .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
@@ -545,7 +546,7 @@ module.exports = {
             if (category == "futanari") {
                 const image = await globalsreddit.nsfw('futanari');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Futanari)')
                     .setDescription('[r/Futanari](https://www.reddit.com/r/futanari/)')
                     .setImage(image)
@@ -564,7 +565,7 @@ module.exports = {
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Gangbang)')
                         .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
@@ -582,7 +583,7 @@ module.exports = {
             if (category == "ganyu") {
                 const image = await globalsreddit.nsfw('ganyunsfw');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Ganyu)')
                     .setDescription('[r/GanyuNSFW](https://www.reddit.com/r/GanyuNSFW/)')
                     .setImage(image)
@@ -601,7 +602,7 @@ module.exports = {
                 if (option == 1) {
                     const image = await globalsreddit.nsfw('genshinimpacthentai');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Genshin)')
                         .setDescription('[r/GenshinImpactHentai](https://www.reddit.com/r/GenshinImpactHentai/)')
                         .setImage(image)
@@ -618,7 +619,7 @@ module.exports = {
                 if (option == 2) {
                     const image = await globalsreddit.nsfw('genshinimpactnsfw');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Genshin)')
                         .setDescription('[r/GenshinImpactNSFW](https://www.reddit.com/r/GenshinImpactNSFW/)')
                         .setImage(image)
@@ -638,7 +639,7 @@ module.exports = {
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Glasses)')
                         .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
@@ -658,7 +659,7 @@ module.exports = {
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Handjob)')
                         .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
@@ -676,7 +677,7 @@ module.exports = {
             if (category == "hutao") {
                 const image = await globalsreddit.nsfw('hutaonsfw');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Hu Tao)')
                     .setDescription('[r/HuTaoNSFW](https://www.reddit.com/r/HuTaoNSFW/)')
                     .setImage(image)
@@ -693,7 +694,7 @@ module.exports = {
             if (category == "keqing") {
                 const image = await globalsreddit.nsfw('keqingnsfw');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Keqing)')
                     .setDescription('[r/KeqingNSFW](https://www.reddit.com/r/KeqingNSFW/)')
                     .setImage(image)
@@ -710,7 +711,7 @@ module.exports = {
             if (category == "lumine") {
                 const image = await globalsreddit.nsfw('luminensfw');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Lumine)')
                     .setDescription('[r/LumineNSFW](https://www.reddit.com/r/LumineNSFW/)')
                     .setImage(image)
@@ -731,7 +732,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Masturbation)')
                             .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                             .setImage(data.url)
@@ -749,7 +750,7 @@ module.exports = {
                 if (option == 2) {
                     const image = await globalsreddit.nsfw('masturbationhentai');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Masturbation)')
                         .setDescription('[r/MasturbationHentai](https://www.reddit.com/r/MasturbationHentai/)')
                         .setImage(image)
@@ -771,7 +772,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Neko)')
                             .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                             .setImage(data.url)
@@ -791,7 +792,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Neko)')
                             .setDescription('[Waifu.Pics](https://waifu.pics/)')
                             .setImage(data.url)
@@ -811,7 +812,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Neko)')
                             .setDescription('[Neko-Love](https://neko-love.xyz/)')
                             .setImage(data.url)
@@ -832,7 +833,7 @@ module.exports = {
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Orgy)')
                         .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
@@ -850,7 +851,7 @@ module.exports = {
             if (category == "overwatch") {
                 const image = await globalsreddit.nsfw('overwatch_porn');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Overwatch)')
                     .setDescription('[r/Overwatch_Porn](https://www.reddit.com/r/Overwatch_Porn/)')
                     .setImage(image)
@@ -869,7 +870,7 @@ module.exports = {
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Pantsu)')
                         .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
@@ -887,7 +888,7 @@ module.exports = {
             if (category == "pee") {
                 const image = await globalsreddit.nsfw('pissinghentai');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Pee)')
                     .setDescription('[r/Pissing Hentai](https://www.reddit.com/r/pissinghentai/)')
                     .setImage(image)
@@ -904,7 +905,7 @@ module.exports = {
             if (category == "pegging") {
                 const image = await globalsreddit.nsfw('pegginghentai');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Pegging)')
                     .setDescription('[r/pegginghentai](https://www.reddit.com/r/pegginghentai/)')
                     .setImage(image)
@@ -925,7 +926,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Public)')
                             .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                             .setImage(data.url)
@@ -943,7 +944,7 @@ module.exports = {
                 if (option == 2) {
                     const image = await globalsreddit.nsfw('publichentai');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Public)')
                         .setDescription('[r/PublicHentai](https://www.reddit.com/r/PublicHentai/)')
                         .setImage(image)
@@ -961,7 +962,7 @@ module.exports = {
             if (category == "rem") {
                 const image = await globalsreddit.nsfw('remhentai');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Rem)')
                     .setDescription('[r/RemHentai](https://www.reddit.com/r/RemHentai/)')
                     .setImage(image)
@@ -982,7 +983,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Tentacles)')
                             .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                             .setImage(data.url)
@@ -1000,7 +1001,7 @@ module.exports = {
                 if (option == 2) {
                     const image = await globalsreddit.nsfw('tentai');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Tentacles)')
                         .setDescription('[r/Tentai](https://www.reddit.com/r/Tentai/)')
                         .setImage(image)
@@ -1018,7 +1019,7 @@ module.exports = {
             if (category == "thick") {
                 const image = await globalsreddit.nsfw('thick_hentai');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Thick)')
                     .setDescription('[r/thick_hentai](https://www.reddit.com/r/thick_hentai/)')
                     .setImage(image)
@@ -1037,7 +1038,7 @@ module.exports = {
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Thighs)')
                         .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                         .setImage(data.url)
@@ -1059,7 +1060,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Trap)')
                             .setDescription('[Waifu.Pics](https://waifu.pics/)')
                             .setImage(data.url)
@@ -1077,7 +1078,7 @@ module.exports = {
                 if (option == 2) {
                     const image = await globalsreddit.nsfw('traphentai');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Trap)')
                         .setDescription('[r/Trap Hentai](https://www.reddit.com/r/traphentai/)')
                         .setImage(image)
@@ -1095,7 +1096,7 @@ module.exports = {
             if (category == "undressing") {
                 const image = await globalsreddit.nsfw('undressinghentai');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Undressing)')
                     .setDescription('[r/UndressingHentai](https://www.reddit.com/r/UndressingHentai/)')
                     .setImage(image)
@@ -1116,7 +1117,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Uniform)')
                             .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                             .setImage(data.url)
@@ -1134,7 +1135,7 @@ module.exports = {
                 if (option == 2) {
                     const image = await globalsreddit.nsfw('uniform_hentai');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Uniform)')
                         .setDescription('[r/Uniform_Hentai](https://www.reddit.com/r/Uniform_Hentai/)')
                         .setImage(image)
@@ -1152,7 +1153,7 @@ module.exports = {
             if (category == "upskirt") {
                 const image = await globalsreddit.nsfw('upskirthentai');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Upskirt)')
                     .setDescription('[r/UpskirtHentai](https://www.reddit.com/r/UpskirtHentai/)')
                     .setImage(image)
@@ -1171,7 +1172,7 @@ module.exports = {
                 if (res.ok) {
                     const data = await res.json();
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Waifu)')
                         .setDescription('[Waifu.Pics](https://waifu.pics/)')
                         .setImage(data.url)
@@ -1189,7 +1190,7 @@ module.exports = {
             if (category == "yaemiko") {
                 const image = await globalsreddit.nsfw('yaemikonsfw');
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Hentai Pics (Yae Miko)')
                     .setDescription('[r/YaeMikoNSFW](https://www.reddit.com/r/YaeMikoNSFW/)')
                     .setImage(image)
@@ -1210,7 +1211,7 @@ module.exports = {
                     if (res.ok) {
                         const data = await res.json();
                         const embed = new EmbedBuilder()
-                            .setColor('#FFC0DD')
+                            .setColor(globalscolours.embed)
                             .setTitle('Hentai Pics (Yuri)')
                             .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                             .setImage(data.url)
@@ -1228,7 +1229,7 @@ module.exports = {
                 if (option == 2) {
                     const image = await globalsreddit.nsfw('yuri');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Yuri)')
                         .setDescription('[r/yuri](https://www.reddit.com/r/yuri/)')
                         .setImage(image)
@@ -1245,7 +1246,7 @@ module.exports = {
                 if (option == 3) {
                     const image = await globalsreddit.nsfw('yurihentai');
                     const embed = new EmbedBuilder()
-                        .setColor('#FFC0DD')
+                        .setColor(globalscolours.embed)
                         .setTitle('Hentai Pics (Yuri)')
                         .setDescription('[r/YuriHentai](https://www.reddit.com/r/YuriHentai/)')
                         .setImage(image)
@@ -1263,7 +1264,7 @@ module.exports = {
         } else {
             await interaction.deferReply({ ephemeral: true });
             const embed = new EmbedBuilder()
-                .setColor('#FFC0DD')
+                .setColor(globalscolours.embed)
                 .setTitle('Notice')
                 .setDescription('This command can only be ran in nsfw channels')
                 .setTimestamp()

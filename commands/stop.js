@@ -1,5 +1,6 @@
 const fs = require('node:fs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+var globalscolours = require('../globals/colours.js');
 var globalsaudio = require('../globals/audio.js');
 
 module.exports = {
@@ -22,7 +23,7 @@ module.exports = {
         globalsaudio.connectionstatus = 0;
 
         const embed = new EmbedBuilder()
-            .setColor('#FFC0DD')
+            .setColor(globalscolours.embed)
             .setTitle('Music Player')
             .setDescription('Stopped play audio and disconnected from voice chat')
             .setTimestamp()

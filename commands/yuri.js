@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
+var globalscolours = require('../globals/colours.js');
 var globalsreddit = require('../globals/reddit.js');
 
 module.exports = {
@@ -12,7 +13,7 @@ module.exports = {
         if (option == 1) {
             const image = await globalsreddit.sfw('wholesomeyuri');
             const embed = new EmbedBuilder()
-                .setColor('#FFC0DD')
+                .setColor(globalscolours.embed)
                 .setTitle('Yuri Pics')
                 .setDescription('[r/Wholesome Yuri](https://www.reddit.com/r/wholesomeyuri/)')
                 .setImage(image)
@@ -29,7 +30,7 @@ module.exports = {
         if (option == 2) {
             const image = await globalsreddit.sfw('hololiveyuri');
             const embed = new EmbedBuilder()
-                .setColor('#FFC0DD')
+                .setColor(globalscolours.embed)
                 .setTitle('Yuri Pics')
                 .setDescription('[r/Hololive Yuri](https://www.reddit.com/r/HololiveYuri/)')
                 .setImage(image)

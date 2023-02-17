@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
+var globalscolours = require('../globals/colours.js');
 var globalsreddit = require('../globals/reddit.js');
 
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
         await interaction.deferReply();
         const image = await globalsreddit.sfw('ganyu');
         const embed = new EmbedBuilder()
-            .setColor('#FFC0DD')
+            .setColor(globalscolours.embed)
             .setTitle('Ganyu Pics')
             .setDescription('[r/Ganyu](https://www.reddit.com/r/Ganyu/)')
             .setImage(image)

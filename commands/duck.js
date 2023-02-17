@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
+var globalscolours = require('../globals/colours.js');
 var globalsreddit = require('../globals/reddit.js');
 
 module.exports = {
@@ -14,7 +15,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Duck Pics')
                     .setDescription('[Random-d](https://random-d.uk/)')
                     .setImage(data.url)
@@ -32,7 +33,7 @@ module.exports = {
         if (option == 2) {
             const image = await globalsreddit.sfw('duck');
             const embed = new EmbedBuilder()
-                .setColor('#FFC0DD')
+                .setColor(globalscolours.embed)
                 .setTitle('Duck Pics')
                 .setDescription('[r/Duck](https://www.reddit.com/r/duck/)')
                 .setImage(image)

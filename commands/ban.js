@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
+var globalscolours = require('../globals/colours.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -41,7 +42,7 @@ module.exports = {
         }
         
         const embed = new EmbedBuilder()
-            .setColor('#FFC0DD')
+            .setColor(globalscolours.embed)
             .setTitle('Banned User')
             .setDescription(`Name: ${user.tag}\nID: ${user.id}`)
             .setTimestamp()

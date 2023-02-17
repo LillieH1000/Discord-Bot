@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+var globalscolours = require('../globals/colours.js');
 var globalsreddit = require('../globals/reddit.js');
 
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
         await interaction.deferReply();
         const image = await globalsreddit.sfw('hutao_mains');
         const embed = new EmbedBuilder()
-            .setColor('#FFC0DD')
+            .setColor(globalscolours.embed)
             .setTitle('Hu Tao Pics')
             .setDescription('[r/HuTao_Mains](https://www.reddit.com/r/HuTao_Mains/)')
             .setImage(image)

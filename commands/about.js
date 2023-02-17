@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { clientId } = require('../config.json');
+var globalscolours = require('../globals/colours.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -10,8 +11,7 @@ module.exports = {
         const member = interaction.guild.members.cache.get(clientId) || await interaction.guild.members.fetch(clientId);
         
         const embed = new EmbedBuilder()
-            .setColor('#FFC0DD')
-            .setTitle('Discord Bot')
+            .setColor(globalscolours.embed)
             .setDescription('Made By Lillie')
             .setThumbnail(member.displayAvatarURL())
             .setFooter({ text: 'ID: ' + member.id })

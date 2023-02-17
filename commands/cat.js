@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
+var globalscolours = require('../globals/colours.js');
 var globalsreddit = require('../globals/reddit.js');
 
 module.exports = {
@@ -14,7 +15,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Cat Pics')
                     .setDescription('[Nekos.Life](https://nekos.life/)')
                     .setImage(data.url)
@@ -34,7 +35,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Cat Pics')
                     .setDescription('[AlexFlipnote.Dev](https://alexflipnote.dev/)')
                     .setImage(data.file)
@@ -54,7 +55,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Cat Pics')
                     .setDescription('[Cataas](https://cataas.com/)')
                     .setImage('https://cataas.com' + data.url)
@@ -72,7 +73,7 @@ module.exports = {
         if (option == 4) {
             const image = await globalsreddit.sfw('cats');
             const embed = new EmbedBuilder()
-                .setColor('#FFC0DD')
+                .setColor(globalscolours.embed)
                 .setTitle('Cat Pics')
                 .setDescription('[r/Cats](https://www.reddit.com/r/cats/)')
                 .setImage(image)
@@ -89,7 +90,7 @@ module.exports = {
         if (option == 5) {
             const image = await globalsreddit.sfw('catpictures');
             const embed = new EmbedBuilder()
-                .setColor('#FFC0DD')
+                .setColor(globalscolours.embed)
                 .setTitle('Cat Pics')
                 .setDescription('[r/Cat Pictures](https://www.reddit.com/r/catpictures/)')
                 .setImage(image)

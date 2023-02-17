@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
+var globalscolours = require('../globals/colours.js');
 var globalsreddit = require('../globals/reddit.js');
 
 module.exports = {
@@ -14,7 +15,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Neko Pics')
                     .setDescription('[Nekos.Life](https://nekos.life/)')
                     .setImage(data.url)
@@ -34,7 +35,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Neko Pics')
                     .setDescription('[Waifu.Pics](https://waifu.pics/)')
                     .setImage(data.url)
@@ -54,7 +55,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Neko Pics')
                     .setDescription('[Nekos.Best](https://nekos.best/)')
                     .setImage(data.results[0].url)
@@ -74,7 +75,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Neko Pics')
                     .setDescription('[Neko-Love](https://neko-love.xyz/)')
                     .setImage(data.url)
@@ -94,7 +95,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor('#FFC0DD')
+                    .setColor(globalscolours.embed)
                     .setTitle('Neko Pics')
                     .setDescription('[Hmtai](https://hmtai.herokuapp.com/)')
                     .setImage(data.url)
@@ -112,7 +113,7 @@ module.exports = {
         if (option == 6) {
             const image = await globalsreddit.sfw('catgirlsfw');
             const embed = new EmbedBuilder()
-                .setColor('#FFC0DD')
+                .setColor(globalscolours.embed)
                 .setTitle('Neko Pics')
                 .setDescription('[r/CatgirlSFW](https://www.reddit.com/r/CatgirlSFW/)')
                 .setImage(image)

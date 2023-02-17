@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { createAudioResource } = require('@discordjs/voice');
+var globalscolours = require('../globals/colours.js');
 var globalsaudio = require('../globals/audio.js');
 
 module.exports = {
@@ -27,7 +28,7 @@ module.exports = {
         }
 
         const embed = new EmbedBuilder()
-            .setColor('#FFC0DD')
+            .setColor(globalscolours.embed)
             .setTitle('Music Player')
             .setDescription('Skipped playing audio')
             .setTimestamp()

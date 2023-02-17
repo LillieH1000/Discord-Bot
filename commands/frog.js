@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
+var globalscolours = require('../globals/colours.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -65,7 +66,7 @@ module.exports = {
             "http://www.allaboutfrogs.org/funstuff/random/0054.jpg"
         ]);
         const embed = new EmbedBuilder()
-            .setColor('#FFC0DD')
+            .setColor(globalscolours.embed)
             .setTitle('Frog Pics')
             .setDescription('[Frogland](http://allaboutfrogs.org/)')
             .setImage(option)

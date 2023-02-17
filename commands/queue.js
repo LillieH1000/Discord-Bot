@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+var globalscolours = require('../globals/colours.js');
 var globalsaudio = require('../globals/audio.js');
 
 module.exports = {
@@ -23,7 +24,7 @@ module.exports = {
         }
 
         const embed = new EmbedBuilder()
-            .setColor('#FFC0DD')
+            .setColor(globalscolours.embed)
             .setTitle('Music Player')
             .setTimestamp()
 
