@@ -51,7 +51,7 @@ module.exports = async(client) => {
                                 new ButtonBuilder()
                                     .setLabel('Other')
                                     .setStyle(ButtonStyle.Link)
-                                    .setURL("https://song.link/y/" + word.match(rx)[1])
+                                    .setURL('https://song.link/y/' + word.match(rx)[1])
                             );
                             await message.reply({ embeds: [embed], components: [row], allowedMentions: { repliedUser: false } });
                         } catch (error) {
