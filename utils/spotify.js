@@ -1,5 +1,3 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-var globalscolours = require('../globals/colours.js');
 var globalsmusic = require('../globals/music.js');
 
 module.exports = async(client) => {
