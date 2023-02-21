@@ -1,5 +1,4 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-var _ = require('underscore');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 async function components(platform, type, info) {
     const res = await fetch(`https://api.song.link/v1-alpha.1/links?platform=${platform}&type=song&${type}=${info}`);
