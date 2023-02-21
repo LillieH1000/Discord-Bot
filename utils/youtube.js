@@ -13,7 +13,7 @@ module.exports = async(client) => {
                     const res = await fetch('https://returnyoutubedislikeapi.com/votes?videoId='.concat(word.match(rx)[1]));
                     if (res.ok) {
                         const data = await res.json();
-                        const components = await globalsmusic.components('youtube', 'id', word.match(rx)[1]);
+                        const components = await globalsmusic.components(word);
 
                         const embed = new EmbedBuilder()
                             .setColor(globalscolours.embed)
