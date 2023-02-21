@@ -1,7 +1,7 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 async function components(url) {
-    const res = await fetch(`https://api.song.link/v1-alpha.1/links?url=${url}&songIfSingle=true`);
+    const res = await fetch(`https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(url)}&songIfSingle=true`);
     if (res.ok) {
         const data = await res.json();
 
