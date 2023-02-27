@@ -42,7 +42,7 @@ module.exports = {
             pokemon = name + '-paldea';
         }
 
-        const res = await fetch('https://pokeapi.co/api/v2/pokemon/'.concat(pokemon.toLowerCase()));
+        const res = await fetch('https://pokeapi.co/api/v2/pokemon/'.concat(pokemon.replace(' ', '-').toLowerCase()));
         if (res.ok) {
             const data = await res.json();
             
@@ -120,19 +120,7 @@ module.exports = {
                 { name: 'Base Stats', value: basestats, inline: false },
             )
     
-            if (form == 'paldea') {
-                if (message) {
-                    embed.addFields(
-                        { name: 'Game And Count', value: message, inline: false },
-                    );
-                }
-
-                embed.addFields(
-                    { name: 'Notice', value: 'Unfortunately sprites for Paldea forms aren\'t available via pokeapi at this time', inline: false },
-                );
-
-                await interaction.editReply({ embeds: [embed] });
-            } else {
+            if (data.sprites.other.home.front_default != null) {
                 embed.setThumbnail(data.sprites.other.home.front_default)
 
                 const menu = new SelectMenuBuilder().setPlaceholder('Choose Sprite Image');
@@ -186,6 +174,8 @@ module.exports = {
                 const row = new ActionRowBuilder().addComponents(menu);
 
                 await interaction.editReply({ embeds: [embed], components: [row] });
+            } else {
+                await interaction.editReply({ embeds: [embed] });
             }
         } else {
             const embed = new EmbedBuilder()
