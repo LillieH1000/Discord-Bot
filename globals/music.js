@@ -20,7 +20,6 @@ async function components(url) {
         const tidalButton = new ButtonBuilder().setLabel('Tidal').setStyle(ButtonStyle.Link);
         const spotifyButton = new ButtonBuilder().setLabel('Spotify').setStyle(ButtonStyle.Link);
         const youtubeButton = new ButtonBuilder().setLabel('YouTube').setStyle(ButtonStyle.Link);
-        const youtubeMusicButton = new ButtonBuilder().setLabel('YouTube Music').setStyle(ButtonStyle.Link);
 
         if (data.linksByPlatform.appleMusic != null) {
             appleMusicButton.setURL(data.linksByPlatform.appleMusic.url);
@@ -146,20 +145,6 @@ async function components(url) {
                 row4.addComponents(youtubeButton);
             } else if (row5.components != undefined && row5.components.length < 5) {
                 row5.addComponents(youtubeButton);
-            }
-        }
-        if (data.linksByPlatform.youtubeMusic != null) {
-            youtubeMusicButton.setURL(data.linksByPlatform.youtubeMusic.url);
-            if (row1.components != undefined && row1.components.length < 5) {
-                row1.addComponents(youtubeMusicButton);
-            } else if (row2.components != undefined && row2.components.length < 5) {
-                row2.addComponents(youtubeMusicButton);
-            } else if (row3.components != undefined && row3.components.length < 5) {
-                row3.addComponents(youtubeMusicButton);
-            } else if (row4.components != undefined && row4.components.length < 5) {
-                row4.addComponents(youtubeMusicButton);
-            } else if (row5.components != undefined && row5.components.length < 5) {
-                row5.addComponents(youtubeMusicButton);
             }
         }
         
