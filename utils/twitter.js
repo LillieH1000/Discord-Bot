@@ -4,8 +4,10 @@ module.exports = async(client) => {
     
         try {
             for (const word of message.content.split(" ")) {
-                const rx = /^http(?:s)?:\/\/(.*)twitter\.com\//;
-                if (word.match(rx)) {
+                const tx = /^http(?:s)?:\/\/(.*)twitter\.com\//;
+                const fx = /^http(?:s)?:\/\/(.*)fxtwitter\.com\//;
+                const vx = /^http(?:s)?:\/\/(.*)vxtwitter\.com\//;
+                if (word.match(tx) && !word.match(fx) && !word.match(vx)) {
                     message.suppressEmbeds(true)
                     message.reply({ content: word.replace("twitter.com", "vxtwitter.com"), allowedMentions: { repliedUser: false } });
                 }
