@@ -85,26 +85,22 @@ module.exports = {
                 await response('hentaianal', null, category, interaction);
             }
             if (category == "ayaka") {
-                await response('ayakahentai', null, category, interaction);
+                var option = _.sample([1, 2]);
+                if (option == 1) {
+                    await response('ayakahentai', null, category, interaction);
+                }
+                if (option == 2) {
+                    await response('ayaka_hentai', null, category, interaction);
+                }
             }
             if (category == "bdsm") {
                 await response('hentaibondage', null, category, interaction);
             }
             if (category == "blowjob") {
-                var option = _.sample([1, 2]);
-                if (option == 1) {
-                    const res = await fetch("https://api.waifu.pics/nsfw/blowjob");
-                    if (res.ok) {
-                        const data = await res.json();
-                        await response(null, data.url, category, interaction);
-                    }
-                }
-                if (option == 2) {
-                    const res = await fetch('http://api.nekos.fun:8080/api/blowjob');
-                    if (res.ok) {
-                        const data = await res.json();
-                        await response(null, data.image, category, interaction);
-                    }
+                const res = await fetch("https://api.waifu.pics/nsfw/blowjob");
+                if (res.ok) {
+                    const data = await res.json();
+                    await response(null, data.url, category, interaction);
                 }
             }
             if (category == "byleth") {
@@ -156,10 +152,16 @@ module.exports = {
                 await response('hutaonsfw', null, category, interaction);
             }
             if (category == "keqing") {
-                await response('keqing', null, category, interaction);
+                await response('keqingnsfw', null, category, interaction);
             }
             if (category == "lumine") {
-                await response('luminensfw', null, category, interaction);
+                var option = _.sample([1, 2]);
+                if (option == 1) {
+                    await response('luminensfw', null, category, interaction);
+                }
+                if (option == 2) {
+                    await response('lumine_nsfw', null, category, interaction);
+                }
             }
             if (category == "masturbation") {
                 await response('masturbationhentai', null, category, interaction);
