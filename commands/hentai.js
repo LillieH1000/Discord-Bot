@@ -69,7 +69,7 @@ module.exports = {
                     N:\nneko\nnilou\n
                     O:\norgy\noverwatch\n
                     P:\npee\npegging\npublic\n
-                    R:\nrem\n
+                    R:\nraiden\n
                     S:\nshenhe\n
                     T:\ntentacles\nthick\ntrap\n
                     U:\nundressing\nuniform\nupskirt\n
@@ -186,8 +186,8 @@ module.exports = {
             if (category == "public") {
                 await response('publichentai', null, category, interaction);
             }
-            if (category == "rem") {
-                await response('remhentai', null, category, interaction);
+            if (category == "raiden") {
+                await response('raidennsfw', null, category, interaction);
             }
             if (category == "shenhe") {
                 await response('shenhensfw', null, category, interaction);

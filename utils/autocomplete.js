@@ -48,7 +48,7 @@ module.exports = async(client) => {
                 choices = ['pee', 'pegging', 'public'];
             }
             if (focusedOption.value.startsWith('r')) {
-                choices = ['rem'];
+                choices = ['raiden'];
             }
             if (focusedOption.value.startsWith('s')) {
                 choices = ['shenhe'];
