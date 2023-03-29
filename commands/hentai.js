@@ -71,10 +71,11 @@ module.exports = {
                     K:\nkeqing\n
                     L:\nlumine\n
                     M:\nmasturbation\n
-                    N:\nneko\n
+                    N:\nneko\nnilou\n
                     O:\norgy\noverwatch\n
                     P:\npantsu\npee\npegging\npublic\n
                     R:\nrem\n
+                    S:\nshenhe\n
                     T:\ntentacles\nthick\nthighs\ntrap\n
                     U:\nundressing\nuniform\nupskirt\n
                     W:\nwaifu\n
@@ -569,6 +570,9 @@ module.exports = {
                     }
                 }
             }
+            if (category == "nilou") {
+                await reddit('nilou_hentai', category, interaction);
+            }
             if (category == "orgy") {
                 const res = await fetch('https://hmtai.herokuapp.com/nsfw/orgy');
                 if (res.ok) {
@@ -646,6 +650,9 @@ module.exports = {
             }
             if (category == "rem") {
                 await reddit('remhentai', category, interaction);
+            }
+            if (category == "shenhe") {
+                await reddit('shenhensfw', category, interaction);
             }
             if (category == "tentacles") {
                 var option = _.sample([1, 2]);

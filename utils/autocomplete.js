@@ -39,7 +39,7 @@ module.exports = async(client) => {
                 choices = ['masturbation'];
             }
             if (focusedOption.value.startsWith('n')) {
-                choices = ['neko'];
+                choices = ['neko', 'nilou'];
             }
             if (focusedOption.value.startsWith('o')) {
                 choices = ['orgy', 'overwatch'];
@@ -49,6 +49,9 @@ module.exports = async(client) => {
             }
             if (focusedOption.value.startsWith('r')) {
                 choices = ['rem'];
+            }
+            if (focusedOption.value.startsWith('s')) {
+                choices = ['shenhe'];
             }
             if (focusedOption.value.startsWith('t')) {
                 choices = ['tentacles', 'thick', 'thighs', 'trap'];
