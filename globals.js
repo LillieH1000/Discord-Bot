@@ -1,4 +1,4 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { createAudioPlayer } = require('@discordjs/voice');
 var _ = require('underscore');
 
@@ -12,14 +12,16 @@ var nowplaying = '';
 
 const embedcolour = '#FFC0DD';
 
-async function reddit(subreddit) {
+async function reddit(subreddit, nsfw) {
     const res = await fetch(`https://www.reddit.com/r/${subreddit}.json?limit=50`);
     if (res.ok) {
         const images = [];
         const data = await res.json();
         data.data.children.forEach((child) => {
-            if (child.data.over_18 == false) {
-                if (child.data.url.endsWith('jpg') || child.data.url.endsWith('jpeg') || child.data.url.endsWith('png') || child.data.url.endsWith('gif')) {
+            if (child.data.url.endsWith('jpg') || child.data.url.endsWith('jpeg') || child.data.url.endsWith('png') || child.data.url.endsWith('gif')) {
+                if (nsfw == false && child.data.over_18 == false) {
+                    images.push(child.data.url);
+                } else if (nsfw == true && child.data.over_18 == true) {
                     images.push(child.data.url);
                 }
             }
@@ -31,175 +33,31 @@ async function reddit(subreddit) {
     }
 }
 
-async function musicurl(url) {
-    const res = await fetch(`https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(url)}&songIfSingle=true`);
-    if (res.ok) {
-        const data = await res.json();
+async function response(info) {
+    const embed = new EmbedBuilder()
+        .setColor(embedcolour)
+        .setTimestamp()
+    const row = new ActionRowBuilder()
 
-        const row1 = new ActionRowBuilder();
-        const row2 = new ActionRowBuilder();
-        const row3 = new ActionRowBuilder();
-        const row4 = new ActionRowBuilder();
-        const row5 = new ActionRowBuilder();
+    if (info.type == "text") {
+        embed.setTitle(info.title)
+        embed.setDescription(info.description)
+    }
+    if (info.type == "image") {
+        embed.setTitle(info.title)
+        embed.setImage(info.url)
+        row.addComponents(
+            new ButtonBuilder()
+                .setLabel('View Original Image')
+                .setStyle(ButtonStyle.Link)
+                .setURL(info.url)
+        )
+    }
 
-        const appleMusicButton = new ButtonBuilder().setLabel('Apple Music').setStyle(ButtonStyle.Link);
-        const audiomackButton = new ButtonBuilder().setLabel('Audiomack').setStyle(ButtonStyle.Link);
-        const deezerButton = new ButtonBuilder().setLabel('Deezer').setStyle(ButtonStyle.Link);
-        const napsterButton = new ButtonBuilder().setLabel('Napster').setStyle(ButtonStyle.Link);
-        const pandoraButton = new ButtonBuilder().setLabel('Pandora').setStyle(ButtonStyle.Link);
-        const soundcloudButton = new ButtonBuilder().setLabel('SoundCloud').setStyle(ButtonStyle.Link);
-        const tidalButton = new ButtonBuilder().setLabel('Tidal').setStyle(ButtonStyle.Link);
-        const spotifyButton = new ButtonBuilder().setLabel('Spotify').setStyle(ButtonStyle.Link);
-        const youtubeButton = new ButtonBuilder().setLabel('YouTube').setStyle(ButtonStyle.Link);
-
-        if (data.linksByPlatform.appleMusic != null) {
-            appleMusicButton.setURL(data.linksByPlatform.appleMusic.url);
-            if (row1.components != undefined && row1.components.length < 5) {
-                row1.addComponents(appleMusicButton);
-            } else if (row2.components != undefined && row2.components.length < 5) {
-                row2.addComponents(appleMusicButton);
-            } else if (row3.components != undefined && row3.components.length < 5) {
-                row3.addComponents(appleMusicButton);
-            } else if (row4.components != undefined && row4.components.length < 5) {
-                row4.addComponents(appleMusicButton);
-            } else if (row5.components != undefined && row5.components.length < 5) {
-                row5.addComponents(appleMusicButton);
-            }
-        }
-        if (data.linksByPlatform.audiomack != null) {
-            audiomackButton.setURL(data.linksByPlatform.audiomack.url);
-            if (row1.components != undefined && row1.components.length < 5) {
-                row1.addComponents(audiomackButton);
-            } else if (row2.components != undefined && row2.components.length < 5) {
-                row2.addComponents(audiomackButton);
-            } else if (row3.components != undefined && row3.components.length < 5) {
-                row3.addComponents(audiomackButton);
-            } else if (row4.components != undefined && row4.components.length < 5) {
-                row4.addComponents(audiomackButton);
-            } else if (row5.components != undefined && row5.components.length < 5) {
-                row5.addComponents(audiomackButton);
-            }
-        }
-        if (data.linksByPlatform.deezer != null) {
-            deezerButton.setURL(data.linksByPlatform.deezer.url);
-            if (row1.components != undefined && row1.components.length < 5) {
-                row1.addComponents(deezerButton);
-            } else if (row2.components != undefined && row2.components.length < 5) {
-                row2.addComponents(deezerButton);
-            } else if (row3.components != undefined && row3.components.length < 5) {
-                row3.addComponents(deezerButton);
-            } else if (row4.components != undefined && row4.components.length < 5) {
-                row4.addComponents(deezerButton);
-            } else if (row5.components != undefined && row5.components.length < 5) {
-                row5.addComponents(deezerButton);
-            }
-        }
-        if (data.linksByPlatform.napster != null) {
-            napsterButton.setURL(data.linksByPlatform.napster.url);
-            if (row1.components != undefined && row1.components.length < 5) {
-                row1.addComponents(napsterButton);
-            } else if (row2.components != undefined && row2.components.length < 5) {
-                row2.addComponents(napsterButton);
-            } else if (row3.components != undefined && row3.components.length < 5) {
-                row3.addComponents(napsterButton);
-            } else if (row4.components != undefined && row4.components.length < 5) {
-                row4.addComponents(napsterButton);
-            } else if (row5.components != undefined && row5.components.length < 5) {
-                row5.addComponents(napsterButton);
-            }
-        }
-        if (data.linksByPlatform.pandora != null) {
-            pandoraButton.setURL(data.linksByPlatform.pandora.url);
-            if (row1.components != undefined && row1.components.length < 5) {
-                row1.addComponents(pandoraButton);
-            } else if (row2.components != undefined && row2.components.length < 5) {
-                row2.addComponents(pandoraButton);
-            } else if (row3.components != undefined && row3.components.length < 5) {
-                row3.addComponents(pandoraButton);
-            } else if (row4.components != undefined && row4.components.length < 5) {
-                row4.addComponents(pandoraButton);
-            } else if (row5.components != undefined && row5.components.length < 5) {
-                row5.addComponents(pandoraButton);
-            }
-        }
-        if (data.linksByPlatform.soundcloud != null) {
-            soundcloudButton.setURL(data.linksByPlatform.soundcloud.url);
-            if (row1.components != undefined && row1.components.length < 5) {
-                row1.addComponents(soundcloudButton);
-            } else if (row2.components != undefined && row2.components.length < 5) {
-                row2.addComponents(soundcloudButton);
-            } else if (row3.components != undefined && row3.components.length < 5) {
-                row3.addComponents(soundcloudButton);
-            } else if (row4.components != undefined && row4.components.length < 5) {
-                row4.addComponents(soundcloudButton);
-            } else if (row5.components != undefined && row5.components.length < 5) {
-                row5.addComponents(soundcloudButton);
-            }
-        }
-        if (data.linksByPlatform.tidal != null) {
-            tidalButton.setURL(data.linksByPlatform.tidal.url);
-            if (row1.components != undefined && row1.components.length < 5) {
-                row1.addComponents(tidalButton);
-            } else if (row2.components != undefined && row2.components.length < 5) {
-                row2.addComponents(tidalButton);
-            } else if (row3.components != undefined && row3.components.length < 5) {
-                row3.addComponents(tidalButton);
-            } else if (row4.components != undefined && row4.components.length < 5) {
-                row4.addComponents(tidalButton);
-            } else if (row5.components != undefined && row5.components.length < 5) {
-                row5.addComponents(tidalButton);
-            }
-        }
-        if (data.linksByPlatform.spotify != null) {
-            spotifyButton.setURL(data.linksByPlatform.spotify.url);
-            if (row1.components != undefined && row1.components.length < 5) {
-                row1.addComponents(spotifyButton);
-            } else if (row2.components != undefined && row2.components.length < 5) {
-                row2.addComponents(spotifyButton);
-            } else if (row3.components != undefined && row3.components.length < 5) {
-                row3.addComponents(spotifyButton);
-            } else if (row4.components != undefined && row4.components.length < 5) {
-                row4.addComponents(spotifyButton);
-            } else if (row5.components != undefined && row5.components.length < 5) {
-                row5.addComponents(spotifyButton);
-            }
-        }
-        if (data.linksByPlatform.youtube != null) {
-            youtubeButton.setURL(data.linksByPlatform.youtube.url);
-            if (row1.components != undefined && row1.components.length < 5) {
-                row1.addComponents(youtubeButton);
-            } else if (row2.components != undefined && row2.components.length < 5) {
-                row2.addComponents(youtubeButton);
-            } else if (row3.components != undefined && row3.components.length < 5) {
-                row3.addComponents(youtubeButton);
-            } else if (row4.components != undefined && row4.components.length < 5) {
-                row4.addComponents(youtubeButton);
-            } else if (row5.components != undefined && row5.components.length < 5) {
-                row5.addComponents(youtubeButton);
-            }
-        }
-        
-        const components = new Array();
-
-        if (row1.components != undefined && row1.components.length != 0) {
-            components.push(row1);
-        }
-        if (row2.components != undefined && row2.components.length != 0) {
-            components.push(row2);
-        }
-        if (row3.components != undefined && row3.components.length != 0) {
-            components.push(row3);
-        }
-        if (row4.components != undefined && row4.components.length != 0) {
-            components.push(row4);
-        }
-        if (row5.components != undefined && row5.components.length != 0) {
-            components.push(row5);
-        }
-
-        return components;
+    if (row.components != null && row.components != undefined && row.components.length != 0) {
+        await info.interaction.editReply({ embeds: [embed], components: [row], ephemeral: info.ephemeral });
     } else {
-        return null;
+        await info.interaction.editReply({ embeds: [embed], ephemeral: info.ephemeral });
     }
 }
 
@@ -213,5 +71,5 @@ module.exports = {
     nowplaying,
     embedcolour,
     reddit: reddit,
-    musicurl: musicurl
+    response: response
 };
