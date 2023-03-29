@@ -1,23 +1,23 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-var globals = require('../globals.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+var globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('eula')
-		.setDescription('Posts a random eula picture'),
+		.setName("eula")
+		.setDescription("Posts a random eula picture"),
 	async execute(interaction) {
         await interaction.deferReply();
-        const image = await globals.reddit('eulamains');
+        const image = await globals.reddit("eulamains");
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
-            .setTitle('Eula Pics')
-            .setDescription('[r/EulaMains](https://www.reddit.com/r/EulaMains/)')
+            .setTitle("Eula Pics")
+            .setDescription("[r/EulaMains](https://www.reddit.com/r/EulaMains/)")
             .setImage(image)
             .setTimestamp()
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
-                    .setLabel('View Original Image')
+                    .setLabel("View Original Image")
                     .setStyle(ButtonStyle.Link)
                     .setURL(image)
             );

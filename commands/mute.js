@@ -1,53 +1,53 @@
-const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
-var globals = require('../globals.js');
+const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require("discord.js");
+var globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('mute')
-		.setDescription('Mute a member')
+		.setName("mute")
+		.setDescription("Mute a member")
         .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.MuteMembers)
         .addUserOption(option =>
-            option.setName('user')
-                .setDescription('Select a user')
+            option.setName("user")
+                .setDescription("Select a user")
                 .setRequired(true))
         .addIntegerOption(option =>
-            option.setName('days')
-                .setDescription('Enter number of days')
+            option.setName("days")
+                .setDescription("Enter number of days")
                 .setRequired(true))
         .addIntegerOption(option =>
-            option.setName('hours')
-                .setDescription('Enter number of hours')
+            option.setName("hours")
+                .setDescription("Enter number of hours")
                 .setRequired(true))
         .addIntegerOption(option =>
-            option.setName('minutes')
-                .setDescription('Enter number of minutes')
+            option.setName("minutes")
+                .setDescription("Enter number of minutes")
                 .setRequired(true))
         .addIntegerOption(option =>
-            option.setName('seconds')
-                .setDescription('Enter number of seconds')
+            option.setName("seconds")
+                .setDescription("Enter number of seconds")
                 .setRequired(true))
         .addStringOption(option =>
-            option.setName('reason')
-                .setDescription('Enter the reason')),
+            option.setName("reason")
+                .setDescription("Enter the reason")),
 	async execute(interaction) {
         await interaction.deferReply({ ephemeral: true });
-        const user = interaction.options.getUser('user');
+        const user = interaction.options.getUser("user");
         const member = interaction.guild.members.cache.get(user.id) || await interaction.guild.members.fetch(user.id);
 
-        const days = interaction.options.getInteger('days');
+        const days = interaction.options.getInteger("days");
         const daysmil = days * 24 * 60 * 60 * 1000;
 
-        const hours = interaction.options.getInteger('hours');
+        const hours = interaction.options.getInteger("hours");
         const hoursmil = hours * 60 * 60 * 1000;
 
-        const minutes = interaction.options.getInteger('minutes');
+        const minutes = interaction.options.getInteger("minutes");
         const minutessmil = minutes * 60 * 1000;
 
-        const seconds = interaction.options.getInteger('seconds');
+        const seconds = interaction.options.getInteger("seconds");
         const secondssmil = seconds * 1000;
 
-        const reason = interaction.options.getString('reason');
+        const reason = interaction.options.getString("reason");
 
         if (reason) {
             await member.timeout(Math.round(daysmil + hoursmil + minutessmil + secondssmil), { reason: reason });
@@ -57,7 +57,7 @@ module.exports = {
         
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
-            .setTitle('Muted User')
+            .setTitle("Muted User")
             .setDescription(`Name: ${user.tag}\nID: ${user.id}`)
             .setTimestamp()
 

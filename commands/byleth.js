@@ -1,23 +1,23 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-var globals = require('../globals.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+var globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('byleth')
-		.setDescription('Posts a random byleth picture'),
+		.setName("byleth")
+		.setDescription("Posts a random byleth picture"),
 	async execute(interaction) {
         await interaction.deferReply();
-        const image = await globals.reddit('byleth');
+        const image = await globals.reddit("byleth");
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
-            .setTitle('Byleth Pics')
-            .setDescription('[r/Byleth](https://www.reddit.com/r/Byleth/)')
+            .setTitle("Byleth Pics")
+            .setDescription("[r/Byleth](https://www.reddit.com/r/Byleth/)")
             .setImage(image)
             .setTimestamp()
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
-                    .setLabel('View Original Image')
+                    .setLabel("View Original Image")
                     .setStyle(ButtonStyle.Link)
                     .setURL(image)
             );

@@ -1,6 +1,6 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { createAudioPlayer } = require('@discordjs/voice');
-var _ = require('underscore');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const { createAudioPlayer } = require("@discordjs/voice");
+var _ = require("underscore");
 
 var connection;
 var player = createAudioPlayer();
@@ -8,9 +8,9 @@ var resource;
 var connectionstatus = 0;
 var queue = [];
 var titles = [];
-var nowplaying = '';
+var nowplaying = "";
 
-const embedcolour = '#FFC0DD';
+const embedcolour = "#FFC0DD";
 
 async function reddit(subreddit, nsfw) {
     const res = await fetch(`https://www.reddit.com/r/${subreddit}.json?limit=50`);
@@ -18,7 +18,7 @@ async function reddit(subreddit, nsfw) {
         const images = [];
         const data = await res.json();
         data.data.children.forEach((child) => {
-            if (child.data.url.endsWith('jpg') || child.data.url.endsWith('jpeg') || child.data.url.endsWith('png') || child.data.url.endsWith('gif')) {
+            if (child.data.url.endsWith("jpg") || child.data.url.endsWith("jpeg") || child.data.url.endsWith("png") || child.data.url.endsWith("gif")) {
                 if (nsfw == false && child.data.over_18 == false) {
                     images.push(child.data.url);
                 } else if (nsfw == true && child.data.over_18 == true) {
@@ -48,7 +48,7 @@ async function response(info) {
         embed.setImage(info.url)
         row.addComponents(
             new ButtonBuilder()
-                .setLabel('View Original Image')
+                .setLabel("View Original Image")
                 .setStyle(ButtonStyle.Link)
                 .setURL(info.url)
         )

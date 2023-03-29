@@ -1,21 +1,21 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-var globals = require('../globals.js');
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+var globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('pronouns')
-		.setDescription('Get a users pronouns')
+		.setName("pronouns")
+		.setDescription("Get a users pronouns")
         .addUserOption(option =>
-            option.setName('user')
-                .setDescription('Select a user')
+            option.setName("user")
+                .setDescription("Select a user")
                 .setRequired(true)),
 	async execute(interaction) {
         await interaction.deferReply({ ephemeral: true });
-        const user = interaction.options.getUser('user');
-        const res = await fetch('https://pronoundb.org/api/v1/lookup?platform=discord&id='.concat(user.id));
+        const user = interaction.options.getUser("user");
+        const res = await fetch("https://pronoundb.org/api/v1/lookup?platform=discord&id=".concat(user.id));
         if (res.ok) {
             const data = await res.json();
-            var pronoun = '';
+            var pronoun = "";
             if (data.pronouns == "unspecified") {
                 pronoun = "unspecified";
             }
@@ -81,9 +81,9 @@ module.exports = {
             }
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
-                .setTitle('PronounDB')
+                .setTitle("PronounDB")
                 .addFields(
-                    { name: 'Pronouns of ' + user.username + ':', value: pronoun, inline: false },
+                    { name: "Pronouns of " + user.username + ":", value: pronoun, inline: false },
                 )
                 .setTimestamp()
             await interaction.editReply({ embeds: [embed], ephemeral: true });

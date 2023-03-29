@@ -1,6 +1,6 @@
-const fs = require('node:fs');
-const { createAudioResource, AudioPlayerStatus } = require('@discordjs/voice');
-var globals = require('../globals.js');
+const fs = require("node:fs");
+const { createAudioResource, AudioPlayerStatus } = require("@discordjs/voice");
+var globals = require("../globals.js");
 
 module.exports = async() => {
     globals.player.on(AudioPlayerStatus.Idle, () => {
@@ -14,7 +14,7 @@ module.exports = async() => {
                 globals.connection.destroy();
                 globals.queue = [];
                 globals.titles = [];
-                globals.nowplaying = '';
+                globals.nowplaying = "";
                 globals.connectionstatus = 0;
             } else {
                 globals.nowplaying = globals.titles[0];
@@ -30,7 +30,7 @@ module.exports = async() => {
         }
     });
 
-    globals.player.on('error', voiceerror => {
+    globals.player.on("error", voiceerror => {
         console.error(voiceerror);
         try {
             globals.connection.destroy();
@@ -41,7 +41,7 @@ module.exports = async() => {
             }
             globals.queue = [];
             globals.titles = [];
-            globals.nowplaying = '';
+            globals.nowplaying = "";
             globals.connectionstatus = 0;
         } catch (error) {
             console.error(error);

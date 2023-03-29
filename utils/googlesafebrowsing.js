@@ -1,7 +1,7 @@
-const { safebrowsingapikey } = require('../config.json');
+const { safebrowsingapikey } = require("../config.json");
 
 module.exports = async(client) => {
-    client.on('messageCreate', async message => {
+    client.on("messageCreate", async message => {
         if (message.author.bot) return;
     
         try {
@@ -18,7 +18,7 @@ module.exports = async(client) => {
                         ]
                     }
                 }
-                const res = await fetch('https://safebrowsing.googleapis.com/v4/threatMatches:find?key='.concat(safebrowsingapikey), {
+                const res = await fetch("https://safebrowsing.googleapis.com/v4/threatMatches:find?key=".concat(safebrowsingapikey), {
                     method: "post",
                     body: JSON.stringify(payload),
                     headers: {

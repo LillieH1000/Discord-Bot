@@ -1,48 +1,48 @@
-const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
-var globals = require('../globals.js');
+const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder } = require("discord.js");
+var globals = require("../globals.js");
 
 module.exports = async(client) => {
-    client.on('interactionCreate', async interaction => {
+    client.on("interactionCreate", async interaction => {
         if (!interaction.isSelectMenu()) return;
         
         try {
-            const pokemon = interaction.customId.split('custommenuid')[0];
-            const game = interaction.customId.split('custommenuid')[1];
+            const pokemon = interaction.customId.split("custommenuid")[0];
+            const game = interaction.customId.split("custommenuid")[1];
 
-            const res = await fetch('https://pokeapi.co/api/v2/pokemon/'.concat(pokemon));
+            const res = await fetch("https://pokeapi.co/api/v2/pokemon/".concat(pokemon));
             if (res.ok) {
                 const data = await res.json();
                 
                 var typescount = 0;
-                var types = '';
+                var types = "";
                 for (const type of data.types) {
                     types += type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1);
                     typescount += 1;
                     if (data.types.length != typescount) {
-                        types += ', ';
+                        types += ", ";
                     }
                 }
         
                 var abilitiescount = 0;
-                var abilities = '';
+                var abilities = "";
                 for (const ability of data.abilities) {
                     abilities += ability.ability.name.charAt(0).toUpperCase() + ability.ability.name.slice(1);
                     if (ability.is_hidden == true) {
-                        abilities += ' (Hidden)';
+                        abilities += " (Hidden)";
                     }
                     abilitiescount += 1;
                     if (data.abilities.length != abilitiescount) {
-                        abilities += ', ';
+                        abilities += ", ";
                     }
                 }
         
                 var basestatscount = 0;
-                var basestats = '';
+                var basestats = "";
                 for (const basestat of data.stats) {
-                    basestats += basestat.stat.name.charAt(0).toUpperCase() + basestat.stat.name.slice(1) + ': ' + basestat.base_stat.toString();
+                    basestats += basestat.stat.name.charAt(0).toUpperCase() + basestat.stat.name.slice(1) + ": " + basestat.base_stat.toString();
                     basestatscount += 1;
                     if (data.stats.length != basestatscount) {
-                        basestats += '\n';
+                        basestats += "\n";
                     }
                 }
                     
@@ -56,59 +56,59 @@ module.exports = async(client) => {
 
                 if (data.id != null) {
                     embed.addFields(
-                        { name: 'Pokedex ID', value: data.id.toString(), inline: false },
+                        { name: "Pokedex ID", value: data.id.toString(), inline: false },
                     )
                 }
 
                 embed.addFields(
-                    { name: 'Types', value: types, inline: false },
-                    { name: 'Abilities', value: abilities, inline: false },
+                    { name: "Types", value: types, inline: false },
+                    { name: "Abilities", value: abilities, inline: false },
                 )
 
                 if (data.height != null) {
                     embed.addFields(
-                        { name: 'Height (Decimetres)', value: data.height.toString(), inline: false },
+                        { name: "Height (Decimetres)", value: data.height.toString(), inline: false },
                     )
                 }
 
                 if (data.weight != null) {
                     embed.addFields(
-                        { name: 'Weight (Hectograms)', value: data.weight.toString(), inline: false },
+                        { name: "Weight (Hectograms)", value: data.weight.toString(), inline: false },
                     )
                 }
 
                 if (data.base_experience != null) {
                     embed.addFields(
-                        { name: 'Base Experience', value: data.base_experience.toString(), inline: false },
+                        { name: "Base Experience", value: data.base_experience.toString(), inline: false },
                     )
                 }
 
                 embed.addFields(
-                    { name: 'Base Stats', value: basestats, inline: false },
+                    { name: "Base Stats", value: basestats, inline: false },
                 )
                 
-                if (interaction.values[0] == 'defaultregular') {
+                if (interaction.values[0] == "defaultregular") {
                     embed.setThumbnail(data.sprites.other.home.front_default);
                 }
-                if (interaction.values[0] == 'defaultshiny') {
+                if (interaction.values[0] == "defaultshiny") {
                     embed.setThumbnail(data.sprites.other.home.front_shiny);
                 }
-                if (interaction.values[0] == 'femaleregular') {
+                if (interaction.values[0] == "femaleregular") {
                     embed.setThumbnail(data.sprites.other.home.front_female);
                 }
-                if (interaction.values[0] == 'femaleshiny') {
+                if (interaction.values[0] == "femaleshiny") {
                     embed.setThumbnail(data.sprites.other.home.front_shiny_female);
                 }
         
-                const menu = new SelectMenuBuilder().setPlaceholder('Choose Sprite Image');
+                const menu = new SelectMenuBuilder().setPlaceholder("Choose Sprite Image");
         
-                if (game != '') {
+                if (game != "") {
                     embed.addFields(
-                        { name: 'Game And Count', value: game, inline: false },
+                        { name: "Game And Count", value: game, inline: false },
                     );
-                    menu.setCustomId(data.name + 'custommenuid' + game);
+                    menu.setCustomId(data.name + "custommenuid" + game);
                 } else {
-                    menu.setCustomId(data.name + 'custommenuid');
+                    menu.setCustomId(data.name + "custommenuid");
                 }
                 
                 if (data.sprites.other.home.front_default != null) {

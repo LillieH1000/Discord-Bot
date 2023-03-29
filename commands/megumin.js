@@ -1,28 +1,28 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-var _ = require('underscore');
-var globals = require('../globals.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+var _ = require("underscore");
+var globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('megumin')
-		.setDescription('Posts a random megumin picture'),
+		.setName("megumin")
+		.setDescription("Posts a random megumin picture"),
 	async execute(interaction) {
         await interaction.deferReply();
         var option = _.sample([1, 2]);
         if (option == 1) {
-            const res = await fetch('https://api.waifu.pics/sfw/megumin');
+            const res = await fetch("https://api.waifu.pics/sfw/megumin");
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
                     .setColor(globals.embedcolour)
-                    .setTitle('Megumin Pics')
-                    .setDescription('[Waifu.Pics](https://waifu.pics/)')
+                    .setTitle("Megumin Pics")
+                    .setDescription("[Waifu.Pics](https://waifu.pics/)")
                     .setImage(data.url)
                     .setTimestamp()
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
-                            .setLabel('View Original Image')
+                            .setLabel("View Original Image")
                             .setStyle(ButtonStyle.Link)
                             .setURL(data.url)
                     );
@@ -30,17 +30,17 @@ module.exports = {
             }
         }
         if (option == 2) {
-            const image = await globals.reddit('megumin');
+            const image = await globals.reddit("megumin");
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
-                .setTitle('Megumin Pics')
-                .setDescription('[r/Megumin and Megumin Explosion Related](https://www.reddit.com/r/Megumin/)')
+                .setTitle("Megumin Pics")
+                .setDescription("[r/Megumin and Megumin Explosion Related](https://www.reddit.com/r/Megumin/)")
                 .setImage(image)
                 .setTimestamp()
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
-                        .setLabel('View Original Image')
+                        .setLabel("View Original Image")
                         .setStyle(ButtonStyle.Link)
                         .setURL(image)
                 );

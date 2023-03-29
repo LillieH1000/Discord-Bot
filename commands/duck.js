@@ -1,28 +1,28 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-var _ = require('underscore');
-var globals = require('../globals.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+var _ = require("underscore");
+var globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('duck')
-		.setDescription('Posts a random duck picture'),
+		.setName("duck")
+		.setDescription("Posts a random duck picture"),
 	async execute(interaction) {
         await interaction.deferReply();
         var option = _.sample([1, 2]);
         if (option == 1) {
-            const res = await fetch('https://random-d.uk/api/v2/random');
+            const res = await fetch("https://random-d.uk/api/v2/random");
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
                     .setColor(globals.embedcolour)
-                    .setTitle('Duck Pics')
-                    .setDescription('[Random-d](https://random-d.uk/)')
+                    .setTitle("Duck Pics")
+                    .setDescription("[Random-d](https://random-d.uk/)")
                     .setImage(data.url)
                     .setTimestamp()
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
-                            .setLabel('View Original Image')
+                            .setLabel("View Original Image")
                             .setStyle(ButtonStyle.Link)
                             .setURL(data.url)
                     );
@@ -30,17 +30,17 @@ module.exports = {
             }
         }
         if (option == 2) {
-            const image = await globals.reddit('duck');
+            const image = await globals.reddit("duck");
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
-                .setTitle('Duck Pics')
-                .setDescription('[r/Duck](https://www.reddit.com/r/duck/)')
+                .setTitle("Duck Pics")
+                .setDescription("[r/Duck](https://www.reddit.com/r/duck/)")
                 .setImage(image)
                 .setTimestamp()
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
-                        .setLabel('View Original Image')
+                        .setLabel("View Original Image")
                         .setStyle(ButtonStyle.Link)
                         .setURL(image)
                 );

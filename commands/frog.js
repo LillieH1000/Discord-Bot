@@ -1,11 +1,11 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-var _ = require('underscore');
-var globals = require('../globals.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+var _ = require("underscore");
+var globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('frog')
-		.setDescription('Posts a random frog picture'),
+		.setName("frog")
+		.setDescription("Posts a random frog picture"),
 	async execute(interaction) {
         await interaction.deferReply();
         var option = _.sample([
@@ -67,14 +67,14 @@ module.exports = {
         ]);
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
-            .setTitle('Frog Pics')
-            .setDescription('[Frogland](http://allaboutfrogs.org/)')
+            .setTitle("Frog Pics")
+            .setDescription("[Frogland](http://allaboutfrogs.org/)")
             .setImage(option)
             .setTimestamp()
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
-                    .setLabel('View Original Image')
+                    .setLabel("View Original Image")
                     .setStyle(ButtonStyle.Link)
                     .setURL(option)
             );

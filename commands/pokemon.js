@@ -1,81 +1,81 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
-var globals = require('../globals.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, SelectMenuBuilder } = require("discord.js");
+var globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('pokemon')
-		.setDescription('Gives you info about the specified pokemon')
+		.setName("pokemon")
+		.setDescription("Gives you info about the specified pokemon")
         .addStringOption(option =>
-            option.setName('name')
-                .setDescription('Enter the pokemon name')
+            option.setName("name")
+                .setDescription("Enter the pokemon name")
                 .setRequired(true))
         .addStringOption(option =>
-            option.setName('form')
-                .setDescription('Enter the pokemon form')
+            option.setName("form")
+                .setDescription("Enter the pokemon form")
                 .setRequired(true)
                 .addChoices(
-                    { name: 'None', value: 'none' },
-                    { name: 'Alola', value: 'alola' },
-                    { name: 'Galar', value: 'galar' },
-                    { name: 'Hisui', value: 'hisui' },
-                    { name: 'Paldea', value: 'paldea' },
+                    { name: "None", value: "none" },
+                    { name: "Alola", value: "alola" },
+                    { name: "Galar", value: "galar" },
+                    { name: "Hisui", value: "hisui" },
+                    { name: "Paldea", value: "paldea" },
                 ))
         .addStringOption(option =>
-            option.setName('message')
-                .setDescription('Enter your message')),
+            option.setName("message")
+                .setDescription("Enter your message")),
 	async execute(interaction) {
         await interaction.deferReply();
-        const name = interaction.options.getString('name');
-        const form = interaction.options.getString('form');
-        const message = interaction.options.getString('message');
+        const name = interaction.options.getString("name");
+        const form = interaction.options.getString("form");
+        const message = interaction.options.getString("message");
 
-        var pokemon = '';
-        if (form == 'none') {
+        var pokemon = "";
+        if (form == "none") {
             pokemon = name;
-        } else if (form == 'alola') {
-            pokemon = name + '-alola';
-        } else if (form == 'galar') {
-            pokemon = name + '-galar';
-        } else if (form == 'hisui') {
-            pokemon = name + '-hisui';
-        } else if (form == 'paldea') {
-            pokemon = name + '-paldea';
+        } else if (form == "alola") {
+            pokemon = name + "-alola";
+        } else if (form == "galar") {
+            pokemon = name + "-galar";
+        } else if (form == "hisui") {
+            pokemon = name + "-hisui";
+        } else if (form == "paldea") {
+            pokemon = name + "-paldea";
         }
 
-        const res = await fetch('https://pokeapi.co/api/v2/pokemon/'.concat(pokemon.replace(' ', '-').toLowerCase()));
+        const res = await fetch("https://pokeapi.co/api/v2/pokemon/".concat(pokemon.replace(" ", "-").toLowerCase()));
         if (res.ok) {
             const data = await res.json();
             
             var typescount = 0;
-            var types = '';
+            var types = "";
             for (const type of data.types) {
                 types += type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1);
                 typescount += 1;
                 if (data.types.length != typescount) {
-                    types += ', ';
+                    types += ", ";
                 }
             }
     
             var abilitiescount = 0;
-            var abilities = '';
+            var abilities = "";
             for (const ability of data.abilities) {
                 abilities += ability.ability.name.charAt(0).toUpperCase() + ability.ability.name.slice(1);
                 if (ability.is_hidden == true) {
-                    abilities += ' (Hidden)';
+                    abilities += " (Hidden)";
                 }
                 abilitiescount += 1;
                 if (data.abilities.length != abilitiescount) {
-                    abilities += ', ';
+                    abilities += ", ";
                 }
             }
     
             var basestatscount = 0;
-            var basestats = '';
+            var basestats = "";
             for (const basestat of data.stats) {
-                basestats += basestat.stat.name.charAt(0).toUpperCase() + basestat.stat.name.slice(1) + ': ' + basestat.base_stat.toString();
+                basestats += basestat.stat.name.charAt(0).toUpperCase() + basestat.stat.name.slice(1) + ": " + basestat.base_stat.toString();
                 basestatscount += 1;
                 if (data.stats.length != basestatscount) {
-                    basestats += '\n';
+                    basestats += "\n";
                 }
             }
                 
@@ -89,49 +89,49 @@ module.exports = {
 
             if (data.id != null) {
                 embed.addFields(
-                    { name: 'Pokedex ID', value: data.id.toString(), inline: false },
+                    { name: "Pokedex ID", value: data.id.toString(), inline: false },
                 )
             }
 
             embed.addFields(
-                { name: 'Types', value: types, inline: false },
-                { name: 'Abilities', value: abilities, inline: false },
+                { name: "Types", value: types, inline: false },
+                { name: "Abilities", value: abilities, inline: false },
             )
 
             if (data.height != null) {
                 embed.addFields(
-                    { name: 'Height (Decimetres)', value: data.height.toString(), inline: false },
+                    { name: "Height (Decimetres)", value: data.height.toString(), inline: false },
                 )
             }
 
             if (data.weight != null) {
                 embed.addFields(
-                    { name: 'Weight (Hectograms)', value: data.weight.toString(), inline: false },
+                    { name: "Weight (Hectograms)", value: data.weight.toString(), inline: false },
                 )
             }
 
             if (data.base_experience != null) {
                 embed.addFields(
-                    { name: 'Base Experience', value: data.base_experience.toString(), inline: false },
+                    { name: "Base Experience", value: data.base_experience.toString(), inline: false },
                 )
             }
 
             embed.addFields(
-                { name: 'Base Stats', value: basestats, inline: false },
+                { name: "Base Stats", value: basestats, inline: false },
             )
     
             if (data.sprites.other.home.front_default != null) {
                 embed.setThumbnail(data.sprites.other.home.front_default)
 
-                const menu = new SelectMenuBuilder().setPlaceholder('Choose Sprite Image');
+                const menu = new SelectMenuBuilder().setPlaceholder("Choose Sprite Image");
     
                 if (message) {
                     embed.addFields(
-                        { name: 'Game And Count', value: message, inline: false },
+                        { name: "Game And Count", value: message, inline: false },
                     );
-                    menu.setCustomId(data.name + 'custommenuid' + message);
+                    menu.setCustomId(data.name + "custommenuid" + message);
                 } else {
-                    menu.setCustomId(data.name + 'custommenuid');
+                    menu.setCustomId(data.name + "custommenuid");
                 }
                 
                 if (data.sprites.other.home.front_default != null) {
@@ -180,7 +180,7 @@ module.exports = {
         } else {
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
-                .setTitle('Pokemon Not Found')
+                .setTitle("Pokemon Not Found")
                 .setTimestamp()
 
             await interaction.editReply({ embeds: [embed] });

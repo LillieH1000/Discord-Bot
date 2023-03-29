@@ -1,12 +1,12 @@
-const fs = require('node:fs');
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { createAudioResource } = require('@discordjs/voice');
-var globals = require('../globals.js');
+const fs = require("node:fs");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { createAudioResource } = require("@discordjs/voice");
+var globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('skip')
-		.setDescription('Skips the current playing song')
+		.setName("skip")
+		.setDescription("Skips the current playing song")
         .setDMPermission(false),
 	async execute(interaction) {
         await interaction.deferReply();
@@ -28,8 +28,8 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
-            .setTitle('Music Player')
-            .setDescription('Skipped playing audio')
+            .setTitle("Music Player")
+            .setDescription("Skipped playing audio")
             .setTimestamp()
 
         await interaction.editReply({ embeds: [embed] });
