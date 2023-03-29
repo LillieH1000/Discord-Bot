@@ -1,6 +1,6 @@
 if [ $1 == "register" ]
 then
-    node deploy-commands.js
+    node deploy.js
 fi
 if [ $1 == "start" ]
 then
