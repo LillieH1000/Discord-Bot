@@ -1,6 +1,37 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { createAudioPlayer } = require('@discordjs/voice');
+var _ = require('underscore');
 
-async function components(url) {
+var connection;
+var player = createAudioPlayer();
+var resource;
+var connectionstatus = 0;
+var queue = [];
+var titles = [];
+var nowplaying = '';
+
+const embedcolour = '#FFC0DD';
+
+async function reddit(subreddit) {
+    const res = await fetch(`https://www.reddit.com/r/${subreddit}.json?limit=50`);
+    if (res.ok) {
+        const images = [];
+        const data = await res.json();
+        data.data.children.forEach((child) => {
+            if (child.data.over_18 == false) {
+                if (child.data.url.endsWith('jpg') || child.data.url.endsWith('jpeg') || child.data.url.endsWith('png') || child.data.url.endsWith('gif')) {
+                    images.push(child.data.url);
+                }
+            }
+        });
+        var image = _.sample(images);
+        return image;
+    } else {
+        return null;
+    }
+}
+
+async function musicurl(url) {
     const res = await fetch(`https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(url)}&songIfSingle=true`);
     if (res.ok) {
         const data = await res.json();
@@ -173,5 +204,14 @@ async function components(url) {
 }
 
 module.exports = {
-    components: components
+    connection,
+    player,
+    resource,
+    connectionstatus,
+    queue,
+    titles,
+    nowplaying,
+    embedcolour,
+    reddit: reddit,
+    musicurl: musicurl
 };
