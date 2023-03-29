@@ -1,7 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
-var globalscolours = require('../globals/colours.js');
-var globalsreddit = require('../globals/reddit.js');
+var globals = require('../globals.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -11,9 +10,9 @@ module.exports = {
         await interaction.deferReply();
         var option = _.sample([1, 2]);
         if (option == 1) {
-            const image = await globalsreddit.sfw('wholesomeyuri');
+            const image = await globals.reddit('wholesomeyuri');
             const embed = new EmbedBuilder()
-                .setColor(globalscolours.embed)
+                .setColor(globals.embedcolour)
                 .setTitle('Yuri Pics')
                 .setDescription('[r/Wholesome Yuri](https://www.reddit.com/r/wholesomeyuri/)')
                 .setImage(image)
@@ -28,9 +27,9 @@ module.exports = {
             await interaction.editReply({ embeds: [embed], components: [row] });
         }
         if (option == 2) {
-            const image = await globalsreddit.sfw('hololiveyuri');
+            const image = await globals.reddit('hololiveyuri');
             const embed = new EmbedBuilder()
-                .setColor(globalscolours.embed)
+                .setColor(globals.embedcolour)
                 .setTitle('Yuri Pics')
                 .setDescription('[r/Hololive Yuri](https://www.reddit.com/r/HololiveYuri/)')
                 .setImage(image)

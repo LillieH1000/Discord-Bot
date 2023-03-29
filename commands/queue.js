@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-var globalscolours = require('../globals/colours.js');
-var globalsaudio = require('../globals/audio.js');
+var globals = require('../globals.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -14,21 +13,21 @@ module.exports = {
         var queuelistcount = 0;
         var queuelist = '';
 
-        for (i = 0; i < globalsaudio.queue.length; i++) {
+        for (i = 0; i < globals.queue.length; i++) {
             queuecount += 1;
             queuelistcount += 1;
-            queuelist += queuelistcount.toString() + ') ' + globalsaudio.titles[i];
-            if (globalsaudio.queue.length != queuecount) {
+            queuelist += queuelistcount.toString() + ') ' + globals.titles[i];
+            if (globals.queue.length != queuecount) {
                 queuelist += '\n';
             }
         }
 
         const embed = new EmbedBuilder()
-            .setColor(globalscolours.embed)
+            .setColor(globals.embedcolour)
             .setTitle('Music Player')
             .setTimestamp()
 
-        if (globalsaudio.queue === undefined || globalsaudio.queue.length == 0) {
+        if (globals.queue === undefined || globals.queue.length == 0) {
             embed.addFields(
                 { name: 'Songs In Queue', value: 'None', inline: false },
             );

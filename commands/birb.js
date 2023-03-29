@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-var globalscolours = require('../globals/colours.js');
+var globals = require('../globals.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -11,7 +11,7 @@ module.exports = {
         if (res.ok) {
             const data = await res.json();
             const embed = new EmbedBuilder()
-                .setColor(globalscolours.embed)
+                .setColor(globals.embedcolour)
                 .setTitle('Birb Pics')
                 .setDescription('[AlexFlipnote.Dev](https://alexflipnote.dev/)')
                 .setImage(data.file)

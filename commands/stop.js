@@ -1,7 +1,6 @@
 const fs = require('node:fs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-var globalscolours = require('../globals/colours.js');
-var globalsaudio = require('../globals/audio.js');
+var globals = require('../globals.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -11,19 +10,19 @@ module.exports = {
 	async execute(interaction) {
         await interaction.deferReply();
 
-        globalsaudio.connection.destroy();
-        for (const list of globalsaudio.queue) {
+        globals.connection.destroy();
+        for (const list of globals.queue) {
             if (fs.existsSync(list)) {
                 fs.unlinkSync(list)
             }
         }
-        globalsaudio.queue = [];
-        globalsaudio.titles = [];
-        globalsaudio.nowplaying = '';
-        globalsaudio.connectionstatus = 0;
+        globals.queue = [];
+        globals.titles = [];
+        globals.nowplaying = '';
+        globals.connectionstatus = 0;
 
         const embed = new EmbedBuilder()
-            .setColor(globalscolours.embed)
+            .setColor(globals.embedcolour)
             .setTitle('Music Player')
             .setDescription('Stopped play audio and disconnected from voice chat')
             .setTimestamp()

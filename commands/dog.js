@@ -1,7 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
-var globalscolours = require('../globals/colours.js');
-var globalsreddit = require('../globals/reddit.js');
+var globals = require('../globals.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -15,7 +14,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor(globalscolours.embed)
+                    .setColor(globals.embedcolour)
                     .setTitle('Dog Pics')
                     .setDescription('[Dog.Ceo](https://dog.ceo/)')
                     .setImage(data.message)
@@ -35,7 +34,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor(globalscolours.embed)
+                    .setColor(globals.embedcolour)
                     .setTitle('Dog Pics')
                     .setDescription('[Nekos.Life](https://nekos.life/)')
                     .setImage(data.url)
@@ -55,7 +54,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor(globalscolours.embed)
+                    .setColor(globals.embedcolour)
                     .setTitle('Dog Pics')
                     .setDescription('[AlexFlipnote.Dev](https://alexflipnote.dev/)')
                     .setImage(data.file)
@@ -71,9 +70,9 @@ module.exports = {
             }
         }
         if (option == 4) {
-            const image = await globalsreddit.sfw('dogpictures');
+            const image = await globals.reddit('dogpictures');
             const embed = new EmbedBuilder()
-                .setColor(globalscolours.embed)
+                .setColor(globals.embedcolour)
                 .setTitle('Dog Pics')
                 .setDescription('[r/Dog Pictures](https://www.reddit.com/r/dogpictures/)')
                 .setImage(image)

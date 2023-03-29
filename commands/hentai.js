@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 var _ = require('underscore');
-var globalscolours = require('../globals/colours.js');
+var globals = require('../globals.js');
 
 async function response(subreddit, url, category, interaction) {
     const res = await fetch(`https://www.reddit.com/r/${subreddit}.json?limit=50`);
@@ -24,7 +24,7 @@ async function response(subreddit, url, category, interaction) {
         }
 
         const embed = new EmbedBuilder()
-            .setColor(globalscolours.embed)
+            .setColor(globals.embedcolour)
             .setTitle(`Hentai Pics (${category.charAt(0).toUpperCase() + category.slice(1)})`)
             .setImage(image)
             .setTimestamp()
@@ -54,7 +54,7 @@ module.exports = {
             const category = interaction.options.getString('category');
             if (!category) {
                 const embed = new EmbedBuilder()
-                    .setColor(globalscolours.embed)
+                    .setColor(globals.embedcolour)
                     .setTitle('Hentai Categories')
                     .setDescription(`A:\namber\nanal\nayaka\n
                     B:\nbdsm\nblowjob\nbyleth\n
@@ -236,7 +236,7 @@ module.exports = {
         } else {
             await interaction.deferReply({ ephemeral: true });
             const embed = new EmbedBuilder()
-                .setColor(globalscolours.embed)
+                .setColor(globals.embedcolour)
                 .setTitle('Notice')
                 .setDescription('This command can only be ran in nsfw channels')
                 .setTimestamp()

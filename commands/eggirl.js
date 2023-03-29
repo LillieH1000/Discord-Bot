@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-var globalscolours = require('../globals/colours.js');
-var globalsreddit = require('../globals/reddit.js');
+var globals = require('../globals.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -8,9 +7,9 @@ module.exports = {
 		.setDescription('Posts a random pic from egg_irl'),
 	async execute(interaction) {
         await interaction.deferReply();
-        const image = await globalsreddit.sfw('egg_irl');
+        const image = await globals.reddit('egg_irl');
         const embed = new EmbedBuilder()
-            .setColor(globalscolours.embed)
+            .setColor(globals.embedcolour)
             .setTitle('egg_irl Pics')
             .setDescription('[r/egg_irl](https://www.reddit.com/r/egg_irl/)')
             .setImage(image)

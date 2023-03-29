@@ -1,7 +1,6 @@
 const { joinVoiceChannel, getVoiceConnection, createAudioResource } = require('@discordjs/voice');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-var globalscolours = require('../globals/colours.js');
-var globalsaudio = require('../globals/audio.js');
+var globals = require('../globals.js');
 const exec = require('child_process').exec;
 
 function makeid(length) {
@@ -46,26 +45,26 @@ async function ytdlp(type, filename, interaction, details) {
     os.execCommand(titlecommand, function (returnvalue) {
         title = returnvalue;
         os.execCommand(downloadcommand, function () {
-            globalsaudio.queue.push('downloads/' + filename + '.mp3');
-            globalsaudio.titles.push(title);
+            globals.queue.push('downloads/' + filename + '.mp3');
+            globals.titles.push(title);
 
             const embed = new EmbedBuilder()
-                .setColor(globalscolours.embed)
+                .setColor(globals.embedcolour)
                 .setTitle('Music Player')
                 .setDescription('Queued: ' + title)
                 .setTimestamp()
 
             interaction.editReply({ embeds: [embed] });
 
-            if (globalsaudio.connectionstatus == 0) {
-                globalsaudio.connectionstatus = 1;
-                globalsaudio.nowplaying = globalsaudio.titles[0];
-                globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
+            if (globals.connectionstatus == 0) {
+                globals.connectionstatus = 1;
+                globals.nowplaying = globals.titles[0];
+                globals.resource = createAudioResource(globals.queue[0], {
                     inlineVolume: true
                 });
-                globalsaudio.resource.volume.setVolume(0.3);
-                globalsaudio.player.play(globalsaudio.resource);
-                globalsaudio.connection.subscribe(globalsaudio.player);
+                globals.resource.volume.setVolume(0.3);
+                globals.player.play(globals.resource);
+                globals.connection.subscribe(globals.player);
             }
         })
     })
@@ -100,7 +99,7 @@ module.exports = {
         const voiceConnection = getVoiceConnection(interaction.guild.id);
         
         if (!voiceConnection) {
-            globalsaudio.connection = joinVoiceChannel({
+            globals.connection = joinVoiceChannel({
                 channelId: interaction.member.voice.channel.id,
                 guildId: interaction.guild.id,
                 adapterCreator: interaction.guild.voiceAdapterCreator,
@@ -131,7 +130,7 @@ module.exports = {
                 await ytdlp(0, filename, interaction, url);
             } else {
                 const embed = new EmbedBuilder()
-                    .setColor(globalscolours.embed)
+                    .setColor(globals.embedcolour)
                     .setTitle('Music Player')
                     .setDescription('Only urls are supported for Bandcamp, search for Bandcamp is currently unsupported')
                     .setTimestamp()
@@ -145,7 +144,7 @@ module.exports = {
                 await ytdlp(0, filename, interaction, url);
             } else {
                 const embed = new EmbedBuilder()
-                    .setColor(globalscolours.embed)
+                    .setColor(globals.embedcolour)
                     .setTitle('Music Player')
                     .setDescription('Only urls are supported for Last.fm, search for Last.fm is currently unsupported')
                     .setTimestamp()
@@ -159,7 +158,7 @@ module.exports = {
                 await ytdlp(0, filename, interaction, url);
             } else {
                 const embed = new EmbedBuilder()
-                    .setColor(globalscolours.embed)
+                    .setColor(globals.embedcolour)
                     .setTitle('Music Player')
                     .setDescription('Only urls are supported for Jamando, search for Jamando is currently unsupported')
                     .setTimestamp()
@@ -173,7 +172,7 @@ module.exports = {
                 await ytdlp(0, filename, interaction, url);
             } else {
                 const embed = new EmbedBuilder()
-                    .setColor(globalscolours.embed)
+                    .setColor(globals.embedcolour)
                     .setTitle('Music Player')
                     .setDescription('Only urls are supported for ReverbNation, search for ReverbNation is currently unsupported')
                     .setTimestamp()

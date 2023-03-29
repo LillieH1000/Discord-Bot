@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-var globalscolours = require('../globals/colours.js');
-var globalsaudio = require('../globals/audio.js');
+var globals = require('../globals.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -10,10 +9,10 @@ module.exports = {
 	async execute(interaction) {
         await interaction.deferReply();
 
-        globalsaudio.player.pause();
+        globals.player.pause();
 
         const embed = new EmbedBuilder()
-            .setColor(globalscolours.embed)
+            .setColor(globals.embedcolour)
             .setTitle('Music Player')
             .setDescription('Paused playing audio')
             .setTimestamp()

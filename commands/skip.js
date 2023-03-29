@@ -1,8 +1,7 @@
 const fs = require('node:fs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { createAudioResource } = require('@discordjs/voice');
-var globalscolours = require('../globals/colours.js');
-var globalsaudio = require('../globals/audio.js');
+var globals = require('../globals.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -12,23 +11,23 @@ module.exports = {
 	async execute(interaction) {
         await interaction.deferReply();
 
-        if (globalsaudio.connectionstatus == 1) {
-            if (fs.existsSync(globalsaudio.queue[0])) {
-                fs.unlinkSync(globalsaudio.queue[0])
+        if (globals.connectionstatus == 1) {
+            if (fs.existsSync(globals.queue[0])) {
+                fs.unlinkSync(globals.queue[0])
             }
-            globalsaudio.queue.shift();
-            globalsaudio.titles.shift();
-            globalsaudio.nowplaying = globalsaudio.titles[0];
-            globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
+            globals.queue.shift();
+            globals.titles.shift();
+            globals.nowplaying = globals.titles[0];
+            globals.resource = createAudioResource(globals.queue[0], {
                 inlineVolume: true
             });
-            globalsaudio.resource.volume.setVolume(0.3);
-            globalsaudio.player.play(globalsaudio.resource);
-            globalsaudio.connection.subscribe(globalsaudio.player);
+            globals.resource.volume.setVolume(0.3);
+            globals.player.play(globals.resource);
+            globals.connection.subscribe(globals.player);
         }
 
         const embed = new EmbedBuilder()
-            .setColor(globalscolours.embed)
+            .setColor(globals.embedcolour)
             .setTitle('Music Player')
             .setDescription('Skipped playing audio')
             .setTimestamp()

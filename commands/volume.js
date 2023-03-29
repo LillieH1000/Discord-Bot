@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-var globalscolours = require('../globals/colours.js');
-var globalsaudio = require('../globals/audio.js');
+var globals = require('../globals.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -15,10 +14,10 @@ module.exports = {
         await interaction.deferReply();
         const volume = interaction.options.getInteger('volume');
         
-        globalsaudio.resource.volume.setVolume(volume / 100);
+        globals.resource.volume.setVolume(volume / 100);
 
         const embed = new EmbedBuilder()
-            .setColor(globalscolours.embed)
+            .setColor(globals.embedcolour)
             .setTitle('Music Player')
             .setDescription('Changed audio volume level to: ' + volume.toString())
             .setTimestamp()

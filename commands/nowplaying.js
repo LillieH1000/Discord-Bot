@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-var globalscolours = require('../globals/colours.js');
-var globalsaudio = require('../globals/audio.js');
+var globals = require('../globals.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -11,14 +10,14 @@ module.exports = {
         await interaction.deferReply();
 
         const embed = new EmbedBuilder()
-            .setColor(globalscolours.embed)
+            .setColor(globals.embedcolour)
             .setTitle('Music Player')
             .setTimestamp()
 
-        if (globalsaudio.nowplaying == '') {
+        if (globals.nowplaying == '') {
             embed.setDescription('There is currently nothing playing')
         } else {
-            embed.setDescription('Now Playing: ' + globalsaudio.nowplaying)
+            embed.setDescription('Now Playing: ' + globals.nowplaying)
         }
 
         await interaction.editReply({ embeds: [embed] });

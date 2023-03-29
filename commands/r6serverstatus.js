@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const R6API = require('r6api.js').default;
 const { ubisoftaccountinfo } = require('../config.json');
-var globalscolours = require('../globals/colours.js');
+var globals = require('../globals.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -15,7 +15,7 @@ module.exports = {
         const serverstatus = await r6api.getStatus();
 
         const embed = new EmbedBuilder()
-            .setColor(globalscolours.embed)
+            .setColor(globals.embedcolour)
             .setTitle('Rainbow Six Siege Server Status')
             .setTimestamp()
 

@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const R6API = require('r6api.js').default;
 const { ubisoftaccountinfo } = require('../config.json');
-var globalscolours = require('../globals/colours.js');
+var globals = require('../globals.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -123,7 +123,7 @@ module.exports = {
         terroristhuntextracthostageinfo += 'Win Rate: ' + stats.pve.modes.extractHostage.winRate.toLocaleString() + '\n';
         
         const embed = new EmbedBuilder()
-            .setColor(globalscolours.embed)
+            .setColor(globals.embedcolour)
             .setTitle(player.username.toString())
             .addFields(
                 { name: 'Info', value: playerinfo, inline: false },
