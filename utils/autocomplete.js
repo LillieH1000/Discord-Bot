@@ -9,25 +9,25 @@ module.exports = async(client) => {
             var choices;
 
             if (focusedOption.value.startsWith('a')) {
-                choices = ['amber', 'anal', 'ass', 'ayaka'];
+                choices = ['amber', 'anal', 'ayaka'];
             }
             if (focusedOption.value.startsWith('b')) {
-                choices = ['bdsm', 'blowjob', 'boobjob', 'boobs', 'byleth'];
+                choices = ['bdsm', 'blowjob', 'byleth'];
             }
             if (focusedOption.value.startsWith('c')) {
-                choices = ['creampie', 'cum'];
+                choices = ['cum'];
             }
             if (focusedOption.value.startsWith('e')) {
-                choices = ['emilia', 'ero', 'eula'];
+                choices = ['emilia', 'eula'];
             }
             if (focusedOption.value.startsWith('f')) {
-                choices = ['femboy', 'femdom', 'footjob', 'futanari'];
+                choices = ['femboy', 'femdom', 'futanari'];
             }
             if (focusedOption.value.startsWith('g')) {
-                choices = ['gangbang', 'ganyu', 'genshin', 'glasses'];
+                choices = ['ganyu', 'genshin'];
             }
             if (focusedOption.value.startsWith('h')) {
-                choices = ['handjob', 'hutao'];
+                choices = ['hutao'];
             }
             if (focusedOption.value.startsWith('k')) {
                 choices = ['keqing'];
@@ -42,10 +42,10 @@ module.exports = async(client) => {
                 choices = ['neko', 'nilou'];
             }
             if (focusedOption.value.startsWith('o')) {
-                choices = ['orgy', 'overwatch'];
+                choices = ['overwatch'];
             }
             if (focusedOption.value.startsWith('p')) {
-                choices = ['pantsu', 'pee', 'pegging', 'public'];
+                choices = ['pee', 'pegging', 'public'];
             }
             if (focusedOption.value.startsWith('r')) {
                 choices = ['rem'];
@@ -54,7 +54,7 @@ module.exports = async(client) => {
                 choices = ['shenhe'];
             }
             if (focusedOption.value.startsWith('t')) {
-                choices = ['tentacles', 'thick', 'thighs', 'trap'];
+                choices = ['tentacles', 'thick', 'trap'];
             }
             if (focusedOption.value.startsWith('u')) {
                 choices = ['undressing', 'uniform', 'upskirt'];
