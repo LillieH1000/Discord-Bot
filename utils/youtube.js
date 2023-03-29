@@ -12,18 +12,13 @@ module.exports = async(client) => {
                     const res = await fetch('https://returnyoutubedislikeapi.com/votes?videoId='.concat(word.match(rx)[1]));
                     if (res.ok) {
                         const data = await res.json();
-                        const components = await globals.musicurl(word);
 
                         const embed = new EmbedBuilder()
                             .setColor(globals.embedcolour)
                             .setDescription('Views: ' + data.viewCount.toLocaleString() + '\nLikes: ' + data.likes.toLocaleString() + '\nDislikes: ' + data.dislikes.toLocaleString())
                             .setTimestamp()
 
-                        if (components != null && components != undefined && components.length != 0) {
-                            await message.reply({ embeds: [embed], components: components, allowedMentions: { repliedUser: false } });
-                        } else {
-                            await message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
-                        }
+                        await message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
                     }
                 }
             }
