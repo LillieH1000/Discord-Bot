@@ -1,13 +1,13 @@
 const { EmbedBuilder } = require('discord.js');
 const dayjs = require('dayjs');
-var globalscolours = require('../globals/colours.js');
+var globals = require('../globals.js');
 
 module.exports = async(client) => {
     client.on('guildMemberAdd', async guildMember => {
         try {
             const createdDate = dayjs(guildMember.user.createdAt).format('MMMM D, YYYY');
             const embed = new EmbedBuilder()
-                .setColor(globalscolours.embed)
+                .setColor(globals.embedcolour)
                 .setAuthor({ name: guildMember.user.username, iconURL: guildMember.user.displayAvatarURL() })
                 .setTitle('Member Joined')
                 .addFields(

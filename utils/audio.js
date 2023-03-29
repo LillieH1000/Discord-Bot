@@ -1,48 +1,48 @@
 const fs = require('node:fs');
 const { createAudioResource, AudioPlayerStatus } = require('@discordjs/voice');
-var globalsaudio = require('../globals/audio.js');
+var globals = require('../globals.js');
 
 module.exports = async() => {
-    globalsaudio.player.on(AudioPlayerStatus.Idle, () => {
+    globals.player.on(AudioPlayerStatus.Idle, () => {
         try {
-            if (fs.existsSync(globalsaudio.queue[0])) {
-                fs.unlinkSync(globalsaudio.queue[0])
+            if (fs.existsSync(globals.queue[0])) {
+                fs.unlinkSync(globals.queue[0])
             }
-            globalsaudio.queue.shift();
-            globalsaudio.titles.shift();
-            if (globalsaudio.queue === undefined || globalsaudio.queue.length == 0) {
-                globalsaudio.connection.destroy();
-                globalsaudio.queue = [];
-                globalsaudio.titles = [];
-                globalsaudio.nowplaying = '';
-                globalsaudio.connectionstatus = 0;
+            globals.queue.shift();
+            globals.titles.shift();
+            if (globals.queue === undefined || globals.queue.length == 0) {
+                globals.connection.destroy();
+                globals.queue = [];
+                globals.titles = [];
+                globals.nowplaying = '';
+                globals.connectionstatus = 0;
             } else {
-                globalsaudio.nowplaying = globalsaudio.titles[0];
-                globalsaudio.resource = createAudioResource(globalsaudio.queue[0], {
+                globals.nowplaying = globals.titles[0];
+                globals.resource = createAudioResource(globals.queue[0], {
                     inlineVolume: true
                 });
-                globalsaudio.resource.volume.setVolume(0.3);
-                globalsaudio.player.play(globalsaudio.resource);
-                globalsaudio.connection.subscribe(globalsaudio.player);
+                globals.resource.volume.setVolume(0.3);
+                globals.player.play(globals.resource);
+                globals.connection.subscribe(globals.player);
             }
         } catch (error) {
             console.error(error);
         }
     });
 
-    globalsaudio.player.on('error', voiceerror => {
+    globals.player.on('error', voiceerror => {
         console.error(voiceerror);
         try {
-            globalsaudio.connection.destroy();
-            for (const list of globalsaudio.queue) {
+            globals.connection.destroy();
+            for (const list of globals.queue) {
                 if (fs.existsSync(list)) {
                     fs.unlinkSync(list)
                 }
             }
-            globalsaudio.queue = [];
-            globalsaudio.titles = [];
-            globalsaudio.nowplaying = '';
-            globalsaudio.connectionstatus = 0;
+            globals.queue = [];
+            globals.titles = [];
+            globals.nowplaying = '';
+            globals.connectionstatus = 0;
         } catch (error) {
             console.error(error);
         }

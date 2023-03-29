@@ -1,4 +1,4 @@
-var globalsmusic = require('../globals/music.js');
+var globals = require('../globals.js');
 
 module.exports = async(client) => {
     client.on('messageCreate', async message => {
@@ -8,7 +8,7 @@ module.exports = async(client) => {
             for (const word of message.content.split(' ')) {
                 const rx = /^http(?:s)?:\/\/(.*)spotify\.com\//;
                 if (word.match(rx)) {
-                    const components = await globalsmusic.components(word);
+                    const components = await globals.musicurl(word);
                     
                     if (components != null && components != undefined && components.length != 0) {
                         await message.reply({ components: components, allowedMentions: { repliedUser: false } });

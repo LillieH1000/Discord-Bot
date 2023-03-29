@@ -1,6 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-var globalscolours = require('../globals/colours.js');
-var globalsmusic = require('../globals/music.js');
+var globals = require('../globals.js');
 
 module.exports = async(client) => {
     client.on('messageCreate', async message => {
@@ -13,10 +12,10 @@ module.exports = async(client) => {
                     const res = await fetch('https://returnyoutubedislikeapi.com/votes?videoId='.concat(word.match(rx)[1]));
                     if (res.ok) {
                         const data = await res.json();
-                        const components = await globalsmusic.components(word);
+                        const components = await globals.musicurl(word);
 
                         const embed = new EmbedBuilder()
-                            .setColor(globalscolours.embed)
+                            .setColor(globals.embedcolour)
                             .setDescription('Views: ' + data.viewCount.toLocaleString() + '\nLikes: ' + data.likes.toLocaleString() + '\nDislikes: ' + data.dislikes.toLocaleString())
                             .setTimestamp()
 
