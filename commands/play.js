@@ -109,7 +109,7 @@ module.exports = {
         const filename = makeid(50);
 
         if (source == 'youtube') {
-            const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+            const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
             if (url.match(rx)) {
                 await ytdlp(0, filename, interaction, url);
             } else {
