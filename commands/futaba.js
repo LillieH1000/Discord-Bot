@@ -7,7 +7,7 @@ module.exports = {
 		.setDescription("Posts a random futaba (persona 5) picture"),
 	async execute(interaction) {
         await interaction.deferReply();
-        const image = await globals.reddit("churchoffutaba");
+        const image = await globals.reddit("churchoffutaba", false);
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
             .setTitle("Futaba Pics")

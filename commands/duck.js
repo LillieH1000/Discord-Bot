@@ -30,7 +30,7 @@ module.exports = {
             }
         }
         if (option == 2) {
-            const image = await globals.reddit("duck");
+            const image = await globals.reddit("duck", false);
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
                 .setTitle("Duck Pics")

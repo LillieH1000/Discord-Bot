@@ -70,7 +70,7 @@ module.exports = {
             }
         }
         if (option == 4) {
-            const image = await globals.reddit("cats");
+            const image = await globals.reddit("cats", false);
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
                 .setTitle("Cat Pics")
@@ -87,7 +87,7 @@ module.exports = {
             await interaction.editReply({ embeds: [embed], components: [row] });
         }
         if (option == 5) {
-            const image = await globals.reddit("catpictures");
+            const image = await globals.reddit("catpictures", false);
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
                 .setTitle("Cat Pics")
