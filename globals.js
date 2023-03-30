@@ -36,22 +36,22 @@ async function reddit(subreddit, nsfw) {
 async function response(info) {
     const embed = new EmbedBuilder()
         .setColor(embedcolour)
-        .setTimestamp()
-    const row = new ActionRowBuilder()
+        .setTimestamp();
+    const row = new ActionRowBuilder();
 
     if (info.type == "text") {
-        embed.setTitle(info.title)
-        embed.setDescription(info.description)
+        embed.setTitle(info.title);
+        embed.setDescription(info.description);
     }
     if (info.type == "image") {
-        embed.setTitle(info.title)
-        embed.setImage(info.url)
+        embed.setTitle(info.title);
+        embed.setImage(info.url);
         row.addComponents(
             new ButtonBuilder()
                 .setLabel("View Original Image")
                 .setStyle(ButtonStyle.Link)
                 .setURL(info.url)
-        )
+        );
     }
 
     if (row.components != null && row.components != undefined && row.components.length != 0) {

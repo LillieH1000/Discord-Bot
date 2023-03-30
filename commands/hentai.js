@@ -15,13 +15,13 @@ module.exports = {
         if (interaction.channel.nsfw) {
             await interaction.deferReply();
             const category = interaction.options.getString("category");
-            var object = new Object()
-            var url = new String()
+            var object = new Object();
+            var url = new String();
             if (!category) {
-                object.interaction = interaction
-                object.ephemeral = false
-                object.type = "text"
-                object.title = "Hentai Categories"
+                object.interaction = interaction;
+                object.ephemeral = false;
+                object.type = "text";
+                object.title = "Hentai Categories";
                 object.description = `A:\namber\nanal\nayaka\n
                 B:\nbdsm\nblowjob\nbyleth\n
                 C:\ncum\n
@@ -40,7 +40,7 @@ module.exports = {
                 T:\ntentacles\nthick\ntrap\n
                 U:\nundressing\nuniform\nupskirt\n
                 W:\nwaifu\n
-                Y:\nyaemiko\nyuri`
+                Y:\nyaemiko\nyuri`;
                 await globals.response(object);
                 return;
             }
@@ -202,20 +202,20 @@ module.exports = {
                 url = await globals.reddit("yuri", true);
             }
 
-            object.interaction = interaction
-            object.ephemeral = false
-            object.type = "image"
-            object.title = `Hentai Pics (${category.charAt(0).toUpperCase() + category.slice(1)})`
-            object.url = url
+            object.interaction = interaction;
+            object.ephemeral = false;
+            object.type = "image";
+            object.title = `Hentai Pics (${category.charAt(0).toUpperCase() + category.slice(1)})`;
+            object.url = url;
             await globals.response(object);
         } else {
             await interaction.deferReply({ ephemeral: true });
-            var object = new Object()
-            object.interaction = interaction
-            object.ephemeral = true
-            object.type = "text"
-            object.title = "Notice"
-            object.description = "This command can only be ran in nsfw channels"
+            var object = new Object();
+            object.interaction = interaction;
+            object.ephemeral = true;
+            object.type = "text";
+            object.title = "Notice";
+            object.description = "This command can only be ran in nsfw channels";
             await globals.response(object);
         }
 	},
