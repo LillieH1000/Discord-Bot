@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 var _ = require("underscore");
 var globals = require("../globals.js");
 
@@ -13,25 +13,24 @@ module.exports = {
 	async execute(interaction) {
         await interaction.deferReply();
         const category = interaction.options.getString("category");
-        var object = new Object();
         var url = new String();
         if (!category) {
-            object.interaction = interaction;
-            object.ephemeral = false;
-            object.type = "text";
-            object.title = "Genshin Categories";
-            object.description = `A:\namber\nayaka\n
-            C:\ncollei\n
-            E:\neula\n
-            G:\nganyu\n
-            H:\nhutao\n
-            K:\nkeqing\n
-            L:\nlayla\nlumine\n
-            N:\nnahida\nnilou\nnoelle\n
-            R:\nraiden\n
-            S:\nshenhe\n
-            Y:\nyaemiko`;
-            await globals.response(object);
+            const embed = new EmbedBuilder()
+                .setColor(globals.embedcolour)
+                .setTitle("Genshin Categories")
+                .setDescription(`A:\namber\nayaka\n
+                C:\ncollei\n
+                E:\neula\n
+                G:\nganyu\n
+                H:\nhutao\n
+                K:\nkeqing\n
+                L:\nlayla\nlumine\n
+                N:\nnahida\nnilou\nnoelle\n
+                R:\nraiden\n
+                S:\nshenhe\n
+                Y:\nyaemiko`)
+                .setTimestamp()
+            await interaction.editReply({ embeds: [embed] });
             return;
         }
         if (category == "amber") {
@@ -92,11 +91,18 @@ module.exports = {
             url = await globals.reddit("yaemiko", false);
         }
 
-        object.interaction = interaction;
-        object.ephemeral = false;
-        object.type = "image";
-        object.title = `Genshin Pics (${category.charAt(0).toUpperCase() + category.slice(1)})`;
-        object.url = url;
-        await globals.response(object);
+        const embed = new EmbedBuilder()
+            .setColor(globals.embedcolour)
+            .setTitle(`Genshin Pics (${category.charAt(0).toUpperCase() + category.slice(1)})`)
+            .setImage(url)
+            .setTimestamp()
+        const row = new ActionRowBuilder()
+            .addComponents(
+                new ButtonBuilder()
+                    .setLabel("View Original Image")
+                    .setStyle(ButtonStyle.Link)
+                    .setURL(url)
+            );
+        await interaction.editReply({ embeds: [embed], components: [row] });
 	},
 };

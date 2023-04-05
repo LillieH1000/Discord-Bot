@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 var _ = require("underscore");
 var globals = require("../globals.js");
 
@@ -15,33 +15,32 @@ module.exports = {
         if (interaction.channel.nsfw) {
             await interaction.deferReply();
             const category = interaction.options.getString("category");
-            var object = new Object();
             var url = new String();
             if (!category) {
-                object.interaction = interaction;
-                object.ephemeral = false;
-                object.type = "text";
-                object.title = "Hentai Categories";
-                object.description = `A:\namber\nanal\nayaka\n
-                B:\nbdsm\nblowjob\nbyleth\n
-                C:\ncum\n
-                E:\nemilia\neula\n
-                F:\nfemboy\nfemdom\nfutanari\n
-                G:\nganyu\ngenshin\n
-                H:\nhutao\n
-                K:\nkeqing\n
-                L:\nlumine\n
-                M:\nmasturbation\n
-                N:\nneko\nnilou\n
-                O:\norgy\noverwatch\n
-                P:\npee\npegging\npublic\n
-                R:\nraiden\n
-                S:\nshenhe\n
-                T:\ntentacles\nthick\ntrap\n
-                U:\nundressing\nuniform\nupskirt\n
-                W:\nwaifu\n
-                Y:\nyaemiko\nyuri`;
-                await globals.response(object);
+                const embed = new EmbedBuilder()
+                    .setColor(globals.embedcolour)
+                    .setTitle("Hentai Categories")
+                    .setDescription(`A:\namber\nanal\nayaka\n
+                    B:\nbdsm\nblowjob\nbyleth\n
+                    C:\ncum\n
+                    E:\nemilia\neula\n
+                    F:\nfemboy\nfemdom\nfutanari\n
+                    G:\nganyu\ngenshin\n
+                    H:\nhutao\n
+                    K:\nkeqing\n
+                    L:\nlumine\n
+                    M:\nmasturbation\n
+                    N:\nneko\nnilou\n
+                    O:\norgy\noverwatch\n
+                    P:\npee\npegging\npublic\n
+                    R:\nraiden\n
+                    S:\nshenhe\n
+                    T:\ntentacles\nthick\ntrap\n
+                    U:\nundressing\nuniform\nupskirt\n
+                    W:\nwaifu\n
+                    Y:\nyaemiko\nyuri`)
+                    .setTimestamp()
+                await interaction.editReply({ embeds: [embed] });
                 return;
             }
             if (category == "amber") {
@@ -202,21 +201,27 @@ module.exports = {
                 url = await globals.reddit("yuri", true);
             }
 
-            object.interaction = interaction;
-            object.ephemeral = false;
-            object.type = "image";
-            object.title = `Hentai Pics (${category.charAt(0).toUpperCase() + category.slice(1)})`;
-            object.url = url;
-            await globals.response(object);
+            const embed = new EmbedBuilder()
+                .setColor(globals.embedcolour)
+                .setTitle(`Hentai Pics (${category.charAt(0).toUpperCase() + category.slice(1)})`)
+                .setImage(url)
+                .setTimestamp()
+            const row = new ActionRowBuilder()
+                .addComponents(
+                    new ButtonBuilder()
+                        .setLabel("View Original Image")
+                        .setStyle(ButtonStyle.Link)
+                        .setURL(url)
+                );
+            await interaction.editReply({ embeds: [embed], components: [row] });
         } else {
             await interaction.deferReply({ ephemeral: true });
-            var object = new Object();
-            object.interaction = interaction;
-            object.ephemeral = true;
-            object.type = "text";
-            object.title = "Notice";
-            object.description = "This command can only be ran in nsfw channels";
-            await globals.response(object);
+            const embed = new EmbedBuilder()
+                .setColor(globals.embedcolour)
+                .setTitle("Notice")
+                .setDescription("This command can only be ran in nsfw channels")
+                .setTimestamp()
+            await interaction.editReply({ embeds: [embed], ephemeral: true });
         }
 	},
 };

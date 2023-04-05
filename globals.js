@@ -1,4 +1,3 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 const { createAudioPlayer } = require("@discordjs/voice");
 var _ = require("underscore");
 
@@ -33,34 +32,6 @@ async function reddit(subreddit, nsfw) {
     }
 }
 
-async function response(info) {
-    const embed = new EmbedBuilder()
-        .setColor(embedcolour)
-        .setTimestamp();
-    const row = new ActionRowBuilder();
-
-    if (info.type == "text") {
-        embed.setTitle(info.title);
-        embed.setDescription(info.description);
-    }
-    if (info.type == "image") {
-        embed.setTitle(info.title);
-        embed.setImage(info.url);
-        row.addComponents(
-            new ButtonBuilder()
-                .setLabel("View Original Image")
-                .setStyle(ButtonStyle.Link)
-                .setURL(info.url)
-        );
-    }
-
-    if (row.components != null && row.components != undefined && row.components.length != 0) {
-        await info.interaction.editReply({ embeds: [embed], components: [row], ephemeral: info.ephemeral });
-    } else {
-        await info.interaction.editReply({ embeds: [embed], ephemeral: info.ephemeral });
-    }
-}
-
 module.exports = {
     connection,
     player,
@@ -70,6 +41,5 @@ module.exports = {
     titles,
     nowplaying,
     embedcolour,
-    reddit: reddit,
-    response: response
+    reddit: reddit
 };
