@@ -65,7 +65,7 @@ module.exports = {
                 const res = await fetch("https://api.waifu.pics/nsfw/blowjob");
                 if (res.ok) {
                     const data = await res.json();
-                    await response(null, data.url, category, interaction);
+                    url = data.url
                 }
             }
             if (category == "byleth") {
@@ -135,7 +135,7 @@ module.exports = {
                 const res = await fetch("https://api.waifu.pics/nsfw/neko");
                 if (res.ok) {
                     const data = await res.json();
-                    await response(null, data.url, category, interaction);
+                    url = data.url
                 }
             }
             if (category == "nilou") {
@@ -171,7 +171,7 @@ module.exports = {
                     const res = await fetch("https://api.waifu.pics/nsfw/trap");
                     if (res.ok) {
                         const data = await res.json();
-                        await response(null, data.url, category, interaction);
+                        url = data.url
                     }
                 }
                 if (option == 2) {
@@ -191,7 +191,7 @@ module.exports = {
                 const res = await fetch("https://api.waifu.pics/nsfw/waifu");
                 if (res.ok) {
                     const data = await res.json();
-                    await response(null, data.url, category, interaction);
+                    url = data.url
                 }
             }
             if (category == "yaemiko") {
