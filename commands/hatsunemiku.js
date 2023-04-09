@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
-var _ = require("underscore");
 var globals = require("../globals.js");
 
 module.exports = {
@@ -8,14 +7,7 @@ module.exports = {
 		.setDescription("Posts a random hatsune miku picture. Made for Grace <3"),
 	async execute(interaction) {
         await interaction.deferReply();
-        var url = new String();
-        var option = _.sample([1, 2]);
-        if (option == 1) {
-            url = await globals.reddit("hatsune", false, ["ai art"]);
-        }
-        if (option == 2) {
-            url = await globals.reddit("hatsunemiku", false, ["fanart"]);
-        }
+        const url = await globals.reddit("hatsunemiku", false, ["fanart"]);
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
             .setTitle("Hatsune Miku Pics")
