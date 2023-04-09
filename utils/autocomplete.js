@@ -11,8 +11,20 @@ module.exports = async(client) => {
             if (focusedOption.value.startsWith("b")) {
                 choices = ["beardeddragon", "birb"];
             }
+            if (focusedOption.value.startsWith("c")) {
+                choices = ["cat"];
+            }
+            if (focusedOption.value.startsWith("d")) {
+                choices = ["dog", "duck"];
+            }
+            if (focusedOption.value.startsWith("f")) {
+                choices = ["fox", "frog"];
+            }
             if (focusedOption.value.startsWith("g")) {
                 choices = ["goose"];
+            }
+            if (focusedOption.value.startsWith("s")) {
+                choices = ["snake"];
             }
 
             try {
