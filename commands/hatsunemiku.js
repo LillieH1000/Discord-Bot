@@ -11,10 +11,10 @@ module.exports = {
         var url = new String();
         var option = _.sample([1, 2]);
         if (option == 1) {
-            url = await globals.reddit("hatsune", false);
+            url = await globals.reddit("hatsune", false, []);
         }
         if (option == 2) {
-            url = await globals.reddit("hatsunemiku", false);
+            url = await globals.reddit("hatsunemiku", false, []);
         }
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)

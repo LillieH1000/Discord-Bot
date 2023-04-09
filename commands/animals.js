@@ -25,7 +25,7 @@ module.exports = {
             return;
         }
         if (category == "beardeddragon") {
-            url = await globals.reddit("beardeddragon", false);
+            url = await globals.reddit("beardeddragon", false, []);
         }
         if (category == "birb") {
             const res = await fetch("https://api.alexflipnote.dev/birb");
