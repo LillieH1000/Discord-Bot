@@ -13,9 +13,10 @@ module.exports = async(client) => {
                         "videoID": word.match(rx)[1],
                         "countryCode": "CA",
                         "clientName": "ANDROID",
-                        "clientVersion": "16.20"
+                        "clientVersion": "16.20",
+                        "showLinks": false
                     }
-                    const res1 = await fetch("https://yt.lillieh1000.gay/player/v1/", {
+                    const res1 = await fetch("https://yt.lillieh1000.gay/player/v2/", {
                         method: "post",
                         body: JSON.stringify(body),
                         headers: {
