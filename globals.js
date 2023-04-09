@@ -12,7 +12,7 @@ var nowplaying = "";
 const embedcolour = "#FFC0DD";
 
 async function reddit(subreddit, nsfw, flairs) {
-    const res = await fetch(`https://www.reddit.com/r/${subreddit}.json?limit=100`);
+    const res = await fetch(`https://www.reddit.com/r/${subreddit}.json?limit=500`);
     if (res.ok) {
         const images = [];
         const data = await res.json();
