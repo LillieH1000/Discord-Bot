@@ -34,16 +34,16 @@ module.exports = {
             return;
         }
         if (category == "amber") {
-            url = await globals.reddit("ambermains", false, []);
+            url = await globals.reddit("ambermains", false, ["art"]);
         }
         if (category == "ayaka") {
-            url = await globals.reddit("ayakamains", false, []);
+            url = await globals.reddit("ayakamains", false, ["art"]);
         }
         if (category == "collei") {
-            url = await globals.reddit("colleimains", false, []);
+            url = await globals.reddit("colleimains", false, ["non-oc art", "oc art"]);
         }
         if (category == "eula") {
-            url = await globals.reddit("eulamains", false, []);
+            url = await globals.reddit("eulamains", false, ["non-oc fanart", "oc art"]);
         }
         if (category == "ganyu") {
             var option = _.sample([1, 2]);
@@ -51,44 +51,44 @@ module.exports = {
                 url = await globals.reddit("ganyu", false, ["non-oc art", "oc art"]);
             }
             if (option == 2) {
-                url = await globals.reddit("ganyusimps", false, []);
+                url = await globals.reddit("ganyusimps", false, ["fanart"]);
             }
         }
         if (category == "hutao") {
-            url = await globals.reddit("hutao_mains", false, []);
+            url = await globals.reddit("hutao_mains", false, ["non-oc fanart", "oc fanart"]);
         }
         if (category == "keqing") {
-            url = await globals.reddit("keqingmains", false, []);
+            url = await globals.reddit("keqingmains", false, ["art"]);
         }
         if (category == "layla") {
-            url = await globals.reddit("laylamains", false, []);
+            url = await globals.reddit("laylamains", false, ["non-oc art", "oc art"]);
         }
         if (category == "lumine") {
             var option = _.sample([1, 2]);
             if (option == 1) {
-                url = await globals.reddit("luminemains", false, []);
+                url = await globals.reddit("luminemains", false, ["non-oc art", "oc art"]);
             }
             if (option == 2) {
-                url = await globals.reddit("lumine_mains", false, []);
+                url = await globals.reddit("lumine_mains", false, ["fan art"]);
             }
         }
         if (category == "nahida") {
-            url = await globals.reddit("nahida_mains", false, []);
+            url = await globals.reddit("nahida_mains", false, ["art - original content", "art - non oc"]);
         }
         if (category == "nilou") {
-            url = await globals.reddit("niloumains", false, []);
+            url = await globals.reddit("niloumains", false, ["non-oc art", "oc art"]);
         }
         if (category == "noelle") {
-            url = await globals.reddit("noellemains", false, []);
+            url = await globals.reddit("noellemains", false, ["art"]);
         }
         if (category == "raiden") {
-            url = await globals.reddit("raidenmains", false, []);
+            url = await globals.reddit("raidenmains", false, ["non-oc fanart", "oc fanart"]);
         }
         if (category == "shenhe") {
-            url = await globals.reddit("shenhemains", false, []);
+            url = await globals.reddit("shenhemains", false, ["non-oc art", "oc art"]);
         }
         if (category == "yaemiko") {
-            url = await globals.reddit("yaemiko", false, []);
+            url = await globals.reddit("yaemiko", false, ["art | oc", "art | non-oc"]);
         }
 
         const embed = new EmbedBuilder()
