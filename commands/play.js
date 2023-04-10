@@ -54,7 +54,7 @@ module.exports = {
                     .setDescription("Queued: " + data.title)
                     .setTimestamp()
 
-                interaction.editReply({ embeds: [embed] });
+                await interaction.editReply({ embeds: [embed] });
 
                 if (globals.connectionstatus == 0) {
                     globals.connectionstatus = 1;
@@ -67,6 +67,14 @@ module.exports = {
                     globals.connection.subscribe(globals.player);
                 }
             }
+        } else {
+            const embed = new EmbedBuilder()
+                    .setColor(globals.embedcolour)
+                    .setTitle("Music Player")
+                    .setDescription("Search for audio is currently in-development, please pass a yt url for the time being")
+                    .setTimestamp()
+
+            await interaction.editReply({ embeds: [embed] });
         }
 	},
 };
