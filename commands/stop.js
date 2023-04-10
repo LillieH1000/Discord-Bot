@@ -1,4 +1,3 @@
-const fs = require("node:fs");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 var globals = require("../globals.js");
 
@@ -11,11 +10,6 @@ module.exports = {
         await interaction.deferReply();
 
         globals.connection.destroy();
-        for (const list of globals.queue) {
-            if (fs.existsSync(list)) {
-                fs.unlinkSync(list)
-            }
-        }
         globals.queue = [];
         globals.titles = [];
         globals.nowplaying = "";

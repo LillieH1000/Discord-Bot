@@ -1,6 +1,6 @@
-const fs = require("node:fs");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { createAudioResource } = require("@discordjs/voice");
+var got = require("got");
 var globals = require("../globals.js");
 
 module.exports = {
@@ -12,13 +12,10 @@ module.exports = {
         await interaction.deferReply();
 
         if (globals.connectionstatus == 1) {
-            if (fs.existsSync(globals.queue[0])) {
-                fs.unlinkSync(globals.queue[0])
-            }
             globals.queue.shift();
             globals.titles.shift();
             globals.nowplaying = globals.titles[0];
-            globals.resource = createAudioResource(globals.queue[0], {
+            globals.resource = createAudioResource(got.stream(globals.queue[0]), {
                 inlineVolume: true
             });
             globals.resource.volume.setVolume(0.3);
