@@ -66,13 +66,58 @@ module.exports = {
                 }
             }
         } else {
-            const embed = new EmbedBuilder()
-                    .setColor(globals.embedcolour)
-                    .setTitle("Music Player")
-                    .setDescription("Search for audio is currently in-development, please pass a yt url for the time being")
-                    .setTimestamp()
+            const body = {
+                "query": url,
+                "countryCode": "CA"
+            }
+            const res1 = await fetch("https://yt.lillieh1000.gay/search/v1/", {
+                method: "post",
+                body: JSON.stringify(body),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            if (res1.ok) {
+                const data1 = await res1.json();
 
-            await interaction.editReply({ embeds: [embed] });
+                const body = {
+                    "videoID": data1.info[0].videoID,
+                    "countryCode": "CA",
+                    "showLinks": true
+                }
+                const res2 = await fetch("https://yt.lillieh1000.gay/player/v3/", {
+                    method: "post",
+                    body: JSON.stringify(body),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+                if (res2.ok) {
+                    const data2 = await res2.json();
+
+                    globals.queue.push(data2.bestAudio);
+                    globals.titles.push(data2.title);
+
+                    const embed = new EmbedBuilder()
+                        .setColor(globals.embedcolour)
+                        .setTitle("Music Player")
+                        .setDescription("Queued: " + data2.title)
+                        .setTimestamp()
+
+                    await interaction.editReply({ embeds: [embed] });
+
+                    if (globals.connectionstatus == 0) {
+                        globals.connectionstatus = 1;
+                        globals.nowplaying = globals.titles[0];
+                        globals.resource = createAudioResource(got.stream(globals.queue[0]), {
+                            inlineVolume: true
+                        });
+                        globals.resource.volume.setVolume(0.3);
+                        globals.player.play(globals.resource);
+                        globals.connection.subscribe(globals.player);
+                    }
+                }
+            }
         }
 	},
 };
