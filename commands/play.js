@@ -31,11 +31,9 @@ module.exports = {
             const body = {
                 "videoID": url.match(rx)[1],
                 "countryCode": "CA",
-                "clientName": "ANDROID",
-                "clientVersion": "16.20",
                 "showLinks": true
             }
-            const res = await fetch("https://yt.lillieh1000.gay/player/v2/", {
+            const res = await fetch("https://yt.lillieh1000.gay/player/v3/", {
                 method: "post",
                 body: JSON.stringify(body),
                 headers: {
