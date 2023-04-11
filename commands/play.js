@@ -9,12 +9,12 @@ module.exports = {
 		.setDescription("Plays a song")
         .setDMPermission(false)
         .addStringOption(option =>
-            option.setName("url")
-                .setDescription("Enter the yt url")
+            option.setName("info")
+                .setDescription("Enter the yt video name or url")
                 .setRequired(true)),
 	async execute(interaction) {
         await interaction.deferReply();
-        const url = interaction.options.getString("url");
+        const info = interaction.options.getString("info");
 
         const voiceConnection = getVoiceConnection(interaction.guild.id);
         
@@ -27,9 +27,9 @@ module.exports = {
         }
 
         const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
-        if (url.match(rx)) {
+        if (info.match(rx)) {
             const body = {
-                "videoID": url.match(rx)[1],
+                "videoID": info.match(rx)[1],
                 "countryCode": "CA",
                 "showLinks": true
             }
@@ -67,7 +67,7 @@ module.exports = {
             }
         } else {
             const body = {
-                "query": url,
+                "query": info,
                 "countryCode": "CA"
             }
             const res1 = await fetch("https://yt.lillieh1000.gay/search/v1/", {
