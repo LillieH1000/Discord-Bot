@@ -9,18 +9,7 @@ module.exports = async(client) => {
             for (const word of message.content.split(" ")) {
                 const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
                 if (word.match(rx)) {
-                    const body = {
-                        "videoID": word.match(rx)[1],
-                        "countryCode": "CA",
-                        "showLinks": false
-                    }
-                    const res1 = await fetch("https://yt.lillieh1000.gay/player/v3/", {
-                        method: "post",
-                        body: JSON.stringify(body),
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    });
+                    const res1 = await fetch("https://yt.lillieh1000.gay/player/v5/?videoID=".concat(word.match(rx)[1]));
                     const res2 = await fetch("https://returnyoutubedislikeapi.com/votes?videoId=".concat(word.match(rx)[1]));
                     if (res1.ok && res2.ok) {
                         const data1 = await res1.json();

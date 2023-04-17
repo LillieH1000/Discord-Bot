@@ -28,22 +28,11 @@ module.exports = {
 
         const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
         if (info.match(rx)) {
-            const body = {
-                "videoID": info.match(rx)[1],
-                "countryCode": "CA",
-                "showLinks": true
-            }
-            const res = await fetch("https://yt.lillieh1000.gay/player/v3/", {
-                method: "post",
-                body: JSON.stringify(body),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
+            const res = await fetch("https://yt.lillieh1000.gay/player/v5/?videoID=".concat(info.match(rx)[1]));
             if (res.ok) {
                 const data = await res.json();
 
-                globals.queue.push(data.bestAudio);
+                globals.queue.push(data.best.audio);
                 globals.titles.push(data.title);
 
                 const embed = new EmbedBuilder()
@@ -66,36 +55,15 @@ module.exports = {
                 }
             }
         } else {
-            const body = {
-                "query": info,
-                "countryCode": "CA"
-            }
-            const res1 = await fetch("https://yt.lillieh1000.gay/search/v1/", {
-                method: "post",
-                body: JSON.stringify(body),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
+            const res1 = await fetch("https://yt.lillieh1000.gay/search/v2/?query=".concat(info));
             if (res1.ok) {
                 const data1 = await res1.json();
 
-                const body = {
-                    "videoID": data1.info[0].videoID,
-                    "countryCode": "CA",
-                    "showLinks": true
-                }
-                const res2 = await fetch("https://yt.lillieh1000.gay/player/v3/", {
-                    method: "post",
-                    body: JSON.stringify(body),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                });
+                const res2 = await fetch("https://yt.lillieh1000.gay/player/v5/?videoID=".concat(data1.info[0].videoID));
                 if (res2.ok) {
                     const data2 = await res2.json();
 
-                    globals.queue.push(data2.bestAudio);
+                    globals.queue.push(data2.best.audio);
                     globals.titles.push(data2.title);
 
                     const embed = new EmbedBuilder()
