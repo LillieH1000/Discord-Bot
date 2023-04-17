@@ -96,10 +96,10 @@ module.exports = async(client) => {
                 choices = ["bdsm", "blowjob", "byleth"];
             }
             if (focusedOption.value.startsWith("c")) {
-                choices = ["cum"];
+                choices = ["chiisai", "cum"];
             }
             if (focusedOption.value.startsWith("e")) {
-                choices = ["emilia", "eula"];
+                choices = ["ecchi", "emilia", "eula"];
             }
             if (focusedOption.value.startsWith("f")) {
                 choices = ["femboy", "femdom", "futanari"];
@@ -123,7 +123,7 @@ module.exports = async(client) => {
                 choices = ["neko", "nilou"];
             }
             if (focusedOption.value.startsWith("o")) {
-                choices = ["overwatch"];
+                choices = ["oral", "overwatch"];
             }
             if (focusedOption.value.startsWith("p")) {
                 choices = ["pee", "pegging", "public"];
@@ -132,7 +132,7 @@ module.exports = async(client) => {
                 choices = ["raiden"];
             }
             if (focusedOption.value.startsWith("s")) {
-                choices = ["shenhe"];
+                choices = ["shenhe", "soaked"];
             }
             if (focusedOption.value.startsWith("t")) {
                 choices = ["tentacles", "thick", "trap"];

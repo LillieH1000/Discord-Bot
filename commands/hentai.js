@@ -22,8 +22,8 @@ module.exports = {
                     .setTitle("Hentai Categories")
                     .setDescription(`A:\namber\nanal\nayaka\n
                     B:\nbdsm\nblowjob\nbyleth\n
-                    C:\ncum\n
-                    E:\nemilia\neula\n
+                    C:\nchiisai\ncum\n
+                    E:\necchi\nemilia\neula\n
                     F:\nfemboy\nfemdom\nfutanari\n
                     G:\nganyu\ngenshin\n
                     H:\nhutao\n
@@ -31,10 +31,10 @@ module.exports = {
                     L:\nlumine\n
                     M:\nmasturbation\n
                     N:\nneko\nnilou\n
-                    O:\norgy\noverwatch\n
+                    O:\noral\noverwatch\n
                     P:\npee\npegging\npublic\n
                     R:\nraiden\n
-                    S:\nshenhe\n
+                    S:\nshenhe\nsoaked\n
                     T:\ntentacles\nthick\ntrap\n
                     U:\nundressing\nuniform\nupskirt\n
                     W:\nwaifu\n
@@ -71,8 +71,14 @@ module.exports = {
             if (category == "byleth") {
                 url = await globals.reddit("byleth", true, []);
             }
+            if (category == "chiisai") {
+                url = await globals.reddit("chiisaihentai", true, []);
+            }
             if (category == "cum") {
                 url = await globals.reddit("cumhentai", true, []);
+            }
+            if (category == "ecchi") {
+                url = await globals.reddit("ecchi", true, []);
             }
             if (category == "emilia") {
                 url = await globals.reddit("emiliahentai", true, []);
@@ -141,6 +147,9 @@ module.exports = {
             if (category == "nilou") {
                 url = await globals.reddit("nilou_hentai", true, []);
             }
+            if (category == "oral") {
+                url = await globals.reddit("oralhentai", true, []);
+            }
             if (category == "overwatch") {
                 url = await globals.reddit("overwatch_porn", true, []);
             }
@@ -158,6 +167,9 @@ module.exports = {
             }
             if (category == "shenhe") {
                 url = await globals.reddit("shenhensfw", true, []);
+            }
+            if (category == "soaked") {
+                url = await globals.reddit("soakedhentai", true, []);
             }
             if (category == "tentacles") {
                 url = await globals.reddit("tentai", true, []);
