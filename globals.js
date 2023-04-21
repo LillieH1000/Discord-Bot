@@ -41,8 +41,13 @@ async function reddit(subreddit, nsfw, flairs) {
     }
 }
 
-async function music(url) {
-    const res = await fetch(`https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(url)}&songIfSingle=true`);
+async function music(url, id) {
+    var res;
+    if (url != null && id == null) {
+        res = await fetch(`https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(url)}&songIfSingle=true`);
+    } else if (url == null && id != null) {
+        res = await fetch(`https://api.song.link/v1-alpha.1/links?platform=youtube&type=song&id=${id}&songIfSingle=true`);
+    }
     if (res.ok) {
         const data = await res.json();
 
