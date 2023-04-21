@@ -1,4 +1,4 @@
-const { createAudioResource, AudioPlayerStatus } = require("@discordjs/voice");
+const { createAudioResource, StreamType, AudioPlayerStatus } = require("@discordjs/voice");
 var got = require("got");
 var globals = require("../globals.js");
 
@@ -16,6 +16,7 @@ module.exports = async() => {
             } else {
                 globals.nowplaying = globals.titles[0];
                 globals.resource = createAudioResource(got.stream(globals.queue[0]), {
+                    inputType: StreamType.WebmOpus,
                     inlineVolume: true
                 });
                 globals.resource.volume.setVolume(0.3);

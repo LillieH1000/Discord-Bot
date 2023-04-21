@@ -1,4 +1,4 @@
-const { joinVoiceChannel, getVoiceConnection, createAudioResource } = require("@discordjs/voice");
+const { joinVoiceChannel, getVoiceConnection, createAudioResource, StreamType } = require("@discordjs/voice");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 var got = require("got");
 var globals = require("../globals.js");
@@ -28,11 +28,11 @@ module.exports = {
 
         const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
         if (info.match(rx)) {
-            const res = await fetch("https://yt.lillieh1000.gay/player/v5/?videoID=".concat(info.match(rx)[1]));
+            const res = await fetch("https://yt.lillieh1000.gay/player/v6/?videoID=".concat(info.match(rx)[1]));
             if (res.ok) {
                 const data = await res.json();
 
-                globals.queue.push(data.best.audio);
+                globals.queue.push(data.best.audio.webm);
                 globals.titles.push(data.title);
 
                 const embed = new EmbedBuilder()
@@ -47,6 +47,7 @@ module.exports = {
                     globals.connectionstatus = 1;
                     globals.nowplaying = globals.titles[0];
                     globals.resource = createAudioResource(got.stream(globals.queue[0]), {
+                        inputType: StreamType.WebmOpus,
                         inlineVolume: true
                     });
                     globals.resource.volume.setVolume(0.3);
@@ -59,11 +60,11 @@ module.exports = {
             if (res1.ok) {
                 const data1 = await res1.json();
 
-                const res2 = await fetch("https://yt.lillieh1000.gay/player/v5/?videoID=".concat(data1.info[0].videoID));
+                const res2 = await fetch("https://yt.lillieh1000.gay/player/v6/?videoID=".concat(data1.info[0].videoID));
                 if (res2.ok) {
                     const data2 = await res2.json();
 
-                    globals.queue.push(data2.best.audio);
+                    globals.queue.push(data2.best.audio.webm);
                     globals.titles.push(data2.title);
 
                     const embed = new EmbedBuilder()
@@ -78,6 +79,7 @@ module.exports = {
                         globals.connectionstatus = 1;
                         globals.nowplaying = globals.titles[0];
                         globals.resource = createAudioResource(got.stream(globals.queue[0]), {
+                            inputType: StreamType.WebmOpus,
                             inlineVolume: true
                         });
                         globals.resource.volume.setVolume(0.3);
