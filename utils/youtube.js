@@ -9,15 +9,15 @@ module.exports = async(client) => {
             for (const word of message.content.split(" ")) {
                 const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
                 if (word.match(rx)) {
-                    const res1 = await fetch("https://yt.lillieh1000.gay/player/v6/?videoID=".concat(word.match(rx)[1]));
-                    const res2 = await fetch("https://returnyoutubedislikeapi.com/votes?videoId=".concat(word.match(rx)[1]));
+                    const res1 = await fetch(`https://yt.lillieh1000.gay/player/v6/?videoID=${word.match(rx)[1]}`);
+                    const res2 = await fetch(`https://returnyoutubedislikeapi.com/votes?videoId=${word.match(rx)[1]}`);
                     if (res1.ok && res2.ok) {
                         const data1 = await res1.json();
                         const data2 = await res2.json();
 
                         const embed = new EmbedBuilder()
                             .setColor(globals.embedcolour)
-                            .setDescription("Views: " + data1.viewcount.toLocaleString() + "\nLikes: " + data2.likes.toLocaleString() + "\nDislikes: " + data2.dislikes.toLocaleString())
+                            .setDescription(`Views: ${data1.viewcount.toLocaleString()}\nLikes: ${data2.likes.toLocaleString()}\nDislikes: ${data2.dislikes.toLocaleString()}`)
                             .setTimestamp()
 
                         await message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
