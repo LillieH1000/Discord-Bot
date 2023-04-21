@@ -9,7 +9,7 @@ module.exports = async(client) => {
             const pokemon = interaction.customId.split("custommenuid")[0];
             const game = interaction.customId.split("custommenuid")[1];
 
-            const res = await fetch("https://pokeapi.co/api/v2/pokemon/".concat(pokemon));
+            const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
             if (res.ok) {
                 const data = await res.json();
                 
@@ -106,9 +106,9 @@ module.exports = async(client) => {
                     embed.addFields(
                         { name: "Game And Count", value: game, inline: false },
                     );
-                    menu.setCustomId(data.name + "custommenuid" + game);
+                    menu.setCustomId(`${data.name}custommenuid${game}`);
                 } else {
-                    menu.setCustomId(data.name + "custommenuid");
+                    menu.setCustomId(`${data.name}custommenuid`);
                 }
                 
                 if (data.sprites.other.home.front_default != null) {

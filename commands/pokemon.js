@@ -42,7 +42,7 @@ module.exports = {
             pokemon = name + "-paldea";
         }
 
-        const res = await fetch("https://pokeapi.co/api/v2/pokemon/".concat(pokemon.replace(" ", "-").toLowerCase()));
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.replace(" ", "-").toLowerCase()}`);
         if (res.ok) {
             const data = await res.json();
             
@@ -129,9 +129,9 @@ module.exports = {
                     embed.addFields(
                         { name: "Game And Count", value: message, inline: false },
                     );
-                    menu.setCustomId(data.name + "custommenuid" + message);
+                    menu.setCustomId(`${data.name}custommenuid${message}`);
                 } else {
-                    menu.setCustomId(data.name + "custommenuid");
+                    menu.setCustomId(`${data.name}custommenuid`);
                 }
                 
                 if (data.sprites.other.home.front_default != null) {
