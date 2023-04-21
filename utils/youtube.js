@@ -14,13 +14,18 @@ module.exports = async(client) => {
                     if (res1.ok && res2.ok) {
                         const data1 = await res1.json();
                         const data2 = await res2.json();
+                        const components = await globals.music(word);
 
                         const embed = new EmbedBuilder()
                             .setColor(globals.embedcolour)
                             .setDescription(`Views: ${data1.viewcount.toLocaleString()}\nLikes: ${data2.likes.toLocaleString()}\nDislikes: ${data2.dislikes.toLocaleString()}`)
                             .setTimestamp()
 
-                        await message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
+                        if (components != null && components != undefined && components.length != 0) {
+                            await message.reply({ embeds: [embed], components: components, allowedMentions: { repliedUser: false } });
+                        } else {
+                            await message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
+                        }
                     }
                 }
             }
