@@ -1,6 +1,7 @@
 module.exports = async(client) => {
     client.on("messageCreate", async message => {
         if (message.author.bot) return;
+        if (!message.content) return;
     
         try {
             for (const word of message.content.split(" ")) {
