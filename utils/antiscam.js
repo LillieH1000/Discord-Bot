@@ -1,6 +1,7 @@
 module.exports = async(client) => {
     client.on("messageCreate", async message => {
         if (message.author.bot) return;
+        if (!message.content) return;
     
         try {
             const res = await fetch("https://raw.githubusercontent.com/Dogino/Discord-Phishing-URLs/main/scam-urls.txt");
