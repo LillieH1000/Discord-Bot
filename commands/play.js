@@ -10,7 +10,7 @@ module.exports = {
         .setDMPermission(false)
         .addStringOption(option =>
             option.setName("info")
-                .setDescription("Enter the yt video name or url")
+                .setDescription("Enter the song name (YouTube) or url (YouTube, Audiomack)")
                 .setRequired(true)),
 	async execute(interaction) {
         await interaction.deferReply();
