@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { createAudioResource, StreamType } = require("@discordjs/voice");
+const { createAudioResource } = require("@discordjs/voice");
 var got = require("got");
 var globals = require("../globals.js");
 
@@ -16,7 +16,6 @@ module.exports = {
             globals.titles.shift();
             globals.nowplaying = globals.titles[0];
             globals.resource = createAudioResource(got.stream(globals.queue[0]), {
-                inputType: StreamType.WebmOpus,
                 inlineVolume: true
             });
             globals.resource.volume.setVolume(0.3);
