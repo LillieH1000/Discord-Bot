@@ -1,8 +1,6 @@
-const { InteractionType } = require("discord.js");
-
 module.exports = async(client) => {
     client.on("interactionCreate", async interaction => {
-        if (interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
+        if (!interaction.isAutocomplete()) return;
 
         const focusedOption = interaction.options.getFocused(true);
         var choices;
