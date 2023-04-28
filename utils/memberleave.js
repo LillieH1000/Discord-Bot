@@ -13,7 +13,7 @@ module.exports = async(client) => {
                 .addFields(
                     { name: "Created At:", value: createdDate, inline: false },
                 )
-                .setFooter({ text: "ID: " + guildMember.user.id })
+                .setFooter({ text: `ID: ${guildMember.user.id}` })
                 .setTimestamp()
                 const guild = guildMember.guild;
                 guild.systemChannel.send({ embeds: [embed] });
