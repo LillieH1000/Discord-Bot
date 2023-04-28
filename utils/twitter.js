@@ -10,7 +10,8 @@ module.exports = async(client) => {
                 const vx = /^http(?:s)?:\/\/(.*)vxtwitter\.com\//;
                 if (word.match(tx) && !word.match(fx) && !word.match(vx)) {
                     message.suppressEmbeds(true)
-                    message.reply({ content: word.replace("twitter.com", "vxtwitter.com"), allowedMentions: { repliedUser: false } });
+                    message.reply({ content: message.content.replace(/twitter.com/g, "vxtwitter.com"), allowedMentions: { repliedUser: false } });
+                    break;
                 }
             }
         } catch (error) {
