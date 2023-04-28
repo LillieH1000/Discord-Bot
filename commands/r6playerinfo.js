@@ -31,96 +31,87 @@ module.exports = {
 
         const rankedstatus = ranks.seasons[Object.keys(ranks.seasons)[0]];
 
-        var playerinfo = "";
-        playerinfo += "Status: " + userstatus.status.charAt(0).toUpperCase() + userstatus.status.slice(1) + "\n";
-        playerinfo += "Level: " + progression.level.toLocaleString() + "\n";
-        playerinfo += "XP Of Current Level: " + progression.xp.toLocaleString() + "\n";
-        playerinfo += "Total XP: " + stats.pvp.general.xp.toLocaleString() + "\n";
-        playerinfo += "Lootbox Probability: " + progression.lootboxProbability.percent.toLocaleString() + "\n";
-        playerinfo += "Rank: " + rankedstatus.regions.ncsa.boards.pvp_ranked.current.name.toString() + "\n";
-        playerinfo += "MMR: " + rankedstatus.regions.ncsa.boards.pvp_ranked.current.mmr.toLocaleString();
+        const playerinfo = `Status: ${userstatus.status.charAt(0).toUpperCase() + userstatus.status.slice(1)}
+        Level: ${progression.level.toLocaleString()}
+        XP Of Current Level: ${progression.xp.toLocaleString()}
+        Total XP: ${stats.pvp.general.xp.toLocaleString()}
+        Lootbox Probability: ${progression.lootboxProbability.percent.toLocaleString()}
+        Rank: ${rankedstatus.regions.ncsa.boards.pvp_ranked.current.name.toString()}
+        MMR: ${rankedstatus.regions.ncsa.boards.pvp_ranked.current.mmr.toLocaleString()}`;
 
-        var generalinfo = "";
-        generalinfo += "Playtime: " + stats.pvp.general.playtime.toLocaleString() + "\n";
-        generalinfo += "Matches Played: " + stats.pvp.general.matches.toLocaleString() + "\n";
-        generalinfo += "Bullets Connected: " + stats.pvp.general.bulletsConnected.toLocaleString() + "\n";
-        generalinfo += "Kills: " + stats.pvp.general.kills.toLocaleString() + "\n";
-        generalinfo += "Deaths: " + stats.pvp.general.deaths.toLocaleString() + "\n";
-        generalinfo += "KD Rate: " + stats.pvp.general.kd.toLocaleString() + "\n";
-        generalinfo += "Assists: " + stats.pvp.general.assists.toLocaleString() + "\n";
-        generalinfo += "Headshots: " + stats.pvp.general.headshots.toLocaleString() + "\n";
-        generalinfo += "Melee Kills: " + stats.pvp.general.meleeKills.toLocaleString() + "\n";
-        generalinfo += "Penetration Kills: " + stats.pvp.general.penetrationKills.toLocaleString() + "\n";
-        generalinfo += "Blind Kills: " + stats.pvp.general.blindKills.toLocaleString() + "\n";
-        generalinfo += "Revives: " + stats.pvp.general.revives.toLocaleString() + "\n";
-        generalinfo += "Gadgets Destroyed: " + stats.pvp.general.gadgetsDestroyed.toLocaleString() + "\n";
-        generalinfo += "Rappel Breaches: " + stats.pvp.general.rappelBreaches.toLocaleString() + "\n";
-        generalinfo += "Barricades Deployed: " + stats.pvp.general.barricadesDeployed.toLocaleString() + "\n";
-        generalinfo += "Reinforcements Deployed: " + stats.pvp.general.reinforcementsDeployed.toLocaleString() + "\n";
-        generalinfo += "Suicides: " + stats.pvp.general.suicides.toLocaleString();
+        const generalinfo = `Playtime: ${stats.pvp.general.playtime.toLocaleString()}
+        Matches Played: ${stats.pvp.general.matches.toLocaleString()}
+        Bullets Connected: ${stats.pvp.general.bulletsConnected.toLocaleString()}
+        Kills: ${stats.pvp.general.kills.toLocaleString()}
+        Deaths: ${stats.pvp.general.deaths.toLocaleString()}
+        KD Rate: ${stats.pvp.general.kd.toLocaleString()}
+        Assists: ${stats.pvp.general.assists.toLocaleString()}
+        Headshots: ${stats.pvp.general.headshots.toLocaleString()}
+        Melee Kills: ${stats.pvp.general.meleeKills.toLocaleString()}
+        Penetration Kills: ${stats.pvp.general.penetrationKills.toLocaleString()}
+        Blind Kills: ${stats.pvp.general.blindKills.toLocaleString()}
+        Revives: ${stats.pvp.general.revives.toLocaleString()}
+        Gadgets Destroyed: ${stats.pvp.general.gadgetsDestroyed.toLocaleString()}
+        Rappel Breaches: ${stats.pvp.general.rappelBreaches.toLocaleString()}
+        Barricades Deployed: ${stats.pvp.general.barricadesDeployed.toLocaleString()}
+        Reinforcements Deployed: ${stats.pvp.general.reinforcementsDeployed.toLocaleString()}
+        Suicides: ${stats.pvp.general.suicides.toLocaleString()}`;
 
-        var casualinfo = "";
-        casualinfo += "Playtime: " + stats.pvp.queues.casual.playtime.toLocaleString() + "\n";
-        casualinfo += "Matches Played: " + stats.pvp.queues.casual.matches.toLocaleString() + "\n";
-        casualinfo += "Wins: " + stats.pvp.queues.casual.wins.toLocaleString() + "\n";
-        casualinfo += "Losses: " + stats.pvp.queues.casual.losses.toLocaleString() + "\n";
-        casualinfo += "Win Rate: " + stats.pvp.queues.casual.winRate.toLocaleString() + "\n";
-        casualinfo += "Kills: " + stats.pvp.queues.casual.kills.toLocaleString() + "\n";
-        casualinfo += "Deaths: " + stats.pvp.queues.casual.deaths.toLocaleString() + "\n";
-        casualinfo += "KD Rate: " + stats.pvp.queues.casual.kd.toLocaleString();
+        const casualinfo = `Playtime: ${stats.pvp.queues.casual.playtime.toLocaleString()}
+        Matches Played: ${stats.pvp.queues.casual.matches.toLocaleString()}
+        Wins: ${stats.pvp.queues.casual.wins.toLocaleString()}
+        Losses: ${stats.pvp.queues.casual.losses.toLocaleString()}
+        Win Rate: ${stats.pvp.queues.casual.winRate.toLocaleString()}
+        Kills: ${stats.pvp.queues.casual.kills.toLocaleString()}
+        Deaths: ${stats.pvp.queues.casual.deaths.toLocaleString()}
+        KD Rate: ${stats.pvp.queues.casual.kd.toLocaleString()}`;
 
-        var rankedinfo = "";
-        rankedinfo += "Playtime: " + stats.pvp.queues.ranked.playtime.toLocaleString() + "\n";
-        rankedinfo += "Matches Played: " + stats.pvp.queues.ranked.matches.toLocaleString() + "\n";
-        rankedinfo += "Wins: " + stats.pvp.queues.ranked.wins.toLocaleString() + "\n";
-        rankedinfo += "Losses: " + stats.pvp.queues.ranked.losses.toLocaleString() + "\n";
-        rankedinfo += "Win Rate: " + stats.pvp.queues.ranked.winRate.toLocaleString() + "\n";
-        rankedinfo += "Kills: " + stats.pvp.queues.ranked.kills.toLocaleString() + "\n";
-        rankedinfo += "Deaths: " + stats.pvp.queues.ranked.deaths.toLocaleString() + "\n";
-        rankedinfo += "KD Rate: " + stats.pvp.queues.ranked.kd.toLocaleString();
+        const rankedinfo = `Playtime: ${stats.pvp.queues.ranked.playtime.toLocaleString()}
+        Matches Played: ${stats.pvp.queues.ranked.matches.toLocaleString()}
+        Wins: ${stats.pvp.queues.ranked.wins.toLocaleString()}
+        Losses: ${stats.pvp.queues.ranked.losses.toLocaleString()}
+        Win Rate: ${stats.pvp.queues.ranked.winRate.toLocaleString()}
+        Kills: ${stats.pvp.queues.ranked.kills.toLocaleString()}
+        Deaths: ${stats.pvp.queues.ranked.deaths.toLocaleString()}
+        KD Rate: ${stats.pvp.queues.ranked.kd.toLocaleString()}`;
 
-        var terroristhuntinfo = "";
-        terroristhuntinfo += "Playtime: " + stats.pve.general.playtime.toLocaleString() + "\n";
-        terroristhuntinfo += "Matches Played: " + stats.pve.general.matches.toLocaleString() + "\n";
-        terroristhuntinfo += "Bullets Connected: " + stats.pve.general.bulletsConnected.toLocaleString() + "\n";
-        terroristhuntinfo += "Kills: " + stats.pve.general.kills.toLocaleString() + "\n";
-        terroristhuntinfo += "Deaths: " + stats.pve.general.deaths.toLocaleString() + "\n";
-        terroristhuntinfo += "KD Rate: " + stats.pve.general.kd.toLocaleString() + "\n";
-        terroristhuntinfo += "Assists: " + stats.pve.general.assists.toLocaleString() + "\n";
-        terroristhuntinfo += "Headshots: " + stats.pve.general.headshots.toLocaleString() + "\n";
-        terroristhuntinfo += "Melee Kills: " + stats.pve.general.meleeKills.toLocaleString() + "\n";
-        terroristhuntinfo += "Penetration Kills: " + stats.pve.general.penetrationKills.toLocaleString() + "\n";
-        terroristhuntinfo += "Blind Kills: " + stats.pve.general.blindKills.toLocaleString() + "\n";
-        terroristhuntinfo += "Revives: " + stats.pve.general.revives.toLocaleString() + "\n";
-        terroristhuntinfo += "Gadgets Destroyed: " + stats.pve.general.gadgetsDestroyed.toLocaleString() + "\n";
-        terroristhuntinfo += "Rappel Breaches: " + stats.pve.general.rappelBreaches.toLocaleString() + "\n";
-        terroristhuntinfo += "Barricades Deployed: " + stats.pve.general.barricadesDeployed.toLocaleString() + "\n";
-        terroristhuntinfo += "Reinforcements Deployed: " + stats.pve.general.reinforcementsDeployed.toLocaleString() + "\n";
-        terroristhuntinfo += "Suicides: " + stats.pve.general.suicides.toLocaleString();
+        const terroristhuntinfo = `Playtime: ${stats.pve.general.playtime.toLocaleString()}
+        Matches Played: ${stats.pve.general.matches.toLocaleString()}
+        Bullets Connected: ${stats.pve.general.bulletsConnected.toLocaleString()}
+        Kills: ${stats.pve.general.kills.toLocaleString()}
+        Deaths: ${stats.pve.general.deaths.toLocaleString()}
+        KD Rate: ${stats.pve.general.kd.toLocaleString()}
+        Assists: ${stats.pve.general.assists.toLocaleString()}
+        Headshots: ${stats.pve.general.headshots.toLocaleString()}
+        Melee Kills: ${stats.pve.general.meleeKills.toLocaleString()}
+        Penetration Kills: ${stats.pve.general.penetrationKills.toLocaleString()}
+        Blind Kills: ${stats.pve.general.blindKills.toLocaleString()}
+        Revives: ${stats.pve.general.revives.toLocaleString()}
+        Gadgets Destroyed: ${stats.pve.general.gadgetsDestroyed.toLocaleString()}
+        Rappel Breaches: ${stats.pve.general.rappelBreaches.toLocaleString()}
+        Barricades Deployed: ${stats.pve.general.barricadesDeployed.toLocaleString()}
+        Reinforcements Deployed: ${stats.pve.general.reinforcementsDeployed.toLocaleString()}
+        Suicides: ${stats.pve.general.suicides.toLocaleString()}`;
 
-        var terroristhuntdisarmbombinfo = "";
-        terroristhuntdisarmbombinfo += "Matches Played: " + stats.pve.modes.disarmBomb.matches.toLocaleString() + "\n";
-        terroristhuntdisarmbombinfo += "Wins: " + stats.pve.modes.disarmBomb.wins.toLocaleString() + "\n";
-        terroristhuntdisarmbombinfo += "Losses: " + stats.pve.modes.disarmBomb.losses.toLocaleString() + "\n";
-        terroristhuntdisarmbombinfo += "Win Rate: " + stats.pve.modes.disarmBomb.winRate.toLocaleString() + "\n";
+        const terroristhuntdisarmbombinfo = `Matches Played: ${stats.pve.modes.disarmBomb.matches.toLocaleString()}
+        Wins: ${stats.pve.modes.disarmBomb.wins.toLocaleString()}
+        Losses: ${stats.pve.modes.disarmBomb.losses.toLocaleString()}
+        Win Rate: ${stats.pve.modes.disarmBomb.winRate.toLocaleString()}`;
 
-        var terroristhunteliminationinfo = "";
-        terroristhunteliminationinfo += "Matches Played: " + stats.pve.modes.elimination.matches.toLocaleString() + "\n";
-        terroristhunteliminationinfo += "Wins: " + stats.pve.modes.elimination.wins.toLocaleString() + "\n";
-        terroristhunteliminationinfo += "Losses: " + stats.pve.modes.elimination.losses.toLocaleString() + "\n";
-        terroristhunteliminationinfo += "Win Rate: " + stats.pve.modes.elimination.winRate.toLocaleString() + "\n";
+        const terroristhunteliminationinfo = `Matches Played: ${stats.pve.modes.elimination.matches.toLocaleString()}
+        Wins: ${stats.pve.modes.elimination.wins.toLocaleString()}
+        Losses: ${stats.pve.modes.elimination.losses.toLocaleString()}
+        Win Rate: ${stats.pve.modes.elimination.winRate.toLocaleString()}`;
 
-        var terroristhuntprotecthostageinfo = "";
-        terroristhuntprotecthostageinfo += "Matches Played: " + stats.pve.modes.protectHostage.matches.toLocaleString() + "\n";
-        terroristhuntprotecthostageinfo += "Wins: " + stats.pve.modes.protectHostage.wins.toLocaleString() + "\n";
-        terroristhuntprotecthostageinfo += "Losses: " + stats.pve.modes.protectHostage.losses.toLocaleString() + "\n";
-        terroristhuntprotecthostageinfo += "Win Rate: " + stats.pve.modes.protectHostage.winRate.toLocaleString() + "\n";
+        const terroristhuntprotecthostageinfo = `Matches Played: ${stats.pve.modes.protectHostage.matches.toLocaleString()}
+        Wins: ${stats.pve.modes.protectHostage.wins.toLocaleString()}
+        Losses: ${stats.pve.modes.protectHostage.losses.toLocaleString()}
+        Win Rate: ${stats.pve.modes.protectHostage.winRate.toLocaleString()}`;
 
-        var terroristhuntextracthostageinfo = "";
-        terroristhuntextracthostageinfo += "Matches Played: " + stats.pve.modes.extractHostage.matches.toLocaleString() + "\n";
-        terroristhuntextracthostageinfo += "Wins: " + stats.pve.modes.extractHostage.wins.toLocaleString() + "\n";
-        terroristhuntextracthostageinfo += "Losses: " + stats.pve.modes.extractHostage.losses.toLocaleString() + "\n";
-        terroristhuntextracthostageinfo += "Win Rate: " + stats.pve.modes.extractHostage.winRate.toLocaleString() + "\n";
+        const terroristhuntextracthostageinfo = `Matches Played: ${stats.pve.modes.extractHostage.matches.toLocaleString()}
+        Wins: ${stats.pve.modes.extractHostage.wins.toLocaleString()}
+        Losses: ${stats.pve.modes.extractHostage.losses.toLocaleString()}
+        Win Rate: ${stats.pve.modes.extractHostage.winRate.toLocaleString()}`;
         
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
@@ -151,7 +142,7 @@ module.exports = {
                 new ButtonBuilder()
                     .setLabel("R6 Tracker")
                     .setStyle(ButtonStyle.Link)
-                    .setURL("https://r6.tracker.network/profile/pc/" + player.username.toString())
+                    .setURL(`https://r6.tracker.network/profile/pc/${player.username.toString()}`)
             );
 
         await interaction.editReply({ embeds: [embed], components: [row] });
