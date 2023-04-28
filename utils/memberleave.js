@@ -15,8 +15,8 @@ module.exports = async(client) => {
                 )
                 .setFooter({ text: `ID: ${guildMember.user.id}` })
                 .setTimestamp()
-                const guild = guildMember.guild;
-                guild.systemChannel.send({ embeds: [embed] });
+            const guild = guildMember.guild;
+            guild.systemChannel.send({ embeds: [embed] });
         } catch (error) {
             console.error(error);
         }
