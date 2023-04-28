@@ -29,7 +29,7 @@ module.exports = {
         const ytrx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
         const amrx = /^http(?:s)?:\/\/(.*)audiomack\.com\//;
         if (info.match(ytrx)) {
-            const res = await fetch(`https://yt.lillieh1000.gay/player/v6/?videoID=${info.match(ytrx)[1]}`);
+            const res = await fetch(`https://yt.lillieh1000.gay/?videoID=${info.match(ytrx)[1]}`);
             if (res.ok) {
                 const data = await res.json();
 
@@ -83,11 +83,11 @@ module.exports = {
                 }
             }
         } else {
-            const res1 = await fetch(`https://yt.lillieh1000.gay/search/v2/?query=${info}`);
+            const res1 = await fetch(`https://yt.lillieh1000.gay/?query=${info}`);
             if (res1.ok) {
                 const data1 = await res1.json();
 
-                const res2 = await fetch(`https://yt.lillieh1000.gay/player/v6/?videoID=${data1.info[0].videoID}`);
+                const res2 = await fetch(`https://yt.lillieh1000.gay/?videoID=${data1.info[0].videoID}`);
                 if (res2.ok) {
                     const data2 = await res2.json();
 
