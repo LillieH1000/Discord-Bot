@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, SelectMenuBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 var globals = require("../globals.js");
 
 module.exports = {
@@ -123,7 +123,7 @@ module.exports = {
             if (data.sprites.other.home.front_default != null) {
                 embed.setThumbnail(data.sprites.other.home.front_default)
 
-                const menu = new SelectMenuBuilder().setPlaceholder("Choose Sprite Image");
+                const menu = new StringSelectMenuBuilder().setPlaceholder("Choose Sprite Image");
     
                 if (message) {
                     embed.addFields(

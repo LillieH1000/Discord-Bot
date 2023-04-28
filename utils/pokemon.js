@@ -1,9 +1,9 @@
-const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 var globals = require("../globals.js");
 
 module.exports = async(client) => {
     client.on("interactionCreate", async interaction => {
-        if (!interaction.isSelectMenu()) return;
+        if (!interaction.isStringSelectMenu()) return;
         
         try {
             const pokemon = interaction.customId.split("custommenuid")[0];
@@ -100,7 +100,7 @@ module.exports = async(client) => {
                     embed.setThumbnail(data.sprites.other.home.front_shiny_female);
                 }
         
-                const menu = new SelectMenuBuilder().setPlaceholder("Choose Sprite Image");
+                const menu = new StringSelectMenuBuilder().setPlaceholder("Choose Sprite Image");
         
                 if (game != "") {
                     embed.addFields(
