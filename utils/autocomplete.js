@@ -4,10 +4,10 @@ module.exports = async(client) => {
     client.on("interactionCreate", async interaction => {
         if (interaction.type !== InteractionType.ApplicationCommandAutocomplete) return;
 
+        const focusedOption = interaction.options.getFocused(true);
+        var choices;
+        
         if (interaction.commandName === "animals") {
-            const focusedOption = interaction.options.getFocused(true);
-            var choices;
-
             if (focusedOption.value.startsWith("b")) {
                 choices = ["beardeddragon", "birb"];
             }
@@ -26,21 +26,9 @@ module.exports = async(client) => {
             if (focusedOption.value.startsWith("s")) {
                 choices = ["snake"];
             }
-
-            try {
-                const filtered = choices.filter(choice => choice.startsWith(focusedOption.value));
-                await interaction.respond(
-                    filtered.map(choice => ({ name: choice, value: choice })),
-                );
-            } catch (error) {
-                console.error(error);
-            }
         }
 
         if (interaction.commandName === "genshin") {
-            const focusedOption = interaction.options.getFocused(true);
-            var choices;
-
             if (focusedOption.value.startsWith("a")) {
                 choices = ["amber", "ayaka"];
             }
@@ -74,21 +62,9 @@ module.exports = async(client) => {
             if (focusedOption.value.startsWith("y")) {
                 choices = ["yaemiko"];
             }
-
-            try {
-                const filtered = choices.filter(choice => choice.startsWith(focusedOption.value));
-                await interaction.respond(
-                    filtered.map(choice => ({ name: choice, value: choice })),
-                );
-            } catch (error) {
-                console.error(error);
-            }
         }
 
         if (interaction.commandName === "hentai") {
-            const focusedOption = interaction.options.getFocused(true);
-            var choices;
-
             if (focusedOption.value.startsWith("a")) {
                 choices = ["amber", "anal", "ayaka"];
             }
@@ -146,15 +122,15 @@ module.exports = async(client) => {
             if (focusedOption.value.startsWith("y")) {
                 choices = ["yaemiko", "yuri"];
             }
+        }
 
-            try {
-                const filtered = choices.filter(choice => choice.startsWith(focusedOption.value));
-                await interaction.respond(
-                    filtered.map(choice => ({ name: choice, value: choice })),
-                );
-            } catch (error) {
-                console.error(error);
-            }
+        try {
+            const filtered = choices.filter(choice => choice.startsWith(focusedOption.value));
+            await interaction.respond(
+                filtered.map(choice => ({ name: choice, value: choice })),
+            );
+        } catch (error) {
+            console.error(error);
         }
     });
 };
