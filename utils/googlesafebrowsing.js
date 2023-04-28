@@ -2,8 +2,7 @@ const { safebrowsingapikey } = require("../config.json");
 
 module.exports = async(client) => {
     client.on("messageCreate", async message => {
-        if (message.author.bot) return;
-        if (!message.content) return;
+        if (message.author.bot || !message.content) return;
     
         try {
             for (const word of message.content.split(" ")) {
