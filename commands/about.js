@@ -14,7 +14,7 @@ module.exports = {
             .setColor(globals.embedcolour)
             .setDescription("Made By Lillie")
             .setThumbnail(member.displayAvatarURL())
-            .setFooter({ text: "ID: " + member.id })
+            .setFooter({ text: `ID: ${member.id}` })
             .setTimestamp()
 
         const row = new ActionRowBuilder()
