@@ -68,7 +68,7 @@ module.exports = {
                 }
             }
         } else if (info.match(amrx)) {
-            const res = await fetch(`https://am.lillieh1000.gay/player/v1/?url=${info}`);
+            const res = await fetch(`https://am.lillieh1000.gay/?url=${info}`);
             if (res.ok) {
                 const data = await res.json();
 
@@ -78,10 +78,22 @@ module.exports = {
                 const embed = new EmbedBuilder()
                     .setColor(globals.embedcolour)
                     .setTitle("Music Player")
-                    .setDescription(`Queued: ${data.title}`)
+                    .setDescription("Queued")
+                    .setThumbnail(data.artwork)
+                    .addFields(
+                        { name: data.title, value: data.author, inline: false },
+                    )
                     .setTimestamp()
 
-                await interaction.editReply({ embeds: [embed] });
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setLabel("Audiomack")
+                            .setStyle(ButtonStyle.Link)
+                            .setURL(info)
+                    );
+
+                await interaction.editReply({ embeds: [embed], components: [row] });
 
                 if (globals.connectionstatus == 0) {
                     globals.connectionstatus = 1;
