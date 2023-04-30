@@ -1,4 +1,4 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 const { createAudioPlayer } = require("@discordjs/voice");
 var _ = require("underscore");
 
@@ -57,16 +57,16 @@ async function music(url, id) {
         const row4 = new ActionRowBuilder();
         const row5 = new ActionRowBuilder();
 
-        const appleMusicButton = new ButtonBuilder().setLabel('Apple Music').setStyle(ButtonStyle.Link);
-        const audiomackButton = new ButtonBuilder().setLabel('Audiomack').setStyle(ButtonStyle.Link);
-        const deezerButton = new ButtonBuilder().setLabel('Deezer').setStyle(ButtonStyle.Link);
-        const napsterButton = new ButtonBuilder().setLabel('Napster').setStyle(ButtonStyle.Link);
-        const pandoraButton = new ButtonBuilder().setLabel('Pandora').setStyle(ButtonStyle.Link);
-        const soundcloudButton = new ButtonBuilder().setLabel('SoundCloud').setStyle(ButtonStyle.Link);
-        const tidalButton = new ButtonBuilder().setLabel('Tidal').setStyle(ButtonStyle.Link);
-        const spotifyButton = new ButtonBuilder().setLabel('Spotify').setStyle(ButtonStyle.Link);
-        const youtubeButton = new ButtonBuilder().setLabel('YouTube').setStyle(ButtonStyle.Link);
-        const youtubeMusicButton = new ButtonBuilder().setLabel('YouTube Music').setStyle(ButtonStyle.Link);
+        const appleMusicButton = new ButtonBuilder().setLabel("Apple Music").setStyle(ButtonStyle.Link);
+        const audiomackButton = new ButtonBuilder().setLabel("Audiomack").setStyle(ButtonStyle.Link);
+        const deezerButton = new ButtonBuilder().setLabel("Deezer").setStyle(ButtonStyle.Link);
+        const napsterButton = new ButtonBuilder().setLabel("Napster").setStyle(ButtonStyle.Link);
+        const pandoraButton = new ButtonBuilder().setLabel("Pandora").setStyle(ButtonStyle.Link);
+        const soundcloudButton = new ButtonBuilder().setLabel("SoundCloud").setStyle(ButtonStyle.Link);
+        const tidalButton = new ButtonBuilder().setLabel("Tidal").setStyle(ButtonStyle.Link);
+        const spotifyButton = new ButtonBuilder().setLabel("Spotify").setStyle(ButtonStyle.Link);
+        const youtubeButton = new ButtonBuilder().setLabel("YouTube").setStyle(ButtonStyle.Link);
+        const youtubeMusicButton = new ButtonBuilder().setLabel("YouTube Music").setStyle(ButtonStyle.Link);
 
         if (data.linksByPlatform.appleMusic != null) {
             appleMusicButton.setURL(data.linksByPlatform.appleMusic.url);
