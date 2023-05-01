@@ -6,8 +6,9 @@ module.exports = async(client) => {
     
         try {
             for (const word of message.content.split(' ')) {
-                const rx = /^http(?:s)?:\/\/(.*)spotify\.com\//;
-                if (word.match(rx)) {
+                const amrx = /^http(?:s)?:\/\/(.*)audiomack\.com\//;
+                const sprx = /^http(?:s)?:\/\/(.*)spotify\.com\//;
+                if (word.match(amrx) || word.match(sprx)) {
                     const components = await globals.music(word, null);
                     
                     if (components != null && components != undefined && components.length != 0) {
