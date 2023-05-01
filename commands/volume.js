@@ -19,7 +19,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
             .setTitle("Music Player")
-            .setDescription("Changed audio volume level to: " + volume.toString())
+            .setDescription(`Changed audio volume level to: ${volume.toString()}`)
             .setTimestamp()
 
         await interaction.editReply({ embeds: [embed] });

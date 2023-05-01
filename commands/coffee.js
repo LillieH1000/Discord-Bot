@@ -13,7 +13,6 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
                 .setTitle("Coffee Pics")
-                .setDescription("[AlexFlipnote.Dev](https://alexflipnote.dev/)")
                 .setImage(data.file)
                 .setTimestamp()
             const row = new ActionRowBuilder()

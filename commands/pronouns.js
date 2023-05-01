@@ -83,7 +83,7 @@ module.exports = {
                 .setColor(globals.embedcolour)
                 .setTitle("PronounDB")
                 .addFields(
-                    { name: "Pronouns of " + user.username + ":", value: pronoun, inline: false },
+                    { name: `Pronouns of ${user.username}:`, value: pronoun, inline: false },
                 )
                 .setTimestamp()
             await interaction.editReply({ embeds: [embed], ephemeral: true });

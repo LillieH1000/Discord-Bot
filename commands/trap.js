@@ -7,19 +7,18 @@ module.exports = {
 		.setDescription("Posts a random cute anime boy trap picture"),
 	async execute(interaction) {
         await interaction.deferReply();
-        const image = await globals.reddit("cutetraps", []);
+        const url = await globals.reddit("cutetraps", []);
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
             .setTitle("Trap Pics")
-            .setDescription("[r/CuteTraps](https://www.reddit.com/r/CuteTraps/)")
-            .setImage(image)
+            .setImage(url)
             .setTimestamp()
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
                     .setLabel("View Original Image")
                     .setStyle(ButtonStyle.Link)
-                    .setURL(image)
+                    .setURL(url)
             );
         await interaction.editReply({ embeds: [embed], components: [row] });
 	},

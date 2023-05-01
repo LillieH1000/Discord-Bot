@@ -7,19 +7,18 @@ module.exports = {
 		.setDescription("Posts a random menhera picture"),
 	async execute(interaction) {
         await interaction.deferReply();
-        const image = await globals.reddit("menhera", []);
+        const url = await globals.reddit("menhera", []);
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
             .setTitle("Menhera Pics")
-            .setDescription("[r/menhera](https://www.reddit.com/r/menhera/)")
-            .setImage(image)
+            .setImage(url)
             .setTimestamp()
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
                     .setLabel("View Original Image")
                     .setStyle(ButtonStyle.Link)
-                    .setURL(image)
+                    .setURL(url)
             );
         await interaction.editReply({ embeds: [embed], components: [row] });
 	},

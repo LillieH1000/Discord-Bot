@@ -10,36 +10,34 @@ module.exports = {
         await interaction.deferReply();
         var option = _.sample([1, 2]);
         if (option == 1) {
-            const image = await globals.reddit("wholesomeyuri", []);
+            const url = await globals.reddit("wholesomeyuri", []);
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
                 .setTitle("Yuri Pics")
-                .setDescription("[r/Wholesome Yuri](https://www.reddit.com/r/wholesomeyuri/)")
-                .setImage(image)
+                .setImage(url)
                 .setTimestamp()
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
                         .setLabel("View Original Image")
                         .setStyle(ButtonStyle.Link)
-                        .setURL(image)
+                        .setURL(url)
                 );
             await interaction.editReply({ embeds: [embed], components: [row] });
         }
         if (option == 2) {
-            const image = await globals.reddit("hololiveyuri", []);
+            const url = await globals.reddit("hololiveyuri", []);
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
                 .setTitle("Yuri Pics")
-                .setDescription("[r/Hololive Yuri](https://www.reddit.com/r/HololiveYuri/)")
-                .setImage(image)
+                .setImage(url)
                 .setTimestamp()
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
                         .setLabel("View Original Image")
                         .setStyle(ButtonStyle.Link)
-                        .setURL(image)
+                        .setURL(url)
                 );
             await interaction.editReply({ embeds: [embed], components: [row] });
         }

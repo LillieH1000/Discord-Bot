@@ -16,7 +16,6 @@ module.exports = {
                 const embed = new EmbedBuilder()
                     .setColor(globals.embedcolour)
                     .setTitle("Megumin Pics")
-                    .setDescription("[Waifu.Pics](https://waifu.pics/)")
                     .setImage(data.url)
                     .setTimestamp()
                 const row = new ActionRowBuilder()
@@ -30,19 +29,18 @@ module.exports = {
             }
         }
         if (option == 2) {
-            const image = await globals.reddit("megumin", []);
+            const url = await globals.reddit("megumin", []);
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
                 .setTitle("Megumin Pics")
-                .setDescription("[r/Megumin and Megumin Explosion Related](https://www.reddit.com/r/Megumin/)")
-                .setImage(image)
+                .setImage(url)
                 .setTimestamp()
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
                         .setLabel("View Original Image")
                         .setStyle(ButtonStyle.Link)
-                        .setURL(image)
+                        .setURL(url)
                 );
             await interaction.editReply({ embeds: [embed], components: [row] });
         }

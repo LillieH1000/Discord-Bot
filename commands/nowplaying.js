@@ -17,7 +17,7 @@ module.exports = {
         if (globals.nowplaying == "") {
             embed.setDescription("There is currently nothing playing")
         } else {
-            embed.setDescription("Now Playing: " + globals.nowplaying)
+            embed.setDescription(`Now Playing: ${globals.nowplaying}`)
         }
 
         await interaction.editReply({ embeds: [embed] });

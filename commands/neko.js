@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription("Posts a random neko picture"),
 	async execute(interaction) {
         await interaction.deferReply();
-        var option = _.sample([1, 2, 3, 4, 5, 6]);
+        var option = _.sample([1, 2, 3, 4]);
         if (option == 1) {
             const res = await fetch("https://nekos.life/api/v2/img/neko");
             if (res.ok) {
@@ -16,7 +16,6 @@ module.exports = {
                 const embed = new EmbedBuilder()
                     .setColor(globals.embedcolour)
                     .setTitle("Neko Pics")
-                    .setDescription("[Nekos.Life](https://nekos.life/)")
                     .setImage(data.url)
                     .setTimestamp()
                 const row = new ActionRowBuilder()
@@ -36,7 +35,6 @@ module.exports = {
                 const embed = new EmbedBuilder()
                     .setColor(globals.embedcolour)
                     .setTitle("Neko Pics")
-                    .setDescription("[Waifu.Pics](https://waifu.pics/)")
                     .setImage(data.url)
                     .setTimestamp()
                 const row = new ActionRowBuilder()
@@ -56,7 +54,6 @@ module.exports = {
                 const embed = new EmbedBuilder()
                     .setColor(globals.embedcolour)
                     .setTitle("Neko Pics")
-                    .setDescription("[Nekos.Best](https://nekos.best/)")
                     .setImage(data.results[0].url)
                     .setTimestamp()
                 const row = new ActionRowBuilder()
@@ -70,59 +67,18 @@ module.exports = {
             }
         }
         if (option == 4) {
-            const res = await fetch("https://neko-love.xyz/api/v1/neko/");
-            if (res.ok) {
-                const data = await res.json();
-                const embed = new EmbedBuilder()
-                    .setColor(globals.embedcolour)
-                    .setTitle("Neko Pics")
-                    .setDescription("[Neko-Love](https://neko-love.xyz/)")
-                    .setImage(data.url)
-                    .setTimestamp()
-                const row = new ActionRowBuilder()
-                    .addComponents(
-                        new ButtonBuilder()
-                            .setLabel("View Original Image")
-                            .setStyle(ButtonStyle.Link)
-                            .setURL(data.url)
-                    );
-                await interaction.editReply({ embeds: [embed], components: [row] });
-            }
-        }
-        if (option == 5) {
-            const res = await fetch("https://hmtai.herokuapp.com/v2/neko/");
-            if (res.ok) {
-                const data = await res.json();
-                const embed = new EmbedBuilder()
-                    .setColor(globals.embedcolour)
-                    .setTitle("Neko Pics")
-                    .setDescription("[Hmtai](https://hmtai.herokuapp.com/)")
-                    .setImage(data.url)
-                    .setTimestamp()
-                const row = new ActionRowBuilder()
-                    .addComponents(
-                        new ButtonBuilder()
-                            .setLabel("View Original Image")
-                            .setStyle(ButtonStyle.Link)
-                            .setURL(data.url)
-                    );
-                await interaction.editReply({ embeds: [embed], components: [row] });
-            }
-        }
-        if (option == 6) {
-            const image = await globals.reddit("catgirlsfw", []);
+            const url = await globals.reddit("catgirlsfw", []);
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
                 .setTitle("Neko Pics")
-                .setDescription("[r/CatgirlSFW](https://www.reddit.com/r/CatgirlSFW/)")
-                .setImage(image)
+                .setImage(url)
                 .setTimestamp()
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
                         .setLabel("View Original Image")
                         .setStyle(ButtonStyle.Link)
-                        .setURL(image)
+                        .setURL(url)
                 );
             await interaction.editReply({ embeds: [embed], components: [row] });
         }

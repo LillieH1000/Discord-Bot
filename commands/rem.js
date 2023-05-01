@@ -7,19 +7,18 @@ module.exports = {
 		.setDescription("Posts a random rem picture"),
 	async execute(interaction) {
         await interaction.deferReply();
-        const image = await globals.reddit("onetruerem", []);
+        const url = await globals.reddit("onetruerem", []);
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
             .setTitle("Rem Pics")
-            .setDescription("[r/OneTrueRem](https://www.reddit.com/r/OneTrueRem/)")
-            .setImage(image)
+            .setImage(url)
             .setTimestamp()
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
                     .setLabel("View Original Image")
                     .setStyle(ButtonStyle.Link)
-                    .setURL(image)
+                    .setURL(url)
             );
         await interaction.editReply({ embeds: [embed], components: [row] });
 	},
