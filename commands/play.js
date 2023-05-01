@@ -32,6 +32,7 @@ module.exports = {
             const res = await fetch(`https://yt.lillieh1000.gay/?videoID=${encodeURIComponent(info.match(ytrx)[1])}`);
             if (res.ok) {
                 const data = await res.json();
+                const components = await globals.music(null, info.match(ytrx)[1]);
 
                 globals.queue.push(data.best.audio.mp4);
                 globals.titles.push(data.title);
@@ -46,15 +47,11 @@ module.exports = {
                     )
                     .setTimestamp()
 
-                const row = new ActionRowBuilder()
-                    .addComponents(
-                        new ButtonBuilder()
-                            .setLabel("YouTube")
-                            .setStyle(ButtonStyle.Link)
-                            .setURL(`https://youtu.be/${data.videoID}`)
-                    );
-
-                await interaction.editReply({ embeds: [embed], components: [row] });
+                if (components != null && components != undefined && components.length != 0) {
+                    await interaction.editReply({ embeds: [embed], components: components });
+                } else {
+                    await interaction.editReply({ embeds: [embed] });
+                }
 
                 if (globals.connectionstatus == 0) {
                     globals.connectionstatus = 1;
@@ -71,6 +68,7 @@ module.exports = {
             const res = await fetch(`https://am.lillieh1000.gay/?url=${encodeURIComponent(info)}`);
             if (res.ok) {
                 const data = await res.json();
+                const components = await globals.music(info, null);
 
                 globals.queue.push(data.streamURL);
                 globals.titles.push(data.title);
@@ -85,15 +83,11 @@ module.exports = {
                     )
                     .setTimestamp()
 
-                const row = new ActionRowBuilder()
-                    .addComponents(
-                        new ButtonBuilder()
-                            .setLabel("Audiomack")
-                            .setStyle(ButtonStyle.Link)
-                            .setURL(info)
-                    );
-
-                await interaction.editReply({ embeds: [embed], components: [row] });
+                if (components != null && components != undefined && components.length != 0) {
+                    await interaction.editReply({ embeds: [embed], components: components });
+                } else {
+                    await interaction.editReply({ embeds: [embed] });
+                }
 
                 if (globals.connectionstatus == 0) {
                     globals.connectionstatus = 1;
@@ -114,6 +108,7 @@ module.exports = {
                 const res2 = await fetch(`https://yt.lillieh1000.gay/?videoID=${encodeURIComponent(data1.info[0].videoID)}`);
                 if (res2.ok) {
                     const data2 = await res2.json();
+                    const components = await globals.music(null, data1.info[0].videoID);
 
                     globals.queue.push(data2.best.audio.mp4);
                     globals.titles.push(data2.title);
@@ -128,15 +123,11 @@ module.exports = {
                         )
                         .setTimestamp()
 
-                    const row = new ActionRowBuilder()
-                        .addComponents(
-                            new ButtonBuilder()
-                                .setLabel("YouTube")
-                                .setStyle(ButtonStyle.Link)
-                                .setURL(`https://youtu.be/${data2.videoID}`)
-                        );
-
-                    await interaction.editReply({ embeds: [embed], components: [row] });
+                    if (components != null && components != undefined && components.length != 0) {
+                        await interaction.editReply({ embeds: [embed], components: components });
+                    } else {
+                        await interaction.editReply({ embeds: [embed] });
+                    }
 
                     if (globals.connectionstatus == 0) {
                         globals.connectionstatus = 1;
