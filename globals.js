@@ -17,7 +17,8 @@ async function reddit(subreddit, flairs) {
 
     if (flairs != null && flairs != undefined && flairs.length != 0) {
         flairs.forEach((flair) => {
-            url += `&q=flair_name:"${flair}"`;
+            const param = `&q=flair_name:"${flair}"`;
+            url += encodeURIComponent(param);
         });
     }
 
@@ -44,7 +45,7 @@ async function music(url, id) {
     if (url != null && id == null) {
         res = await fetch(`https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(url)}&songIfSingle=true`);
     } else if (url == null && id != null) {
-        res = await fetch(`https://api.song.link/v1-alpha.1/links?platform=youtube&type=song&id=${id}&songIfSingle=true`);
+        res = await fetch(`https://api.song.link/v1-alpha.1/links?platform=youtube&type=song&id=${encodeURIComponent(id)}&songIfSingle=true`);
     }
     if (res.ok) {
         const data = await res.json();
