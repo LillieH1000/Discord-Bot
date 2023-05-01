@@ -10,7 +10,7 @@ module.exports = {
         await interaction.deferReply();
         var option = _.sample([1, 2]);
         if (option == 1) {
-            const image = await globals.reddit("wholesomeyuri", false, []);
+            const image = await globals.reddit("wholesomeyuri", []);
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
                 .setTitle("Yuri Pics")
@@ -27,7 +27,7 @@ module.exports = {
             await interaction.editReply({ embeds: [embed], components: [row] });
         }
         if (option == 2) {
-            const image = await globals.reddit("hololiveyuri", false, []);
+            const image = await globals.reddit("hololiveyuri", []);
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
                 .setTitle("Yuri Pics")

@@ -7,7 +7,7 @@ module.exports = {
 		.setDescription("Posts a random emilia picture"),
 	async execute(interaction) {
         await interaction.deferReply();
-        const image = await globals.reddit("onetrueemilia", false, []);
+        const image = await globals.reddit("onetrueemilia", []);
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
             .setTitle("Emilia Pics")

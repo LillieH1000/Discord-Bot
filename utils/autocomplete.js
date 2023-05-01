@@ -63,62 +63,17 @@ module.exports = async(client) => {
         }
 
         if (interaction.commandName === "hentai") {
-            if (focusedOption.value.startsWith("a")) {
-                choices = ["amber", "anal", "ayaka"];
-            }
             if (focusedOption.value.startsWith("b")) {
-                choices = ["bdsm", "blowjob", "byleth"];
-            }
-            if (focusedOption.value.startsWith("c")) {
-                choices = ["chiisai", "cum"];
-            }
-            if (focusedOption.value.startsWith("e")) {
-                choices = ["ecchi", "emilia", "eula"];
-            }
-            if (focusedOption.value.startsWith("f")) {
-                choices = ["femboy", "femdom", "futanari"];
-            }
-            if (focusedOption.value.startsWith("g")) {
-                choices = ["ganyu", "genshin"];
-            }
-            if (focusedOption.value.startsWith("h")) {
-                choices = ["hutao"];
-            }
-            if (focusedOption.value.startsWith("k")) {
-                choices = ["keqing"];
-            }
-            if (focusedOption.value.startsWith("l")) {
-                choices = ["lumine"];
-            }
-            if (focusedOption.value.startsWith("m")) {
-                choices = ["masturbation"];
+                choices = ["blowjob"];
             }
             if (focusedOption.value.startsWith("n")) {
-                choices = ["neko", "nilou"];
-            }
-            if (focusedOption.value.startsWith("o")) {
-                choices = ["oral", "overwatch"];
-            }
-            if (focusedOption.value.startsWith("p")) {
-                choices = ["pee", "pegging", "public"];
-            }
-            if (focusedOption.value.startsWith("r")) {
-                choices = ["raiden"];
-            }
-            if (focusedOption.value.startsWith("s")) {
-                choices = ["shenhe", "soaked"];
+                choices = ["neko"];
             }
             if (focusedOption.value.startsWith("t")) {
-                choices = ["tentacles", "thick", "trap"];
-            }
-            if (focusedOption.value.startsWith("u")) {
-                choices = ["undressing", "uniform", "upskirt"];
+                choices = ["trap"];
             }
             if (focusedOption.value.startsWith("w")) {
                 choices = ["waifu"];
-            }
-            if (focusedOption.value.startsWith("y")) {
-                choices = ["yaemiko", "yuri"];
             }
         }
 

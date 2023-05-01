@@ -12,8 +12,8 @@ var nowplaying = "";
 
 const embedcolour = "#FFC0DD";
 
-async function reddit(subreddit, nsfw, flairs) {
-    var url = `https://www.reddit.com/r/${subreddit}/search.json?q=nsfw:${nsfw}&restrict_sr=true&limit=100`;
+async function reddit(subreddit, flairs) {
+    var url = `https://www.reddit.com/r/${subreddit}/search.json?q=nsfw:false&restrict_sr=true&limit=100`;
 
     if (flairs != null && flairs != undefined && flairs.length != 0) {
         flairs.forEach((flair) => {
@@ -27,9 +27,7 @@ async function reddit(subreddit, nsfw, flairs) {
         const data = await res.json();
         data.data.children.forEach((child) => {
             if (child.data.url.endsWith("jpg") || child.data.url.endsWith("jpeg") || child.data.url.endsWith("png") || child.data.url.endsWith("gif")) {
-                if (nsfw == false && child.data.over_18 == false) {
-                    images.push(child.data.url);
-                } else if (nsfw == true && child.data.over_18 == true) {
+                if (child.data.over_18 == false) {
                     images.push(child.data.url);
                 }
             }

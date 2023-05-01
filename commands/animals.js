@@ -29,7 +29,7 @@ module.exports = {
             return;
         }
         if (category == "beardeddragon") {
-            url = await globals.reddit("beardeddragon", false, []);
+            url = await globals.reddit("beardeddragon", []);
         }
         if (category == "birb") {
             const res = await fetch("https://api.alexflipnote.dev/birb");
@@ -62,10 +62,10 @@ module.exports = {
                 }
             }
             if (option == 4) {
-                url = await globals.reddit("cats", false, []);
+                url = await globals.reddit("cats", []);
             }
             if (option == 5) {
-                url = await globals.reddit("catpictures", false, []);
+                url = await globals.reddit("catpictures", []);
             }
         }
         if (category == "dog") {
@@ -92,7 +92,7 @@ module.exports = {
                 }
             }
             if (option == 4) {
-                url = await globals.reddit("dogpictures", false, []);
+                url = await globals.reddit("dogpictures", []);
             }
         }
         if (category == "duck") {
@@ -105,7 +105,7 @@ module.exports = {
                 }
             }
             if (option == 2) {
-                url = await globals.reddit("duck", false, []);
+                url = await globals.reddit("duck", []);
             }
         }
         if (category == "fox") {
@@ -182,7 +182,7 @@ module.exports = {
             }
         }
         if (category == "snake") {
-            url = await globals.reddit("snakes", false, []);
+            url = await globals.reddit("snakes", []);
         }
 
         const embed = new EmbedBuilder()

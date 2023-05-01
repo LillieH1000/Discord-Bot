@@ -7,7 +7,7 @@ module.exports = {
 		.setDescription("Posts a random hatsune miku picture. Made for Grace <3"),
 	async execute(interaction) {
         await interaction.deferReply();
-        const url = await globals.reddit("hatsunemiku", false, ["fanart"]);
+        const url = await globals.reddit("hatsunemiku", ["fanart"]);
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
             .setTitle("Hatsune Miku Pics")
