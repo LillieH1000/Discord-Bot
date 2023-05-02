@@ -31,7 +31,7 @@ module.exports = {
 
         const rankedstatus = ranks.seasons[Object.keys(ranks.seasons)[0]];
 
-        const playerinfo = `Status: ${userstatus.status.charAt(0).toUpperCase() + userstatus.status.slice(1)}
+        const playerinfo = `Status:\xa0${userstatus.status.charAt(0).toUpperCase() + userstatus.status.slice(1)}
         Level:\xa0${progression.level.toLocaleString()}
         XP\xa0Of\xa0Current\xa0Level:\xa0${progression.xp.toLocaleString()}
         Total\xa0XP:\xa0${stats.pvp.general.xp.toLocaleString()}
