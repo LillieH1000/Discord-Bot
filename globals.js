@@ -62,8 +62,8 @@ async function music(url, id) {
         const napsterButton = new ButtonBuilder().setLabel("Napster").setStyle(ButtonStyle.Link);
         const pandoraButton = new ButtonBuilder().setLabel("Pandora").setStyle(ButtonStyle.Link);
         const soundcloudButton = new ButtonBuilder().setLabel("SoundCloud").setStyle(ButtonStyle.Link);
-        const tidalButton = new ButtonBuilder().setLabel("Tidal").setStyle(ButtonStyle.Link);
         const spotifyButton = new ButtonBuilder().setLabel("Spotify").setStyle(ButtonStyle.Link);
+        const tidalButton = new ButtonBuilder().setLabel("Tidal").setStyle(ButtonStyle.Link);
         const youtubeButton = new ButtonBuilder().setLabel("YouTube").setStyle(ButtonStyle.Link);
         const youtubeMusicButton = new ButtonBuilder().setLabel("YouTube Music").setStyle(ButtonStyle.Link);
 
@@ -151,20 +151,6 @@ async function music(url, id) {
                 row5.addComponents(soundcloudButton);
             }
         }
-        if (data.linksByPlatform.tidal != null) {
-            tidalButton.setURL(data.linksByPlatform.tidal.url);
-            if (row1.components != null && row1.components != undefined && row1.components.length < 5) {
-                row1.addComponents(tidalButton);
-            } else if (row2.components != null && row2.components != undefined && row2.components.length < 5) {
-                row2.addComponents(tidalButton);
-            } else if (row3.components != null && row3.components != undefined && row3.components.length < 5) {
-                row3.addComponents(tidalButton);
-            } else if (row4.components != null && row4.components != undefined && row4.components.length < 5) {
-                row4.addComponents(tidalButton);
-            } else if (row5.components != null && row5.components != undefined && row5.components.length < 5) {
-                row5.addComponents(tidalButton);
-            }
-        }
         if (data.linksByPlatform.spotify != null) {
             spotifyButton.setURL(data.linksByPlatform.spotify.url);
             if (row1.components != null && row1.components != undefined && row1.components.length < 5) {
@@ -177,6 +163,20 @@ async function music(url, id) {
                 row4.addComponents(spotifyButton);
             } else if (row5.components != null && row5.components != undefined && row5.components.length < 5) {
                 row5.addComponents(spotifyButton);
+            }
+        }
+        if (data.linksByPlatform.tidal != null) {
+            tidalButton.setURL(data.linksByPlatform.tidal.url);
+            if (row1.components != null && row1.components != undefined && row1.components.length < 5) {
+                row1.addComponents(tidalButton);
+            } else if (row2.components != null && row2.components != undefined && row2.components.length < 5) {
+                row2.addComponents(tidalButton);
+            } else if (row3.components != null && row3.components != undefined && row3.components.length < 5) {
+                row3.addComponents(tidalButton);
+            } else if (row4.components != null && row4.components != undefined && row4.components.length < 5) {
+                row4.addComponents(tidalButton);
+            } else if (row5.components != null && row5.components != undefined && row5.components.length < 5) {
+                row5.addComponents(tidalButton);
             }
         }
         if (data.linksByPlatform.youtube != null) {
