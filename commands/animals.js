@@ -23,7 +23,7 @@ module.exports = {
                 D:\ndog\nduck\n
                 F:\nfox\nfrog\n
                 G:\ngoose\n
-                S:\nsnake`)
+                S:\nsnake`.replace(/[ \t]/gm, ""))
                 .setTimestamp()
             await interaction.editReply({ embeds: [embed] });
             return;

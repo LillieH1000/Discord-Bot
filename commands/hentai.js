@@ -23,7 +23,7 @@ module.exports = {
                     .setDescription(`B:\nblowjob\n
                     N:\nneko\n
                     T:\ntrap\n
-                    W:\nwaifu`)
+                    W:\nwaifu`.replace(/[ \t]/gm, ""))
                     .setTimestamp()
                 await interaction.editReply({ embeds: [embed] });
                 return;

@@ -28,7 +28,7 @@ module.exports = {
                 N:\nnahida\nnilou\nnoelle\n
                 R:\nraiden\n
                 S:\nshenhe\n
-                Y:\nyaemiko`)
+                Y:\nyaemiko`.replace(/[ \t]/gm, ""))
                 .setTimestamp()
             await interaction.editReply({ embeds: [embed] });
             return;

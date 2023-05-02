@@ -37,7 +37,7 @@ module.exports = {
         Total XP: ${stats.pvp.general.xp.toLocaleString()}
         Lootbox Probability: ${progression.lootboxProbability.percent.toLocaleString()}
         Rank: ${rankedstatus.regions.ncsa.boards.pvp_ranked.current.name.toString()}
-        MMR: ${rankedstatus.regions.ncsa.boards.pvp_ranked.current.mmr.toLocaleString()}`;
+        MMR: ${rankedstatus.regions.ncsa.boards.pvp_ranked.current.mmr.toLocaleString()}`.replace(/[ \t]/gm, "");
 
         const generalinfo = `Playtime: ${stats.pvp.general.playtime.toLocaleString()}
         Matches Played: ${stats.pvp.general.matches.toLocaleString()}
@@ -55,7 +55,7 @@ module.exports = {
         Rappel Breaches: ${stats.pvp.general.rappelBreaches.toLocaleString()}
         Barricades Deployed: ${stats.pvp.general.barricadesDeployed.toLocaleString()}
         Reinforcements Deployed: ${stats.pvp.general.reinforcementsDeployed.toLocaleString()}
-        Suicides: ${stats.pvp.general.suicides.toLocaleString()}`;
+        Suicides: ${stats.pvp.general.suicides.toLocaleString()}`.replace(/[ \t]/gm, "");
 
         const casualinfo = `Playtime: ${stats.pvp.queues.casual.playtime.toLocaleString()}
         Matches Played: ${stats.pvp.queues.casual.matches.toLocaleString()}
@@ -64,7 +64,7 @@ module.exports = {
         Win Rate: ${stats.pvp.queues.casual.winRate.toLocaleString()}
         Kills: ${stats.pvp.queues.casual.kills.toLocaleString()}
         Deaths: ${stats.pvp.queues.casual.deaths.toLocaleString()}
-        KD Rate: ${stats.pvp.queues.casual.kd.toLocaleString()}`;
+        KD Rate: ${stats.pvp.queues.casual.kd.toLocaleString()}`.replace(/[ \t]/gm, "");
 
         const rankedinfo = `Playtime: ${stats.pvp.queues.ranked.playtime.toLocaleString()}
         Matches Played: ${stats.pvp.queues.ranked.matches.toLocaleString()}
@@ -73,7 +73,7 @@ module.exports = {
         Win Rate: ${stats.pvp.queues.ranked.winRate.toLocaleString()}
         Kills: ${stats.pvp.queues.ranked.kills.toLocaleString()}
         Deaths: ${stats.pvp.queues.ranked.deaths.toLocaleString()}
-        KD Rate: ${stats.pvp.queues.ranked.kd.toLocaleString()}`;
+        KD Rate: ${stats.pvp.queues.ranked.kd.toLocaleString()}`.replace(/[ \t]/gm, "");
 
         const terroristhuntinfo = `Playtime: ${stats.pve.general.playtime.toLocaleString()}
         Matches Played: ${stats.pve.general.matches.toLocaleString()}
@@ -91,27 +91,27 @@ module.exports = {
         Rappel Breaches: ${stats.pve.general.rappelBreaches.toLocaleString()}
         Barricades Deployed: ${stats.pve.general.barricadesDeployed.toLocaleString()}
         Reinforcements Deployed: ${stats.pve.general.reinforcementsDeployed.toLocaleString()}
-        Suicides: ${stats.pve.general.suicides.toLocaleString()}`;
+        Suicides: ${stats.pve.general.suicides.toLocaleString()}`.replace(/[ \t]/gm, "");
 
         const terroristhuntdisarmbombinfo = `Matches Played: ${stats.pve.modes.disarmBomb.matches.toLocaleString()}
         Wins: ${stats.pve.modes.disarmBomb.wins.toLocaleString()}
         Losses: ${stats.pve.modes.disarmBomb.losses.toLocaleString()}
-        Win Rate: ${stats.pve.modes.disarmBomb.winRate.toLocaleString()}`;
+        Win Rate: ${stats.pve.modes.disarmBomb.winRate.toLocaleString()}`.replace(/[ \t]/gm, "");
 
         const terroristhunteliminationinfo = `Matches Played: ${stats.pve.modes.elimination.matches.toLocaleString()}
         Wins: ${stats.pve.modes.elimination.wins.toLocaleString()}
         Losses: ${stats.pve.modes.elimination.losses.toLocaleString()}
-        Win Rate: ${stats.pve.modes.elimination.winRate.toLocaleString()}`;
+        Win Rate: ${stats.pve.modes.elimination.winRate.toLocaleString()}`.replace(/[ \t]/gm, "");
 
         const terroristhuntprotecthostageinfo = `Matches Played: ${stats.pve.modes.protectHostage.matches.toLocaleString()}
         Wins: ${stats.pve.modes.protectHostage.wins.toLocaleString()}
         Losses: ${stats.pve.modes.protectHostage.losses.toLocaleString()}
-        Win Rate: ${stats.pve.modes.protectHostage.winRate.toLocaleString()}`;
+        Win Rate: ${stats.pve.modes.protectHostage.winRate.toLocaleString()}`.replace(/[ \t]/gm, "");
 
         const terroristhuntextracthostageinfo = `Matches Played: ${stats.pve.modes.extractHostage.matches.toLocaleString()}
         Wins: ${stats.pve.modes.extractHostage.wins.toLocaleString()}
         Losses: ${stats.pve.modes.extractHostage.losses.toLocaleString()}
-        Win Rate: ${stats.pve.modes.extractHostage.winRate.toLocaleString()}`;
+        Win Rate: ${stats.pve.modes.extractHostage.winRate.toLocaleString()}`.replace(/[ \t]/gm, "");
         
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
