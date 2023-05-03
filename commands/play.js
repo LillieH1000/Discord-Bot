@@ -1,5 +1,5 @@
 const { joinVoiceChannel, getVoiceConnection, createAudioResource } = require("@discordjs/voice");
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 var globals = require("../globals.js");
 
 module.exports = {
