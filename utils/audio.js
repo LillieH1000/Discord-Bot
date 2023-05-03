@@ -14,15 +14,16 @@ module.exports = async() => {
                 globals.connectionstatus = 0;
             } else {
                 globals.nowplaying = globals.titles[0];
-                const stream = fetch(globals.queue[0]);
-                if (stream.ok) {
-                    globals.resource = createAudioResource(stream.body, {
-                        inlineVolume: true
-                    });
-                    globals.resource.volume.setVolume(0.3);
-                    globals.player.play(globals.resource);
-                    globals.connection.subscribe(globals.player);
-                }
+                fetch(globals.queue[0]).then((stream) => {
+                    if (stream.ok) {
+                        globals.resource = createAudioResource(stream.body, {
+                            inlineVolume: true
+                        });
+                        globals.resource.volume.setVolume(0.3);
+                        globals.player.play(globals.resource);
+                        globals.connection.subscribe(globals.player);
+                    }
+                });
             }
         } catch (error) {
             console.error(error);
