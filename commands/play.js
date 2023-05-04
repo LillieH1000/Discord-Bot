@@ -36,6 +36,7 @@ module.exports = {
                 globals.queue.push(data.best.audio.mp4);
                 globals.titles.push(data.title);
 
+                const time = new Date(data.length * 1000).toISOString().slice(11, 19);
                 const embed = new EmbedBuilder()
                     .setColor(globals.embedcolour)
                     .setTitle("Music Player")
@@ -44,6 +45,7 @@ module.exports = {
                     .addFields(
                         { name: data.title, value: data.author, inline: false },
                     )
+                    .setFooter({ text: `Length: ${time}` })
                     .setTimestamp()
 
                 if (components != null && components != undefined && components.length != 0) {
@@ -118,6 +120,7 @@ module.exports = {
                     globals.queue.push(data2.best.audio.mp4);
                     globals.titles.push(data2.title);
 
+                    const time = new Date(data2.length * 1000).toISOString().slice(11, 19);
                     const embed = new EmbedBuilder()
                         .setColor(globals.embedcolour)
                         .setTitle("Music Player")
@@ -126,6 +129,7 @@ module.exports = {
                         .addFields(
                             { name: data2.title, value: data2.author, inline: false },
                         )
+                        .setFooter({ text: `Length: ${time}` })
                         .setTimestamp()
 
                     if (components != null && components != undefined && components.length != 0) {
