@@ -29,7 +29,7 @@ module.exports = {
             }
         }
         if (option == 2) {
-            const url = await globals.reddit("megumin", []);
+            const url = await globals.reddit("megumin", false, []);
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
                 .setTitle("Megumin Pics")

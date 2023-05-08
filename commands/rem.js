@@ -7,7 +7,7 @@ module.exports = {
 		.setDescription("Posts a random rem picture"),
 	async execute(interaction) {
         await interaction.deferReply();
-        const url = await globals.reddit("onetruerem", []);
+        const url = await globals.reddit("onetruerem", false, []);
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)
             .setTitle("Rem Pics")

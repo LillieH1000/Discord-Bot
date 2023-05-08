@@ -67,7 +67,7 @@ module.exports = {
             }
         }
         if (option == 4) {
-            const url = await globals.reddit("catgirlsfw", []);
+            const url = await globals.reddit("catgirlsfw", false, []);
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
                 .setTitle("Neko Pics")
