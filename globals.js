@@ -13,7 +13,12 @@ var nowplaying = "";
 const embedcolour = "#FFC0DD";
 
 async function reddit(subreddit, nsfw, flairs) {
-    var url = `https://api.reddit.com/r/${subreddit}/hot?q=nsfw:${nsfw}&restrict_sr=true&limit=100`;
+    var url = new String();
+    if (nsfw == false) {
+        url = `https://www.reddit.com/r/${subreddit}/search.json?q=nsfw:false&restrict_sr=true&limit=100`;
+    } else if (nsfw == true) {
+        url = `https://api.reddit.com/r/${subreddit}/hot?q=nsfw:true&limit=100`;
+    }
 
     if (flairs != null && flairs != undefined && flairs.length != 0) {
         flairs.forEach((flair) => {
