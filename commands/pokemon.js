@@ -12,9 +12,7 @@ module.exports = {
         .addStringOption(option =>
             option.setName("form")
                 .setDescription("Enter the pokemon form")
-                .setRequired(true)
                 .addChoices(
-                    { name: "None", value: "none" },
                     { name: "Alola", value: "alola" },
                     { name: "Galar", value: "galar" },
                     { name: "Hisui", value: "hisui" },
@@ -30,9 +28,7 @@ module.exports = {
         const message = interaction.options.getString("message");
 
         var pokemon = "";
-        if (form == "none") {
-            pokemon = name;
-        } else if (form == "alola") {
+        if (form == "alola") {
             pokemon = name + "-alola";
         } else if (form == "galar") {
             pokemon = name + "-galar";
@@ -40,6 +36,8 @@ module.exports = {
             pokemon = name + "-hisui";
         } else if (form == "paldea") {
             pokemon = name + "-paldea";
+        } else {
+            pokemon = name;
         }
 
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.replace(" ", "-").toLowerCase()}`);
