@@ -1,5 +1,5 @@
 const fs = require("node:fs");
-const { Client, Collection, GatewayIntentBits, EmbedBuilder } = require("discord.js");
+const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const { token } = require("./config.json");
 var globals = require("./globals.js");
 
