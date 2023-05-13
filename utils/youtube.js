@@ -12,7 +12,7 @@ module.exports = async(client) => {
                 if (word.match(rx)) {
                     const body1 = {
                         "key": lilliesytapi,
-                        "videoID": encodeURIComponent(word.match(ytrx)[1]),
+                        "videoID": encodeURIComponent(word.match(rx)[1]),
                         "countryCode": "CA",
                         "showLinks": false
                     }
