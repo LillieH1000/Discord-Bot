@@ -1,9 +1,12 @@
 {
-	"clientId": "BotClientIdHere",
-	"token": "BotTokenHere",
-	"safebrowsingapikey": "GoogleSafeBrowsingApiKeyHere",
-	"ubisoftaccountinfo": [
-		"UbisoftAccountEmailHere",
-		"UbisoftAccountPasswordHere"
+	"client": "client",
+	"token": "token",
+	"safebrowsingapi": "key",
+	"lilliesytapi": "key",
+	"lilliesamapi": "key",
+	"lilliesosrsapi": "key",
+	"ubisoftaccount": [
+		"email",
+		"password"
 	]
 }
