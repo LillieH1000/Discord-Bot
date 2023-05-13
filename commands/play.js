@@ -1,5 +1,6 @@
 const { joinVoiceChannel, getVoiceConnection, createAudioResource } = require("@discordjs/voice");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { lilliesytapi, lilliesamapi } = require("./config.json");
 var globals = require("../globals.js");
 
 module.exports = {
@@ -28,7 +29,19 @@ module.exports = {
         const ytrx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
         const amrx = /^http(?:s)?:\/\/(.*)audiomack\.com\//;
         if (info.match(ytrx)) {
-            const res = await fetch(`https://yt.lillieh1000.gay/?videoID=${encodeURIComponent(info.match(ytrx)[1])}`);
+            const body = {
+                "key": lilliesytapi,
+                "videoID": encodeURIComponent(info.match(ytrx)[1]),
+                "countryCode": "CA",
+                "showLinks": true
+            }
+            const res = await fetch("https://yt.lillieh1000.gay/", {
+                method: "post",
+                body: JSON.stringify(body),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
             if (res.ok) {
                 const data = await res.json();
                 const components = await globals.music(null, info.match(ytrx)[1]);
@@ -69,7 +82,17 @@ module.exports = {
                 }
             }
         } else if (info.match(amrx)) {
-            const res = await fetch(`https://am.lillieh1000.gay/?url=${encodeURIComponent(info)}`);
+            const body = {
+                "key": lilliesamapi,
+                "url": encodeURIComponent(info)
+            }
+            const res = await fetch("https://am.lillieh1000.gay/", {
+                method: "post",
+                body: JSON.stringify(body),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
             if (res.ok) {
                 const data = await res.json();
                 const components = await globals.music(info, null);
@@ -108,11 +131,34 @@ module.exports = {
                 }
             }
         } else {
-            const res1 = await fetch(`https://yt.lillieh1000.gay/?query=${encodeURIComponent(info)}`);
+            const body1 = {
+                "key": lilliesytapi,
+                "query": encodeURIComponent(info),
+                "countryCode": "CA"
+            }
+            const res1 = await fetch("https://yt.lillieh1000.gay/", {
+                method: "post",
+                body: JSON.stringify(body1),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
             if (res1.ok) {
                 const data1 = await res1.json();
 
-                const res2 = await fetch(`https://yt.lillieh1000.gay/?videoID=${encodeURIComponent(data1.info[0].videoID)}`);
+                const body2 = {
+                    "key": lilliesytapi,
+                    "videoID": encodeURIComponent(data1.info[0].videoID),
+                    "countryCode": "CA",
+                    "showLinks": true
+                }
+                const res2 = await fetch("https://yt.lillieh1000.gay/", {
+                    method: "post",
+                    body: JSON.stringify(body2),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
                 if (res2.ok) {
                     const data2 = await res2.json();
                     const components = await globals.music(null, data1.info[0].videoID);

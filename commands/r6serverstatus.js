@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const R6API = require("r6api.js").default;
-const { ubisoftaccountinfo } = require("../config.json");
+const { ubisoftaccount } = require("../config.json");
 var globals = require("../globals.js");
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
 	async execute(interaction) {
         await interaction.deferReply();
         
-        const r6api = new R6API({ email: ubisoftaccountinfo[0], password: ubisoftaccountinfo[1] });
+        const r6api = new R6API({ email: ubisoftaccount[0], password: ubisoftaccount[1] });
         
         const serverstatus = await r6api.getStatus();
 
