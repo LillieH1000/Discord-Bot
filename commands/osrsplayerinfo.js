@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { lilliesosrsapi } = require("./config.json");
+const { lilliesosrsapi } = require("../config.json");
 var globals = require("../globals.js");
 
 module.exports = {

@@ -1,6 +1,6 @@
 const { joinVoiceChannel, getVoiceConnection, createAudioResource } = require("@discordjs/voice");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { lilliesytapi, lilliesamapi } = require("./config.json");
+const { lilliesytapi, lilliesamapi } = require("../config.json");
 var globals = require("../globals.js");
 
 module.exports = {

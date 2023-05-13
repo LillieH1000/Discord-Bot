@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const { lilliesytapi } = require("./config.json");
+const { lilliesytapi } = require("../config.json");
 var globals = require("../globals.js");
 
 module.exports = async(client) => {
