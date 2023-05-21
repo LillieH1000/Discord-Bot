@@ -10,7 +10,11 @@ curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 ```
 
 ```
-sudo apt install make g++ ffmpeg nodejs libtool-bin
+sudo apt install make g++ ffmpeg nodejs libtool-bin python3 python3-pip
+```
+
+```
+python3 -m pip install -U pip yt-dlp
 ```
 
 ```
