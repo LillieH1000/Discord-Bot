@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { lilliesosrsapi } = require("../config.json");
+const { osrsapi } = require("../config.json");
 var globals = require("../globals.js");
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
         const username = interaction.options.getString("username");
         
         const body = {
-            "key": lilliesosrsapi,
+            "key": osrsapi,
             "name": username
         }
         const res = await fetch("https://osrs.lillieh1000.gay/", {

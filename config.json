@@ -2,9 +2,7 @@
 	"client": "client",
 	"token": "token",
 	"safebrowsingapi": "key",
-	"lilliesytapi": "key",
-	"lilliesamapi": "key",
-	"lilliesosrsapi": "key",
+	"osrsapi": "key",
 	"ubisoftaccount": [
 		"email",
 		"password"
