@@ -27,20 +27,39 @@ async function ytdlp(type, interaction, components, details) {
     os.execCommand(command, function(value) {
         const output = JSON.parse(value);
 
-        globals.queue.push(output.url);
-        globals.titles.push(output.title);
+        var embed;
+        if (type == 0) {
+            globals.queue.push(output.url);
+            globals.titles.push(output.title);
 
-        const time = new Date(output.duration * 1000).toISOString().slice(11, 19);
-        const embed = new EmbedBuilder()
-            .setColor(globals.embedcolour)
-            .setTitle("Music Player")
-            .setDescription("Queued")
-            .setThumbnail(output.thumbnail)
-            .addFields(
-                { name: output.title, value: output.uploader, inline: false },
-            )
-            .setFooter({ text: `Length: ${time}` })
-            .setTimestamp()
+            const time = new Date(output.duration * 1000).toISOString().slice(11, 19);
+            embed = new EmbedBuilder()
+                .setColor(globals.embedcolour)
+                .setTitle("Music Player")
+                .setDescription("Queued")
+                .setThumbnail(output.thumbnail)
+                .addFields(
+                    { name: output.title, value: output.uploader, inline: false },
+                )
+                .setFooter({ text: `Length: ${time}` })
+                .setTimestamp()
+        }
+        if (type == 1) {
+            globals.queue.push(output.entries[0].url);
+            globals.titles.push(output.entries[0].title);
+
+            const time = new Date(output.entries[0].duration * 1000).toISOString().slice(11, 19);
+            embed = new EmbedBuilder()
+                .setColor(globals.embedcolour)
+                .setTitle("Music Player")
+                .setDescription("Queued")
+                .setThumbnail(output.entries[0].thumbnail)
+                .addFields(
+                    { name: output.entries[0].title, value: output.entries[0].uploader, inline: false },
+                )
+                .setFooter({ text: `Length: ${time}` })
+                .setTimestamp()
+        }
 
         if (components != null && components != undefined && components.length != 0) {
             interaction.editReply({ embeds: [embed], components: components });
@@ -90,7 +109,7 @@ module.exports = {
 
         const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
         if (url.match(rx)) {
-            const components = await globals.music(null, url.match(ytrx)[1]);
+            const components = await globals.music(null, url.match(rx)[1]);
             await ytdlp(0, interaction, components, url);
         } else if (url == "test") {
             const components = await globals.music(null, "zyRt-nBM3dY");
