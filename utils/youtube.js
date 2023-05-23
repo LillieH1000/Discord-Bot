@@ -49,13 +49,12 @@ module.exports = async(client) => {
             for (const word of message.content.split(" ")) {
                 const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
                 if (word.match(rx)) {
+                    const components = await globals.music(null, word.match(rx)[1]);
                     const res = await fetch(`https://returnyoutubedislikeapi.com/votes?videoId=${encodeURIComponent(word.match(rx)[1])}`);
                     if (res.ok) {
                         const data = await res.json();
-                        const components = await globals.music(null, word.match(rx)[1]);
                         await ytdlp(message, components, word, data.dislikes);
                     } else {
-                        const components = await globals.music(null, word.match(rx)[1]);
                         await ytdlp(message, components, word, null);
                     }
                 }
