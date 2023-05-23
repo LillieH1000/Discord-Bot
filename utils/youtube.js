@@ -26,11 +26,27 @@ async function ytdlp(message, components, details, dislikes) {
             .setFooter({ text: `Length: ${time}` })
             .setTimestamp()
 
-        if (dislikes != null) {
-            embed.setDescription(`Views: ${output.view_count.toLocaleString()}\nLikes: ${output.like_count.toLocaleString()}\nDislikes: ${dislikes.toLocaleString()}`)
+        var description = new String();
+        if (output.view_count != null && output.view_count != undefined && output.view_count.length != 0) {
+            if (description != null && description != undefined && description.length != 0) {
+                description += "\n";
+            }
+            description += `Views: ${output.view_count.toLocaleString()}`;
         }
-        if (dislikes == null) {
-            embed.setDescription(`Views: ${output.view_count.toLocaleString()}\nLikes: ${output.like_count.toLocaleString()}`)
+        if (output.like_count != null && output.like_count != undefined && output.like_count.length != 0) {
+            if (description != null && description != undefined && description.length != 0) {
+                description += "\n";
+            }
+            description += `Likes: ${output.like_count.toLocaleString()}`;
+        }
+        if (dislikes != null && dislikes != undefined && dislikes.length != 0) {
+            if (description != null && description != undefined && description.length != 0) {
+                description += "\n";
+            }
+            description += `Dislikes: ${dislikes.toLocaleString()}`;
+        }
+        if (description != null && description != undefined && description.length != 0) {
+            embed.setDescription(description);
         }
 
         if (components != null && components != undefined && components.length != 0) {
