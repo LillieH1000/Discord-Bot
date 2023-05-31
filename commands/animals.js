@@ -18,18 +18,14 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
                 .setTitle("Animal Categories")
-                .setDescription(`B:\nbeardeddragon\nbirb\n
+                .setDescription(`B:\nbirb\n
                 C:\ncat\n
                 D:\ndog\nduck\n
                 F:\nfox\nfrog\n
-                G:\ngoose\n
-                S:\nsnake`.replace(/[ \t]/gm, ""))
+                G:\ngoose`.replace(/[ \t]/gm, ""))
                 .setTimestamp()
             await interaction.editReply({ embeds: [embed] });
             return;
-        }
-        if (category == "beardeddragon") {
-            url = await globals.reddit("beardeddragon", false, []);
         }
         if (category == "birb") {
             const res = await fetch("https://api.alexflipnote.dev/birb");
@@ -39,7 +35,7 @@ module.exports = {
             }
         }
         if (category == "cat") {
-            var option = _.sample([1, 2, 3, 4, 5]);
+            var option = _.sample([1, 2, 3]);
             if (option == 1) {
                 const res = await fetch("https://nekos.life/api/v2/img/meow");
                 if (res.ok) {
@@ -61,15 +57,9 @@ module.exports = {
                     url = "https://cataas.com" + data.url;
                 }
             }
-            if (option == 4) {
-                url = await globals.reddit("cats", false, []);
-            }
-            if (option == 5) {
-                url = await globals.reddit("catpictures", false, []);
-            }
         }
         if (category == "dog") {
-            var option = _.sample([1, 2, 3, 4]);
+            var option = _.sample([1, 2, 3]);
             if (option == 1) {
                 const res = await fetch("https://dog.ceo/api/breeds/image/random");
                 if (res.ok) {
@@ -91,21 +81,12 @@ module.exports = {
                     url = data.file;
                 }
             }
-            if (option == 4) {
-                url = await globals.reddit("dogpictures", false, []);
-            }
         }
         if (category == "duck") {
-            var option = _.sample([1, 2]);
-            if (option == 1) {
-                const res = await fetch("https://random-d.uk/api/v2/random");
-                if (res.ok) {
-                    const data = await res.json();
-                    url = data.url;
-                }
-            }
-            if (option == 2) {
-                url = await globals.reddit("duck", false, []);
+            const res = await fetch("https://random-d.uk/api/v2/random");
+            if (res.ok) {
+                const data = await res.json();
+                url = data.url;
             }
         }
         if (category == "fox") {
@@ -180,9 +161,6 @@ module.exports = {
                 const data = await res.json();
                 url = data.url
             }
-        }
-        if (category == "snake") {
-            url = await globals.reddit("snakes", false, []);
         }
 
         const embed = new EmbedBuilder()
