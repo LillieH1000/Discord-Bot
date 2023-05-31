@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
-var _ = require("underscore");
-var globals = require("../globals.js");
+let _ = require("underscore");
+let globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription("Posts a random waifu picture"),
 	async execute(interaction) {
         await interaction.deferReply();
-        var option = _.sample([1, 2]);
+        let option = _.sample([1, 2]);
         if (option == 1) {
             const res = await fetch("https://api.waifu.pics/sfw/waifu");
             if (res.ok) {

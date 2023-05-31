@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { osrsapi } = require("../config.json");
-var globals = require("../globals.js");
+let globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()

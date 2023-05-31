@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-var globals = require("../globals.js");
+let globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -15,7 +15,7 @@ module.exports = {
         const res = await fetch("https://pronoundb.org/api/v1/lookup?platform=discord&id=".concat(user.id));
         if (res.ok) {
             const data = await res.json();
-            var pronoun = "";
+            let pronoun = "";
             if (data.pronouns == "unspecified") {
                 pronoun = "unspecified";
             }

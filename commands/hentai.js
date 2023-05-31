@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
-var _ = require("underscore");
-var globals = require("../globals.js");
+let _ = require("underscore");
+let globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -15,7 +15,7 @@ module.exports = {
         if (interaction.channel.nsfw) {
             await interaction.deferReply();
             const category = interaction.options.getString("category");
-            var url = new String();
+            let url = new String();
             if (!category) {
                 const embed = new EmbedBuilder()
                     .setColor(globals.embedcolour)

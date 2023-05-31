@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const dayjs = require("dayjs");
-var globals = require("../globals.js");
+let globals = require("../globals.js");
 
 module.exports = async(client) => {
     client.on("guildMemberAdd", async guildMember => {

@@ -1,4 +1,4 @@
-var globals = require('../globals.js');
+let globals = require('../globals.js');
 
 module.exports = async(client) => {
     client.on('messageCreate', async message => {

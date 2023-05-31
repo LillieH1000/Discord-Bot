@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { createAudioResource } = require("@discordjs/voice");
-var globals = require("../globals.js");
+let globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
-var globals = require("../globals.js");
+let globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()

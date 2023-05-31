@@ -3,7 +3,7 @@ module.exports = async(client) => {
         if (!interaction.isAutocomplete()) return;
 
         const focusedOption = interaction.options.getFocused(true);
-        var choices;
+        let choices;
         
         if (interaction.commandName === "animals") {
             if (focusedOption.value.startsWith("b")) {

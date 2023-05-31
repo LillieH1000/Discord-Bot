@@ -1,5 +1,5 @@
 const { createAudioResource, AudioPlayerStatus } = require("@discordjs/voice");
-var globals = require("../globals.js");
+let globals = require("../globals.js");
 
 module.exports = async() => {
     globals.player.on(AudioPlayerStatus.Idle, () => {

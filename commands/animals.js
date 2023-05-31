@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
-var _ = require("underscore");
-var globals = require("../globals.js");
+let _ = require("underscore");
+let globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -13,7 +13,7 @@ module.exports = {
 	async execute(interaction) {
         await interaction.deferReply();
         const category = interaction.options.getString("category");
-        var url = new String();
+        let url = new String();
         if (!category) {
             const embed = new EmbedBuilder()
                 .setColor(globals.embedcolour)
@@ -35,7 +35,7 @@ module.exports = {
             }
         }
         if (category == "cat") {
-            var option = _.sample([1, 2, 3]);
+            let option = _.sample([1, 2, 3]);
             if (option == 1) {
                 const res = await fetch("https://nekos.life/api/v2/img/meow");
                 if (res.ok) {
@@ -59,7 +59,7 @@ module.exports = {
             }
         }
         if (category == "dog") {
-            var option = _.sample([1, 2, 3]);
+            let option = _.sample([1, 2, 3]);
             if (option == 1) {
                 const res = await fetch("https://dog.ceo/api/breeds/image/random");
                 if (res.ok) {

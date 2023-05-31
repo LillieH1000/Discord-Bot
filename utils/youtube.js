@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-var globals = require("../globals.js");
+let globals = require("../globals.js");
 const exec = require("child_process").exec;
 
 function os_func() {
@@ -13,7 +13,7 @@ function os_func() {
     }
 }
 
-var os = new os_func();
+let os = new os_func();
 
 async function ytdlp(message, components, details, dislikes) {
     const command = `yt-dlp -J -f "bestaudio/best" --no-playlist ${details}`;
@@ -26,7 +26,7 @@ async function ytdlp(message, components, details, dislikes) {
             .setFooter({ text: `Length: ${time}` })
             .setTimestamp()
 
-        var description = new String();
+        let description = new String();
         if (output.view_count != null && output.view_count != undefined && output.view_count.length != 0) {
             if (description != null && description != undefined && description.length != 0) {
                 description += "\n";

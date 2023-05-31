@@ -1,5 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
-var globals = require("../globals.js");
+let globals = require("../globals.js");
 
 module.exports = async(client) => {
     client.on("interactionCreate", async interaction => {
@@ -13,8 +13,8 @@ module.exports = async(client) => {
             if (res.ok) {
                 const data = await res.json();
                 
-                var typescount = 0;
-                var types = "";
+                let typescount = 0;
+                let types = "";
                 for (const type of data.types) {
                     types += type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1);
                     typescount += 1;
@@ -23,8 +23,8 @@ module.exports = async(client) => {
                     }
                 }
         
-                var abilitiescount = 0;
-                var abilities = "";
+                let abilitiescount = 0;
+                let abilities = "";
                 for (const ability of data.abilities) {
                     abilities += ability.ability.name.charAt(0).toUpperCase() + ability.ability.name.slice(1);
                     if (ability.is_hidden == true) {
@@ -36,8 +36,8 @@ module.exports = async(client) => {
                     }
                 }
         
-                var basestatscount = 0;
-                var basestats = "";
+                let basestatscount = 0;
+                let basestats = "";
                 for (const basestat of data.stats) {
                     basestats += basestat.stat.name.charAt(0).toUpperCase() + basestat.stat.name.slice(1) + ": " + basestat.base_stat.toString();
                     basestatscount += 1;

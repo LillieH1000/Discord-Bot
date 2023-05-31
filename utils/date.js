@@ -1,6 +1,6 @@
 const dayjs = require("dayjs");
-var utc = require("dayjs/plugin/utc")
-var timezone = require("dayjs/plugin/timezone");
+let utc = require("dayjs/plugin/utc")
+let timezone = require("dayjs/plugin/timezone");
 
 module.exports = async(client) => {
     // Town Of Salem Server

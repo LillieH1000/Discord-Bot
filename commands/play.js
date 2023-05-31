@@ -1,6 +1,6 @@
 const { joinVoiceChannel, getVoiceConnection, createAudioResource } = require("@discordjs/voice");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-var globals = require("../globals.js");
+let globals = require("../globals.js");
 const exec = require("child_process").exec;
 
 function os_func() {
@@ -14,10 +14,10 @@ function os_func() {
     }
 }
 
-var os = new os_func();
+let os = new os_func();
 
 async function ytdlp(type, interaction, components, details) {
-    var command = new String();
+    let command = new String();
     if (type == 0) {
         command = `yt-dlp -J -f "bestaudio/best" --no-playlist ${details}`;
     }
@@ -27,7 +27,7 @@ async function ytdlp(type, interaction, components, details) {
     os.execCommand(command, function(value) {
         const output = JSON.parse(value);
 
-        var embed;
+        let embed;
         if (type == 0) {
             globals.queue.push(output.url);
             globals.titles.push(output.title);

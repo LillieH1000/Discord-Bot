@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-var globals = require("../globals.js");
+let globals = require("../globals.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -9,9 +9,9 @@ module.exports = {
 	async execute(interaction) {
         await interaction.deferReply();
 
-        var queuecount = 0;
-        var queuelistcount = 0;
-        var queuelist = "";
+        let queuecount = 0;
+        let queuelistcount = 0;
+        let queuelist = "";
 
         for (i = 0; i < globals.queue.length; i++) {
             queuecount += 1;
