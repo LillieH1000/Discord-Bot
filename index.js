@@ -22,6 +22,9 @@ for (const file of utilsFiles) {
 
 client.once("ready", () => {
 	console.log(`Logged in as ${client.user.tag}`);
+	client.guilds.cache.forEach(guild => {
+		console.log(`${guild.name} - ${guild.id}`);
+	});
 });
 
 client.login(token);
