@@ -111,9 +111,6 @@ module.exports = {
         if (url.match(rx)) {
             const components = await globals.music(null, url.match(rx)[1]);
             await ytdlp(0, interaction, components, url);
-        } else if (url == "test") {
-            const components = await globals.music(null, "zyRt-nBM3dY");
-            await ytdlp(0, interaction, components, "https://www.youtube.com/watch?v=zyRt-nBM3dY");
         } else {
             const components = await globals.music(url, null);
             await ytdlp(1, interaction, components, url);
