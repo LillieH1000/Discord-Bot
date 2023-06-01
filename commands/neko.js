@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription("Posts a random neko picture"),
 	async execute(interaction) {
         await interaction.deferReply();
-        let option = _.sample([1, 2, 3, 4]);
+        let option = _.sample([1, 2, 3]);
         if (option == 1) {
             const res = await fetch("https://nekos.life/api/v2/img/neko");
             if (res.ok) {
@@ -65,22 +65,6 @@ module.exports = {
                     );
                 await interaction.editReply({ embeds: [embed], components: [row] });
             }
-        }
-        if (option == 4) {
-            const url = await globals.reddit("catgirlsfw", false, []);
-            const embed = new EmbedBuilder()
-                .setColor(globals.embedcolour)
-                .setTitle("Neko Pics")
-                .setImage(url)
-                .setTimestamp()
-            const row = new ActionRowBuilder()
-                .addComponents(
-                    new ButtonBuilder()
-                        .setLabel("View Original Image")
-                        .setStyle(ButtonStyle.Link)
-                        .setURL(url)
-                );
-            await interaction.editReply({ embeds: [embed], components: [row] });
         }
 	},
 };
