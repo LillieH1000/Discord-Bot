@@ -173,6 +173,12 @@ module.exports = {
 
                 await interaction.editReply({ embeds: [embed], components: [row] });
             } else {
+                if (message) {
+                    embed.addFields(
+                        { name: "Game And Count", value: message, inline: false },
+                    );
+                }
+
                 await interaction.editReply({ embeds: [embed] });
             }
         } else {
