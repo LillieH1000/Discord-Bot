@@ -27,7 +27,7 @@ module.exports = {
         const form = interaction.options.getString("form");
         const message = interaction.options.getString("message");
 
-        let pokemon = "";
+        let pokemon = new String();
         if (form == "alola") {
             pokemon = name + "-alola";
         } else if (form == "galar") {
@@ -45,7 +45,7 @@ module.exports = {
             const data = await res.json();
             
             let typescount = 0;
-            let types = "";
+            let types = new String();
             for (const type of data.types) {
                 types += type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1);
                 typescount += 1;
@@ -55,7 +55,7 @@ module.exports = {
             }
     
             let abilitiescount = 0;
-            let abilities = "";
+            let abilities = new String();
             for (const ability of data.abilities) {
                 abilities += ability.ability.name.charAt(0).toUpperCase() + ability.ability.name.slice(1);
                 if (ability.is_hidden == true) {
@@ -68,7 +68,7 @@ module.exports = {
             }
     
             let basestatscount = 0;
-            let basestats = "";
+            let basestats = new String();
             for (const basestat of data.stats) {
                 basestats += basestat.stat.name.charAt(0).toUpperCase() + basestat.stat.name.slice(1) + ": " + basestat.base_stat.toString();
                 basestatscount += 1;
@@ -117,6 +117,12 @@ module.exports = {
             embed.addFields(
                 { name: "Base Stats", value: basestats, inline: false },
             )
+
+            if (message) {
+                embed.addFields(
+                    { name: "Game And Count", value: message, inline: false },
+                );
+            }
     
             if (data.sprites.other.home.front_default != null) {
                 embed.setThumbnail(data.sprites.other.home.front_default)
@@ -124,9 +130,6 @@ module.exports = {
                 const menu = new StringSelectMenuBuilder().setPlaceholder("Choose Sprite Image");
     
                 if (message) {
-                    embed.addFields(
-                        { name: "Game And Count", value: message, inline: false },
-                    );
                     menu.setCustomId(`${data.name}custommenuid${message}`);
                 } else {
                     menu.setCustomId(`${data.name}custommenuid`);
@@ -173,12 +176,6 @@ module.exports = {
 
                 await interaction.editReply({ embeds: [embed], components: [row] });
             } else {
-                if (message) {
-                    embed.addFields(
-                        { name: "Game And Count", value: message, inline: false },
-                    );
-                }
-
                 await interaction.editReply({ embeds: [embed] });
             }
         } else {

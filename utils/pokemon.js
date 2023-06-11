@@ -14,7 +14,7 @@ module.exports = async(client) => {
                 const data = await res.json();
                 
                 let typescount = 0;
-                let types = "";
+                let types = new String();
                 for (const type of data.types) {
                     types += type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1);
                     typescount += 1;
@@ -24,7 +24,7 @@ module.exports = async(client) => {
                 }
         
                 let abilitiescount = 0;
-                let abilities = "";
+                let abilities = new String();
                 for (const ability of data.abilities) {
                     abilities += ability.ability.name.charAt(0).toUpperCase() + ability.ability.name.slice(1);
                     if (ability.is_hidden == true) {
@@ -37,7 +37,7 @@ module.exports = async(client) => {
                 }
         
                 let basestatscount = 0;
-                let basestats = "";
+                let basestats = new String();
                 for (const basestat of data.stats) {
                     basestats += basestat.stat.name.charAt(0).toUpperCase() + basestat.stat.name.slice(1) + ": " + basestat.base_stat.toString();
                     basestatscount += 1;
