@@ -12,10 +12,10 @@ module.exports = {
 	async execute(interaction) {
         await interaction.deferReply({ ephemeral: true });
         const user = interaction.options.getUser("user");
-        const res = await fetch("https://pronoundb.org/api/v1/lookup?platform=discord&id=".concat(user.id));
+        const res = await fetch(`https://pronoundb.org/api/v1/lookup?platform=discord&id=${user.id}`);
         if (res.ok) {
             const data = await res.json();
-            let pronoun = "";
+            let pronoun = new String();
             if (data.pronouns == "unspecified") {
                 pronoun = "unspecified";
             }
