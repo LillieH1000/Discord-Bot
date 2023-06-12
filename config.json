@@ -2,7 +2,6 @@
 	"client": "client",
 	"token": "token",
 	"safebrowsingapi": "key",
-	"osrsapi": "key",
 	"ubisoftaccount": [
 		"email",
 		"password"
