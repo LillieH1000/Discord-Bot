@@ -19,10 +19,10 @@ let os = new os_func();
 async function ytdlp(type, interaction, components, details) {
     let command = new String();
     if (type == 0) {
-        command = `yt-dlp -J -f "bestaudio/best" --no-playlist ${details}`;
+        command = `yt-dlp -J -f "bestaudio[ext=m4a]/best[ext=m4a]" --no-playlist ${details}`;
     }
     if (type == 1) {
-        command = `yt-dlp -J -f "bestaudio/best" --no-playlist "ytsearch:${details}"`;
+        command = `yt-dlp -J -f "bestaudio[ext=m4a]/best[ext=m4a]" --no-playlist "ytsearch:${details}"`;
     }
     os.execCommand(command, function(value) {
         const output = JSON.parse(value);

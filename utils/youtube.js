@@ -16,7 +16,7 @@ function os_func() {
 let os = new os_func();
 
 async function ytdlp(message, components, details, dislikes) {
-    const command = `yt-dlp -J -f "bestaudio/best" --no-playlist ${details}`;
+    const command = `yt-dlp -J --no-playlist ${details}`;
     os.execCommand(command, function(value) {
         const output = JSON.parse(value);
 
