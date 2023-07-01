@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { getVoiceConnection } = require("@discordjs/voice");
 let globals = require("../globals.js");
 
 module.exports = {
@@ -9,11 +10,11 @@ module.exports = {
 	async execute(interaction) {
         await interaction.deferReply();
 
-        globals.connection.destroy();
-        globals.queue = [];
-        globals.titles = [];
-        globals.nowplaying = "";
-        globals.connectionstatus = 0;
+        const voiceConnection = getVoiceConnection(interaction.guild.id);
+        if (voiceConnection && globals.player[interaction.guild.id].status == 1) {
+            voiceConnection.destroy();
+            delete globals.player[interaction.guild.id];
+        }
 
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)

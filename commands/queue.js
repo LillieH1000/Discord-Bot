@@ -13,11 +13,11 @@ module.exports = {
         let queuelistcount = 0;
         let queuelist = "";
 
-        for (i = 0; i < globals.queue.length; i++) {
+        for (let i = 0; i < globals.player[interaction.guild.id].urls.length; i++) {
             queuecount += 1;
             queuelistcount += 1;
             queuelist += queuelistcount.toString() + ") " + globals.titles[i];
-            if (globals.queue.length != queuecount) {
+            if (globals.player[interaction.guild.id].urls.length != queuecount) {
                 queuelist += "\n";
             }
         }
@@ -27,7 +27,7 @@ module.exports = {
             .setTitle("Music Player")
             .setTimestamp()
 
-        if (globals.queue === undefined || globals.queue.length == 0) {
+        if (globals.player[interaction.guild.id].urls == null || globals.player[interaction.guild.id].urls == undefined || globals.player[interaction.guild.id].urls.length == 0) {
             embed.addFields(
                 { name: "Songs In Queue", value: "None", inline: false },
             );

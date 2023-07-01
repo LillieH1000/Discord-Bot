@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { getVoiceConnection } = require("@discordjs/voice");
 let globals = require("../globals.js");
 
 module.exports = {
@@ -9,7 +10,10 @@ module.exports = {
 	async execute(interaction) {
         await interaction.deferReply();
 
-        globals.player.unpause();
+        const voiceConnection = getVoiceConnection(interaction.guild.id);
+        if (voiceConnection && globals.player[interaction.guild.id].status == 1) {
+            globals.player[interaction.guild.id].player.unpause();
+        }
 
         const embed = new EmbedBuilder()
             .setColor(globals.embedcolour)

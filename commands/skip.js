@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { createAudioResource } = require("@discordjs/voice");
+const { getVoiceConnection, createAudioResource } = require("@discordjs/voice");
 let globals = require("../globals.js");
 
 module.exports = {
@@ -10,18 +10,18 @@ module.exports = {
 	async execute(interaction) {
         await interaction.deferReply();
 
-        if (globals.connectionstatus == 1) {
-            globals.queue.shift();
-            globals.titles.shift();
-            globals.nowplaying = globals.titles[0];
-            const stream = await fetch(globals.queue[0]);
+        const voiceConnection = getVoiceConnection(interaction.guild.id);
+        if (voiceConnection && globals.player[interaction.guild.id].status == 1) {
+            globals.player[interaction.guild.id].titles.shift();
+            globals.player[interaction.guild.id].urls.shift();
+            const stream = await fetch(globals.player[interaction.guild.id].urls[0]);
             if (stream.ok) {
-                globals.resource = createAudioResource(stream.body, {
+                globals.player[interaction.guild.id].resource = createAudioResource(stream.body, {
                     inlineVolume: true
                 });
-                globals.resource.volume.setVolume(0.3);
-                globals.player.play(globals.resource);
-                globals.connection.subscribe(globals.player);
+                globals.player[interaction.guild.id].resource.volume.setVolume(0.3);
+                globals.player[interaction.guild.id].player.play(globals.player[interaction.guild.id].resource);
+                voiceConnection.subscribe(globals.player[interaction.guild.id].player);
             }
         }
 

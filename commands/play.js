@@ -1,4 +1,4 @@
-const { joinVoiceChannel, getVoiceConnection, createAudioResource } = require("@discordjs/voice");
+const { joinVoiceChannel, getVoiceConnection, createAudioResource, createAudioPlayer, AudioPlayerStatus } = require("@discordjs/voice");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 let globals = require("../globals.js");
 const exec = require("child_process").exec;
@@ -29,8 +29,8 @@ async function ytdlp(type, interaction, components, details) {
 
         let embed;
         if (type == 0) {
-            globals.queue.push(output.url);
-            globals.titles.push(output.title);
+            globals.player[interaction.guild.id].titles.push(output.title);
+            globals.player[interaction.guild.id].urls.push(output.url);
 
             const time = new Date(output.duration * 1000).toISOString().slice(11, 19);
             embed = new EmbedBuilder()
@@ -45,8 +45,8 @@ async function ytdlp(type, interaction, components, details) {
                 .setTimestamp()
         }
         if (type == 1) {
-            globals.queue.push(output.entries[0].url);
-            globals.titles.push(output.entries[0].title);
+            globals.player[interaction.guild.id].titles.push(output.entries[0].title);
+            globals.player[interaction.guild.id].urls.push(output.entries[0].url);
 
             const time = new Date(output.entries[0].duration * 1000).toISOString().slice(11, 19);
             embed = new EmbedBuilder()
@@ -67,17 +67,42 @@ async function ytdlp(type, interaction, components, details) {
             interaction.editReply({ embeds: [embed] });
         }
 
-        if (globals.connectionstatus == 0) {
-            globals.connectionstatus = 1;
-            globals.nowplaying = globals.titles[0];
-            fetch(globals.queue[0]).then((stream) => {
+        const voiceConnection = getVoiceConnection(interaction.guild.id);
+        if (voiceConnection && globals.player[interaction.guild.id].status == 0) {
+            globals.player[interaction.guild.id].status = 1;
+            fetch(globals.player[interaction.guild.id].urls[0]).then((stream) => {
                 if (stream.ok) {
-                    globals.resource = createAudioResource(stream.body, {
+                    globals.player[interaction.guild.id].resource = createAudioResource(stream.body, {
                         inlineVolume: true
                     });
-                    globals.resource.volume.setVolume(0.3);
-                    globals.player.play(globals.resource);
-                    globals.connection.subscribe(globals.player);
+                    globals.player[interaction.guild.id].resource.volume.setVolume(0.3);
+                    globals.player[interaction.guild.id].player.play(globals.player[interaction.guild.id].resource);
+                    voiceConnection.subscribe(globals.player[interaction.guild.id].player);
+
+                    globals.player[interaction.guild.id].player.on(AudioPlayerStatus.Idle, () => {
+                        try {
+                            globals.player[interaction.guild.id].titles.shift();
+                            globals.player[interaction.guild.id].urls.shift();
+                            const voiceConnection = getVoiceConnection(interaction.guild.id);
+                            if (globals.player[interaction.guild.id].urls == null || globals.player[interaction.guild.id].urls == undefined || globals.player[interaction.guild.id].urls.length == 0) {
+                                voiceConnection.destroy();
+                                delete globals.player[interaction.guild.id];
+                            } else {
+                                fetch(globals.player[interaction.guild.id].urls[0]).then((stream) => {
+                                    if (stream.ok) {
+                                        globals.player[interaction.guild.id].resource = createAudioResource(stream.body, {
+                                            inlineVolume: true
+                                        });
+                                        globals.player[interaction.guild.id].resource.volume.setVolume(0.3);
+                                        globals.player[interaction.guild.id].player.play(globals.player[interaction.guild.id].resource);
+                                        voiceConnection.subscribe(globals.player[interaction.guild.id].player);
+                                    }
+                                });
+                            }
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    })
                 }
             });
         }
@@ -100,11 +125,22 @@ module.exports = {
         const voiceConnection = getVoiceConnection(interaction.guild.id);
         
         if (!voiceConnection) {
-            globals.connection = joinVoiceChannel({
+            joinVoiceChannel({
                 channelId: interaction.member.voice.channel.id,
                 guildId: interaction.guild.id,
                 adapterCreator: interaction.guild.voiceAdapterCreator,
             });
+            if (!globals.player.hasOwnProperty([interaction.guild.id])) {
+                globals.player = {
+                    [interaction.guild.id]: {
+                        "status": 0,
+                        "titles": [],
+                        "urls": [],
+                        "player": createAudioPlayer(),
+                        "resource": null
+                    }
+                };
+            }
         }
 
         const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;

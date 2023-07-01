@@ -1,13 +1,6 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
-const { createAudioPlayer } = require("@discordjs/voice");
 
-let connection;
-let player = createAudioPlayer();
-let resource;
-let connectionstatus = 0;
-let queue = [];
-let titles = [];
-let nowplaying = "";
+let player = {};
 
 const embedcolour = "#FFC0DD";
 
@@ -204,13 +197,7 @@ async function music(url, id) {
 }
 
 module.exports = {
-    connection,
     player,
-    resource,
-    connectionstatus,
-    queue,
-    titles,
-    nowplaying,
     embedcolour,
     music: music
 };

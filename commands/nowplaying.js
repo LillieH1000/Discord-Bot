@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { getVoiceConnection } = require("@discordjs/voice");
 let globals = require("../globals.js");
 
 module.exports = {
@@ -14,10 +15,11 @@ module.exports = {
             .setTitle("Music Player")
             .setTimestamp()
 
-        if (globals.nowplaying == "") {
-            embed.setDescription("There is currently nothing playing")
+        const voiceConnection = getVoiceConnection(interaction.guild.id);
+        if (voiceConnection && globals.player[interaction.guild.id].status == 1) {
+            embed.setDescription(`Now Playing: ${globals.player[interaction.guild.id].titles[0]}`)
         } else {
-            embed.setDescription(`Now Playing: ${globals.nowplaying}`)
+            embed.setDescription("There is currently nothing playing")
         }
 
         await interaction.editReply({ embeds: [embed] });
