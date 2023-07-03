@@ -16,7 +16,7 @@ module.exports = {
         let url = new String();
         if (!category) {
             const embed = new EmbedBuilder()
-                .setColor(globals.embedcolour)
+                .setColor(globals.colours.embed)
                 .setTitle("Animal Categories")
                 .setDescription(`B:\nbirb\n
                 C:\ncat\n
@@ -164,7 +164,7 @@ module.exports = {
         }
 
         const embed = new EmbedBuilder()
-            .setColor(globals.embedcolour)
+            .setColor(globals.colours.embed)
             .setTitle(`Animal Pics (${category.charAt(0).toUpperCase() + category.slice(1)})`)
             .setImage(url)
             .setTimestamp()

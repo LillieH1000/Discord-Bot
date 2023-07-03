@@ -80,7 +80,7 @@ module.exports = {
                 pronoun = "Avoid pronouns, use my name";
             }
             const embed = new EmbedBuilder()
-                .setColor(globals.embedcolour)
+                .setColor(globals.colours.embed)
                 .setTitle("PronounDB")
                 .addFields(
                     { name: `Pronouns of ${user.username}:`, value: pronoun, inline: false },

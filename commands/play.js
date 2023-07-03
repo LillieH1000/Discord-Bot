@@ -34,7 +34,7 @@ async function ytdlp(type, interaction, components, details) {
 
             const time = new Date(output.duration * 1000).toISOString().slice(11, 19);
             embed = new EmbedBuilder()
-                .setColor(globals.embedcolour)
+                .setColor(globals.colours.embed)
                 .setTitle("Music Player")
                 .setDescription("Queued")
                 .setThumbnail(output.thumbnail)
@@ -50,7 +50,7 @@ async function ytdlp(type, interaction, components, details) {
 
             const time = new Date(output.entries[0].duration * 1000).toISOString().slice(11, 19);
             embed = new EmbedBuilder()
-                .setColor(globals.embedcolour)
+                .setColor(globals.colours.embed)
                 .setTitle("Music Player")
                 .setDescription("Queued")
                 .setThumbnail(output.entries[0].thumbnail)

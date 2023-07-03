@@ -42,7 +42,7 @@ module.exports = {
         }
         
         const embed = new EmbedBuilder()
-            .setColor(globals.embedcolour)
+            .setColor(globals.colours.embed)
             .setTitle("Banned User")
             .setDescription(`Name: ${user.tag}\nID: ${user.id}`)
             .setTimestamp()

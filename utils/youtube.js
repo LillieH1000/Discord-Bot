@@ -22,7 +22,7 @@ async function ytdlp(message, components, details, dislikes) {
 
         const time = new Date(output.duration * 1000).toISOString().slice(11, 19);
         const embed = new EmbedBuilder()
-            .setColor(globals.embedcolour)
+            .setColor(globals.colours.embed)
             .setFooter({ text: `Length: ${time}` })
             .setTimestamp()
 

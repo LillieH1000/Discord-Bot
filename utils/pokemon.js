@@ -47,7 +47,7 @@ module.exports = async(client) => {
                 }
                     
                 const embed = new EmbedBuilder()
-                    .setColor(globals.embedcolour)
+                    .setColor(globals.colours.embed)
                     .setTimestamp()
 
                 if (data.name != null) {

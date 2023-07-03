@@ -28,7 +28,7 @@ module.exports = {
             const data = await res.json();
 
             const embed = new EmbedBuilder()
-                .setColor(globals.embedcolour)
+                .setColor(globals.colours.embed)
                 .setTitle(data.name)
                 .setTimestamp()
 

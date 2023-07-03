@@ -78,7 +78,7 @@ module.exports = {
             }
                 
             const embed = new EmbedBuilder()
-                .setColor(globals.embedcolour)
+                .setColor(globals.colours.embed)
                 .setTimestamp()
 
             if (data.name != null) {
@@ -180,7 +180,7 @@ module.exports = {
             }
         } else {
             const embed = new EmbedBuilder()
-                .setColor(globals.embedcolour)
+                .setColor(globals.colours.embed)
                 .setTitle("Pokemon Not Found")
                 .setTimestamp()
 

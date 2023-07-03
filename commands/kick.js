@@ -27,7 +27,7 @@ module.exports = {
         }
 
         const embed = new EmbedBuilder()
-            .setColor(globals.embedcolour)
+            .setColor(globals.colours.embed)
             .setTitle("Kicked User")
             .setDescription(`Name: ${user.tag}\nID: ${user.id}`)
             .setTimestamp()

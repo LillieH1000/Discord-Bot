@@ -11,7 +11,7 @@ module.exports = {
         await interaction.deferReply();
 
         const embed = new EmbedBuilder()
-            .setColor(globals.embedcolour)
+            .setColor(globals.colours.embed)
             .setTitle("Music Player")
             .setTimestamp()
 

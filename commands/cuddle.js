@@ -14,7 +14,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor(globals.embedcolour)
+                    .setColor(globals.colours.embed)
                     .setTitle("Cuddle Pics")
                     .setImage(data.url)
                     .setTimestamp()
@@ -33,7 +33,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor(globals.embedcolour)
+                    .setColor(globals.colours.embed)
                     .setTitle("Cuddle Pics")
                     .setImage(data.url)
                     .setTimestamp()
@@ -52,7 +52,7 @@ module.exports = {
             if (res.ok) {
                 const data = await res.json();
                 const embed = new EmbedBuilder()
-                    .setColor(globals.embedcolour)
+                    .setColor(globals.colours.embed)
                     .setTitle("Cuddle Pics")
                     .setImage(data.results[0].url)
                     .setTimestamp()

@@ -15,7 +15,7 @@ module.exports = {
         const serverstatus = await r6api.getStatus();
 
         const embed = new EmbedBuilder()
-            .setColor(globals.embedcolour)
+            .setColor(globals.colours.embed)
             .setTitle("Rainbow Six Siege Server Status")
             .setTimestamp()
 

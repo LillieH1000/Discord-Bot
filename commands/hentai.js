@@ -18,7 +18,7 @@ module.exports = {
             let url = new String();
             if (!category) {
                 const embed = new EmbedBuilder()
-                    .setColor(globals.embedcolour)
+                    .setColor(globals.colours.embed)
                     .setTitle("Hentai Categories")
                     .setDescription(`B:\nblowjob\n
                     N:\nneko\n
@@ -58,7 +58,7 @@ module.exports = {
             }
 
             const embed = new EmbedBuilder()
-                .setColor(globals.embedcolour)
+                .setColor(globals.colours.embed)
                 .setTitle(`Hentai Pics (${category.charAt(0).toUpperCase() + category.slice(1)})`)
                 .setImage(url)
                 .setTimestamp()
@@ -73,7 +73,7 @@ module.exports = {
         } else {
             await interaction.deferReply({ ephemeral: true });
             const embed = new EmbedBuilder()
-                .setColor(globals.embedcolour)
+                .setColor(globals.colours.embed)
                 .setTitle("Notice")
                 .setDescription("This command can only be ran in nsfw channels")
                 .setTimestamp()

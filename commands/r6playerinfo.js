@@ -114,7 +114,7 @@ module.exports = {
         Win\xa0Rate:\xa0${stats.pve.modes.extractHostage.winRate.toLocaleString()}`.replace(/[ \t]/gm, "");
         
         const embed = new EmbedBuilder()
-            .setColor(globals.embedcolour)
+            .setColor(globals.colours.embed)
             .setTitle(player.username.toString())
             .addFields(
                 { name: "Info", value: playerinfo, inline: false },

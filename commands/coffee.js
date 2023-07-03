@@ -11,7 +11,7 @@ module.exports = {
         if (res.ok) {
             const data = await res.json();
             const embed = new EmbedBuilder()
-                .setColor(globals.embedcolour)
+                .setColor(globals.colours.embed)
                 .setTitle("Coffee Pics")
                 .setImage(data.file)
                 .setTimestamp()

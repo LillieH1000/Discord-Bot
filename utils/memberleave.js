@@ -7,7 +7,7 @@ module.exports = async(client) => {
         try {
             const createdDate = dayjs(guildMember.user.createdAt).format("MMMM D, YYYY");
             const embed = new EmbedBuilder()
-                .setColor(globals.embedcolour)
+                .setColor(globals.colours.embed)
                 .setAuthor({ name: guildMember.user.username, iconURL: guildMember.user.displayAvatarURL() })
                 .setTitle("Member Left")
                 .addFields(

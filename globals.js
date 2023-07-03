@@ -1,8 +1,10 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
-let player = {};
+let player = new Object();
 
-const embedcolour = "#FFC0DD";
+const colours = {
+    "embed": "#FFC0DD"
+};
 
 async function music(url, id) {
     let res;
@@ -198,6 +200,6 @@ async function music(url, id) {
 
 module.exports = {
     player,
-    embedcolour,
+    colours,
     music: music
 };
