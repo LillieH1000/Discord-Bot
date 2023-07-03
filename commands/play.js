@@ -103,6 +103,17 @@ async function ytdlp(type, interaction, components, details) {
                             console.error(error);
                         }
                     })
+
+                    globals.player[interaction.guild.id].player.on("error", voiceerror => {
+                        console.error(voiceerror);
+                        try {
+                            const voiceConnection = getVoiceConnection(interaction.guild.id);
+                            voiceConnection.destroy();
+                            delete globals.player[interaction.guild.id];
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    })
                 }
             });
         }
