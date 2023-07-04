@@ -16,7 +16,7 @@ function os_func() {
 
 let os = new os_func();
 
-async function ytdlp(interaction, extension, flag, components, details) {
+async function ytdlp(interaction, platform, extension, flag, details) {
     let command = new String();
     if (flag == null) {
         command = `yt-dlp -J -f "bestaudio[ext=${extension}]/best[ext=${extension}]" --no-playlist ${details}`;
@@ -27,7 +27,9 @@ async function ytdlp(interaction, extension, flag, components, details) {
         const output = JSON.parse(value);
 
         let embed;
+        let components;
         if (flag == null) {
+            components = globals.music(platform, output.id, null);
             globals.player[interaction.guild.id].titles.push(output.title);
             globals.player[interaction.guild.id].urls.push(output.url);
 
@@ -43,6 +45,7 @@ async function ytdlp(interaction, extension, flag, components, details) {
                 .setFooter({ text: `Length: ${time}` })
                 .setTimestamp()
         } else if (flag != null) {
+            components = globals.music(platform, output.entries[0].id, null);
             globals.player[interaction.guild.id].titles.push(output.entries[0].title);
             globals.player[interaction.guild.id].urls.push(output.entries[0].url);
 
@@ -165,25 +168,23 @@ module.exports = {
         if (source == "youtube") {
             const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
             if (url.match(rx)) {
-                const components = await globals.music(null, url.match(rx)[1]);
-                await ytdlp(interaction, "m4a", null, components, url);
+                await ytdlp(interaction, "youtube", "m4a", null, url);
             } else {
-                await ytdlp(interaction, "m4a", "ytsearch", null, url);
+                await ytdlp(interaction, "youtube", "m4a", "ytsearch", url);
             }
         }
         if (source == "soundcloud") {
             const rx = /^http(?:s)?:\/\/(.*)soundcloud\.com|snd\.sc\/$/;
             if (url.match(rx)) {
-                const components = await globals.music(url, null);
-                await ytdlp(interaction, "mp3", null, components, url);
+                await ytdlp(interaction, "soundcloud", "mp3", null, url);
             } else {
-                await ytdlp(interaction, "mp3", "scsearch", null, url);
+                await ytdlp(interaction, "soundcloud", "mp3", "scsearch", url);
             }
         }
         if (source == "bandcamp") {
             const rx = /^http(?:s)?:\/\/(.*)bandcamp\.com\//;
             if (url.match(rx)) {
-                await ytdlp(interaction, "mp3", null, null, url);
+                await ytdlp(interaction, "bandcamp", "mp3", null, url);
             } else {
                 const embed = new EmbedBuilder()
                     .setColor(globals.colours.embed)
