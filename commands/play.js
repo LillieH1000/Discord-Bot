@@ -27,9 +27,9 @@ async function ytdlp(interaction, platform, extension, flag, details) {
         const output = JSON.parse(value);
 
         let embed;
-        let components;
+        let id;
         if (flag == null) {
-            components = globals.music(platform, output.id, null);
+            id = output.id;
             globals.player[interaction.guild.id].titles.push(output.title);
             globals.player[interaction.guild.id].urls.push(output.url);
 
@@ -45,7 +45,7 @@ async function ytdlp(interaction, platform, extension, flag, details) {
                 .setFooter({ text: `Length: ${time}` })
                 .setTimestamp()
         } else if (flag != null) {
-            components = globals.music(platform, output.entries[0].id, null);
+            id = output.entries[0].id;
             globals.player[interaction.guild.id].titles.push(output.entries[0].title);
             globals.player[interaction.guild.id].urls.push(output.entries[0].url);
 
@@ -62,11 +62,13 @@ async function ytdlp(interaction, platform, extension, flag, details) {
                 .setTimestamp()
         }
 
-        if (components != null && components != undefined && components.length != 0) {
-            interaction.editReply({ embeds: [embed], components: components });
-        } else {
-            interaction.editReply({ embeds: [embed] });
-        }
+        globals.music(platform, id, null).then((components) => {
+            if (components != null && components != undefined && components.length != 0) {
+                interaction.editReply({ embeds: [embed], components: components });
+            } else {
+                interaction.editReply({ embeds: [embed] });
+            }
+        });
 
         const voiceConnection = getVoiceConnection(interaction.guild.id);
         if (voiceConnection && globals.player[interaction.guild.id].status == 0) {
