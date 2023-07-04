@@ -9,7 +9,7 @@ module.exports = async(client) => {
                 const amrx = /^http(?:s)?:\/\/(.*)audiomack\.com\//;
                 const sprx = /^http(?:s)?:\/\/(.*)spotify\.com\//;
                 if (word.match(amrx) || word.match(sprx)) {
-                    const components = await globals.music(word, null);
+                    const components = await globals.music(null, null, word);
                     
                     if (components != null && components != undefined && components.length != 0) {
                         await message.reply({ components: components, allowedMentions: { repliedUser: false } });

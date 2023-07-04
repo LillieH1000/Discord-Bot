@@ -15,7 +15,7 @@ function os_func() {
 
 let os = new os_func();
 
-async function ytdlp(message, components, details, dislikes) {
+async function ytdlp(message, details, dislikes) {
     const command = `yt-dlp -J --no-playlist ${details}`;
     os.execCommand(command, function(value) {
         const output = JSON.parse(value);
@@ -49,11 +49,13 @@ async function ytdlp(message, components, details, dislikes) {
             embed.setDescription(description);
         }
 
-        if (components != null && components != undefined && components.length != 0) {
-            message.reply({ embeds: [embed], components: components, allowedMentions: { repliedUser: false } });
-        } else {
-            message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
-        }
+        globals.music("youtube", output.id, null).then((components) => {
+            if (components != null && components != undefined && components.length != 0) {
+                message.reply({ embeds: [embed], components: components, allowedMentions: { repliedUser: false } });
+            } else {
+                message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
+            }
+        });
     });
 }
 
@@ -65,13 +67,12 @@ module.exports = async(client) => {
             for (const word of message.content.split(" ")) {
                 const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
                 if (word.match(rx)) {
-                    const components = await globals.music(null, word.match(rx)[1]);
                     const res = await fetch(`https://returnyoutubedislikeapi.com/votes?videoId=${encodeURIComponent(word.match(rx)[1])}`);
                     if (res.ok) {
                         const data = await res.json();
-                        await ytdlp(message, components, word, data.dislikes);
+                        await ytdlp(message, word, data.dislikes);
                     } else {
-                        await ytdlp(message, components, word, null);
+                        await ytdlp(message, word, null);
                     }
                 }
             }
