@@ -16,19 +16,18 @@ function os_func() {
 
 let os = new os_func();
 
-async function ytdlp(type, interaction, components, details) {
+async function ytdlp(interaction, extension, flag, components, details) {
     let command = new String();
-    if (type == 0) {
-        command = `yt-dlp -J -f "bestaudio[ext=m4a]/best[ext=m4a]" --no-playlist ${details}`;
-    }
-    if (type == 1) {
-        command = `yt-dlp -J -f "bestaudio[ext=m4a]/best[ext=m4a]" --no-playlist "ytsearch:${details}"`;
+    if (flag == null) {
+        command = `yt-dlp -J -f "bestaudio[ext=${extension}]/best[ext=${extension}]" --no-playlist ${details}`;
+    } else if (flag != null) {
+        command = `yt-dlp -J -f "bestaudio[ext=${extension}]/best[ext=${extension}]" --no-playlist "${flag}:${details}"`;
     }
     os.execCommand(command, function(value) {
         const output = JSON.parse(value);
 
         let embed;
-        if (type == 0) {
+        if (flag == null) {
             globals.player[interaction.guild.id].titles.push(output.title);
             globals.player[interaction.guild.id].urls.push(output.url);
 
@@ -43,8 +42,7 @@ async function ytdlp(type, interaction, components, details) {
                 )
                 .setFooter({ text: `Length: ${time}` })
                 .setTimestamp()
-        }
-        if (type == 1) {
+        } else if (flag != null) {
             globals.player[interaction.guild.id].titles.push(output.entries[0].title);
             globals.player[interaction.guild.id].urls.push(output.entries[0].url);
 
@@ -126,11 +124,21 @@ module.exports = {
 		.setDescription("Plays a song")
         .setDMPermission(false)
         .addStringOption(option =>
+            option.setName("source")
+                .setDescription("Choose the video/audio source")
+                .setRequired(true)
+                .addChoices(
+                    { name: "YouTube", value: "youtube" },
+                    { name: "SoundCloud", value: "soundcloud" },
+                    { name: "Bandcamp", value: "bandcamp" },
+                ))
+        .addStringOption(option =>
             option.setName("url")
                 .setDescription("Enter the url")
                 .setRequired(true)),
 	async execute(interaction) {
         await interaction.deferReply();
+        const source = interaction.options.getString("source");
         const url = interaction.options.getString("url");
 
         const voiceConnection = getVoiceConnection(interaction.guild.id);
@@ -154,13 +162,37 @@ module.exports = {
             }
         }
 
-        const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
-        if (url.match(rx)) {
-            const components = await globals.music(null, url.match(rx)[1]);
-            await ytdlp(0, interaction, components, url);
-        } else {
-            const components = await globals.music(url, null);
-            await ytdlp(1, interaction, components, url);
+        if (source == "youtube") {
+            const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+            if (url.match(rx)) {
+                const components = await globals.music(null, url.match(rx)[1]);
+                await ytdlp(interaction, "m4a", null, components, url);
+            } else {
+                await ytdlp(interaction, "m4a", "ytsearch", null, url);
+            }
+        }
+        if (source == "soundcloud") {
+            const rx = /^http(?:s)?:\/\/(.*)soundcloud\.com|snd\.sc\/$/;
+            if (url.match(rx)) {
+                const components = await globals.music(url, null);
+                await ytdlp(interaction, "mp3", null, components, url);
+            } else {
+                await ytdlp(interaction, "mp3", "scsearch", null, url);
+            }
+        }
+        if (source == "bandcamp") {
+            const rx = /^http(?:s)?:\/\/(.*)bandcamp\.com\//;
+            if (url.match(rx)) {
+                await ytdlp(interaction, "mp3", null, null, url);
+            } else {
+                const embed = new EmbedBuilder()
+                    .setColor(globals.colours.embed)
+                    .setTitle("Music Player")
+                    .setDescription("Only urls are supported for Bandcamp, search for Bandcamp is currently unsupported")
+                    .setTimestamp()
+
+                await interaction.editReply({ embeds: [embed] });
+            }
         }
 	},
 };
