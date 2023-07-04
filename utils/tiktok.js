@@ -19,11 +19,8 @@ module.exports = async(client) => {
     
         try {
             for (const word of message.content.split(" ")) {
-                const tx = /^http(?:s)?:\/\/(.*)tiktok\.com\//;
-                const vx = /^http(?:s)?:\/\/(.*)vxtiktok\.com\//;
-                if (word.match(tx) && !word.match(vx)) {
-                    const command = `yt-dlp -J --no-playlist ${word}`;
-                    os.execCommand(command, function(value) {
+                if (word.match(/^http(?:s)?:\/\/(.*)tiktok\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)vxtiktok\.com\//)) {
+                    os.execCommand(`yt-dlp -J --no-playlist ${word}`, function(value) {
                         JSON.parse(value);
                         message.suppressEmbeds(true)
                         message.reply({ content: message.content.replace(/tiktok.com/gm, "vxtiktok.com"), allowedMentions: { repliedUser: false } });

@@ -4,10 +4,7 @@ module.exports = async(client) => {
     
         try {
             for (const word of message.content.split(" ")) {
-                const tx = /^http(?:s)?:\/\/(.*)twitter\.com\//;
-                const fx = /^http(?:s)?:\/\/(.*)fxtwitter\.com\//;
-                const vx = /^http(?:s)?:\/\/(.*)vxtwitter\.com\//;
-                if (word.match(tx) && !word.match(fx) && !word.match(vx)) {
+                if (word.match(/^http(?:s)?:\/\/(.*)twitter\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)fxtwitter\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)vxtwitter\.com\//)) {
                     message.suppressEmbeds(true)
                     message.reply({ content: message.content.replace(/twitter.com/gm, "vxtwitter.com"), allowedMentions: { repliedUser: false } });
                 }

@@ -16,8 +16,7 @@ function os_func() {
 let os = new os_func();
 
 async function ytdlp(message, details, dislikes) {
-    const command = `yt-dlp -J --no-playlist ${details}`;
-    os.execCommand(command, function(value) {
+    os.execCommand(`yt-dlp -J --no-playlist ${details}`, function(value) {
         const output = JSON.parse(value);
 
         const time = new Date(output.duration * 1000).toISOString().slice(11, 19);
