@@ -1,4 +1,18 @@
 let globals = require('../globals.js');
+const exec = require("child_process").exec;
+
+function os_func() {
+    this.execCommand = function(cmd, callback) {
+        exec(cmd, (error, stdout, stderr) => {
+            if (error) {
+                return;
+            }
+            callback(stdout);
+        });
+    }
+}
+
+let os = new os_func();
 
 module.exports = async(client) => {
     client.on('messageCreate', async message => {
@@ -6,14 +20,30 @@ module.exports = async(client) => {
     
         try {
             for (const word of message.content.split(' ')) {
-                const amrx = /^http(?:s)?:\/\/(.*)audiomack\.com\//;
-                const sprx = /^http(?:s)?:\/\/(.*)spotify\.com\//;
-                if (word.match(amrx) || word.match(sprx)) {
+                if (
+                    word.match(/^http(?:s)?:\/\/(.*)apple\.com\//) ||
+                    word.match(/^http(?:s)?:\/\/(.*)audiomack\.com\//) ||
+                    word.match(/^http(?:s)?:\/\/(.*)deezer\.com\//) ||
+                    word.match(/^http(?:s)?:\/\/(.*)napster\.com\//) ||
+                    word.match(/^http(?:s)?:\/\/(.*)pandora\.com\//) ||
+                    word.match(/^http(?:s)?:\/\/(.*)spotify\.com\//) ||
+                    word.match(/^http(?:s)?:\/\/(.*)tidal\.com\//)
+                ) {
                     const components = await globals.music(null, null, word);
                     
                     if (components != null && components != undefined && components.length != 0) {
                         await message.reply({ components: components, allowedMentions: { repliedUser: false } });
                     }
+                } else if (word.match(/^http(?:s)?:\/\/(.*)soundcloud\.com|snd\.sc\/$/)) {
+                    os.execCommand(`yt-dlp -J --no-playlist ${word}`, function(value) {
+                        const output = JSON.parse(value);
+
+                        globals.music("soundcloud", output.id, null).then((components) => {
+                            if (components != null && components != undefined && components.length != 0) {
+                                message.reply({ components: components, allowedMentions: { repliedUser: false } });
+                            }
+                        });
+                    });
                 }
             }
         } catch (error) {
