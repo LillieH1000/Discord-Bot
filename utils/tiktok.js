@@ -1,3 +1,4 @@
+let shellescape = require('shell-escape');
 const exec = require("child_process").exec;
 
 function os_func() {
@@ -20,7 +21,7 @@ module.exports = async(client) => {
         try {
             for (const word of message.content.split(" ")) {
                 if (word.match(/^http(?:s)?:\/\/(.*)tiktok\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)vxtiktok\.com\//)) {
-                    os.execCommand(`yt-dlp -J --no-playlist ${word}`, function(value) {
+                    os.execCommand(shellescape(["yt-dlp", "-J", "--no-playlist", word]), function(value) {
                         JSON.parse(value);
                         message.suppressEmbeds(true)
                         message.reply({ content: message.content.replace(/tiktok.com/gm, "vxtiktok.com"), allowedMentions: { repliedUser: false } });

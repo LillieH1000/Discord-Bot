@@ -1,5 +1,6 @@
 const { joinVoiceChannel, getVoiceConnection, createAudioResource, createAudioPlayer, AudioPlayerStatus } = require("@discordjs/voice");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+let shellescape = require('shell-escape');
 let globals = require("../globals.js");
 const exec = require("child_process").exec;
 
@@ -17,13 +18,13 @@ function os_func() {
 let os = new os_func();
 
 async function ytdlp(interaction, platform, extension, flag, details) {
-    let command = new String();
+    let command;
     if (flag == null) {
-        command = `yt-dlp -J -f "bestaudio[ext=${extension}]/best[ext=${extension}]" --no-playlist ${details}`;
+        command = ["yt-dlp", "-J", "-f", `bestaudio[ext=${extension}]/best[ext=${extension}]`, "--no-playlist", details];
     } else if (flag != null) {
-        command = `yt-dlp -J -f "bestaudio[ext=${extension}]/best[ext=${extension}]" --no-playlist "${flag}:${details}"`;
+        command = ["yt-dlp", "-J", "-f", `bestaudio[ext=${extension}]/best[ext=${extension}]`, "--no-playlist", `${flag}:${details}`];
     }
-    os.execCommand(command, function(value) {
+    os.execCommand(shellescape(command), function(value) {
         const output = JSON.parse(value);
 
         let embed;

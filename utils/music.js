@@ -1,3 +1,4 @@
+let shellescape = require('shell-escape');
 let globals = require('../globals.js');
 const exec = require("child_process").exec;
 
@@ -35,7 +36,7 @@ module.exports = async(client) => {
                         await message.reply({ components: components, allowedMentions: { repliedUser: false } });
                     }
                 } else if (word.match(/^http(?:s)?:\/\/(.*)soundcloud\.com|snd\.sc\/$/)) {
-                    os.execCommand(`yt-dlp -J --no-playlist ${word}`, function(value) {
+                    os.execCommand(shellescape(["yt-dlp", "-J", "--no-playlist", word]), function(value) {
                         const output = JSON.parse(value);
 
                         globals.music("soundcloud", output.id, null).then((components) => {

@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
+let shellescape = require('shell-escape');
 let globals = require("../globals.js");
 const exec = require("child_process").exec;
 
@@ -16,7 +17,7 @@ function os_func() {
 let os = new os_func();
 
 async function ytdlp(message, details, dislikes) {
-    os.execCommand(`yt-dlp -J --no-playlist ${details}`, function(value) {
+    os.execCommand(shellescape(["yt-dlp", "-J", "--no-playlist", details]), function(value) {
         const output = JSON.parse(value);
 
         const time = new Date(output.duration * 1000).toISOString().slice(11, 19);
