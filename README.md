@@ -8,7 +8,7 @@ Features:
 - Discord embed fixer for multiple social medias (Twitter, Tiktok, More coming soon)
 - Built in google safe browsing to delete any url posted that is filtered as dangerous
 - YouTube response embed that returns info of a yt url when posted (Views, Likes, Dislikes, Buttons to other platforms for songs -> Apple Music, Audiomack, Deezer, Napster, Pandora, SoundCloud, Spotify, Tidal, YouTube, YouTube Music)
-- Response embed for song links to the song on other peoples (Apple Music, Audiomack, Deezer, Napster, Pandora, SoundCloud, Spotify, Tidal, YouTube, YouTube Music)
+- Response embed for song links to the song on other platforms (Apple Music, Audiomack, Deezer, Napster, Pandora, SoundCloud, Spotify, Tidal, YouTube, YouTube Music)
 - Admin commands (kick, ban, mute, unmute)
 - Rainbow 6 Siege game commands -> Get player info or server status of Rainbow 6 Siege
 - Pokemon command -> Get info about any pokemon including stats, sprites and other info
@@ -18,7 +18,8 @@ Features:
 - Animal picture commands
 - Coffee pictures command
 
-Mores features and commands coming soon.  
+Mores features and commands coming soon.
+
 Invidual servers may request features such as member count, date, etc since those are currently hardcoded.
 
 -----
