@@ -18,7 +18,7 @@ Features:
 - Animal picture commands
 - Coffee pictures command
 
-Mores features and commands coming soon.
+Mores features and commands coming soon.  
 Invidual servers may request features such as member count, date, etc since those are currently hardcoded.
 
 -----
