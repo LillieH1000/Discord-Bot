@@ -3,6 +3,24 @@ My discord bot written in discord.js
 
 Invite my bot: [Invite](https://discord.com/api/oauth2/authorize?client_id=1065377660303310859&permissions=8&scope=bot%20applications.commands)
 
+Features:
+- Music player (Supports YouTube, SoundCloud, Bandcamp)
+- Discord embed fixer for multiple social medias (Twitter, Tiktok, More coming soon)
+- Built in google safe browsing to delete any url posted that is filtered as dangerous
+- YouTube response embed that returns info of a yt url when posted (Views, Likes, Dislikes, Buttons to other platforms for songs -> Apple Music, Audiomack, Deezer, Napster, Pandora, SoundCloud, Spotify, Tidal, YouTube, YouTube Music)
+- Response embed for song links to the song on other peoples (Apple Music, Audiomack, Deezer, Napster, Pandora, SoundCloud, Spotify, Tidal, YouTube, YouTube Music)
+- Admin commands (kick, ban, mute, unmute)
+- Rainbow 6 Siege game commands -> Get player info or server status of Rainbow 6 Siege
+- Pokemon command -> Get info about any pokemon including stats, sprites and other info
+- Command to get the pronouns of the user from pronoundb
+- Member join and leave embed message
+- Anime picture commands
+- Animal picture commands
+- Coffee pictures command
+
+Mores features and commands coming soon.
+Invidual servers may request features such as member count, date, etc since those are currently hardcoded.
+
 -----
 
 Linux Setup
