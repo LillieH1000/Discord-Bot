@@ -4,7 +4,7 @@ module.exports = async(client) => {
     
         try {
             for (const word of message.content.split(" ")) {
-                if (word.match(/^http(?:s)?:\/\/(.*)instragram\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)ddinstagram\.com\//)) {
+                if (word.match(/^http(?:s)?:\/\/(.*)instagram\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)ddinstagram\.com\//)) {
                     message.suppressEmbeds(true)
                     message.reply({ content: message.content.replace(/instagram.com/gm, "ddinstagram.com"), allowedMentions: { repliedUser: false } });
                 }
