@@ -11,9 +11,9 @@ module.exports = async(client) => {
             dayjs.extend(timezone);
             const currentdate = dayjs.tz(date, "America/New_York").day();
             if (currentdate == 1) {
-                client.user.setActivity("It's Miku Monday!!!!", { type: ActivityType.Watching });
+                client.user.setActivity("It's Miku Monday!!!!", { type: ActivityType.Custom });
             } else {
-                client.user.setActivity("Miku Gang!!!!", { type: ActivityType.Watching });
+                client.user.setActivity("Miku Gang!!!!", { type: ActivityType.Custom });
             }
         } catch (error) {
             console.error(error);
