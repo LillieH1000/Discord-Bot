@@ -21,9 +21,24 @@ async function ytdlp(message, details, dislikes) {
         const output = JSON.parse(value);
 
         const time = new Date(output.duration * 1000).toISOString().slice(11, 19);
+        const timesplit = time.split(":");
+        let formattedTime;
+        if (timesplit[0] == "00") {
+            const splicedTime = timesplit.splice(1).join(":");
+            if (splicedTime.split(":")[0].startsWith("0")) {
+                formattedTime = splicedTime.slice(1);
+            } else {
+                formattedTime = splicedTime;
+            }
+        } else if (timesplit[0].startsWith("0")) {
+            formattedTime = timesplit.join(":").slice(1);
+        } else {
+            formattedTime = timesplit.join(":");
+        }
+
         const embed = new EmbedBuilder()
             .setColor(globals.colours.embed)
-            .setFooter({ text: `Length: ${time}` })
+            .setFooter({ text: `Length: ${formattedTime}` })
             .setTimestamp()
 
         let description = new String();

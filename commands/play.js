@@ -35,6 +35,21 @@ async function ytdlp(interaction, platform, extension, flag, details) {
             globals.player[interaction.guild.id].urls.push(output.url);
 
             const time = new Date(output.duration * 1000).toISOString().slice(11, 19);
+            const timesplit = time.split(":");
+            let formattedTime;
+            if (timesplit[0] == "00") {
+                const splicedTime = timesplit.splice(1).join(":");
+                if (splicedTime.split(":")[0].startsWith("0")) {
+                    formattedTime = splicedTime.slice(1);
+                } else {
+                    formattedTime = splicedTime;
+                }
+            } else if (timesplit[0].startsWith("0")) {
+                formattedTime = timesplit.join(":").slice(1);
+            } else {
+                formattedTime = timesplit.join(":");
+            }
+
             embed = new EmbedBuilder()
                 .setColor(globals.colours.embed)
                 .setTitle("Music Player")
@@ -43,7 +58,7 @@ async function ytdlp(interaction, platform, extension, flag, details) {
                 .addFields(
                     { name: output.title, value: output.uploader, inline: false },
                 )
-                .setFooter({ text: `Length: ${time}` })
+                .setFooter({ text: `Length: ${formattedTime}` })
                 .setTimestamp()
         } else if (flag != null) {
             id = output.entries[0].id;
@@ -51,6 +66,21 @@ async function ytdlp(interaction, platform, extension, flag, details) {
             globals.player[interaction.guild.id].urls.push(output.entries[0].url);
 
             const time = new Date(output.entries[0].duration * 1000).toISOString().slice(11, 19);
+            const timesplit = time.split(":");
+            let formattedTime;
+            if (timesplit[0] == "00") {
+                const splicedTime = timesplit.splice(1).join(":");
+                if (splicedTime.split(":")[0].startsWith("0")) {
+                    formattedTime = splicedTime.slice(1);
+                } else {
+                    formattedTime = splicedTime;
+                }
+            } else if (timesplit[0].startsWith("0")) {
+                formattedTime = timesplit.join(":").slice(1);
+            } else {
+                formattedTime = timesplit.join(":");
+            }
+            
             embed = new EmbedBuilder()
                 .setColor(globals.colours.embed)
                 .setTitle("Music Player")
@@ -59,7 +89,7 @@ async function ytdlp(interaction, platform, extension, flag, details) {
                 .addFields(
                     { name: output.entries[0].title, value: output.entries[0].uploader, inline: false },
                 )
-                .setFooter({ text: `Length: ${time}` })
+                .setFooter({ text: `Length: ${formattedTime}` })
                 .setTimestamp()
         }
 
