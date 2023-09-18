@@ -7,12 +7,14 @@ module.exports = async(client) => {
         try {
             if (oldMember.pending && !newMember.pending) {
                 const createdDate = dayjs(newMember.user.createdAt).format("MMMM D, YYYY");
+                const joinedDate = dayjs(newMember.user.joinedAt).format("MMMM D, YYYY");
                 const embed = new EmbedBuilder()
                     .setColor(globals.colours.embed)
                     .setAuthor({ name: `${newMember.user.displayName} (${newMember.user.username})`, iconURL: newMember.user.displayAvatarURL() })
                     .setTitle("Member Accepted Rules")
                     .addFields(
-                        { name: "Created At:", value: createdDate, inline: false },
+                        { name: "Created At:", value: createdDate, inline: true },
+                        { name: "Joined At:", value: joinedDate, inline: true },
                     )
                     .setFooter({ text: `ID: ${newMember.user.id}` })
                     .setTimestamp()
