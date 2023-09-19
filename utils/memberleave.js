@@ -6,7 +6,7 @@ module.exports = async(client) => {
     client.on("guildMemberRemove", async guildMember => {
         try {
             const createdDate = dayjs(guildMember.user.createdAt).format("MMMM D, YYYY");
-            const joinedDate = dayjs(newMember.user.joinedAt).format("MMMM D, YYYY");
+            const joinedDate = dayjs(guildMember.user.joinedAt).format("MMMM D, YYYY");
             const embed = new EmbedBuilder()
                 .setColor(globals.colours.embed)
                 .setAuthor({ name: `${guildMember.user.displayName} (${guildMember.user.username})`, iconURL: guildMember.user.displayAvatarURL() })
