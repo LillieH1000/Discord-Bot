@@ -7,7 +7,7 @@ module.exports = async(client) => {
         try {
             if (oldMember.pending && !newMember.pending) {
                 const createdDate = dayjs(newMember.user.createdAt).format("MMMM D, YYYY");
-                const joinedDate = dayjs(newMember.user.joinedAt).format("MMMM D, YYYY");
+                const joinedDate = dayjs(newMember.joinedAt).format("MMMM D, YYYY");
                 const embed = new EmbedBuilder()
                     .setColor(globals.colours.embed)
                     .setAuthor({ name: `${newMember.user.displayName} (${newMember.user.username})`, iconURL: newMember.user.displayAvatarURL() })
