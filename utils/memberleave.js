@@ -1,10 +1,12 @@
 const { EmbedBuilder } = require("discord.js");
 const dayjs = require("dayjs");
+let customParseFormat = require("dayjs/plugin/customParseFormat");
 let globals = require("../globals.js");
 
 module.exports = async(client) => {
     client.on("guildMemberRemove", async guildMember => {
         try {
+            dayjs.extend(customParseFormat);
             const createdDate = dayjs(guildMember.user.createdAt).format("MMMM D, YYYY");
             const joinedDate = dayjs(guildMember.joinedAt).format("MMMM D, YYYY");
             const embed = new EmbedBuilder()
