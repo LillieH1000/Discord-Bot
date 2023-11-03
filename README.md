@@ -24,11 +24,9 @@ Invidual servers may request features such as member count, date, etc since thos
 
 -----
 
-Linux Setup
+Linux Setup (Debian / Ubuntu)
 
-```
-curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash -
-```
+Install [Node.js v21](https://github.com/nodesource/distributions#debian-and-ubuntu-based-distributions)
 
 ```
 sudo apt install make g++ ffmpeg nodejs libtool-bin python3 python3-pip
