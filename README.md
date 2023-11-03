@@ -27,7 +27,7 @@ Invidual servers may request features such as member count, date, etc since thos
 Linux Setup
 
 ```
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash -
 ```
 
 ```
