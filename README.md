@@ -5,7 +5,7 @@ Invite my bot: [Invite](https://discord.com/api/oauth2/authorize?client_id=10653
 
 Features:
 - Music player (Supports YouTube, SoundCloud, Bandcamp)
-- Discord embed fixer for multiple social medias (Twitter, Tiktok, Instagram)
+- Discord embed fixer for multiple social medias (Twitter, Reddit, Tiktok, Instagram)
 - Built in google safe browsing to delete any url posted that is filtered as dangerous
 - YouTube response embed that returns info of a yt url when posted (Views, Likes, Dislikes, Buttons to other platforms for songs -> Apple Music, Audiomack, Deezer, Napster, Pandora, SoundCloud, Spotify, Tidal, YouTube, YouTube Music)
 - Response embed for song links to the song on other platforms (Apple Music, Audiomack, Deezer, Napster, Pandora, SoundCloud, Spotify, Tidal, YouTube, YouTube Music)
