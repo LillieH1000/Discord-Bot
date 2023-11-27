@@ -1,12 +1,12 @@
 const { EmbedBuilder } = require("discord.js");
 const dayjs = require("dayjs");
-let customParseFormat = require("dayjs/plugin/customParseFormat");
+let utc = require("dayjs/plugin/utc");
 let globals = require("../globals.js");
 
 module.exports = async(client) => {
     client.on("guildMemberAdd", async guildMember => {
         try {
-            dayjs.extend(customParseFormat);
+            dayjs.extend(utc);
             const createdDate = dayjs(guildMember.user.createdAt).format("MMMM D, YYYY");
             const embed = new EmbedBuilder()
                 .setColor(globals.colours.embed)
