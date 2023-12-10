@@ -8,5 +8,5 @@ module.exports = async(client) => {
         } catch (error) {
             console.error(error);
         }
-    }, 1000*60*1)
+    }, 60000)
 };
