@@ -24,7 +24,8 @@ Linux Setup (Debian / Ubuntu)
 
 Install [Node.js v21](https://github.com/nodesource/distributions#debian-and-ubuntu-based-distributions)
 
-If you are using python 3.11+ you may have external management popup with pip3 on user install packages
+If you are using python 3.11+ you may have external management popup with pip on user install packages
+
 Fix: [GitHub Comment](https://github.com/pypa/pip/issues/11776#issuecomment-1434892689)
 
 ```
