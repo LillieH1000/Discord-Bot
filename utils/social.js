@@ -18,7 +18,7 @@ module.exports = async(client) => {
                     messageContentNew = messageContentNew.replace(/tiktok.com/gm, "vxtiktok.com");
                 }
 
-                if ((word.match(/^http(?:s)?:\/\/(.*)twitter\.com\//) || word.match(/^http(?:s)?:\/\/(.*)x\.com\//)) && !word.match(/^http(?:s)?:\/\/(.*)fxtwitter\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)vxtwitter\.com\//)) {
+                if ((word.match(/^http(?:s)?:\/\/(.*)twitter\.com\//) || word.match(/^http(?:s)?:\/\/x\.com\//)) && !word.match(/^http(?:s)?:\/\/(.*)fxtwitter\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)vxtwitter\.com\//)) {
                     messageContentNew = messageContentNew.replace(/twitter.com/gm, "vxtwitter.com").replace(/x.com/gm, "vxtwitter.com");
                 }
             }
