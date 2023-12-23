@@ -26,16 +26,16 @@ async function music(platform, id, url) {
     const row4 = new ActionRowBuilder();
     const row5 = new ActionRowBuilder();
 
-    const appleMusicButton = new ButtonBuilder().setLabel("Apple Music").setStyle(ButtonStyle.Link);
-    const audiomackButton = new ButtonBuilder().setLabel("Audiomack").setStyle(ButtonStyle.Link);
-    const deezerButton = new ButtonBuilder().setLabel("Deezer").setStyle(ButtonStyle.Link);
-    const napsterButton = new ButtonBuilder().setLabel("Napster").setStyle(ButtonStyle.Link);
-    const pandoraButton = new ButtonBuilder().setLabel("Pandora").setStyle(ButtonStyle.Link);
-    const soundcloudButton = new ButtonBuilder().setLabel("SoundCloud").setStyle(ButtonStyle.Link);
-    const spotifyButton = new ButtonBuilder().setLabel("Spotify").setStyle(ButtonStyle.Link);
-    const tidalButton = new ButtonBuilder().setLabel("Tidal").setStyle(ButtonStyle.Link);
-    const youtubeButton = new ButtonBuilder().setLabel("YouTube").setStyle(ButtonStyle.Link);
-    const youtubeMusicButton = new ButtonBuilder().setLabel("YouTube Music").setStyle(ButtonStyle.Link);
+    const appleMusicButton = new ButtonBuilder().setLabel("Apple Music").setEmoji("<:applemusic:1187948371105828964>").setStyle(ButtonStyle.Link);
+    const audiomackButton = new ButtonBuilder().setLabel("Audiomack").setEmoji("<:audiomack:1187948372670304317>").setStyle(ButtonStyle.Link);
+    const deezerButton = new ButtonBuilder().setLabel("Deezer").setEmoji("<:deezer:1187948373748232332>").setStyle(ButtonStyle.Link);
+    const napsterButton = new ButtonBuilder().setLabel("Napster").setEmoji("<:napster:1187948374796804146>").setStyle(ButtonStyle.Link);
+    const pandoraButton = new ButtonBuilder().setLabel("Pandora").setEmoji("<:pandora:1187949739463950447>").setStyle(ButtonStyle.Link);
+    const soundcloudButton = new ButtonBuilder().setLabel("SoundCloud").setEmoji("<:soundcloud:1187949741166837930>").setStyle(ButtonStyle.Link);
+    const spotifyButton = new ButtonBuilder().setLabel("Spotify").setEmoji("<:spotify:1187949742370603108>").setStyle(ButtonStyle.Link);
+    const tidalButton = new ButtonBuilder().setLabel("Tidal").setEmoji("<:tidal:1187949743289159740>").setStyle(ButtonStyle.Link);
+    const youtubeButton = new ButtonBuilder().setLabel("YouTube").setEmoji("<:youtube:1187946157188579340>").setStyle(ButtonStyle.Link);
+    const youtubeMusicButton = new ButtonBuilder().setLabel("YouTube Music").setEmoji("<:youtubemusic:1187947050646642718>").setStyle(ButtonStyle.Link);
 
     if (data.linksByPlatform.appleMusic != null) {
         appleMusicButton.setURL(data.linksByPlatform.appleMusic.url);
