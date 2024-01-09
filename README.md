@@ -1,7 +1,5 @@
 # Discord Bot
-My discord bot written in discord.js
-
-Invite my bot: [Invite](https://discord.com/api/oauth2/authorize?client_id=1065377660303310859&permissions=8&scope=bot%20applications.commands)
+My discord bot written in discord.js for custom private servers.
 
 Features:
 - Music player (Supports YouTube, SoundCloud, Bandcamp)
@@ -13,10 +11,6 @@ Features:
 - Pokemon command -> Get info about any pokemon including stats, sprites and other info
 - Command to get the pronouns of the user from pronoundb
 - Member join and leave embed message
-
-Mores features and commands coming soon.
-
-Invidual servers may request features such as member count, date, etc since those are currently hardcoded.
 
 -----
 
