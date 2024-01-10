@@ -48,44 +48,44 @@ module.exports = async(client) => {
                     
                 const embed = new EmbedBuilder()
                     .setColor(globals.colours.embed)
-                    .setTimestamp()
+                    .setTimestamp();
 
                 if (data.name != null) {
-                    embed.setTitle(data.name.charAt(0).toUpperCase() + data.name.slice(1))
+                    embed.setTitle(data.name.charAt(0).toUpperCase() + data.name.slice(1));
                 }
 
                 if (data.id != null) {
                     embed.addFields(
                         { name: "Pokedex ID", value: data.id.toString(), inline: false },
-                    )
+                    );
                 }
 
                 embed.addFields(
                     { name: "Types", value: types, inline: false },
                     { name: "Abilities", value: abilities, inline: false },
-                )
+                );
 
                 if (data.height != null) {
                     embed.addFields(
                         { name: "Height (Decimetres)", value: data.height.toString(), inline: false },
-                    )
+                    );
                 }
 
                 if (data.weight != null) {
                     embed.addFields(
                         { name: "Weight (Hectograms)", value: data.weight.toString(), inline: false },
-                    )
+                    );
                 }
 
                 if (data.base_experience != null) {
                     embed.addFields(
                         { name: "Base Experience", value: data.base_experience.toString(), inline: false },
-                    )
+                    );
                 }
 
                 embed.addFields(
                     { name: "Base Stats", value: basestats, inline: false },
-                )
+                );
                 
                 if (interaction.values[0] == "defaultregular") {
                     embed.setThumbnail(data.sprites.other.home.front_default);
@@ -118,7 +118,7 @@ module.exports = async(client) => {
                             value: "defaultregular",
                             description: "Show the regular default pic of the pokemon"
                         }
-                    ])
+                    ]);
                 }
                 if (data.sprites.other.home.front_shiny != null) {
                     menu.addOptions([
@@ -127,7 +127,7 @@ module.exports = async(client) => {
                             value: "defaultshiny",
                             description: "Show the shiny default pic of the pokemon"
                         }
-                    ])
+                    ]);
                 }
                 if (data.sprites.other.home.front_female != null) {
                     menu.addOptions([
@@ -136,7 +136,7 @@ module.exports = async(client) => {
                             value: "femaleregular",
                             description: "Show the regular female pic of the pokemon"
                         }
-                    ])
+                    ]);
                 }
                 if (data.sprites.other.home.front_shiny_female != null) {
                     menu.addOptions([
@@ -145,7 +145,7 @@ module.exports = async(client) => {
                             value: "femaleshiny",
                             description: "Show the shiny female pic of the pokemon"
                         }
-                    ])
+                    ]);
                 }
         
                 const row = new ActionRowBuilder().addComponents(menu);
