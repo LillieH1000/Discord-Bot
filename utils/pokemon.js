@@ -6,8 +6,17 @@ module.exports = async(client) => {
         if (!interaction.isStringSelectMenu()) return;
         
         try {
-            const pokemon = interaction.customId.split("custommenuid")[0];
-            const game = interaction.customId.split("custommenuid")[1];
+            let pokemon = new String();
+            let game = new String();
+
+            if (interaction.customId.includes("custommenuid")) {
+                pokemon = interaction.customId.split("custommenuid")[0];
+                game = interaction.customId.split("custommenuid")[1];
+            } else {
+                const id = JSON.parse(interaction.customId)
+                pokemon = id.name
+                game = id.game
+            }
 
             const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
             if (res.ok) {
@@ -102,14 +111,16 @@ module.exports = async(client) => {
         
                 const menu = new StringSelectMenuBuilder().setPlaceholder("Choose Sprite Image");
         
-                if (game != "") {
+                if (game != null && game != "") {
                     embed.addFields(
                         { name: "Game And Count", value: game, inline: false },
                     );
-                    menu.setCustomId(`${data.name}custommenuid${game}`);
-                } else {
-                    menu.setCustomId(`${data.name}custommenuid`);
                 }
+
+                menu.setCustomId(JSON.stringify({
+                    name: data.name,
+                    game: game
+                }));
                 
                 if (data.sprites.other.home.front_default != null) {
                     menu.addOptions([

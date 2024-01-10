@@ -129,11 +129,10 @@ module.exports = {
 
                 const menu = new StringSelectMenuBuilder().setPlaceholder("Choose Sprite Image");
     
-                if (message) {
-                    menu.setCustomId(`${data.name}custommenuid${message}`);
-                } else {
-                    menu.setCustomId(`${data.name}custommenuid`);
-                }
+                menu.setCustomId(JSON.stringify({
+                    name: data.name,
+                    game: message
+                }));
                 
                 if (data.sprites.other.home.front_default != null) {
                     menu.addOptions([
