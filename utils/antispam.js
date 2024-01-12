@@ -28,7 +28,7 @@ module.exports = async(client) => {
                             .setTimestamp()
 
                         message.member.guild.systemChannel.send({
-                            content: "<@&1096003733554479135>",
+                            content: "<@&1096003733554479135> <@&1195220849435889705>",
                             embeds: [embed]
                         });
                     }
