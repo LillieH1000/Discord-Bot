@@ -11,9 +11,6 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: "10" }).setToken(token);
 
-try {
-	await rest.put(Routes.applicationCommands(client), { body: commands });
-	console.log("Successfully registered application commands.");
-} catch (error) {
-	console.error(error);
-}
+rest.put(Routes.applicationCommands(client), { body: commands })
+	.then(() => console.log("Successfully registered application commands."))
+	.catch(console.error);
