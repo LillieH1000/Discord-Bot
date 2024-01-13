@@ -52,11 +52,9 @@ module.exports = async(client) => {
                     for (const double of data1.damage_relations.double_damage_from) {
                         weakness[double.name] = weakness[double.name] * 2;
                     }
-
                     for (const half of data1.damage_relations.half_damage_from) {
                         weakness[half.name] = weakness[half.name] * 0.5;
                     }
-
                     for (const none of data1.damage_relations.no_damage_from) {
                         weakness[none.name] = weakness[none.name] * 0;
                     }
