@@ -11,17 +11,19 @@ module.exports = {
         await interaction.deferReply();
 
         const voiceConnection = getVoiceConnection(interaction.guild.id);
-        if (voiceConnection && globals.player[interaction.guild.id].status == 1) {
+        if (voiceConnection && voiceConnection.joinConfig.channelId == interaction.member.voice.channelId && globals.player[interaction.guild.id].status == 1) {
             voiceConnection.destroy();
             delete globals.player[interaction.guild.id];
+
+            const embed = new EmbedBuilder()
+                .setColor(globals.colours.embed)
+                .setTitle("Music Player")
+                .setDescription("Stopped play audio and disconnected from voice chat")
+                .setTimestamp();
+
+            await interaction.editReply({ embeds: [embed] });
+        } else {
+            await interaction.deleteReply();
         }
-
-        const embed = new EmbedBuilder()
-            .setColor(globals.colours.embed)
-            .setTitle("Music Player")
-            .setDescription("Stopped play audio and disconnected from voice chat")
-            .setTimestamp()
-
-        await interaction.editReply({ embeds: [embed] });
 	},
 };

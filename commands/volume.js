@@ -16,16 +16,18 @@ module.exports = {
         const volume = interaction.options.getInteger("volume");
         
         const voiceConnection = getVoiceConnection(interaction.guild.id);
-        if (voiceConnection && globals.player[interaction.guild.id].status == 1) {
+        if (voiceConnection && voiceConnection.joinConfig.channelId == interaction.member.voice.channelId && globals.player[interaction.guild.id].status == 1) {
             globals.player[interaction.guild.id].resource.volume.setVolume(volume / 100);
+
+            const embed = new EmbedBuilder()
+                .setColor(globals.colours.embed)
+                .setTitle("Music Player")
+                .setDescription(`Changed audio volume level to: ${volume.toString()}`)
+                .setTimestamp();
+
+            await interaction.editReply({ embeds: [embed] });
+        } else {
+            await interaction.deleteReply();
         }
-
-        const embed = new EmbedBuilder()
-            .setColor(globals.colours.embed)
-            .setTitle("Music Player")
-            .setDescription(`Changed audio volume level to: ${volume.toString()}`)
-            .setTimestamp()
-
-        await interaction.editReply({ embeds: [embed] });
 	},
 };

@@ -51,6 +51,8 @@ async function play(interaction, id) {
             }
         });
     }
+
+    await interaction.deleteReply();
 }
 
 async function request(id) {
@@ -99,7 +101,7 @@ module.exports = {
         
         if (!voiceConnection) {
             joinVoiceChannel({
-                channelId: interaction.member.voice.channel.id,
+                channelId: interaction.member.voice.channelId,
                 guildId: interaction.guild.id,
                 adapterCreator: interaction.guild.voiceAdapterCreator,
             });
@@ -107,7 +109,6 @@ module.exports = {
                 globals.player = {
                     [interaction.guild.id]: {
                         "status": 0,
-                        "titles": [],
                         "ids": [],
                         "player": createAudioPlayer(),
                         "resource": null
