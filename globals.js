@@ -6,12 +6,12 @@ const colours = {
     "embed": "#FFC0DD"
 };
 
-async function music(platform, id, url) {
+async function music(id, url) {
     let res;
-    if (platform == null && id == null && url != null) {
-        res = await fetch(`https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(url)}&songIfSingle=true`);
-    } else if (platform != null && id != null && url == null) {
-        res = await fetch(`https://api.song.link/v1-alpha.1/links?platform=${platform}&type=song&id=${encodeURIComponent(id)}&songIfSingle=true`);
+    if (id == null && url != null) {
+        res = await fetch(`https://api.song.link/v1-alpha.1/links?url=${url}&songIfSingle=true`);
+    } else {
+        res = await fetch(`https://api.song.link/v1-alpha.1/links?platform=youtube&type=song&id=${id}&songIfSingle=true`);
     }
     
     if (!res.ok) {

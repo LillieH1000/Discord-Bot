@@ -57,7 +57,7 @@ module.exports = async(client) => {
                             .setFooter({ text: `Length: ${formattedTime}` })
                             .setTimestamp();
 
-                        globals.music("youtube", data1.videoDetails.videoId, null).then((components) => {
+                        globals.music(data1.videoDetails.videoId, null).then((components) => {
                             if (components != null && components != undefined && components.length != 0) {
                                 message.reply({ embeds: [embed], components: components, allowedMentions: { repliedUser: false } });
                             } else {
