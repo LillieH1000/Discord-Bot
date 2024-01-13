@@ -43,14 +43,58 @@ module.exports = {
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.replace(" ", "-").toLowerCase()}`);
         if (res.ok) {
             const data = await res.json();
+
+            let weakness = {
+                normal: 1,
+                fire: 1,
+                water: 1,
+                electric: 1,
+                grass: 1,
+                ice: 1,
+                fighting: 1,
+                poison: 1,
+                ground: 1,
+                flying: 1,
+                psychic: 1,
+                bug: 1,
+                rock: 1,
+                ghost: 1,
+                dragon: 1,
+                dark: 1,
+                steel: 1,
+                fairy: 1
+            }
             
             let typescount = 0;
             let types = new String();
             for (const type of data.types) {
+                const res1 = await fetch(type.type.url);
+                const data1 = await res1.json();
+
+                for (const double of data1.damage_relations.double_damage_from) {
+                    weakness[double.name] = weakness[double.name] * 2;
+                }
+                for (const half of data1.damage_relations.half_damage_from) {
+                    weakness[half.name] = weakness[half.name] * 0.5;
+                }
+                for (const none of data1.damage_relations.no_damage_from) {
+                    weakness[none.name] = weakness[none.name] * 0;
+                }
+
                 types += type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1);
                 typescount += 1;
                 if (data.types.length != typescount) {
                     types += ", ";
+                }
+            }
+
+            let weaknessescount = 0;
+            let weaknesses = new String();
+            for (const weaknessobject in weakness) {
+                weaknesses += `${weaknessobject.charAt(0).toUpperCase()}${weaknessobject.slice(1)}: ${weakness[weaknessobject]}x`;
+                weaknessescount += 1;
+                if (weakness.length != weaknessescount) {
+                    weaknesses += "\n";
                 }
             }
     
@@ -79,44 +123,45 @@ module.exports = {
                 
             const embed = new EmbedBuilder()
                 .setColor(globals.colours.embed)
-                .setTimestamp()
+                .setTimestamp();
 
             if (data.name != null) {
-                embed.setTitle(data.name.charAt(0).toUpperCase() + data.name.slice(1))
+                embed.setTitle(data.name.charAt(0).toUpperCase() + data.name.slice(1));
             }
 
             if (data.id != null) {
                 embed.addFields(
                     { name: "Pokedex ID", value: data.id.toString(), inline: false },
-                )
+                );
             }
 
             embed.addFields(
                 { name: "Types", value: types, inline: false },
-                { name: "Abilities", value: abilities, inline: false },
-            )
+                { name: "Weakness", value: weaknesses, inline: false },
+                { name: "Abilities", value: abilities, inline: false }
+            );
 
             if (data.height != null) {
                 embed.addFields(
                     { name: "Height (Decimetres)", value: data.height.toString(), inline: false },
-                )
+                );
             }
 
             if (data.weight != null) {
                 embed.addFields(
                     { name: "Weight (Hectograms)", value: data.weight.toString(), inline: false },
-                )
+                );
             }
 
             if (data.base_experience != null) {
                 embed.addFields(
                     { name: "Base Experience", value: data.base_experience.toString(), inline: false },
-                )
+                );
             }
 
             embed.addFields(
                 { name: "Base Stats", value: basestats, inline: false },
-            )
+            );
 
             if (message) {
                 embed.addFields(
@@ -125,7 +170,7 @@ module.exports = {
             }
     
             if (data.sprites.other.home.front_default != null) {
-                embed.setThumbnail(data.sprites.other.home.front_default)
+                embed.setThumbnail(data.sprites.other.home.front_default);
 
                 const menu = new StringSelectMenuBuilder().setPlaceholder("Choose Sprite Image");
     
@@ -141,7 +186,7 @@ module.exports = {
                             value: "defaultregular",
                             description: "Show the regular default pic of the pokemon"
                         }
-                    ])
+                    ]);
                 }
                 if (data.sprites.other.home.front_shiny != null) {
                     menu.addOptions([
@@ -150,7 +195,7 @@ module.exports = {
                             value: "defaultshiny",
                             description: "Show the shiny default pic of the pokemon"
                         }
-                    ])
+                    ]);
                 }
                 if (data.sprites.other.home.front_female != null) {
                     menu.addOptions([
@@ -159,7 +204,7 @@ module.exports = {
                             value: "femaleregular",
                             description: "Show the regular female pic of the pokemon"
                         }
-                    ])
+                    ]);
                 }
                 if (data.sprites.other.home.front_shiny_female != null) {
                     menu.addOptions([
@@ -168,7 +213,7 @@ module.exports = {
                             value: "femaleshiny",
                             description: "Show the shiny female pic of the pokemon"
                         }
-                    ])
+                    ]);
                 }
         
                 const row = new ActionRowBuilder().addComponents(menu);
@@ -181,7 +226,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor(globals.colours.embed)
                 .setTitle("Pokemon Not Found")
-                .setTimestamp()
+                .setTimestamp();
 
             await interaction.editReply({ embeds: [embed] });
         }
