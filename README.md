@@ -18,16 +18,8 @@ Linux Setup (Debian / Ubuntu)
 
 Install [Node.js v21](https://github.com/nodesource/distributions#debian-and-ubuntu-based-distributions)
 
-If you are using python 3.11+ you may have external management popup with pip on user install packages
-
-Fix: [GitHub Comment](https://github.com/pypa/pip/issues/11776#issuecomment-1434892689)
-
 ```
-sudo apt install make g++ ffmpeg nodejs libtool-bin python3 python3-pip
-```
-
-```
-python3 -m pip install -U pip yt-dlp
+sudo apt install ffmpeg nodejs
 ```
 
 ```
@@ -35,5 +27,5 @@ npm install pm2@latest -g
 ```
 
 ```
-npm install discord.js@latest @discordjs/voice@latest sodium-native@latest @discordjs/opus@latest underscore@latest dayjs@latest r6api.js@latest shell-escape@latest
+npm install discord.js@latest @discordjs/voice@latest sodium-native@latest @discordjs/opus@latest underscore@latest dayjs@latest r6api.js@latest
 ```
