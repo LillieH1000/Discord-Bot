@@ -144,7 +144,6 @@ module.exports = {
                 const data = await res.json();
 
                 const contents = data.contents.twoColumnSearchResultsRenderer.primaryContents.sectionListRenderer.contents[0].itemSectionRenderer.contents;
-                console.log(contents.toString());
                 for (let i = 0; i < contents.length; i++) {
                     if (contents[i].videoRenderer != null) {
                         if (contents[i].videoRenderer.videoId != null) {
