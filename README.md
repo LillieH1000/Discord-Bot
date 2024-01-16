@@ -16,5 +16,5 @@ npm install pm2@latest -g
 ```
 
 ```
-npm install discord.js@latest @discordjs/voice@latest sodium-native@latest @discordjs/opus@latest underscore@latest dayjs@latest r6api.js@latest
+npm install discord.js@latest @discordjs/voice@latest sodium-native@latest @discordjs/opus@latest underscore@latest dayjs@latest date-fns@latest r6api.js@latest
 ```
