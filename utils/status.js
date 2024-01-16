@@ -14,11 +14,12 @@ module.exports = async(client) => {
             const currentdate = dayjs.tz(date, "America/New_York").day();
             const currenthour = dayjs.tz(date, "America/New_York").hour();
             if (currentdate == 1) {
-                client.user.setActivity("It's Miku Monday", { type: ActivityType.Custom });
+                hour = null;
+                client.user.setActivity("It's Miku monday", { type: ActivityType.Custom });
             } else {
                 if (hour != currenthour) {
-                    hour = currenthour
-                    let status = _.sample(["Miku Gang", "oo ee oo"]);
+                    hour = currenthour;
+                    let status = _.sample(["Miku gang", "oo ee oo", "I'm thinking Miku"]);
                     client.user.setActivity(status, { type: ActivityType.Custom });
                 }
             }
