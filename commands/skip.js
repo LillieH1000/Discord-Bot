@@ -1,6 +1,6 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { getVoiceConnection, createAudioResource } = require("@discordjs/voice");
-let globals = require("../globals.js");
+import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
+import { getVoiceConnection, createAudioResource } from "@discordjs/voice";
+import globals from "../globals.js";
 
 async function request(id) {
     const res = await fetch("https://www.youtube.com/youtubei/v1/player?key=AIzaSyB-63vPrdThhKuerbB2N_l7Kwwcxj6yUAc&prettyPrint=false", {
@@ -31,35 +31,36 @@ async function request(id) {
     }
 }
 
-module.exports = {
-	data: new SlashCommandBuilder()
-		.setName("skip")
-		.setDescription("Skips the current playing song")
-        .setDMPermission(false),
-	async execute(interaction) {
-        await interaction.deferReply();
+const info = new SlashCommandBuilder()
+    .setName("skip")
+    .setDescription("Skips the current playing song")
+    .setDMPermission(false);
 
-        const voiceConnection = getVoiceConnection(interaction.guild.id);
-        if (voiceConnection && voiceConnection.joinConfig.channelId == interaction.member.voice.channelId && globals.player[interaction.guild.id].status == 1) {
-            globals.player[interaction.guild.id].ids.shift();
+async function invoke(interaction) {
+    await interaction.deferReply();
 
-            const url = await request(globals.player[interaction.guild.id].ids[0]);
-            globals.player[interaction.guild.id].resource = createAudioResource(url, {
-                inlineVolume: true
-            });
-            globals.player[interaction.guild.id].resource.volume.setVolume(0.3);
-            globals.player[interaction.guild.id].player.play(globals.player[interaction.guild.id].resource);
-            voiceConnection.subscribe(globals.player[interaction.guild.id].player);
+    const voiceConnection = getVoiceConnection(interaction.guild.id);
+    if (voiceConnection && voiceConnection.joinConfig.channelId == interaction.member.voice.channelId && globals.player[interaction.guild.id].status == 1) {
+        globals.player[interaction.guild.id].ids.shift();
 
-            const embed = new EmbedBuilder()
-                .setColor(globals.colours.embed)
-                .setTitle("Music Player")
-                .setDescription("Skipped playing audio")
-                .setTimestamp();
+        const url = await request(globals.player[interaction.guild.id].ids[0]);
+        globals.player[interaction.guild.id].resource = createAudioResource(url, {
+            inlineVolume: true
+        });
+        globals.player[interaction.guild.id].resource.volume.setVolume(0.3);
+        globals.player[interaction.guild.id].player.play(globals.player[interaction.guild.id].resource);
+        voiceConnection.subscribe(globals.player[interaction.guild.id].player);
 
-            await interaction.editReply({ embeds: [embed] });
-        } else {
-            await interaction.deleteReply();
-        }
-	},
-};
+        const embed = new EmbedBuilder()
+            .setColor(globals.colours.embed)
+            .setTitle("Music Player")
+            .setDescription("Skipped playing audio")
+            .setTimestamp();
+
+        await interaction.editReply({ embeds: [embed] });
+    } else {
+        await interaction.deleteReply();
+    }
+}
+
+export { info, invoke };

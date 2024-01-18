@@ -1,8 +1,8 @@
-const dayjs = require("dayjs");
-let utc = require("dayjs/plugin/utc")
-let timezone = require("dayjs/plugin/timezone");
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc.js";
+import timezone from "dayjs/plugin/timezone.js";
 
-module.exports = async(client) => {
+async function invoke(client) {
     // Town Of Salem Server
     setInterval(async function() {
         try {
@@ -17,4 +17,6 @@ module.exports = async(client) => {
             console.error(error);
         }
     }, 60000)
-};
+}
+
+export { invoke };

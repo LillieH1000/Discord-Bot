@@ -1,7 +1,7 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
-let globals = require("../globals.js");
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js";
+import globals from "../globals.js";
 
-module.exports = async(client) => {
+async function invoke(client) {
     client.on("messageCreate", async message => {
         if (message.author.bot || !message.content) return;
 
@@ -43,4 +43,6 @@ module.exports = async(client) => {
             console.error(error);
         }
     });
-};
+}
+
+export { invoke };

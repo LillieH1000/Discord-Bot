@@ -1,11 +1,11 @@
-const { ActivityType } = require('discord.js');
-const dayjs = require("dayjs");
-let utc = require("dayjs/plugin/utc")
-let timezone = require("dayjs/plugin/timezone");
-let _ = require("underscore");
+import { ActivityType } from "discord.js";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc.js";
+import timezone from "dayjs/plugin/timezone.js";
+import _ from "underscore";
 let hour;
 
-module.exports = async(client) => {
+async function invoke(client) {
     setInterval(async function() {
         try {
             const date = new Date();
@@ -27,4 +27,6 @@ module.exports = async(client) => {
             console.error(error);
         }
     }, 60000)
-};
+}
+
+export { invoke };

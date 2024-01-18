@@ -1,9 +1,5 @@
 {
 	"client": "client",
 	"token": "token",
-	"safebrowsingapi": "key",
-	"ubisoftaccount": [
-		"email",
-		"password"
-	]
+	"safebrowsingapi": "key"
 }

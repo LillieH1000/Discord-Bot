@@ -1,4 +1,4 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 let player = new Object();
 
@@ -116,8 +116,8 @@ async function music(id, url) {
     return components;
 }
 
-module.exports = {
+export default {
     player,
     colours,
-    music: music
+    music
 };

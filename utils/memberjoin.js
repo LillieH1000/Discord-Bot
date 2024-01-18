@@ -1,8 +1,8 @@
-const { EmbedBuilder } = require("discord.js");
-const { format } = require("date-fns");
-let globals = require("../globals.js");
+import { EmbedBuilder } from "discord.js";
+import { format } from "date-fns";
+import globals from "../globals.js";
 
-module.exports = async(client) => {
+async function invoke(client) {
     client.on("guildMemberAdd", async guildMember => {
         try {
             const embed = new EmbedBuilder()
@@ -43,4 +43,6 @@ module.exports = async(client) => {
             console.error(error);
         }
     });
-};
+}
+
+export { invoke };

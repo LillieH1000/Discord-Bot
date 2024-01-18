@@ -1,4 +1,4 @@
-module.exports = async(client) => {
+async function invoke(client) {
     client.on("interactionCreate", async interaction => {
         if (!interaction.isButton()) return;
         
@@ -11,4 +11,6 @@ module.exports = async(client) => {
             console.error(error);
         }
     });
-};
+}
+
+export { invoke };

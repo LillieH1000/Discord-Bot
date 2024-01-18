@@ -1,4 +1,4 @@
-module.exports = async(client) => {
+async function invoke(client) {
     // Town Of Salem Server
     setInterval(async function() {
         try {
@@ -9,4 +9,6 @@ module.exports = async(client) => {
             console.error(error);
         }
     }, 60000)
-};
+}
+
+export { invoke };

@@ -1,7 +1,7 @@
-const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
-let globals = require("../globals.js");
+import { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } from "discord.js";
+import globals from "../globals.js";
 
-module.exports = async(client) => {
+async function invoke(client) {
     client.on("interactionCreate", async interaction => {
         if (!interaction.isStringSelectMenu()) return;
         
@@ -212,4 +212,6 @@ module.exports = async(client) => {
             console.error(error);
         }
     });
-};
+}
+
+export { invoke };

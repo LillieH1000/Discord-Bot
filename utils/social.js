@@ -1,8 +1,8 @@
-module.exports = async(client) => {
+async function invoke(client) {
     client.on("messageCreate", async message => {
         if (message.author.bot || !message.content) return;
 
-        let messageContentNew = message.content
+        let messageContentNew = message.content;
     
         try {
             for (const word of message.content.split(" ")) {
@@ -24,11 +24,13 @@ module.exports = async(client) => {
             }
 
             if (message.content != messageContentNew) {
-                message.suppressEmbeds(true)
+                message.suppressEmbeds(true);
                 message.reply({ content: messageContentNew, allowedMentions: { repliedUser: false } });
             }
         } catch (error) {
             console.error(error);
         }
     });
-};
+}
+
+export { invoke };
