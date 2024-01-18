@@ -18,16 +18,17 @@ async function invoke(client) {
 
                         const embed = new EmbedBuilder()
                             .setColor(globals.colours.embed)
-                            .setTitle("Message Spam Detected")
+                            .setTitle("Anti Spam Triggered")
                             .addFields(
                                 { name: "Display Name:", value: message.author.displayName, inline: false },
                                 { name: "Username:", value: message.author.username, inline: false },
                                 { name: "ID:", value: message.author.id, inline: false },
-                                { name: "Action:", value: "Muted", inline: false }
+                                { name: "Action:", value: "Muted, messages not deleted", inline: false }
                             )
-                            .setTimestamp()
+                            .setTimestamp();
 
-                        message.member.guild.systemChannel.send({
+                        const channel = message.guild.channels.cache.get("1197666541467078787") || await message.guild.channels.fetch("1197666541467078787");
+                        channel.send({
                             content: "<@&1096003733554479135> <@&1195220849435889705>",
                             embeds: [embed]
                         });
