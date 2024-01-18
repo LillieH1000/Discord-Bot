@@ -11,8 +11,8 @@ module.exports = async(client) => {
                 .setAuthor({ name: guildMember.user.displayName, iconURL: guildMember.user.displayAvatarURL() })
                 .addFields(
                     { name: "Username:", value: guildMember.user.username, inline: false },
-                    { name: "Created At:", value: format(guildMember.user.createdAt, "MMMM d, yyyy"), inline: false },
-                    { name: "Joined At:", value: format(guildMember.joinedAt, "MMMM d, yyyy"), inline: false }
+                    { name: "Created At:", value: format(guildMember.user.createdAt, "MMMM d, yyyy"), inline: true },
+                    { name: "Joined At:", value: format(guildMember.joinedAt, "MMMM d, yyyy"), inline: true }
                 )
                 .setFooter({ text: `ID: ${guildMember.user.id}` })
                 .setTimestamp();
