@@ -8,7 +8,7 @@ async function invoke(client) {
         } catch (error) {
             console.error(error);
         }
-    }, 60000)
+    }, 60000);
 }
 
 export { invoke };
