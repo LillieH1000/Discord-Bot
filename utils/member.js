@@ -16,7 +16,13 @@ async function invoke(client) {
                 .setFooter({ text: `ID: ${guildMember.user.id}` })
                 .setTimestamp();
 
-            guildMember.guild.systemChannel.send({ embeds: [embed] });
+            // Legacy Update Server
+            if (guildMember.guild.id == "1095995920409178112") {
+                const channel = guildMember.guild.channels.cache.get("1197666440942198794") || await guildMember.guild.channels.fetch("1197666440942198794");
+                channel.send({ embeds: [embed] });
+            } else {
+                guildMember.guild.systemChannel.send({ embeds: [embed] });
+            }
         } catch (error) {
             console.error(error);
         }
@@ -31,13 +37,24 @@ async function invoke(client) {
                     .setAuthor({ name: newMember.user.displayName, iconURL: newMember.user.displayAvatarURL() })
                     .addFields(
                         { name: "Username:", value: newMember.user.username, inline: false },
-                        { name: "Created At:", value: format(newMember.user.createdAt, "MMMM d, yyyy"), inline: true },
-                        { name: "Joined At:", value: format(newMember.guild.joinedAt, "MMMM d, yyyy"), inline: true }
+                        { name: "Created At:", value: format(newMember.user.createdAt, "MMMM d, yyyy"), inline: true }
                     )
                     .setFooter({ text: `ID: ${newMember.user.id}` })
                     .setTimestamp();
+
+                if (newMember.joinedAt) {
+                    embed.addFields(
+                        { name: "Joined At:", value: format(newMember.joinedAt, "MMMM d, yyyy"), inline: true }
+                    );
+                }
                 
-                newMember.guild.systemChannel.send({ embeds: [embed] });
+                // Legacy Update Server
+                if (newMember.guild.id == "1095995920409178112") {
+                    const channel = newMember.guild.channels.cache.get("1197666440942198794") || await newMember.guild.channels.fetch("1197666440942198794");
+                    channel.send({ embeds: [embed] });
+                } else {
+                    newMember.guild.systemChannel.send({ embeds: [embed] });
+                }
             }
         } catch (error) {
             console.error(error);
@@ -52,13 +69,24 @@ async function invoke(client) {
                 .setAuthor({ name: guildMember.user.displayName, iconURL: guildMember.user.displayAvatarURL() })
                 .addFields(
                     { name: "Username:", value: guildMember.user.username, inline: false },
-                    { name: "Created At:", value: format(guildMember.user.createdAt, "MMMM d, yyyy"), inline: true },
-                    { name: "Joined At:", value: format(guildMember.guild.joinedAt, "MMMM d, yyyy"), inline: true }
+                    { name: "Created At:", value: format(guildMember.user.createdAt, "MMMM d, yyyy"), inline: true }
                 )
                 .setFooter({ text: `ID: ${guildMember.user.id}` })
                 .setTimestamp();
 
-            guildMember.guild.systemChannel.send({ embeds: [embed] });
+            if (guildMember.joinedAt) {
+                embed.addFields(
+                    { name: "Joined At:", value: format(guildMember.joinedAt, "MMMM d, yyyy"), inline: true }
+                );
+            }
+
+            // Legacy Update Server
+            if (guildMember.guild.id == "1095995920409178112") {
+                const channel = guildMember.guild.channels.cache.get("1197666440942198794") || await guildMember.guild.channels.fetch("1197666440942198794");
+                channel.send({ embeds: [embed] });
+            } else {
+                guildMember.guild.systemChannel.send({ embeds: [embed] });
+            }
         } catch (error) {
             console.error(error);
         }
