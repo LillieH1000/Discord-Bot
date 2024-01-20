@@ -36,7 +36,7 @@ async function music(id, url) {
 
     if (id != null) {
         const watchNativeButton = new ButtonBuilder()
-            .setLabel("Watch Native")
+            .setLabel("Watch Native (Desktop)")
             .setCustomId(JSON.stringify({
                 id: "youtube",
                 video: id
