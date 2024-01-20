@@ -3,10 +3,13 @@ async function invoke(client) {
         if (!interaction.isButton()) return;
         
         try {
-            await interaction.reply({
-                content: `https://lillieh1000.gay/yt?videoID=${interaction.customId}#`,
-                ephemeral: true
-            });
+            const id = JSON.parse(interaction.customId);
+            if (id.id = "youtube") {
+                await interaction.reply({
+                    content: `https://yt.lillieh1000.gay/?videoID=${id.video}#`,
+                    ephemeral: true
+                });
+            }
         } catch (error) {
             console.error(error);
         }

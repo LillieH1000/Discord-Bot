@@ -35,7 +35,13 @@ async function music(id, url) {
     }
 
     if (id != null) {
-        const watchNativeButton = new ButtonBuilder().setLabel("Watch Native").setCustomId(id).setStyle(ButtonStyle.Secondary);
+        const watchNativeButton = new ButtonBuilder()
+            .setLabel("Watch Native")
+            .setCustomId(JSON.stringify({
+                id: "youtube",
+                video: id
+            }))
+            .setStyle(ButtonStyle.Secondary);
         await add(watchNativeButton);
     }
 
