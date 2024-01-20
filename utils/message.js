@@ -32,7 +32,7 @@ async function invoke(client) {
 
         try {
             // Legacy Update Server
-            if (newMessage.guild.id == "1095995920409178112") {
+            if (newMessage.guild.id == "1095995920409178112" && oldMessage.content != newMessage.content) {
                 const embed = new EmbedBuilder()
                     .setColor(globals.colours.embed)
                     .setTitle("Message Updated")
