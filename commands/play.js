@@ -1,16 +1,54 @@
 import { joinVoiceChannel, getVoiceConnection, createAudioResource, createAudioPlayer, AudioPlayerStatus } from "@discordjs/voice";
-import { SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
 import globals from "../globals.js";
 
 async function play(interaction, id) {
     globals.player[interaction.guild.id].ids.push(id);
 
+    const data = await request(id);
+
+    const time = new Date(parseInt(data.videoDetails.lengthSeconds) * 1000).toISOString().slice(11, 19);
+    const timesplit = time.split(":");
+    let formattedTime;
+    if (timesplit[0] == "00") {
+        const splicedTime = timesplit.splice(1).join(":");
+        if (splicedTime.split(":")[0].startsWith("0")) {
+            formattedTime = splicedTime.slice(1);
+        } else {
+            formattedTime = splicedTime;
+        }
+    } else if (timesplit[0].startsWith("0")) {
+        formattedTime = timesplit.join(":").slice(1);
+    } else {
+        formattedTime = timesplit.join(":");
+    }
+
+    const artworks = data.videoDetails.thumbnail.thumbnails;
+
+    const embed = new EmbedBuilder()
+        .setColor(globals.colours.embed)
+        .setTitle("Music Player")
+        .setDescription("Queued")
+        .setThumbnail(artworks[artworks.length - 1].url)
+        .addFields(
+            { name: data.videoDetails.title, value: data.videoDetails.author, inline: false }
+        )
+        .setFooter({ text: `Length: ${formattedTime}` })
+        .setTimestamp();
+
+    globals.music(data.videoDetails.videoId, null).then((components) => {
+        if (components != null && components != undefined && components.length != 0) {
+            interaction.editReply({ embeds: [embed], components: components, allowedMentions: { repliedUser: false } });
+        } else {
+            interaction.editReply({ embeds: [embed], allowedMentions: { repliedUser: false } });
+        }
+    });
+
     const voiceConnection = getVoiceConnection(interaction.guild.id);
     if (voiceConnection && globals.player[interaction.guild.id].status == 0) {
         globals.player[interaction.guild.id].status = 1;
 
-        const url = await request(globals.player[interaction.guild.id].ids[0]);
-        globals.player[interaction.guild.id].resource = createAudioResource(url, {
+        globals.player[interaction.guild.id].resource = createAudioResource(data.streamingData.hlsManifestUrl, {
             inlineVolume: true
         });
         globals.player[interaction.guild.id].resource.volume.setVolume(0.3);
@@ -26,8 +64,8 @@ async function play(interaction, id) {
                     delete globals.player[interaction.guild.id];
                 } else {
                     (async () => {
-                        const url = await request(globals.player[interaction.guild.id].ids[0]);
-                        globals.player[interaction.guild.id].resource = createAudioResource(url, {
+                        const data = await request(globals.player[interaction.guild.id].ids[0]);
+                        globals.player[interaction.guild.id].resource = createAudioResource(data.streamingData.hlsManifestUrl, {
                             inlineVolume: true
                         });
                         globals.player[interaction.guild.id].resource.volume.setVolume(0.3);
@@ -51,8 +89,6 @@ async function play(interaction, id) {
             }
         });
     }
-
-    await interaction.deleteReply();
 }
 
 async function request(id) {
@@ -80,7 +116,7 @@ async function request(id) {
 
     if (res.ok) {
         const data = await res.json();
-        return data.streamingData.hlsManifestUrl;
+        return data;
     }
 }
 
