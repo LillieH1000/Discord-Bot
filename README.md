@@ -12,7 +12,7 @@ sudo apt install make g++ ffmpeg nodejs
 ```
 
 ```
-npm install pm2@latest -g
+sudo npm install pm2@latest -g
 ```
 
 ```
