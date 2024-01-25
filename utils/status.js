@@ -7,9 +7,9 @@ async function invoke(client) {
     setInterval(async function() {
         try {
             const date = new Date();
-            const currentdate = formatInTimeZone(date, "America/New_York", "d");
+            const currentdate = formatInTimeZone(date, "America/New_York", "e");
             const currenthour = formatInTimeZone(date, "America/New_York", "h");
-            if (currentdate == 1) {
+            if (currentdate == 2) {
                 hour = null;
                 client.user.setActivity("It's Miku monday", { type: ActivityType.Custom });
             } else {
