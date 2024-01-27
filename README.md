@@ -15,25 +15,35 @@ Install [Node.js v21](https://github.com/nodesource/distributions#debian-and-ubu
 sudo apt install make g++ ffmpeg nodejs
 ```
 
+Continue to npm section
+
 -----
 
 Arch
 
-Install Node.js v21
+Install [Node Version Manager](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-[1](https://github.com/nvm-sh/nvm#installing-and-updating)
-[2]
 ```
 nvm list-remote
 ```
-[3](https://wiki.archlinux.org/title/Node.js)
+
+Install [Node.js v21](https://wiki.archlinux.org/title/Node.js)
+
+```
+sudo pacman -S make base-devel ffmpeg gcc glibc linux-api-headers
+```
+
+Continue to npm section
 
 -----
 
-```
-sudo npm install pm2@latest -g
-```
+npm
 
 ```
-npm install discord.js@latest @discordjs/voice@latest sodium-native@latest @discordjs/opus@latest underscore@latest date-fns@2 date-fns-tz@2
+npm install pm2@latest -g
+```
+(^ Run as sudo if needed)
+
+```
+npm install
 ```
