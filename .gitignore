@@ -1,2 +1,9 @@
 # macOS
 .DS_Store
+
+# nodejs
+node_modules/
+package-lock.json
+
+# Visual Studio Code
+.vscode/
