@@ -1,4 +1,5 @@
 import { EmbedBuilder } from "discord.js";
+import { format } from "date-fns";
 import globals from "../globals.js";
 
 async function invoke(client) {
@@ -14,6 +15,8 @@ async function invoke(client) {
                     .setAuthor({ name: message.author.displayName, iconURL: message.author.displayAvatarURL() })
                     .addFields(
                         { name: "Username:", value: message.author.username, inline: false },
+                        { name: "Channel:", value: `<#${message.channel.id}>`, inline: false },
+                        { name: "Created At:", value: format(message.createdAt, "MMMM d, yyyy"), inline: false },
                         { name: "Message:", value: message.content, inline: false }
                     )
                     .setFooter({ text: `ID: ${message.author.id}` })
@@ -39,6 +42,9 @@ async function invoke(client) {
                     .setAuthor({ name: newMessage.author.displayName, iconURL: newMessage.author.displayAvatarURL() })
                     .addFields(
                         { name: "Username:", value: newMessage.author.username, inline: false },
+                        { name: "Channel:", value: `<#${newMessage.channel.id}>`, inline: false },
+                        { name: "Old Created At:", value: format(oldMessage.createdAt, "MMMM d, yyyy"), inline: false },
+                        { name: "New Created At:", value: format(newMessage.createdAt, "MMMM d, yyyy"), inline: false },
                         { name: "Old Message:", value: oldMessage.content, inline: false },
                         { name: "New Message:", value: newMessage.content, inline: false }
                     )
