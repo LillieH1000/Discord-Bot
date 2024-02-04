@@ -163,7 +163,11 @@ async function invoke(interaction) {
             { name: "Base Stats", value: basestats, inline: false },
         );
 
-        if (message) {
+        // Town Of Salem Server
+        if (interaction.guild.id == "416350699794857986" && message) {
+            const channel = interaction.guild.channels.cache.get("894979033484369980") || await interaction.guild.channels.fetch("894979033484369980");
+            const count = channel.name.replace("shiny-stuff-", "").replace("-left", "");
+            channel.setName(`shiny stuff ${count - 1} left`);
             embed.addFields(
                 { name: "Game And Count", value: message, inline: false },
             );

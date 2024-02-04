@@ -156,7 +156,8 @@ async function invoke(client) {
         
                 const menu = new StringSelectMenuBuilder().setPlaceholder("Choose Sprite Image");
         
-                if (game != null && game != "") {
+                // Town Of Salem Server
+                if (interaction.guild.id == "416350699794857986" && game != null && game != "") {
                     embed.addFields(
                         { name: "Game And Count", value: game, inline: false },
                     );
