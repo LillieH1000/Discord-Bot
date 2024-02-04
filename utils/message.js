@@ -43,8 +43,8 @@ async function invoke(client) {
                     .addFields(
                         { name: "Username:", value: newMessage.author.username, inline: false },
                         { name: "Channel:", value: `<#${newMessage.channel.id}>`, inline: false },
-                        { name: "Old Created At:", value: format(oldMessage.createdAt, "MMMM d, yyyy"), inline: true },
-                        { name: "New Created At:", value: format(newMessage.createdAt, "MMMM d, yyyy"), inline: true },
+                        { name: "Original Date:", value: format(oldMessage.createdAt, "MMMM d, yyyy"), inline: true },
+                        { name: "Edited Date:", value: format(newMessage.createdAt, "MMMM d, yyyy"), inline: true },
                         { name: "Old Message:", value: oldMessage.content, inline: false },
                         { name: "New Message:", value: newMessage.content, inline: false }
                     )
