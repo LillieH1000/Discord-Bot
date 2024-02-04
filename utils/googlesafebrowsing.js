@@ -9,6 +9,7 @@ async function invoke(client) {
         try {
             // Legacy Update Server
             if (message.guild.id == "1095995920409178112") {
+                message.content = message.content.replace(/</gm, "").replace(/>/gm, "");
                 for (const word of message.content.split(" ")) {
                     const res = await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${config.safebrowsingapi}`, {
                         method: "post",

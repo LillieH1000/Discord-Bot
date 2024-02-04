@@ -4,6 +4,8 @@ import globals from "../globals.js";
 async function invoke(client) {
     client.on("messageCreate", async message => {
         if (message.author.bot || !message.content) return;
+
+        message.content = message.content.replace(/</gm, "").replace(/>/gm, "");
     
         try {
             for (const word of message.content.split(" ")) {
