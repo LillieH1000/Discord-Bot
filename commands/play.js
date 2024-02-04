@@ -51,7 +51,7 @@ async function play(interaction, id) {
         globals.player[interaction.guild.id].resource = createAudioResource(data.streamingData.hlsManifestUrl, {
             inlineVolume: true
         });
-        globals.player[interaction.guild.id].resource.volume.setVolume(0.3);
+        globals.player[interaction.guild.id].resource.volume.setVolume(globals.player[interaction.guild.id].volume);
         globals.player[interaction.guild.id].player.play(globals.player[interaction.guild.id].resource);
         voiceConnection.subscribe(globals.player[interaction.guild.id].player);
 
@@ -68,7 +68,7 @@ async function play(interaction, id) {
                         globals.player[interaction.guild.id].resource = createAudioResource(data.streamingData.hlsManifestUrl, {
                             inlineVolume: true
                         });
-                        globals.player[interaction.guild.id].resource.volume.setVolume(0.3);
+                        globals.player[interaction.guild.id].resource.volume.setVolume(globals.player[interaction.guild.id].volume);
                         globals.player[interaction.guild.id].player.play(globals.player[interaction.guild.id].resource);
                         voiceConnection.subscribe(globals.player[interaction.guild.id].player);
                     })();
@@ -147,6 +147,7 @@ async function invoke(interaction) {
                     "status": 0,
                     "ids": [],
                     "player": createAudioPlayer(),
+                    "volume": 0.3,
                     "resource": null
                 }
             };

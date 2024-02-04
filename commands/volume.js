@@ -17,7 +17,8 @@ async function invoke(interaction) {
     
     const voiceConnection = getVoiceConnection(interaction.guild.id);
     if (voiceConnection && voiceConnection.joinConfig.channelId == interaction.member.voice.channelId && globals.player[interaction.guild.id].status == 1) {
-        globals.player[interaction.guild.id].resource.volume.setVolume(volume / 100);
+        globals.player[interaction.guild.id].volume = volume / 100
+        globals.player[interaction.guild.id].resource.volume.setVolume(globals.player[interaction.guild.id].volume);
 
         const embed = new EmbedBuilder()
             .setColor(globals.colours.embed)

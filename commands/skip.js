@@ -47,7 +47,7 @@ async function invoke(interaction) {
         globals.player[interaction.guild.id].resource = createAudioResource(url, {
             inlineVolume: true
         });
-        globals.player[interaction.guild.id].resource.volume.setVolume(0.3);
+        globals.player[interaction.guild.id].resource.volume.setVolume(globals.player[interaction.guild.id].volume);
         globals.player[interaction.guild.id].player.play(globals.player[interaction.guild.id].resource);
         voiceConnection.subscribe(globals.player[interaction.guild.id].player);
 
