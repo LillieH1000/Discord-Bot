@@ -147,7 +147,7 @@ async function invoke(interaction) {
                     "status": 0,
                     "ids": [],
                     "player": createAudioPlayer(),
-                    "volume": 0.3,
+                    "volume": 0.1,
                     "resource": null
                 }
             };

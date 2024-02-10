@@ -8,7 +8,7 @@ const info = new SlashCommandBuilder()
     .setDMPermission(false)
     .addIntegerOption(option =>
         option.setName("volume")
-            .setDescription("Enter the volume integer (1 - 100) [Default: 30]")
+            .setDescription("Enter the volume integer (1 - 100) [Default: 10]")
             .setRequired(true));
 
 async function invoke(interaction) {
