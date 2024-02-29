@@ -42,7 +42,6 @@ npm
 ```
 npm install pm2@latest -g
 ```
-(^ Run as sudo if needed)
 
 ```
 npm install
