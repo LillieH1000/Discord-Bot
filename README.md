@@ -12,7 +12,7 @@ Debian / Ubuntu
 Install [Node.js v21](https://github.com/nodesource/distributions#debian-and-ubuntu-based-distributions)
 
 ```
-sudo apt install make g++ ffmpeg nodejs
+sudo apt install make g++ ffmpeg
 ```
 
 Continue to npm section
