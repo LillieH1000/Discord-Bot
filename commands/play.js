@@ -2,12 +2,12 @@ import { joinVoiceChannel, getVoiceConnection, createAudioResource, createAudioP
 import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
 import globals from "../globals.js";
 
-async function play(interaction, source, id) {
+async function play(interaction, id) {
     globals.player[interaction.guild.id].ids.push(id);
 
-    const data = await request(source, id);
+    const data = await globals.request(id);
 
-    if (source == 0) {
+    if (data.url == null) {
         const time = new Date(parseInt(data.videoDetails.lengthSeconds) * 1000).toISOString().slice(11, 19);
         const timesplit = time.split(":");
         let formattedTime;
@@ -38,9 +38,7 @@ async function play(interaction, source, id) {
             .setTimestamp();
 
         await interaction.editReply({ embeds: [embed], allowedMentions: { repliedUser: false } });
-    }
-
-    if (source == 1) {
+    } else {
         await interaction.deleteReply();
     }
 
@@ -48,9 +46,15 @@ async function play(interaction, source, id) {
     if (voiceConnection && globals.player[interaction.guild.id].status == 0) {
         globals.player[interaction.guild.id].status = 1;
 
-        globals.player[interaction.guild.id].resource = createAudioResource(data.streamingData.hlsManifestUrl, {
-            inlineVolume: true
-        });
+        if (data.url == null) {
+            globals.player[interaction.guild.id].resource = createAudioResource(data.streamingData.hlsManifestUrl, {
+                inlineVolume: true
+            });
+        } else {
+            globals.player[interaction.guild.id].resource = createAudioResource(data.url, {
+                inlineVolume: true
+            });
+        }
         globals.player[interaction.guild.id].resource.volume.setVolume(globals.player[interaction.guild.id].volume);
         globals.player[interaction.guild.id].player.play(globals.player[interaction.guild.id].resource);
         voiceConnection.subscribe(globals.player[interaction.guild.id].player);
@@ -64,13 +68,12 @@ async function play(interaction, source, id) {
                     delete globals.player[interaction.guild.id];
                 } else {
                     (async () => {
-                        const data = await request(source, globals.player[interaction.guild.id].ids[0]);
-                        if (source == 0) {
+                        const data = await globals.request(globals.player[interaction.guild.id].ids[0]);
+                        if (data.url == null) {
                             globals.player[interaction.guild.id].resource = createAudioResource(data.streamingData.hlsManifestUrl, {
                                 inlineVolume: true
                             });
-                        }
-                        if (source == 1) {
+                        }else {
                             globals.player[interaction.guild.id].resource = createAudioResource(data.url, {
                                 inlineVolume: true
                             });
@@ -95,51 +98,6 @@ async function play(interaction, source, id) {
                 console.error(error);
             }
         });
-    }
-}
-
-async function request(type, id) {
-    if (type == 0) {
-        const res = await fetch("https://www.youtube.com/youtubei/v1/player?key=AIzaSyB-63vPrdThhKuerbB2N_l7Kwwcxj6yUAc&prettyPrint=false", {
-            method: "post",
-            body: JSON.stringify({
-                "context": {
-                    "client": {
-                        "hl": "en",
-                        "gl": "CA",
-                        "clientName": "IOS",
-                        "clientVersion": "18.11.34",
-                        "deviceModel": "iPhone14,3"
-                    }
-                },
-                "contentCheckOk": true,
-                "racyCheckOk": true,
-                "videoId": id
-            }),
-            headers: {
-                "Content-Type": "application/json",
-                "User-Agent": "com.google.ios.youtube/18.11.34 (iPhone14,3; U; CPU iOS 15_6 like Mac OS X)"
-            }
-        });
-
-        if (res.ok) {
-            const data = await res.json();
-            return data;
-        }
-    }
-    
-    if (type == 1) {
-        const res = await fetch(`https://am.lillieh1000.gay/?songURL=${id}`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-            }
-        });
-
-        if (res.ok) {
-            const data = await res.json();
-            return data;
-        }
     }
 }
 
@@ -189,7 +147,7 @@ async function invoke(interaction) {
     if (source == "yt") {
         const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
         if (query.match(rx)) {
-            await play(interaction, 0, query.match(rx)[1]);
+            await play(interaction, query.match(rx)[1]);
         } else {
             const res = await fetch("https://www.youtube.com/youtubei/v1/search?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8&prettyPrint=false", {
                 method: "post",
@@ -218,7 +176,7 @@ async function invoke(interaction) {
                 for (let i = 0; i < contents.length; i++) {
                     if (contents[i].videoRenderer != null) {
                         if (contents[i].videoRenderer.videoId != null) {
-                            await play(interaction, 0, contents[i].videoRenderer.videoId);
+                            await play(interaction, contents[i].videoRenderer.videoId);
                             break;
                         }
                     }
@@ -229,7 +187,7 @@ async function invoke(interaction) {
 
     if (source == "am") {
         if (query.match(/^http(?:s)?:\/\/(.*)audiomack\.com\//)) {
-            await play(interaction, 1, query);
+            await play(interaction, query);
         } else {
             await interaction.deleteReply();
         }
