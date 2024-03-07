@@ -59,13 +59,7 @@ async function invoke(client) {
                             .setFooter({ text: `Length: ${formattedTime}` })
                             .setTimestamp();
 
-                        globals.music(data1.videoDetails.videoId, null).then((components) => {
-                            if (components != null && components != undefined && components.length != 0) {
-                                message.reply({ embeds: [embed], components: components, allowedMentions: { repliedUser: false } });
-                            } else {
-                                message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
-                            }
-                        });
+                        await message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
                     }
                 }
             }

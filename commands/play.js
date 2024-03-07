@@ -36,13 +36,7 @@ async function play(interaction, id) {
         .setFooter({ text: `Length: ${formattedTime}` })
         .setTimestamp();
 
-    globals.music(data.videoDetails.videoId, null).then((components) => {
-        if (components != null && components != undefined && components.length != 0) {
-            interaction.editReply({ embeds: [embed], components: components, allowedMentions: { repliedUser: false } });
-        } else {
-            interaction.editReply({ embeds: [embed], allowedMentions: { repliedUser: false } });
-        }
-    });
+    await interaction.editReply({ embeds: [embed], allowedMentions: { repliedUser: false } });
 
     const voiceConnection = getVoiceConnection(interaction.guild.id);
     if (voiceConnection && globals.player[interaction.guild.id].status == 0) {
