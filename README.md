@@ -6,10 +6,8 @@ Invite my bot: [Invite](https://discord.com/api/oauth2/authorize?client_id=10653
 Features:
 - Music player (Supports YouTube and Audiomack)
 - Discord embed fixer for multiple social medias (Twitter, Reddit, Tiktok, Instagram)
-- Built in google safe browsing to delete any url posted that is filtered as dangerous
-- YouTube response embed that returns info of a yt url when posted (Views, Likes, Dislikes)
-- Rainbow 6 Siege game commands -> Get player info or server status of Rainbow 6 Siege
-- Pokemon command -> Get info about any pokemon including stats, sprites and other info
+- YouTube response embed that returns info of a yt url when posted (views, likes, dislikes)
+- Pokemon command -> Get info about any pokemon including stats, weaknesses, types, sprites and other info
 - Command to get the pronouns of the user from pronoundb
 - Member join and leave embed message
 
