@@ -73,7 +73,7 @@ async function play(interaction, id) {
                             globals.player[interaction.guild.id].resource = createAudioResource(data.streamingData.hlsManifestUrl, {
                                 inlineVolume: true
                             });
-                        }else {
+                        } else {
                             globals.player[interaction.guild.id].resource = createAudioResource(data.url, {
                                 inlineVolume: true
                             });
