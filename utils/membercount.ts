@@ -1,4 +1,6 @@
-async function invoke(client) {
+import { Client } from "discord.js";
+
+async function invoke(client: Client) {
     // Town Of Salem Server
     setInterval(async function() {
         try {

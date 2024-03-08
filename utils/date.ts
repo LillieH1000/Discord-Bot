@@ -1,6 +1,7 @@
 import { formatInTimeZone } from "date-fns-tz";
+import { Client } from "discord.js";
 
-async function invoke(client) {
+async function invoke(client: Client) {
     // Town Of Salem Server
     setInterval(async function() {
         try {

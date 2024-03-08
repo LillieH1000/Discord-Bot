@@ -1,7 +1,7 @@
-import { EmbedBuilder } from "discord.js";
+import { Client, EmbedBuilder } from "discord.js";
 import globals from "../globals.js";
 
-async function invoke(client) {
+async function invoke(client: Client) {
     client.on("messageCreate", async message => {
         if (message.author.bot || !message.content) return;
 

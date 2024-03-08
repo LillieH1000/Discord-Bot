@@ -1,4 +1,6 @@
-async function invoke(client) {
+import { Client } from "discord.js";
+
+async function invoke(client: Client) {
     client.on("interactionCreate", async interaction => {
         if (!interaction.isCommand()) return;
 

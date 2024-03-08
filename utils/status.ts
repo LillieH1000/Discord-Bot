@@ -1,9 +1,9 @@
-import { ActivityType } from "discord.js";
+import { ActivityType, Client } from "discord.js";
 import { formatInTimeZone } from "date-fns-tz";
 import _ from "underscore";
 let hour;
 
-async function invoke(client) {
+async function invoke(client: Client) {
     setInterval(async function() {
         try {
             const date = new Date();

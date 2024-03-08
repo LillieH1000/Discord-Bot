@@ -1,7 +1,7 @@
-import { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } from "discord.js";
+import { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, Client } from "discord.js";
 import globals from "../globals.js";
 
-async function invoke(client) {
+async function invoke(client: Client) {
     client.on("interactionCreate", async interaction => {
         if (!interaction.isStringSelectMenu()) return;
         
