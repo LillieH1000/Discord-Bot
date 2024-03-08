@@ -24,7 +24,7 @@ sudo apt install make g++ ffmpeg chromium-browser
 ```
 
 ```
-npm install pm2@latest -g
+npm install -g pm2
 ```
 
 ```
