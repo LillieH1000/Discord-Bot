@@ -6,14 +6,14 @@ const client = new Client({ intents: [GatewayIntentBits.MessageContent, GatewayI
 
 client.commands = new Collection();
 
-const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
+const commandFiles: string[] = fs.readdirSync("./commands").filter((file: string) => file.endsWith(".ts"));
 
 for (const file of commandFiles) {
 	const command = await import(`./commands/${file}`);
 	client.commands.set(command.info.name, command);
 }
 
-const utilsFiles = fs.readdirSync("./utils").filter(file => file.endsWith(".js"));
+const utilsFiles: string[] = fs.readdirSync("./utils").filter((file: string) => file.endsWith(".ts"));
 
 for (const file of utilsFiles) {
 	const utils = await import(`./utils/${file}`);
