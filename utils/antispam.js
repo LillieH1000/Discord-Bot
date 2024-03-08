@@ -27,7 +27,7 @@ async function invoke(client) {
                             )
                             .setTimestamp();
 
-                        const channel = message.guild.channels.cache.get("1197666541467078787") || await message.guild.channels.fetch("1197666541467078787");
+                        const channel = message.guild.channels.cache.get("1197666541467078787");
                         channel.send({
                             content: "<@&1096003733554479135> <@&1195220849435889705>",
                             embeds: [embed]

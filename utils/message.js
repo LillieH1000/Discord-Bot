@@ -22,7 +22,7 @@ async function invoke(client) {
                     .setFooter({ text: `ID: ${message.author.id}` })
                     .setTimestamp();
 
-                const channel = message.guild.channels.cache.get("1197666507925225662") || await message.guild.channels.fetch("1197666507925225662");
+                const channel = message.guild.channels.cache.get("1197666507925225662");
                 channel.send({ embeds: [embed] });
             }
         } catch (error) {
@@ -51,7 +51,7 @@ async function invoke(client) {
                     .setFooter({ text: `ID: ${newMessage.author.id}` })
                     .setTimestamp();
 
-                const channel = newMessage.guild.channels.cache.get("1197666507925225662") || await newMessage.guild.channels.fetch("1197666507925225662");
+                const channel = newMessage.guild.channels.cache.get("1197666507925225662");
                 channel.send({ embeds: [embed] });
             }
         } catch (error) {
