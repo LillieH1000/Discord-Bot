@@ -1,6 +1,21 @@
 import fs from "node:fs";
 import { Client, Collection, GatewayIntentBits } from "discord.js";
-import config from "./config.json" assert { type: "json" };
+
+let config;
+
+if (process.argv[2] == "dev") {
+	config = await import("file:///C:/Users/lilli/OneDrive/Desktop/Stuff/config.json", {
+		assert: {
+		  type: "json"
+		}
+	});
+} else {
+	config = await import("./config.json", {
+		assert: {
+		  type: "json"
+		}
+	});
+}
 
 const client = new Client({ intents: [GatewayIntentBits.MessageContent, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildBans, GatewayIntentBits.GuildEmojisAndStickers, GatewayIntentBits.GuildIntegrations, GatewayIntentBits.GuildWebhooks, GatewayIntentBits.GuildInvites, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.GuildMessageTyping, GatewayIntentBits.GuildScheduledEvents] });
 
