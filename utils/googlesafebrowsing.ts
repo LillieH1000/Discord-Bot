@@ -1,6 +1,21 @@
 import { EmbedBuilder } from "discord.js";
 import globals from "../globals.js";
-import config from "../config.json" assert { type: "json" };
+
+let config;
+
+if (process.argv[2] == "dev") {
+	config = await import("file:///C:/Users/lilli/OneDrive/Desktop/Stuff/config.json", {
+		assert: {
+		  type: "json"
+		}
+	});
+} else {
+	config = await import("../config.json", {
+		assert: {
+		  type: "json"
+		}
+	});
+}
 
 async function invoke(client) {
     client.on("messageCreate", async message => {

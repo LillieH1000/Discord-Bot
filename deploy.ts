@@ -1,6 +1,21 @@
 import fs from "node:fs";
 import { REST, Routes } from "discord.js";
-import config from "./config.json" assert { type: "json" };
+
+let config;
+
+if (process.argv[2] == "dev") {
+	config = await import("file:///C:/Users/lilli/OneDrive/Desktop/Stuff/config.json", {
+		assert: {
+		  type: "json"
+		}
+	});
+} else {
+	config = await import("./config.json", {
+		assert: {
+		  type: "json"
+		}
+	});
+}
 
 const commands = new Array();
 const commandFiles: string[] = fs.readdirSync("./commands").filter((file: string) => file.endsWith(".ts"));
