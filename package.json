@@ -12,6 +12,7 @@
         "underscore": "^1.13.6"
     },
     "devDependencies": {
+        "@tsconfig/node21": "^21.0.1",
         "tsx": "^4.7.1",
         "typescript": "^5.4.2"
     },
