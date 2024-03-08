@@ -1,10 +1,10 @@
 import fs from "node:fs";
 import { Client, Collection, GatewayIntentBits } from "discord.js";
 
-let config;
+let config: object;
 
 if (process.argv[2] == "dev") {
-	config = await import("file:///C:/Users/lilli/OneDrive/Desktop/Stuff/config.json", {
+	config = await import("../../../Desktop/Stuff/config.json", {
 		assert: {
 		  type: "json"
 		}
