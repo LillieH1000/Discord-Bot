@@ -1,9 +1,10 @@
+import { ColorResolvable } from "discord.js";
 import puppeteer from "puppeteer-core";
 
 let player = new Object();
 
 const colours = {
-    "embed": "#FFC0DD"
+    "embed": "#FFC0DD" as ColorResolvable
 };
 
 async function request(id) {
