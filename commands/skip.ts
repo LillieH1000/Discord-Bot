@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction } from "discord.js";
 import { getVoiceConnection, createAudioResource } from "@discordjs/voice";
 import globals from "../globals.js";
 
@@ -7,7 +7,7 @@ const info = new SlashCommandBuilder()
     .setDescription("Skips the current playing song")
     .setDMPermission(false);
 
-async function invoke(interaction) {
+async function invoke(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply();
 
     const voiceConnection = getVoiceConnection(interaction.guild.id);

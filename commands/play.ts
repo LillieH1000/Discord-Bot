@@ -1,8 +1,8 @@
 import { joinVoiceChannel, getVoiceConnection, createAudioResource, createAudioPlayer, AudioPlayerStatus } from "@discordjs/voice";
-import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction } from "discord.js";
 import globals from "../globals.js";
 
-async function play(interaction, id) {
+async function play(interaction: ChatInputCommandInteraction, id: string) {
     globals.player[interaction.guild.id].ids.push(id);
 
     const data = await globals.request(id);
@@ -118,10 +118,10 @@ const info = new SlashCommandBuilder()
             .setDescription("Enter the video name or url")
             .setRequired(true));
 
-async function invoke(interaction) {
+async function invoke(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply();
     const source = interaction.options.getString("source");
-    const query = interaction.options.getString("query");
+    const query = interaction.options.getString("query") as string;
 
     const voiceConnection = getVoiceConnection(interaction.guild.id);
     

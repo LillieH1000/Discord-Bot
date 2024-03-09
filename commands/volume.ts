@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction } from "discord.js";
 import { getVoiceConnection } from "@discordjs/voice";
 import globals from "../globals.js";
 
@@ -11,7 +11,7 @@ const info = new SlashCommandBuilder()
             .setDescription("Enter the volume integer (1 - 100) [Default: 10]")
             .setRequired(true));
 
-async function invoke(interaction) {
+async function invoke(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply();
     const volume = interaction.options.getInteger("volume");
     
