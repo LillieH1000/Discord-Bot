@@ -1,6 +1,5 @@
 import { ActivityType, Client } from "discord.js";
 import { formatInTimeZone } from "date-fns-tz";
-import _ from "underscore";
 let hour;
 
 async function invoke(client: Client) {
@@ -15,7 +14,8 @@ async function invoke(client: Client) {
             } else {
                 if (hour != currenthour) {
                     hour = currenthour;
-                    let status = _.sample(["Miku gang", "oo ee oo", "I'm thinking Miku"]);
+                    const statuses = ["Miku gang", "oo ee oo", "I'm thinking Miku"];
+                    const status = statuses[Math.floor(Math.random() * statuses.length)];
                     client.user.setActivity(status, { type: ActivityType.Custom });
                 }
             }
