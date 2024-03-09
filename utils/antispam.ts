@@ -1,4 +1,4 @@
-import { Client, EmbedBuilder, TextChannel } from "discord.js";
+import { Client, EmbedBuilder, PermissionsBitField, TextChannel } from "discord.js";
 import globals from "../globals.js";
 let count = new Map();
 
@@ -13,20 +13,26 @@ async function invoke(client: Client) {
                     count: parseInt(count.get(message.author.id).count) + 1
                 });
                 if (parseInt(count.get(message.author.id).count) == 8) {
-                    if (message.member) {
-                        await message.member.timeout(2419200000, "Message Spam");
-                    }
-
                     const embed = new EmbedBuilder()
                         .setColor(globals.colours.embed)
                         .setTitle("Anti Spam Triggered")
                         .addFields(
                             { name: "Display Name:", value: message.author.displayName, inline: false },
                             { name: "Username:", value: message.author.username, inline: false },
-                            { name: "ID:", value: message.author.id, inline: false },
-                            { name: "Action:", value: "Muted, messages not deleted", inline: false }
+                            { name: "ID:", value: message.author.id, inline: false }
                         )
                         .setTimestamp();
+
+                    if (message.member && message.guild.members.me && message.guild.members.me.permissions.has(PermissionsBitField.Flags.ModerateMembers)) {
+                        await message.member.timeout(2419200000, "Message Spam");
+                        embed.addFields(
+                            { name: "Action:", value: "Muted, messages not deleted", inline: false }
+                        );
+                    } else {
+                        embed.addFields(
+                            { name: "Action:", value: "Not muted, messages not deleted", inline: false }
+                        );
+                    }
 
                     const channel = message.guild.channels.cache.get("1197666541467078787") as TextChannel;
                     if (channel) {
