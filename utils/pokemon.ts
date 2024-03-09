@@ -20,7 +20,7 @@ async function invoke(client: Client) {
 
             const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
             if (res.ok) {
-                const data = await res.json();
+                const data = await res.json() as object;
 
                 let weakness = {
                     normal: 1,
@@ -41,13 +41,13 @@ async function invoke(client: Client) {
                     dark: 1,
                     steel: 1,
                     fairy: 1
-                }
+                };
                 
                 let typescount = 0;
                 let types = new String();
                 for (const type of data.types) {
                     const res1 = await fetch(type.type.url);
-                    const data1 = await res1.json();
+                    const data1 = await res1.json() as object;
 
                     for (const double of data1.damage_relations.double_damage_from) {
                         weakness[double.name] = weakness[double.name] * 2;
@@ -109,7 +109,7 @@ async function invoke(client: Client) {
 
                 if (data.id != null) {
                     embed.addFields(
-                        { name: "Pokedex ID", value: data.id.toString(), inline: false },
+                        { name: "Pokedex ID", value: data.id.toString(), inline: false }
                     );
                 }
 
@@ -121,24 +121,24 @@ async function invoke(client: Client) {
 
                 if (data.height != null) {
                     embed.addFields(
-                        { name: "Height (Decimetres)", value: data.height.toString(), inline: false },
+                        { name: "Height (Decimetres)", value: data.height.toString(), inline: false }
                     );
                 }
 
                 if (data.weight != null) {
                     embed.addFields(
-                        { name: "Weight (Hectograms)", value: data.weight.toString(), inline: false },
+                        { name: "Weight (Hectograms)", value: data.weight.toString(), inline: false }
                     );
                 }
 
                 if (data.base_experience != null) {
                     embed.addFields(
-                        { name: "Base Experience", value: data.base_experience.toString(), inline: false },
+                        { name: "Base Experience", value: data.base_experience.toString(), inline: false }
                     );
                 }
 
                 embed.addFields(
-                    { name: "Base Stats", value: basestats, inline: false },
+                    { name: "Base Stats", value: basestats, inline: false }
                 );
                 
                 if (interaction.values[0] == "defaultregular") {
@@ -157,9 +157,9 @@ async function invoke(client: Client) {
                 const menu = new StringSelectMenuBuilder().setPlaceholder("Choose Sprite Image");
         
                 // Town Of Salem Server
-                if (interaction.guild.id == "416350699794857986" && game != null && game != "") {
+                if (interaction.guild && interaction.guild.id == "416350699794857986" && game != null && game != "") {
                     embed.addFields(
-                        { name: "Game And Count", value: game, inline: false },
+                        { name: "Game And Count", value: game, inline: false }
                     );
                 }
 
@@ -169,40 +169,32 @@ async function invoke(client: Client) {
                 }));
                 
                 if (data.sprites.other.home.front_default != null) {
-                    menu.addOptions([
-                        {
-                            label: "Default (Regular)",
-                            value: "defaultregular",
-                            description: "Show the regular default pic of the pokemon"
-                        }
-                    ]);
+                    menu.addOptions([{
+                        label: "Default (Regular)",
+                        value: "defaultregular",
+                        description: "Show the regular default pic of the pokemon"
+                    }]);
                 }
                 if (data.sprites.other.home.front_shiny != null) {
-                    menu.addOptions([
-                        {
+                    menu.addOptions([{
                             label: "Default (Shiny)",
                             value: "defaultshiny",
                             description: "Show the shiny default pic of the pokemon"
-                        }
-                    ]);
+                    }]);
                 }
                 if (data.sprites.other.home.front_female != null) {
-                    menu.addOptions([
-                        {
-                            label: "Female (Regular)",
-                            value: "femaleregular",
-                            description: "Show the regular female pic of the pokemon"
-                        }
-                    ]);
+                    menu.addOptions([{
+                        label: "Female (Regular)",
+                        value: "femaleregular",
+                        description: "Show the regular female pic of the pokemon"
+                    }]);
                 }
                 if (data.sprites.other.home.front_shiny_female != null) {
-                    menu.addOptions([
-                        {
-                            label: "Female (Shiny)",
-                            value: "femaleshiny",
-                            description: "Show the shiny female pic of the pokemon"
-                        }
-                    ]);
+                    menu.addOptions([{
+                        label: "Female (Shiny)",
+                        value: "femaleshiny",
+                        description: "Show the shiny female pic of the pokemon"
+                    }]);
                 }
         
                 const row = new ActionRowBuilder().addComponents(menu);

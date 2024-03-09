@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ChatInputCommandInteraction } from "discord.js";
 import globals from "../globals.js";
 
 const info = new SlashCommandBuilder()
@@ -15,14 +15,15 @@ const info = new SlashCommandBuilder()
                 { name: "Alola", value: "alola" },
                 { name: "Galar", value: "galar" },
                 { name: "Hisui", value: "hisui" },
-                { name: "Paldea", value: "paldea" },
+                { name: "Paldea", value: "paldea" }
             ))
     .addStringOption(option =>
         option.setName("message")
             .setDescription("Enter your message"));
 
-async function invoke(interaction) {
+async function invoke(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply();
+
     const name = interaction.options.getString("name");
     const form = interaction.options.getString("form");
     const message = interaction.options.getString("message");
@@ -42,7 +43,7 @@ async function invoke(interaction) {
 
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.replace(" ", "-").toLowerCase()}`);
     if (res.ok) {
-        const data = await res.json();
+        const data = await res.json() as object;
 
         let weakness = {
             normal: 1,
@@ -63,13 +64,13 @@ async function invoke(interaction) {
             dark: 1,
             steel: 1,
             fairy: 1
-        }
+        };
         
         let typescount = 0;
         let types = new String();
         for (const type of data.types) {
             const res1 = await fetch(type.type.url);
-            const data1 = await res1.json();
+            const data1 = await res1.json() as object;
 
             for (const double of data1.damage_relations.double_damage_from) {
                 weakness[double.name] = weakness[double.name] * 2;
@@ -131,7 +132,7 @@ async function invoke(interaction) {
 
         if (data.id != null) {
             embed.addFields(
-                { name: "Pokedex ID", value: data.id.toString(), inline: false },
+                { name: "Pokedex ID", value: data.id.toString(), inline: false }
             );
         }
 
@@ -143,33 +144,35 @@ async function invoke(interaction) {
 
         if (data.height != null) {
             embed.addFields(
-                { name: "Height (Decimetres)", value: data.height.toString(), inline: false },
+                { name: "Height (Decimetres)", value: data.height.toString(), inline: false }
             );
         }
 
         if (data.weight != null) {
             embed.addFields(
-                { name: "Weight (Hectograms)", value: data.weight.toString(), inline: false },
+                { name: "Weight (Hectograms)", value: data.weight.toString(), inline: false }
             );
         }
 
         if (data.base_experience != null) {
             embed.addFields(
-                { name: "Base Experience", value: data.base_experience.toString(), inline: false },
+                { name: "Base Experience", value: data.base_experience.toString(), inline: false }
             );
         }
 
         embed.addFields(
-            { name: "Base Stats", value: basestats, inline: false },
+            { name: "Base Stats", value: basestats, inline: false }
         );
 
         // Town Of Salem Server
-        if (interaction.guild.id == "416350699794857986" && message) {
+        if (interaction.guild && interaction.guild.id == "416350699794857986" && message) {
             const channel = interaction.guild.channels.cache.get("894979033484369980");
-            const count = channel.name.replace("shiny-stuff-", "").replace("-left", "");
-            channel.setName(`shiny stuff ${count - 1} left`);
+            if (channel) {
+                const count = parseInt(channel.name.replace("shiny-stuff-", "").replace("-left", ""));
+                await channel.setName(`shiny stuff ${count - 1} left`);
+            }
             embed.addFields(
-                { name: "Game And Count", value: message, inline: false },
+                { name: "Game And Count", value: message, inline: false }
             );
         }
 
@@ -184,40 +187,32 @@ async function invoke(interaction) {
             }));
             
             if (data.sprites.other.home.front_default != null) {
-                menu.addOptions([
-                    {
-                        label: "Default (Regular)",
-                        value: "defaultregular",
-                        description: "Show the regular default pic of the pokemon"
-                    }
-                ]);
+                menu.addOptions([{
+                    label: "Default (Regular)",
+                    value: "defaultregular",
+                    description: "Show the regular default pic of the pokemon"
+                }]);
             }
             if (data.sprites.other.home.front_shiny != null) {
-                menu.addOptions([
-                    {
-                        label: "Default (Shiny)",
-                        value: "defaultshiny",
-                        description: "Show the shiny default pic of the pokemon"
-                    }
-                ]);
+                menu.addOptions([{
+                    label: "Default (Shiny)",
+                    value: "defaultshiny",
+                    description: "Show the shiny default pic of the pokemon"
+                }]);
             }
             if (data.sprites.other.home.front_female != null) {
-                menu.addOptions([
-                    {
-                        label: "Female (Regular)",
-                        value: "femaleregular",
-                        description: "Show the regular female pic of the pokemon"
-                    }
-                ]);
+                menu.addOptions([{
+                    label: "Female (Regular)",
+                    value: "femaleregular",
+                    description: "Show the regular female pic of the pokemon"
+                }]);
             }
             if (data.sprites.other.home.front_shiny_female != null) {
-                menu.addOptions([
-                    {
-                        label: "Female (Shiny)",
-                        value: "femaleshiny",
-                        description: "Show the shiny female pic of the pokemon"
-                    }
-                ]);
+                menu.addOptions([{
+                    label: "Female (Shiny)",
+                    value: "femaleshiny",
+                    description: "Show the shiny female pic of the pokemon"
+                }]);
             }
     
             const row = new ActionRowBuilder().addComponents(menu);
