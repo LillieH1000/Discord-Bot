@@ -1,4 +1,4 @@
-import { Client, EmbedBuilder } from "discord.js";
+import { Client, EmbedBuilder, PermissionsBitField, TextChannel } from "discord.js";
 import globals from "../globals.js";
 
 let config: object;
@@ -19,7 +19,7 @@ if (process.argv[2] == "dev") {
 
 async function invoke(client: Client) {
     client.on("messageCreate", async message => {
-        if (message.author.bot || !message.content) return;
+        if (message.author.bot || !message.content || !message.guild) return;
     
         try {
             // Legacy Update Server
@@ -45,10 +45,14 @@ async function invoke(client: Client) {
                         }
                     });
                     if (res.ok) {
-                        const data = await res.json();
+                        const data = await res.json() as object;
                         if (data.matches) {
-                            await message.delete();
-                            message.member.timeout(2419200000, { reason: "Message Spam" });
+                            if (message.guild.members.me && message.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
+                                await message.delete();
+                            }
+                            if (message.member && message.guild.members.me && message.guild.members.me.permissions.has(PermissionsBitField.Flags.ModerateMembers)) {
+                                await message.member.timeout(2419200000, "Message Spam");
+                            }
 
                             const embed = new EmbedBuilder()
                                 .setColor(globals.colours.embed)
@@ -62,11 +66,13 @@ async function invoke(client: Client) {
                                 )
                                 .setTimestamp();
 
-                            const channel = message.guild.channels.cache.get("1197666541467078787");
-                            channel.send({
-                                content: "<@&1096003733554479135> <@&1195220849435889705>",
-                                embeds: [embed]
-                            });
+                            const channel = message.guild.channels.cache.get("1197666541467078787") as TextChannel;
+                            if (channel) {
+                                await channel.send({
+                                    content: "<@&1096003733554479135> <@&1195220849435889705>",
+                                    embeds: [embed]
+                                });
+                            }
 
                             break;
                         }
