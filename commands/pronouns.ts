@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction } from "discord.js";
 import globals from "../globals.js";
 
 const info = new SlashCommandBuilder()
@@ -9,12 +9,14 @@ const info = new SlashCommandBuilder()
             .setDescription("Select a user")
             .setRequired(true));
 
-async function invoke(interaction) {
+async function invoke(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply({ ephemeral: true });
+
     const user = interaction.options.getUser("user");
+
     const res = await fetch(`https://pronoundb.org/api/v1/lookup?platform=discord&id=${user.id}`);
     if (res.ok) {
-        const data = await res.json();
+        const data = await res.json() as object;
         let pronoun = new String();
         if (data.pronouns == "unspecified") {
             pronoun = "unspecified";
@@ -84,7 +86,7 @@ async function invoke(interaction) {
             .setColor(globals.colours.embed)
             .setTitle("PronounDB")
             .addFields(
-                { name: `Pronouns of ${user.username}:`, value: pronoun, inline: false },
+                { name: `Pronouns of ${user.username}:`, value: pronoun, inline: false }
             )
             .setTimestamp();
 
