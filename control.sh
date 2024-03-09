@@ -1,10 +1,10 @@
 if [ $1 == "register" ]
 then
-    node deploy.js
+    npx tsx --no-cache ./deploy.ts
 fi
 if [ $1 == "start" ]
 then
-    pm2 start index.js --name "discordbot"
+    pm2 start "npx tsx --no-cache ./index.ts" --name "discordbot"
 fi
 if [ $1 == "stop" ]
 then
