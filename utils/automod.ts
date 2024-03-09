@@ -2,7 +2,7 @@ import { Client } from "discord.js";
 
 async function invoke(client: Client) {
     client.on("messageCreate", async message => {
-        if (message.author.bot || !message.content) return;
+        if (message.author.bot || !message.content || !message.guild) return;
 
         try {
             // Chariz Server

@@ -1,15 +1,16 @@
 import { ActivityType, Client } from "discord.js";
 import { formatInTimeZone } from "date-fns-tz";
-let hour;
+
+let hour: number;
 
 async function invoke(client: Client) {
     setInterval(async function() {
-        try {
+        if (client.user) {
             const date = new Date();
-            const currentdate = formatInTimeZone(date, "America/New_York", "e");
-            const currenthour = formatInTimeZone(date, "America/New_York", "h");
+            const currentdate = parseInt(formatInTimeZone(date, "America/New_York", "e"));
+            const currenthour = parseInt(formatInTimeZone(date, "America/New_York", "h"));
             if (currentdate == 2) {
-                hour = null;
+                hour = -1;
                 client.user.setActivity("It's Miku monday", { type: ActivityType.Custom });
             } else {
                 if (hour != currenthour) {
@@ -19,8 +20,6 @@ async function invoke(client: Client) {
                     client.user.setActivity(status, { type: ActivityType.Custom });
                 }
             }
-        } catch (error) {
-            console.error(error);
         }
     }, 60000);
 }

@@ -6,36 +6,32 @@ async function invoke(client: Client) {
 
         let messageContentNew = message.content.replace(/</gm, "").replace(/>/gm, "");
 
-        try {
-            let matched = false;
-            for (const word of messageContentNew.split(" ")) {
-                if (word.match(/^http(?:s)?:\/\/(.*)instagram\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)ddinstagram\.com\//)) {
-                    messageContentNew = messageContentNew.replace(/instagram.com/gm, "ddinstagram.com");
-                    matched = true;
-                }
-
-                if (word.match(/^http(?:s)?:\/\/(.*)reddit\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)rxddit\.com\//)) {
-                    messageContentNew = messageContentNew.replace(/reddit.com/gm, "rxddit.com");
-                    matched = true;
-                }
-
-                if (word.match(/^http(?:s)?:\/\/(.*)tiktok\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)vxtiktok\.com\//)) {
-                    messageContentNew = messageContentNew.replace(/tiktok.com/gm, "vxtiktok.com");
-                    matched = true;
-                }
-
-                if ((word.match(/^http(?:s)?:\/\/(.*)twitter\.com\//) || word.match(/^http(?:s)?:\/\/x\.com\//)) && !word.match(/^http(?:s)?:\/\/(.*)fxtwitter\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)vxtwitter\.com\//)) {
-                    messageContentNew = messageContentNew.replace(/twitter.com/gm, "vxtwitter.com").replace(/x.com/gm, "vxtwitter.com");
-                    matched = true;
-                }
+        let matched = false;
+        for (const word of messageContentNew.split(" ")) {
+            if (word.match(/^http(?:s)?:\/\/(.*)instagram\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)ddinstagram\.com\//)) {
+                messageContentNew = messageContentNew.replace(/instagram.com/gm, "ddinstagram.com");
+                matched = true;
             }
 
-            if (matched) {
-                message.suppressEmbeds(true);
-                message.reply({ content: messageContentNew, allowedMentions: { repliedUser: false } });
+            if (word.match(/^http(?:s)?:\/\/(.*)reddit\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)rxddit\.com\//)) {
+                messageContentNew = messageContentNew.replace(/reddit.com/gm, "rxddit.com");
+                matched = true;
             }
-        } catch (error) {
-            console.error(error);
+
+            if (word.match(/^http(?:s)?:\/\/(.*)tiktok\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)vxtiktok\.com\//)) {
+                messageContentNew = messageContentNew.replace(/tiktok.com/gm, "vxtiktok.com");
+                matched = true;
+            }
+
+            if ((word.match(/^http(?:s)?:\/\/(.*)twitter\.com\//) || word.match(/^http(?:s)?:\/\/x\.com\//)) && !word.match(/^http(?:s)?:\/\/(.*)fxtwitter\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)vxtwitter\.com\//)) {
+                messageContentNew = messageContentNew.replace(/twitter.com/gm, "vxtwitter.com").replace(/x.com/gm, "vxtwitter.com");
+                matched = true;
+            }
+        }
+
+        if (matched) {
+            await message.suppressEmbeds(true);
+            await message.reply({ content: messageContentNew, allowedMentions: { repliedUser: false } });
         }
     });
 }
