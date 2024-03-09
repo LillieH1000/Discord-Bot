@@ -12,6 +12,9 @@ async function invoke(client: Client) {
                 const rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
                 if (word.match(rx)) {
                     const data1 = await globals.request(word.match(rx)[1]);
+                    if (!data1) {
+                        return;
+                    }
 
                     const time = new Date(parseInt(data1.videoDetails.lengthSeconds) * 1000).toISOString().slice(11, 19);
                     const timesplit = time.split(":");
