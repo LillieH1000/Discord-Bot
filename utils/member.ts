@@ -18,7 +18,9 @@ async function invoke(client: Client) {
         // Legacy Update Server
         if (guildMember.guild.id == "1095995920409178112") {
             const channel = guildMember.guild.channels.cache.get("1197666440942198794") as TextChannel;
-            await channel.send({ embeds: [embed] });
+            if (channel) {
+                await channel.send({ embeds: [embed] });
+            }
         } else if (guildMember.guild.systemChannel) {
             await guildMember.guild.systemChannel.send({ embeds: [embed] });
         }
@@ -46,7 +48,9 @@ async function invoke(client: Client) {
             // Legacy Update Server
             if (newMember.guild.id == "1095995920409178112") {
                 const channel = newMember.guild.channels.cache.get("1197666440942198794") as TextChannel;
-                await channel.send({ embeds: [embed] });
+                if (channel) {
+                    await channel.send({ embeds: [embed] });
+                }
             } else if (newMember.guild.systemChannel) {
                 await newMember.guild.systemChannel.send({ embeds: [embed] });
             }
@@ -74,7 +78,9 @@ async function invoke(client: Client) {
         // Legacy Update Server
         if (guildMember.guild.id == "1095995920409178112") {
             const channel = guildMember.guild.channels.cache.get("1197666440942198794") as TextChannel;
-            await channel.send({ embeds: [embed] });
+            if (channel) {
+                await channel.send({ embeds: [embed] });
+            }
         } else if (guildMember.guild.systemChannel) {
             await guildMember.guild.systemChannel.send({ embeds: [embed] });
         }

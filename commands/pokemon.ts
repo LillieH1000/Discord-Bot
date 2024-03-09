@@ -24,7 +24,7 @@ const info = new SlashCommandBuilder()
 async function invoke(interaction: ChatInputCommandInteraction) {
     await interaction.deferReply();
 
-    const name = interaction.options.getString("name");
+    const name = interaction.options.getString("name") as string;
     const form = interaction.options.getString("form");
     const message = interaction.options.getString("message");
 

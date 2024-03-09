@@ -29,10 +29,12 @@ async function invoke(client: Client) {
                         .setTimestamp();
 
                     const channel = message.guild.channels.cache.get("1197666541467078787") as TextChannel;
-                    await channel.send({
-                        content: "<@&1096003733554479135> <@&1195220849435889705>",
-                        embeds: [embed]
-                    });
+                    if (channel) {
+                        await channel.send({
+                            content: "<@&1096003733554479135> <@&1195220849435889705>",
+                            embeds: [embed]
+                        });
+                    }
                 }
             } else {
                 count.set(message.author.id, {

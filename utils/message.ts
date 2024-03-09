@@ -22,7 +22,9 @@ async function invoke(client: Client) {
                 .setTimestamp();
 
             const channel = message.guild.channels.cache.get("1197666507925225662") as TextChannel;
-            await channel.send({ embeds: [embed] });
+            if (channel) {
+                await channel.send({ embeds: [embed] });
+            }
         }
     });
 
@@ -47,7 +49,9 @@ async function invoke(client: Client) {
                 .setTimestamp();
 
             const channel = newMessage.guild.channels.cache.get("1197666507925225662") as TextChannel;
-            await channel.send({ embeds: [embed] });
+            if (channel) {
+                await channel.send({ embeds: [embed] });
+            }
         }
     });
 }
