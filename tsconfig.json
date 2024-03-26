@@ -1,6 +1,14 @@
 {
-	"extends": "@tsconfig/node21/tsconfig.json",
 	"compilerOptions": {
-		"resolveJsonModule": true
+		"lib": ["dom", "es2023"],
+		"target": "es2022",
+		"outDir": "dist",
+		"module": "node16",
+		"moduleResolution": "node16",
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"declaration": true,
+		"strict": true
 	}
 }

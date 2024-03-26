@@ -10,7 +10,6 @@
         "sodium-native": "^4.1.1"
     },
     "devDependencies": {
-        "@tsconfig/node21": "^21.0.1",
         "@types/node": "^20.11.30",
         "tsx": "^4.7.1",
         "typescript": "^5.4.3"
