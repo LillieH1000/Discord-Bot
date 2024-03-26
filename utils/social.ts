@@ -24,7 +24,7 @@ async function invoke(client: Client) {
             }
 
             if ((word.match(/^http(?:s)?:\/\/(.*)twitter\.com\//) || word.match(/^http(?:s)?:\/\/x\.com\//)) && !word.match(/^http(?:s)?:\/\/(.*)fxtwitter\.com\//) && !word.match(/^http(?:s)?:\/\/(.*)vxtwitter\.com\//)) {
-                messageContentNew = messageContentNew.replace(/twitter.com/gm, "vxtwitter.com").replace(/x.com/gm, "vxtwitter.com");
+                messageContentNew = messageContentNew.replace(/twitter.com/gm, "fxtwitter.com").replace(/x.com/gm, "fxtwitter.com");
                 matched = true;
             }
         }
